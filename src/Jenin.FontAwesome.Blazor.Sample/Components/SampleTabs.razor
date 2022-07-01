@@ -1,0 +1,33 @@
+﻿@inherits ComponentBase
+
+<div class="container-fluid @CssClass" @attributes=AdditionalAttributes>
+    <div class="card card-nav-tabs text-bg-dark">
+        <CascadingValue Value=this Name="Parent" IsFixed=true>@Tabs</CascadingValue>
+
+        @if(Pages.Count > 0) {
+            <div class="card-header card-header-blue sticky-top">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                    @for(var index = 0; index < Pages.Count; index++) {
+                        var tabPage = Pages[index];
+
+                        <li class="nav-item rounded-5">
+                            <a class="rounded-5 nav-link @(tabPage.Active ? "active" : null)" href="#@tabPage.Id" data-bs-toggle="tab">
+                                @tabPage.Text
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content pt-4">
+                    @for(var index = 0; index < Pages.Count; index++) {
+                        var tabPage = Pages[index];
+                        <div class="tab-pane @(tabPage.Active ? "active" : null)" id="@tabPage.Id" tabindex="0">
+                            @tabPage.Samples
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

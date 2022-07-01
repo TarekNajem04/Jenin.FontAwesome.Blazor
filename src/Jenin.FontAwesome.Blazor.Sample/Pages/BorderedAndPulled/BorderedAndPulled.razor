@@ -1,0 +1,27 @@
+﻿@page "/bordered-and-pulled"
+
+<PageTitle>Font Awesome Bordered & Pulled</PageTitle>
+
+<div class="bordered-and-pulled-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BorderedAndPulledLeftSnippet) Heading="Left" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BorderedAndPulledRightSnippet) Heading="Right" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BorderedAndPulledCustomizationLeftSnippet) Heading="Customization Left" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BorderedAndPulledCustomizationRightSnippet) Heading="Customization Right" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BorderedAndPulledLeftHtmlSnippet) Heading="Left" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BorderedAndPulledRightHtmlSnippet) Heading="Right" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BorderedAndPulledCustomizationLeftHtmlSnippet) Heading="Customization Left" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BorderedAndPulledCustomizationRightHtmlSnippet) Heading="Customization Right" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

@@ -1,0 +1,31 @@
+﻿<style>
+    .fa-stack.small {
+        font-size: 0.5em;
+    }
+
+    i {
+        vertical-align: middle;
+    }
+</style>
+
+<IconContainer CssClass="mb-1 p-5" IconSize=IconSize.X02 InverseColor="black">
+    <Icons>
+        <Icon IconStyle=IconStyle.Regular IconName="fa-circle" />
+
+        <IconStackContainer CssClass="small">
+            <Icons>
+                <Icon IconStyle=IconStyle.Regular IconName="fa-circle" StackSize=IconStackSize.Larger AutoReplaceSvg=ProcessingSvgMethod.False />
+                <Icon IconStyle=IconStyle.Solid IconName="fa-flag" StackSize=IconStackSize.Same AutoReplaceSvg=ProcessingSvgMethod.False />
+            </Icons>
+        </IconStackContainer>
+
+        <IconStackContainer CssClass="small">
+            <Icons>
+                <Icon IconStyle=IconStyle.Solid IconName="fa-circle" StackSize=IconStackSize.Larger AutoReplaceSvg=ProcessingSvgMethod.False />
+                <Icon IconStyle=IconStyle.Solid IconName="fa-flag" StackSize=IconStackSize.Same Inverse=true AutoReplaceSvg=ProcessingSvgMethod.False />
+            </Icons>
+        </IconStackContainer>
+
+        <Icon IconStyle=IconStyle.Regular IconName="fa-circle" />
+    </Icons>
+</IconContainer>

@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@namespace Jenin.FontAwesome.Blazor.Sample.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="~/" />
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <!-- CSS only -->
+    <link href="fontawesome/css/all.css" rel="stylesheet" />
+
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="~/prism/prism.css" rel="stylesheet" />
+    <link href="Jenin.FontAwesome.Blazor.Sample.styles.css" rel="stylesheet" />
+
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+</head>
+<body>
+    @RenderBody()
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="bootstrap/js/bootstrap.bundle.js" type="text/javascript"></script>
+
+    <script src="_content/Jeninnet.FontAwesome/js/fontawesome-Svg[nest]-config.js" type="text/javascript"></script>
+    <script src="fontawesome/js/all.min.js" type="text/javascript"></script>
+    <script src="_content/Jeninnet.FontAwesome/js/fontawesome-config-utilities.js" type="text/javascript"></script>
+
+    <script>
+        window.Prism = window.Prism || {};
+        Prism.disableWorkerMessageHandler = true;
+        Prism.manual = true;
+    </script>
+    <script src="~/prism/prism.js" type="text/javascript"></script>
+    <script src="~/js/PrismUtilities.js" type="text/javascript"></script>
+</body>
+</html>

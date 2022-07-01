@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+        <LangVersion>latest</LangVersion>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <!--<AnalysisMode>recommended</AnalysisMode>-->
+        <AnalysisMode>minimum</AnalysisMode>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Components\ElementInverseable.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Description>Jenin Blazor Library - Free Font Awesome 6 components for ASP.NET Blazor</Description>
+        <PackageId>Jenin.FontAwesome.Blazor</PackageId>
+        <!-- ComponentsPackagesVersion - variable from Directory.Build.props -->
+        <PackageVersion>$(ComponentsPackagesVersion)</PackageVersion>
+        <Authors>Tarek Najem</Authors>
+        <Company>Jenin</Company>
+
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <!--<PackageProjectUrl>https://Jenin.FontAwesome.Blazor.net</PackageProjectUrl>-->
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageReleaseNotes>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/releases</PackageReleaseNotes>
+        <PackageTags>blazor FontAwesome components webassembly wasm FontAwesome6; blazor Prism CodeSnippet</PackageTags>
+
+    </PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+</Project>

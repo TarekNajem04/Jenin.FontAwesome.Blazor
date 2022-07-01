@@ -1,0 +1,28 @@
+﻿@page "/list-icons"
+
+<PageTitle>Font Awesome Icons in a List</PageTitle>
+
+<div class="list-icons-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(UnorderedListSnippet) Heading="Unordered List" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(OrderedListSnippet) Heading="Ordered List" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(ListCustomizationWidthSnippet) Heading="Customization Width" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(ListCustomizationMarginSnippet) Heading="Customization Margin" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(UnorderedListHtmlSnippet) Heading="Ordered List" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(OrderedListHtmlSnippet) Heading="Ordered List" />
+
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(ListCustomizationWidthHtmlSnippet) Heading="Customization Width" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(ListCustomizationMarginHtmlSnippet) Heading="Customization Margin" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

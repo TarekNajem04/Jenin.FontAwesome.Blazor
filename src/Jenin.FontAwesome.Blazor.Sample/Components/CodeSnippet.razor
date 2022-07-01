@@ -1,0 +1,12 @@
+﻿
+<div class="bg-dark @(DrawBorder ? "border border-2 border-warning" : null) @CssClass" @attributes=AdditionalAttributes>
+    <pre>
+        <code class="language-markup line-numbers language-@GetLanguage()" id="@Id">
+            @if(Snippet is not null) {
+                <CascadingValue Value=this IsFixed=true>@Snippet</CascadingValue>
+            }
+
+            @SnippetContent
+        </code>
+    </pre>
+</div>

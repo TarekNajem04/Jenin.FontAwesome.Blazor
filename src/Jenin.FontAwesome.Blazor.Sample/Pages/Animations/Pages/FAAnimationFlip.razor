@@ -1,0 +1,13 @@
+﻿@page "/animation-flip"
+
+<PageTitle>Font Awesome Animation Flip</PageTitle>
+
+<IconContainer CssClass="mb-1" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-compact-disc" Animation=@Animation.Flip() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-camera-rotate" Animation=@Animation.Flip() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-suitcase" Animation=@Animation.Flip(flipZ: 1F, flipX: 0F, flipY: 0F) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-scroll" Animation=@Animation.Flip(flipX: 1F, flipY: 0F) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-money-check-dollar" Animation=@Animation.Flip(durationUnit: DurationUnit.Seconds, duration: 3F) Color="#007AFF" />
+    </Icons>
+</IconContainer>

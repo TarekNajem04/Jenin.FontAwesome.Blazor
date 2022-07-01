@@ -1,0 +1,89 @@
+﻿<div class="top-row ps-3 navbar navbar-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Jenin Font Awesome Blazor</a>
+        <button class="navbar-toggler btn btn-primary btn-sm" @onclick="ToggleNavMenu" title="Navigation menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-home" />
+                <span>Getting started</span>
+            </NavLink>
+
+            <NavLink class="nav-link" href="icon-basics-style" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-infinity" />
+                <span>Icon Styling Basics</span>
+            </NavLink>
+
+            <NavLink class="nav-link" href="icon-size" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-arrows-to-circle" />
+                <span>Icon Size</span>
+            </NavLink>
+            <NavLink class="nav-link" href="fixed-width" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-arrows-left-right-to-line" />
+                <span>Fixed Width</span>
+            </NavLink>
+            <NavLink class="nav-link" href="list-icons" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-list" />
+                <span>Icons in a List</span>
+            </NavLink>
+
+            <NavLink class="nav-link" href="rotate" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-group-arrows-rotate" />
+                <span>Rotate</span>
+            </NavLink>
+
+            <NavLink class="nav-link" href="animation" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-radiation" />
+                <span>Animations</span>
+            </NavLink>
+
+            <NavLink class="nav-link" href="bordered-and-pulled" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-border-none" />
+                <span>Bordered & Pulled Icons</span>
+            </NavLink>
+            <NavLink class="nav-link" href="stacking" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-cubes-stacked" />
+                <span>Icons Stacking</span>
+            </NavLink>
+            <NavLink class="nav-link" href="transforms" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-arrow-right-arrow-left" />
+                <span>Transforms</span>
+            </NavLink>
+
+            <NavLink class="nav-link" href="masking" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-mask" />
+                <span>Icons Masking</span>
+            </NavLink>
+
+            <NavLink class="nav-link" href="layering" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-layer-group" />
+                <span>Layering Text & Counters</span>
+            </NavLink>
+            <NavLink class="nav-link" href="duotone" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-braille" />
+                <span>Duotone Icons</span>
+            </NavLink>
+            <NavLink class="nav-link" href="events" Match="NavLinkMatch.All">
+                <Icon CssClass="me-2" IconSize=IconSize.X01 IconStyle=IconStyle.Solid IconName="fa-bolt-lightning" />
+                <span>Events</span>
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+    //private bool expandSubNavSettings;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu() {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

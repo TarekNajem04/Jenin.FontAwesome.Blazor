@@ -1,0 +1,25 @@
+﻿@page "/events"
+
+<PageTitle>Font Awesome Blazor Events</PageTitle>
+
+<div class="container-fluid mt-3 mb-5">
+    <div class="mt-4 p-5 bg-warning text-dark rounded">
+        <span class="badge bg-danger">Web Font</span>
+        <h1>Font Awesome Events</h1>
+        <p>This feature Doesn't work properly with SVG+JS.</p>
+        <p>So, we have to set the <span class="text-blue fw-bold">AutoReplaceSvg</span> property to <span class="text-blue fw-bold">ProcessingSvgMethod.False</span> for the Font Awesome config object so that the Font Awesome framework can show the icons well</p>
+    </div>
+</div>
+
+<div class="events-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(EventsOnClickSnippet) Heading="On Click" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>
+

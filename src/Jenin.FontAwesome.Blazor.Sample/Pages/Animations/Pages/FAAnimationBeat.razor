@@ -1,0 +1,13 @@
+﻿@page "/animation-beat"
+
+<PageTitle>Font Awesome Animation Beat</PageTitle>
+
+<IconContainer CssClass="mb-1" IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-circle-plus" Animation=@Animation.Beat()                                                           Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-heart"       Animation=@Animation.Beat()                                                           Color="#E32934" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-heart"       Animation=@Animation.Beat(durationUnit: DurationUnit.Milliseconds, duration: 500.00F) Color="#E32934" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-heart"       Animation=@Animation.Beat(durationUnit: DurationUnit.Seconds, duration: 2.00F)        Color="#E32934" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-heart"       Animation=@Animation.Beat(scale: 2.0F)                                                Color="#E32934" />
+    </Icons>
+</IconContainer>

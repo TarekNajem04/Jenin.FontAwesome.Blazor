@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <ProjectReference Include="..\Jenin.FontAwesome.Blazor\Jenin.FontAwesome.Blazor.csproj" />
+    </ItemGroup>
+
+    <Target Name="EmbedDemos" BeforeTargets="PrepareForBuild">
+        <!-- Let's embed Snippet sources to the assembly to be able to show sources at runtime. -->
+        <ItemGroup>
+            <EmbeddedResource Include="Pages/**/*Snippet*" />
+        </ItemGroup>
+    </Target>
+
+</Project>

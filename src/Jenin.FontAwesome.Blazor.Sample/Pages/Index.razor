@@ -1,0 +1,50 @@
+﻿@page "/"
+
+<PageTitle>JENIN Font Awesome Blazor Components</PageTitle>
+
+
+<div class="container-fluid bg-gradient text-bg-success rounded my-4">
+    <div class="p-4 rounded">
+        <span class="badge bg-danger"><strong>Jenin</strong></span>
+        <h1>Font Awesome Blazor</h1>
+        <p>Free Font Awesome 6 components for ASP.NET Blazor.</p>
+    </div>
+</div>
+
+
+<h1>Getting started</h1>
+
+<h2>Prerequisites</h2>
+<p>Jenin.FontAwesome.Blazor components have the following requirements:</p>
+<ul>
+    <li>.NET 6.0 or newer</li>
+    <li>Blazor WebAssembly or Blazor Server hosting model (other options not tested yet)</li>
+</ul>
+
+<h2>Installation</h2>
+
+<h3 class="mt-3 text-info">1. Install the package</h3>
+<p>Find the <a class="link-primary" href="https://www.nuget.org/packages/Jenin.FontAwesome.Blazor/">Jenin.FontAwesome.Blazorp</a> package through NuGet Package Manager or install it with following command:</p>
+<CodeSnippet Language="none">
+    <Snippet>
+        dotnet add package Jenin.FontAwesome.Blazor
+    </Snippet>
+</CodeSnippet>
+
+<h3 class="mt-3 text-info">2. Add CSS &amp; JavaScript references</h3>
+<h4 class="text-info">A. CSS</h4>
+<p>Add the following to your HTML head section, it's either <code>index.html</code>, <code>_Host.cshtml</code> or <code>_Layout.cshtml</code> depending on whether you're running WebAssembly or Server:</p>
+<CodeSnippet SnippetFile="~\Pages\Installation\MainCssSnippet.cshtml" />
+
+<h5 class="my-2">For more details of how host yourself - Font Awesome <a class="link-primary" href="https://fontawesome.com/v6/docs/web/setup/host-yourself/webfonts">Host Yourself - Web Fonts</a></h5>
+
+<h4 class="text-info">B. JavaScript</h4>
+<p>At the end of HTML <code>&lt;body&gt;</code> section of either <code>index.html</code>, <code>_Host.cshtml</code> or <code>_Layout.cshtml</code> add this:</p>
+<CodeSnippet SnippetFile="~\Pages\Installation\MainJavaScriptSnippet.cshtml" />
+
+<h3 class="mt-3 text-info">3. Import namespaces</h3>
+<p>Add following to your <code>_Imports.razor</code> file:</p>
+<CodeSnippet SnippetFile="~\Pages\Installation\ImportNamespacesSnippet.cshtml" />
+
+<Sample CssClass="my-5" SnippetComponent=typeof(Installation.ReadySnippet) Heading="Ready, set, go!" />
+

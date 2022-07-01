@@ -1,0 +1,12 @@
+﻿@page "/animation-beat-fade"
+
+<PageTitle>Font Awesome Animation Beat-Fade</PageTitle>
+
+<IconContainer CssClass="mb-1" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-person-digging" Animation=@Animation.BeatFade() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-heart-circle-exclamation" Animation=@Animation.BeatFade() Color="#E32934" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-poo-bolt" Animation=@(new BeatFade() { Opacity = 0.1F, Scale = 1.25F }) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-circle-info" Animation=@(new BeatFade() { Opacity = 0.67F, Scale = 1.075F }) Color="#007AFF" />
+    </Icons>
+</IconContainer>

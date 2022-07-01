@@ -1,0 +1,38 @@
+﻿@inherits ComponentBase
+
+<div class="bg-dark border border-2 border-success @CssClass" @attributes=AdditionalAttributes>
+    @if(!string.IsNullOrEmpty(Heading)) {
+        //
+        <span class="badge text-bg-success bg-gradient fs-3 border" style="top: -26px;position: relative;left: 10px;">
+            <strong>@Heading</strong>
+        </span>
+        @*
+        <div class="p-2 rounded">
+            <span class="badge text-bg-success bg-gradient fs-3 border"><strong>@Heading</strong></span>
+        </div>
+        *@
+    }
+
+    <div class="bg-dark border-bottom border-2 border-success">
+        @if(SnippetComponent is not null) {
+            <CascadingValue Value=this IsFixed=true>
+                @(
+                    new RenderFragment(builder => {
+                        builder.OpenComponent(0, SnippetComponent);
+                        builder.CloseComponent();
+                    })
+                )
+            </CascadingValue>
+        }else{
+            @Snippet
+        }
+    </div>
+
+    @if(SnippetCode is not null || !string.IsNullOrEmpty(SnippetFile) || SnippetComponent is not null) {
+        <CodeSnippet SnippetFile=@SnippetFile SnippetComponent=SnippetComponent DrawBorder=false>
+            <Snippet>
+                @SnippetCode
+            </Snippet>
+        </CodeSnippet>
+    }
+</div>

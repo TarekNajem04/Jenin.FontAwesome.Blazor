@@ -1,0 +1,30 @@
+﻿@page "/layering"
+
+<PageTitle>Font Awesome Brand Layering Text & Counters</PageTitle>
+
+<div class="container-fluid mt-3 mb-5">
+    <div class="mt-4 p-5 bg-warning text-dark rounded">
+        <span class="badge bg-danger">SVG+JS</span>
+        <h1>Font Awesome Layering</h1>
+        <p>This feature Doesn't work properly with Web Font.</p>
+    </div>
+</div>
+
+<div class="layering-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(LayeringSnippet) Heading="Layering" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(LayeringHtmlSnippet) Heading="Layering" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>
+

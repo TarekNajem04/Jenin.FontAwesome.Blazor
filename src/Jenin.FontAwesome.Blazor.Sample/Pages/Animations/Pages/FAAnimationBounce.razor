@@ -1,0 +1,12 @@
+﻿@page "/animation-bounce"
+
+<PageTitle>Font Awesome Animation Bounce</PageTitle>
+
+<IconContainer CssClass="mb-1" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-basketball" Animation=@Animation.Bounce() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-volleyball" Animation=@Animation.Bounce() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-frog" Animation=@Animation.Bounce(startScaleX: 1F, startScaleY: 1F, jumpScaleX: 1F, jumpScaleY: 1F, landScaleX: 1F, landScaleY: 1F) Color="#7CBB00" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-envelope" Animation=@Animation.Bounce(startScaleX: 1F, startScaleY: 1F, jumpScaleX: 1F, jumpScaleY: 1, landScaleX: 1F, landScaleY: 1F, rebound: 0F) Color="#007AFF" />
+    </Icons>
+</IconContainer>

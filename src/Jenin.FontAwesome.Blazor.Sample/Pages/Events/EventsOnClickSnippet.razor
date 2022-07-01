@@ -1,0 +1,23 @@
+﻿<IconContainer CssClass="mb-1 p-5" IconSize=IconSize.X02>
+    <Icons>
+        <Icon AutoReplaceSvg=ProcessingSvgMethod.False
+              IconStyle=IconStyle.Solid
+              IconName=@(IsChecked ? "fa-check-square" : "fa-square")
+              Bordered=true
+              BorderColor=@(IsChecked ? "green" : "red")
+              BorderWidth="4px"
+              Clicked=IconCliked
+              @ref=Icon />
+    </Icons>
+</IconContainer>
+
+@code {
+    public Icon Icon { get; set; }
+
+    int bw = 1;
+
+    private bool IsChecked => bw % 2 == 0;
+    private void IconCliked(ElementMouseEventArgs eventArgs) {
+        bw++;
+    }
+}

@@ -1,0 +1,19 @@
+﻿<IconContainer CssClass="mb-1 ps-4" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-circle-plus"
+              Animation=@Animation.Beat(delayUnit: DurationUnit.Seconds, delay: 5F)
+              Color="#007AFF" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-triangle-exclamation"
+              Animation=@Animation.Fade(iterationCount: 15F)
+              Color="#007AFF" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-magnet"
+              Animation=@Animation.Bounce(timingFunction: "cubic-bezier(0.2, 3, 0.2, 2)") Rotate=IconRotate.RotateBy RotateAngle=90F
+              Color="#007AFF" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-sync"
+              Animation=@Animation.Spin(delayUnit: DurationUnit.Seconds, delay: 3F, direction: AnimationDirection.Reverse)
+              Color="#007AFF" />
+    </Icons>
+</IconContainer>

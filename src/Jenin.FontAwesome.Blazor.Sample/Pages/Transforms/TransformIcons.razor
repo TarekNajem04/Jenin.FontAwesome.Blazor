@@ -1,0 +1,25 @@
+﻿@page "/transforms"
+
+<PageTitle>Font Awesome Transforms</PageTitle>
+
+<div class="transforms-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(TransformsScalingSnippet) Heading="Scaling" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(TransformsPositioningSnippet) Heading="Positioning" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(TransformsRotatingAndFlippingSnippet) Heading="Rotating and Flipping" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(TransformsScalingHtmlSnippet) Heading="Scaling" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(TransformsPositioningHtmlSnippet) Heading="Positioning" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(TransformsRotatingAndFlippingHtmlSnippet) Heading="Rotating and Flipping" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

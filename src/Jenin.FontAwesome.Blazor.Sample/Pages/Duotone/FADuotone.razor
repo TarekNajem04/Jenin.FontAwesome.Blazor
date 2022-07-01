@@ -1,0 +1,40 @@
+﻿@page "/duotone"
+
+<PageTitle>Font Awesome Duotone Icons</PageTitle>
+
+<div class="container-fluid mt-3 mb-5">
+    <div class="mt-4 p-5 bg-warning text-dark rounded">
+        <span class="badge bg-danger">PRO</span>
+        <h1>Font Awesome Pro Plan Required!</h1>
+        <p>This is a Pro feature so you'll need to grab a Pro-level plan to use it.</p>
+    </div>
+</div>
+
+<div class="duotone-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneBasicSnippet) Heading="Basic Use" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneSwappingLayerOpacitySnippet) Heading="Swapping Layer Opacity" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneChangingSecondaryOpacitySnippet) Heading="Changing Secondary Opacity" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneChangingPrimaryOpacitySnippet) Heading="Changing Primary Opacity" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneColoringSnippet) Heading="Coloring Duotone Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneHighlightPartSnippet) Heading="Use Color to Highlight a Part of an Icon or to Note Status" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneBasicHtmlSnippet) Heading="Layering" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneSwappingLayerOpacityHtmlSnippet) Heading="Swapping Layer Opacity" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneChangingSecondaryOpacityHtmlSnippet) Heading="Changing Secondary Opacity" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneChangingPrimaryOpacityHtmlSnippet) Heading="Changing Primary Opacity" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneColoringHtmlSnippet) Heading="Coloring Duotone Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(DuotoneHighlightPartHtmlSnippet) Heading="Use Color to Highlight a Part of an Icon or to Note Status" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>
+

@@ -1,0 +1,24 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>FontAwesome.Sample</PageTitle>
+
+<div class="page text-bg-dark">
+    <main>
+        <div class="grid-container text-bg-dark">
+            <div class="grid-menu">
+                <div class="sidebar text-bg-dark overflow-x-hidden overflow-y-auto position-fixed w-15 h-100">
+                    <NavMenu />
+                </div>
+            </div>
+            <div class="grid-main">
+                <article class="content text-bg-dark overflow-x-hidden overflow-y-auto position-fixed w-85 h-100">
+                    @Body
+                </article>
+
+            </div>
+            @*
+            <div class="grid-footer">Footer</div>
+            *@
+        </div>
+    </main>
+</div>

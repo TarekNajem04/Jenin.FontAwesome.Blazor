@@ -1,0 +1,25 @@
+﻿@page "/rotate"
+
+<PageTitle>Font Awesome Rotate</PageTitle>
+
+<div class="rotate-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(RotateSnippet) Heading="Rotate Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(CustomRotateSnippet) Heading="Custom Rotation" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(CombiningRotatingFlippingSnippet) Heading="Combining Rotating + Flipping" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(RotateHtmlSnippet) Heading="Rotate Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(CustomRotateHtmlSnippet) Heading="Custom Rotation" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(CombiningRotatingFlippingHtmlSnippet) Heading="Combining Rotating + Flipping" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

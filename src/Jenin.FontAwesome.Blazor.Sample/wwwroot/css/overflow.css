@@ -1,0 +1,64 @@
+﻿
+.vertically-scrollable {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+.Horizontally-scrollable {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.overflow-auto {
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+}
+
+.overflow-hidden {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+.overflow-visible {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+}
+
+.overflow-scroll {
+    overflow-x: scroll !important;
+    overflow-y: scroll !important;
+}
+
+
+.overflow-x-auto {
+    overflow-x: auto !important;
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden !important;
+}
+
+.overflow-x-visible {
+    overflow-x: visible !important;
+}
+
+.overflow-x-scroll {
+    overflow-x: scroll !important;
+}
+
+.overflow-y-auto {
+    overflow-y: auto !important;
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden !important;
+}
+
+.overflow-y-visible {
+    overflow-y: visible !important;
+}
+
+.overflow-y-scroll {
+    overflow-y: scroll !important;
+}

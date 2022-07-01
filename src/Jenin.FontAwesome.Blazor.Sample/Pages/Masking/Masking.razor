@@ -1,0 +1,23 @@
+﻿@page "/masking"
+
+<PageTitle>Font Awesome Masking</PageTitle>
+
+<div class="masking-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(MaskingSnippet) Heading="Masking" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(MaskingIdSnippet) Heading="Masking Id" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(MaskingHtmlSnippet) Heading="Masking" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(MaskingIdHtmlSnippet) Heading="Masking Id" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

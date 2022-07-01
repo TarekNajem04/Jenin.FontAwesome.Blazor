@@ -1,0 +1,12 @@
+﻿
+<button class="btn btn-outline-primary mb-4 ms-2 d-flex align-items-center gap-2" @onclick=GotoStartPage>
+    <Icon IconStyle=IconStyle.Solid IconSize=IconSize.X02 IconName="fa-bell" Animation=@Animation.Shake() Color="gold"/>
+    <span>Are yoy ready?</span>
+</button>
+
+@code{
+    [Inject]
+    private NavigationManager NavigationManager{ get; set; }
+
+    private void GotoStartPage() => NavigationManager.NavigateTo("/icon-basics-style");
+}
