@@ -39,6 +39,9 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageReleaseNotes>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/releases</PackageReleaseNotes>
         <PackageTags>blazor FontAwesome components webassembly wasm FontAwesome6; blazor Prism CodeSnippet</PackageTags>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <NeutralLanguage>en</NeutralLanguage>
 
     </PropertyGroup>
 
