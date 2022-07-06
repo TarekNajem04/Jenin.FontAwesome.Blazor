@@ -42,6 +42,7 @@
         <RepositoryUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <NeutralLanguage>en</NeutralLanguage>
+        <Version>1.0.1</Version>
 
     </PropertyGroup>
 
