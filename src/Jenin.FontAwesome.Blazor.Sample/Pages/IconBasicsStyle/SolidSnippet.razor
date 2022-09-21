@@ -1,17 +1,32 @@
-﻿<IconContainer CssClass="mb-1 p-5">
+﻿<div class="ps-5 btn-group" role="group">
+    <input id="icon-typefaces-classic" name="icon-typefaces" type="radio" class="btn-check" checked=@IsClassic @onchange=@(()=> Typeface = Typefaces.Classic) />
+    <label class="btn btn-outline-success" for="icon-typefaces-classic">Classic</label>
+
+    <input id="icon-typefaces-sharp" name="icon-typefaces" type="radio" class="btn-check" checked=@IsSharp @onchange=@(()=> Typeface = Typefaces.Sharp) />
+    <label class="btn btn-outline-success" for="icon-typefaces-sharp">Sharp</label>
+</div>
+
+<IconContainer CssClass="mb-1 p-5">
     <Icons>
         <span style="font-size: 3em; color: Tomato;">
-            <Icon IconStyle=IconStyle.Solid IconName="fa-camera" />
+            <Icon ForceRebuildRenderTree=true Typeface=Typeface IconStyle=IconStyle.Solid IconName="fa-camera" />
         </span>
 
         <span style="font-size: 48px; color: Dodgerblue;">
-            <Icon IconStyle=IconStyle.Solid IconName="fa-camera" />
+            <Icon ForceRebuildRenderTree=true Typeface=Typeface IconStyle=IconStyle.Solid IconName="fa-camera" />
         </span>
 
         <span style="font-size: 3rem;">
             <span style="color: Mediumslateblue;">
-                <Icon IconStyle=IconStyle.Solid IconName="fa-camera" />
+                <Icon ForceRebuildRenderTree=true Typeface=Typeface IconStyle=IconStyle.Solid IconName="fa-camera" />
             </span>
         </span>
     </Icons>
 </IconContainer>
+
+@code {
+    private bool IsClassic => Typeface is Typefaces.Classic;
+    private bool IsSharp => Typeface is Typefaces.Sharp;
+
+    private Typefaces Typeface { get; set; } = Typefaces.Classic;
+}

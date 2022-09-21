@@ -1,6 +1,4 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-
-namespace Jenin.FontAwesome.Blazor.Components;
+﻿namespace Jenin.FontAwesome.Blazor.Components;
 
 public class IconListItem : Element {
     [Parameter]
@@ -33,7 +31,7 @@ public class IconListItem : Element {
                .AddOrUpdateIfNotNull("--fa-li-margin", ItemMargin)
                .AddOrUpdateIfNotNull("--fa-li-width", ItemWidth);
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder) {
+    protected override void BuildRenderTree(RenderTreeBuilder builder, int sequence) {
         /*
             <ul @attributes=AdditionalAttributes
                @onclick=@OnClickHandlerAsync
@@ -43,7 +41,6 @@ public class IconListItem : Element {
                 <CascadingValue Value=this Name="IconList" IsFixed=true>@Content</CascadingValue>
             </ul>
          */
-        var sequence = 0;
 
         builder.OpenElement(sequence, "li");
         builder.OpenElement(sequence++, "span");

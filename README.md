@@ -26,7 +26,7 @@ Installation
 
 ### 1\. Install the package
 
-Find the [Jenin.FontAwesome.Blazorp](https://www.nuget.org/packages/Jenin.FontAwesome.Blazor/) package through NuGet Package Manager or install it with following command:
+Find the [Jenin.FontAwesome.Blazor](https://www.nuget.org/packages/Jenin.FontAwesome.Blazor/) package through NuGet Package Manager or install it with following command:
 
     dotnet add package Jenin.FontAwesome.Blazor
 
@@ -115,5 +115,3 @@ Are yoy ready?
     
         private void GotoStartPage() => NavigationManager.NavigateTo("/icon-basics-style");
     }
-
-Copy

@@ -1,6 +1,4 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-
-namespace Jenin.FontAwesome.Blazor.Components;
+﻿namespace Jenin.FontAwesome.Blazor.Components;
 
 public class IconStackContainer : IconContainer {
     /// <summary>

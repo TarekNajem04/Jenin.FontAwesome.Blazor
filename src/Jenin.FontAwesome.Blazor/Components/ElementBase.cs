@@ -1,10 +1,19 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-using Jenin.FontAwesome.Blazor.JsInterop;
-
-namespace Jenin.FontAwesome.Blazor.Components;
+﻿namespace Jenin.FontAwesome.Blazor.Components;
 
 public class ElementBase : OwningComponentBase {
     #region Properties
+    /// <summary>
+    /// Sometimes, when changing some properties, it does not rebuild the render tree of the element,
+    /// so this property forces the render tree to be rebuild for that element.
+    /// <para>
+    /// <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/advanced-scenarios?view=aspnetcore-6.0#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order/">
+    /// Sequence numbers relate to code line numbers and not execution order
+    /// </a>
+    /// </para>
+    /// </summary>
+    [Parameter]
+    public bool ForceRebuildRenderTree { get; set; }
+
     /// <summary>
     /// Custom css classname.
     /// </summary>
@@ -245,9 +254,15 @@ public class ElementBase : OwningComponentBase {
 
     protected virtual Dictionary<string, string> AddStyles(Dictionary<string, string> styles) => styles;
 
+    protected sealed override void BuildRenderTree(RenderTreeBuilder builder) => BuildRenderTree(builder, GetBaseSequence());
+    protected virtual void BuildRenderTree(RenderTreeBuilder builder, int sequence) { }
+
     protected virtual int BuildElementRenderTree(ref int sequence, RenderTreeBuilder builder) {
         builder.AddMultipleAttributes(sequence++, AdditionalAttributes);
 
         return sequence;
     }
+
+    //protected override bool ShouldRender() => ForceRebuildRenderTree;
+    protected int GetBaseSequence() => ForceRebuildRenderTree ? new Random().Next(0, 5000) : 0;
 }

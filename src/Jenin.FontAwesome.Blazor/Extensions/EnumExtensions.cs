@@ -1,7 +1,4 @@
-﻿using Jenin.FontAwesome.Blazor;
-using Jenin.FontAwesome.Blazor.Extensions;
-
-namespace Jenin.FontAwesome.Blazor.Extensions;
+﻿namespace Jenin.FontAwesome.Blazor.Extensions;
 
 public static class EnumExtensions {
     public static string GetStringValue(this Enum value, string defaultValue = default) => value.GetValue(defaultValue);

@@ -1,10 +1,12 @@
-﻿using Jenin.FontAwesome.Blazor.Animations;
-using Jenin.FontAwesome.Blazor.Extensions;
-using Jenin.FontAwesome.Blazor.Transformations;
-
-namespace Jenin.FontAwesome.Blazor.Components;
+﻿namespace Jenin.FontAwesome.Blazor.Components;
 
 public class Icon : ElemenWithTransformations {
+    /// <summary>
+    /// Set icon style.
+    /// </summary>
+    [Parameter]
+    public Typefaces Typeface { get; set; }
+
     /// <summary>
     /// Set icon style.
     /// </summary>
@@ -133,7 +135,7 @@ public class Icon : ElemenWithTransformations {
         _ = AdditionalAttributes.UpdateOrRemoveIf("data-fa-mask-id", GetMaskId(), value => string.IsNullOrEmpty(Convert.ToString(value)));
     }
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder) {
+    protected override void BuildRenderTree(RenderTreeBuilder builder, int sequence) {
         /*
             @if(IsNested) {
                 <span class=@BuildContainerClasses() style=@BuildContainerStyles()>
@@ -153,7 +155,6 @@ public class Icon : ElemenWithTransformations {
                 </i>
             }
         */
-        var sequence = 0;
 
         if (IsNested) {
             builder.OpenElement(sequence, "span");
@@ -179,6 +180,7 @@ public class Icon : ElemenWithTransformations {
                 (
                     new[]
                     {
+                        Typeface.GetStringValue(),
                         IconStyle.GetStringValue(),
                         IconName,
                         Rotate.GetStringValue(),

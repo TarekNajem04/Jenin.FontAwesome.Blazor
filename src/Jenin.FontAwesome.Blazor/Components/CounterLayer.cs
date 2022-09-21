@@ -1,6 +1,4 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-
-namespace Jenin.FontAwesome.Blazor.Components;
+﻿namespace Jenin.FontAwesome.Blazor.Components;
 
 public partial class CounterLayer : ElemenWithTransformations {
     [Parameter]
@@ -49,9 +47,7 @@ public partial class CounterLayer : ElemenWithTransformations {
         return classes;
     }
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder) {
-        var sequence = 0;
-
+    protected override void BuildRenderTree(RenderTreeBuilder builder, int sequence) {
         builder.OpenElement(sequence, "span");
         _ = BuildElementRenderTree(ref sequence, builder);
 

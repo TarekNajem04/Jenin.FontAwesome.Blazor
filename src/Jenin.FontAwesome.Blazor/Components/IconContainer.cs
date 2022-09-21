@@ -6,7 +6,7 @@ public class IconContainer : Element {
 
     protected virtual string GetRootTag() => "div";
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder) {
+    protected override void BuildRenderTree(RenderTreeBuilder builder, int sequence) {
         /*
             <div @attributes=AdditionalAttributes
                @onclick=@OnClickHandlerAsync
@@ -16,7 +16,6 @@ public class IconContainer : Element {
                 <CascadingValue Value=this Name="Container" IsFixed=true>@Icons</CascadingValue>
             </div>
          */
-        var sequence = 0;
 
         builder.OpenElement(sequence, GetRootTag());
         _ = BuildElementRenderTree(ref sequence, builder);

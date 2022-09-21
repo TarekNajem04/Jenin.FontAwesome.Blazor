@@ -1,7 +1,4 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-using Jenin.FontAwesome.Blazor.Transformations;
-
-namespace Jenin.FontAwesome.Blazor.Components;
+﻿namespace Jenin.FontAwesome.Blazor.Components;
 
 public class ElemenWithTransformations : Element {
     /// <summary>

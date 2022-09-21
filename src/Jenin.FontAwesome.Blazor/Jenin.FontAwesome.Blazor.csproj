@@ -42,14 +42,19 @@
         <RepositoryUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <NeutralLanguage>en</NeutralLanguage>
-        <Version>1.0.1</Version>
+        <Version>1.1.0</Version>
 
     </PropertyGroup>
 
-	<ItemGroup>
-	  <None Include="..\..\README.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\LICENSES">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+
+    </ItemGroup>
 </Project>
