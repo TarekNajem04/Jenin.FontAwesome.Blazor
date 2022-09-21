@@ -17,7 +17,7 @@ jobs:
         dotnet-version: 6.0.401
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish src/Jenin.FontAwesome.Blazor.Sample.csproj -c Release -o release --nologo
+      run: dotnet publish src/Jenin.FontAwesome.Blazor.Sample/Jenin.FontAwesome.Blazor.Sample.csproj -c Release -o release --nologo
       
     - name: Commit wwwroot to GitHub Pages [Deploy]
       uses: JamesIves/github-pages-deploy-action@v4
