@@ -1,0 +1,260 @@
+/* _content/Jenin.FontAwesome.Blazor.Sample/Components/SampleTabs.razor.rz.scp.css */
+div.card[b-nqz5e5cbjg] {
+    border: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 6px;
+    color: rgba(0,0,0,.87);
+    background: #fff;
+    width: 100%;
+    /*box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);*/
+    /*box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 20%), 0 13px 24px -11px rgb(255 255 255 / 50%);*/
+}
+
+
+    div.card .card-header[b-nqz5e5cbjg] {
+        border-radius: 3px;
+        padding: 1rem 15px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: -30px;
+        border: 0;
+        /*background: linear-gradient(60deg,#eee,#bdbdbd);*/
+    }
+
+    div.card .card-header-gold[b-nqz5e5cbjg] {
+        background: linear-gradient(180deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+        box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 20%), 0 13px 24px -11px rgb(255 255 255 / 50%);
+    }
+
+    div.card .card-header-maroon[b-nqz5e5cbjg] {
+        background: linear-gradient(180deg,#800000,#c32146);
+        box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 20%), 0 13px 24px -11px rgb(255 255 255 / 50%);
+    }
+
+    div.card .card-header-primary[b-nqz5e5cbjg] {
+        background: linear-gradient(180deg,#ab47bc,#7b1fa2);
+        box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 20%), 0 13px 24px -11px rgb(255 255 255 / 50%);
+    }
+
+    div.card .card-header-blue[b-nqz5e5cbjg] {
+        /*background-image: linear-gradient(180deg, #0052FF, #007AFF);*/
+        background-image: linear-gradient(180deg, #0052FF 0%, rgba(9,9,121,1) 50%, #007AFF 100% );
+        box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 20%), 0 13px 24px -11px rgb(255 255 255 / 50%);
+    }
+
+    div.card .card-header-danger[b-nqz5e5cbjg] {
+        background: linear-gradient(180deg,#ef5350,#d32f2f);
+        box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 20%), 0 13px 24px -11px rgb(255 255 255 / 50%);
+    }
+
+
+
+.card-nav-tabs .card-header[b-nqz5e5cbjg] {
+    margin-top: -30px !important;
+}
+
+.card .card-header .nav-tabs[b-nqz5e5cbjg] {
+    padding: 0;
+}
+
+.nav-tabs[b-nqz5e5cbjg] {
+    border: 0;
+    border-radius: 3px;
+    padding: 0 15px;
+}
+
+.nav[b-nqz5e5cbjg] {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.nav-tabs .nav-item[b-nqz5e5cbjg] {
+    margin-bottom: -1px;
+}
+
+    .nav-tabs .nav-item .nav-link.active[b-nqz5e5cbjg] {
+        background-color: hsla(0,0%,100%,.2);
+        transition: background-color .3s .2s;
+    }
+
+    .nav-tabs .nav-item .nav-link[b-nqz5e5cbjg] {
+        border: 0 !important;
+        color: #FFF !important;
+        font-weight: 500;
+        margin: 0;
+        line-height: 24px;
+        /*text-transform: uppercase;*/
+        padding: 10px 15px;
+        background-color: transparent;
+        transition: background-color .3s 0s;
+    }
+/* _content/Jenin.FontAwesome.Blazor.Sample/Shared/MainLayout.razor.rz.scp.css */
+.grid-header[b-givzb6azk6] {
+    grid-area: header;
+}
+
+.grid-menu[b-givzb6azk6] {
+    grid-area: menu;
+}
+
+.grid-main[b-givzb6azk6] {
+    grid-area: main;
+}
+
+
+.grid-footer[b-givzb6azk6] {
+    grid-area: footer;
+}
+
+.grid-container[b-givzb6azk6] {
+    position: fixed;
+    display: grid;
+    grid-template-areas:'menu main';
+    /*
+    grid-template-areas:
+        'header header'
+        'menu main'
+        'footer footer';
+    */
+    grid-template-columns: 15% auto;
+    grid-template-rows: auto;
+    /*
+      justify-items: stretch;
+      align-items: stretch;
+      align-content: stretch;
+    */
+    width: 100%;
+    height: 100%;
+    /*
+    column-gap: 5px;
+    row-gap: 5px;
+    padding: 10px;
+    */
+}
+
+.page[b-givzb6azk6] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-givzb6azk6] {
+    flex: 1;
+}
+
+.sidebar[b-givzb6azk6] {
+    /*background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);*/
+    background-image: linear-gradient(180deg, #0052FF, #007AFF);
+}
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-givzb6azk6] {
+        display: none;
+    }
+
+    .sidebar[b-givzb6azk6] {
+        display: none;
+    }
+
+    .top-row.auth[b-givzb6azk6] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-givzb6azk6], .top-row .btn-link[b-givzb6azk6] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-givzb6azk6] {
+        flex-direction: row;
+    }
+
+
+    .sidebar[b-givzb6azk6] {
+        /*
+        height: 100vh;
+        width: 100%;
+        */
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-givzb6azk6] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row[b-givzb6azk6], article[b-givzb6azk6] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* _content/Jenin.FontAwesome.Blazor.Sample/Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-tnj8h46hft] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-tnj8h46hft] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-tnj8h46hft] {
+    font-size: 1.1rem;
+}
+
+.oi[b-tnj8h46hft] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item[b-tnj8h46hft] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-tnj8h46hft] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-tnj8h46hft] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item[b-tnj8h46hft]  a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item[b-tnj8h46hft]  a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item[b-tnj8h46hft]  a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-tnj8h46hft] {
+        display: none;
+    }
+
+    .collapse[b-tnj8h46hft] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}
