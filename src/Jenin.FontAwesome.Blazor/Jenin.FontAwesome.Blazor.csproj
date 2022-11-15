@@ -21,10 +21,6 @@
         <Compile Remove="Components\ElementInverseable.cs" />
     </ItemGroup>
 
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    </ItemGroup>
-
     <PropertyGroup>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <Description>Jenin Blazor Library - Free Font Awesome 6 components for ASP.NET Blazor</Description>
@@ -56,5 +52,10 @@
             <PackagePath>\</PackagePath>
         </None>
 
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.11" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.11" />
     </ItemGroup>
 </Project>
