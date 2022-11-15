@@ -1,4 +1,6 @@
-﻿namespace Jenin.FontAwesome.Blazor.Components;
+﻿using Microsoft.AspNetCore.Components;
+
+namespace Jenin.FontAwesome.Blazor.Components;
 
 public partial class CounterLayer : ElemenWithTransformations {
     [Parameter]
