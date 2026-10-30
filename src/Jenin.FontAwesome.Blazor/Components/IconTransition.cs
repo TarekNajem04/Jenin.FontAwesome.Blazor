@@ -20,6 +20,11 @@ namespace Jenin.FontAwesome.Blazor.Components;
 /// </remarks>
 public class IconTransition : Element {
     /// <summary>
+    /// The well-known <c>class</c> attribute name.
+    /// </summary>
+    private const string ClassAttribute = "class";
+
+    /// <summary>
     /// The first (default) state's content.
     /// </summary>
     [Parameter]
@@ -65,12 +70,12 @@ public class IconTransition : Element {
         AdditionalAttributes ??= [];
 
         _ = AdditionalAttributes.SetOrRemoveIfEmpty(
-            "class",
+            ClassAttribute,
             string.Join(
                 ' ',
                 new[] {
                     "jfa-anim-transition",
-                    Convert.ToString(AdditionalAttributes.TryGetValue("class", out var existing) ? existing : null, CultureInfo.InvariantCulture)?.Replace("jfa-anim-transition", string.Empty, StringComparison.Ordinal),
+                    Convert.ToString(AdditionalAttributes.TryGetValue(ClassAttribute, out var existing) ? existing : null, CultureInfo.InvariantCulture)?.Replace("jfa-anim-transition", string.Empty, StringComparison.Ordinal),
                 }.Where(static part => !string.IsNullOrWhiteSpace(part))));
 
         base.BuildAccessibilityAttributes();
@@ -109,13 +114,13 @@ public class IconTransition : Element {
         AddEventsToRenderTree(builder, sequence: 2);
 
         builder.OpenElement(7, "span");
-        builder.AddAttribute(8, "class", "jfa-anim-transition-layer");
+        builder.AddAttribute(8, ClassAttribute, "jfa-anim-transition-layer");
         builder.AddAttribute(9, "style", first);
         builder.AddContent(10, ChildContent);
         builder.CloseElement();
 
         builder.OpenElement(11, "span");
-        builder.AddAttribute(12, "class", "jfa-anim-transition-layer");
+        builder.AddAttribute(12, ClassAttribute, "jfa-anim-transition-layer");
         builder.AddAttribute(13, "style", second);
         builder.AddContent(14, AlternateContent);
         builder.CloseElement();

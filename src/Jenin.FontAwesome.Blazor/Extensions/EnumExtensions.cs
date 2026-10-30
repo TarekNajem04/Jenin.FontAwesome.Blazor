@@ -29,10 +29,13 @@ internal static class EnumExtensions {
     public static FieldInfo? GetField<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum>(this TEnum value) where TEnum : struct, Enum
         => typeof(TEnum).GetField(value.ToString());
 
-    public static TEnum ToEnum<TEnum>(this string value, TEnum defaultValue = default) where TEnum : struct
-        => string.IsNullOrEmpty(value)
-                ? defaultValue
-                : Enum.TryParse<TEnum>(value, out var enumValue) ? enumValue : defaultValue;
+    public static TEnum ToEnum<TEnum>(this string value, TEnum defaultValue = default) where TEnum : struct {
+        if(string.IsNullOrEmpty(value)) {
+            return defaultValue;
+        }
+
+        return Enum.TryParse<TEnum>(value, out var enumValue) ? enumValue : defaultValue;
+    }
 
     public static IEnumerable<TEnum> GetAllFlags<TEnum>(this TEnum flags) where TEnum : struct, Enum {
         ulong flag = 1;

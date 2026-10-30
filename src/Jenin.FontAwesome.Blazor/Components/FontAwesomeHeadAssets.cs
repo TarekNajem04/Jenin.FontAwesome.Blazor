@@ -73,24 +73,22 @@ public class FontAwesomeHeadAssets : ComponentBase {
                 ? "_content/Jenin.FontAwesome.Blazor/js/fontawesome-config-webfont.js"
                 : "_content/Jenin.FontAwesome.Blazor/js/fontawesome-config-nest.js");
 
-        var sequence = 0;
-
         if(!string.IsNullOrEmpty(styleSheet)) {
-            builder.OpenElement(sequence++, "link");
-            builder.AddAttribute(sequence++, "rel", "stylesheet");
-            builder.AddAttribute(sequence++, "href", styleSheet);
+            builder.OpenElement(0, "link");
+            builder.AddAttribute(1, "rel", "stylesheet");
+            builder.AddAttribute(2, "href", styleSheet);
             builder.CloseElement();
         }
 
-        builder.OpenElement(sequence++, "script");
-        builder.AddAttribute(sequence++, "src", config);
-        builder.AddAttribute(sequence++, "type", "text/javascript");
+        builder.OpenElement(3, "script");
+        builder.AddAttribute(4, "src", config);
+        builder.AddAttribute(5, "type", "text/javascript");
         builder.CloseElement();
 
         if(!string.IsNullOrEmpty(javaScript)) {
-            builder.OpenElement(sequence++, "script");
-            builder.AddAttribute(sequence++, "src", javaScript);
-            builder.AddAttribute(sequence++, "type", "text/javascript");
+            builder.OpenElement(6, "script");
+            builder.AddAttribute(7, "src", javaScript);
+            builder.AddAttribute(8, "type", "text/javascript");
             builder.CloseElement();
         }
     }

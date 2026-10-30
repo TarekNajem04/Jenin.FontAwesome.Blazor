@@ -76,12 +76,9 @@ public class JeninMudIcon : ComponentBase {
         builder.AddAttribute(5, nameof(global::MudBlazor.MudIcon.Class), CssClass);
 
         if(AdditionalAttributes is not null) {
-            var forwarded = new Dictionary<string, object>(AdditionalAttributes.Count);
-            foreach(var pair in AdditionalAttributes) {
-                if(pair.Value is not null) {
-                    forwarded[pair.Key] = pair.Value;
-                }
-            }
+            var forwarded = AdditionalAttributes
+                .Where(static pair => pair.Value is not null)
+                .ToDictionary(static pair => pair.Key, static pair => pair.Value!);
 
             builder.AddMultipleAttributes(6, forwarded);
         }

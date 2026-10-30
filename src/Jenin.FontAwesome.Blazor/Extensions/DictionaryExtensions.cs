@@ -135,12 +135,43 @@ internal static class DictionaryExtensions {
 
         return dictionary;
     }
+
+    public static Dictionary<TKey, string> AddOrUpdateIf<TKey, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum>(this Dictionary<TKey, string> dictionary, TKey key, TEnum value, Func<TEnum, bool> predicate) where TKey : notnull where TEnum : struct, Enum {
+        if(key is null || !predicate(value)) {
+            return dictionary;
+        }
+
+        dictionary[key] = value.GetStringValue() ?? string.Empty;
+
+        return dictionary;
+    }
+
     public static Dictionary<TKey, string> AddOrUpdateIfNotNull<TKey>(this Dictionary<TKey, string> dictionary, TKey key, string? value) where TKey : notnull {
         if(key is null || string.IsNullOrEmpty(value)) {
             return dictionary;
         }
 
         dictionary[key] = value;
+
+        return dictionary;
+    }
+
+    public static Dictionary<TKey, string> AddOrUpdateIfNotNull<TKey>(this Dictionary<TKey, string> dictionary, TKey key, float? value) where TKey : notnull {
+        if(key is null || !value.HasValue) {
+            return dictionary;
+        }
+
+        dictionary[key] = value.Value.ToString("F", CultureInfo.InvariantCulture);
+
+        return dictionary;
+    }
+
+    public static Dictionary<TKey, string> AddOrUpdateIfNotNull<TKey>(this Dictionary<TKey, string> dictionary, TKey key, int? value) where TKey : notnull {
+        if(key is null || !value.HasValue) {
+            return dictionary;
+        }
+
+        dictionary[key] = value.Value.ToString(CultureInfo.InvariantCulture);
 
         return dictionary;
     }
@@ -167,36 +198,6 @@ internal static class DictionaryExtensions {
         } else {
             dictionary[key] = (TValue)(object)value;
         }
-
-        return dictionary;
-    }
-
-    public static Dictionary<TKey, string> AddOrUpdateIf<TKey, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum>(this Dictionary<TKey, string> dictionary, TKey key, TEnum value, Func<TEnum, bool> predicate) where TKey : notnull where TEnum : struct, Enum {
-        if(key is null || !predicate(value)) {
-            return dictionary;
-        }
-
-        dictionary[key] = value.GetStringValue() ?? string.Empty;
-
-        return dictionary;
-    }
-
-    public static Dictionary<TKey, string> AddOrUpdateIfNotNull<TKey>(this Dictionary<TKey, string> dictionary, TKey key, float? value) where TKey : notnull {
-        if(key is null || !value.HasValue) {
-            return dictionary;
-        }
-
-        dictionary[key] = value.Value.ToString("F", CultureInfo.InvariantCulture);
-
-        return dictionary;
-    }
-
-    public static Dictionary<TKey, string> AddOrUpdateIfNotNull<TKey>(this Dictionary<TKey, string> dictionary, TKey key, int? value) where TKey : notnull {
-        if(key is null || !value.HasValue) {
-            return dictionary;
-        }
-
-        dictionary[key] = value.Value.ToString(CultureInfo.InvariantCulture);
 
         return dictionary;
     }

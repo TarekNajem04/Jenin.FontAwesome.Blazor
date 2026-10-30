@@ -11,6 +11,11 @@ namespace Jenin.FontAwesome.Blazor.Components;
 /// additional-attribute building pipeline. Not typically consumed directly.
 /// </summary>
 public class ElementBase : ComponentBase {
+    /// <summary>
+    /// The well-known <c>style</c> attribute name.
+    /// </summary>
+    private const string StyleAttribute = "style";
+
     #region Properties
     /// <summary>
     /// Custom css classname.
@@ -237,7 +242,7 @@ public class ElementBase : ComponentBase {
             return;
         }
 
-        if(AdditionalAttributes.TryGetValue("style", out var style)) {
+        if(AdditionalAttributes.TryGetValue(StyleAttribute, out var style)) {
             _userStyle = Convert.ToString(style, CultureInfo.InvariantCulture);
         }
 
@@ -317,10 +322,10 @@ public class ElementBase : ComponentBase {
         // Restore the author-supplied base values before recomputing, so computed values written on a
         // previous render never leak into the next one (BuildStyles reseeds from this dictionary).
         _ = AdditionalAttributes.SetOrRemoveIfEmpty("class", _userClass);
-        _ = AdditionalAttributes.SetOrRemoveIfEmpty("style", _userStyle);
+        _ = AdditionalAttributes.SetOrRemoveIfEmpty(StyleAttribute, _userStyle);
 
         _ = AdditionalAttributes.SetOrRemoveIfEmpty("class", BuildClasses().Trim());
-        _ = AdditionalAttributes.SetOrRemoveIfEmpty("style", BuildStyles().Trim());
+        _ = AdditionalAttributes.SetOrRemoveIfEmpty(StyleAttribute, BuildStyles().Trim());
 
         BuildAccessibilityAttributes();
     }
@@ -422,7 +427,7 @@ public class ElementBase : ComponentBase {
         var styles = new Dictionary<string, string>();
 
         // ===== Check exist Style =====
-        if(AdditionalAttributes?.TryGetValue("style", out var existStyles) == true) {
+        if(AdditionalAttributes?.TryGetValue(StyleAttribute, out var existStyles) == true) {
             var existStylesString = Convert.ToString(existStyles, CultureInfo.InvariantCulture);
 
             if(!string.IsNullOrEmpty(existStylesString)) {

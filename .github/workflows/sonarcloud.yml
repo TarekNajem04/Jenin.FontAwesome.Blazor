@@ -141,7 +141,10 @@ jobs:
             /d:sonar.coverage.exclusions="**/*.ps1,**/*.md,docs/**,scripts/**,eng/**,.github/**,assets/**,badges/**,private/**" \
             /d:sonar.scm.provider=git \
             /d:sonar.scm.forceReloadAll=true \
-            /d:sonar.exclusions="samples/**,templates/**,tests/e2e/**,docs/**,scripts/**,eng/**,.github/**,assets/**,badges/**,private/**,**/*.ps1,**/*.md,**/bin/**,**/obj/**,**/TestResults/**,artifacts/**" \
+            # Shipped RCL scripts and shell entry points are runtime assets, not compiled
+            # product code (same rationale as scripts/** and eng/**, mirroring the sibling
+            # projects): Sonar analyzes them with generic JS/shell rules that do not apply.
+            /d:sonar.exclusions="samples/**,templates/**,tests/e2e/**,docs/**,scripts/**,eng/**,.github/**,assets/**,badges/**,private/**,**/*.ps1,**/*.md,**/*.sh,src/*/wwwroot/js/**,**/bin/**,**/obj/**,**/TestResults/**,artifacts/**" \
             /d:sonar.test.exclusions="tests/**"
 
       # ---------------------------------------------------------
