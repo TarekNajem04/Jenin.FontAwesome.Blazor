@@ -57,7 +57,13 @@ public abstract class SvgIcon : ComponentBase {
     protected override void BuildRenderTree(RenderTreeBuilder builder) {
         ArgumentNullException.ThrowIfNull(builder);
 
-        var accessibleName = GetAccessibleName();
+        string? accessibleName;
+
+        if(string.IsNullOrWhiteSpace(AriaLabel)) {
+            accessibleName = string.IsNullOrWhiteSpace(Title) ? null : Title.Trim();
+        } else {
+            accessibleName = AriaLabel.Trim();
+        }
 
         builder.OpenElement(0, "svg");
         builder.AddAttribute(1, "xmlns", "http://www.w3.org/2000/svg");
@@ -74,13 +80,15 @@ public abstract class SvgIcon : ComponentBase {
             builder.AddAttribute(4, "width", userWidth.Trim());
         }
 
-        var mergedClass = BuildMergedClass();
+        var mergedClass = string.Join(
+            ' ',
+            new[] { CssClass, GetUserAttribute("class") }.Where(static part => !string.IsNullOrWhiteSpace(part)));
 
         if(!string.IsNullOrWhiteSpace(mergedClass)) {
             builder.AddAttribute(5, "class", mergedClass);
         }
 
-        builder.AddAttribute(6, "style", BuildMergedStyle());
+        builder.AddAttribute(6, "style", "vertical-align:-0.125em;" + (GetUserAttribute("style") ?? string.Empty));
 
         if(accessibleName is null) {
             builder.AddAttribute(7, "aria-hidden", "true");
@@ -105,25 +113,10 @@ public abstract class SvgIcon : ComponentBase {
         builder.CloseElement();
     }
 
-    private string? GetAccessibleName() {
-        if(!string.IsNullOrWhiteSpace(AriaLabel)) {
-            return AriaLabel.Trim();
-        }
-
-        return string.IsNullOrWhiteSpace(Title) ? null : Title.Trim();
-    }
-
     private string? GetUserAttribute(string name) =>
         AdditionalAttributes is not null && AdditionalAttributes.TryGetValue(name, out var value)
             ? Convert.ToString(value, CultureInfo.InvariantCulture)
             : null;
-
-    private string BuildMergedClass() => string.Join(
-        ' ',
-        new[] { CssClass, GetUserAttribute("class") }.Where(static part => !string.IsNullOrWhiteSpace(part)));
-
-    private string BuildMergedStyle() =>
-        "vertical-align:-0.125em;" + (GetUserAttribute("style") ?? string.Empty);
 
     private void AppendRestAttributes(RenderTreeBuilder builder) {
         if(AdditionalAttributes is null) {
