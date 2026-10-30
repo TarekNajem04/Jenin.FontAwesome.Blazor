@@ -1,0 +1,18 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<button type="button"
+        class="site-theme-toggle"
+        aria-pressed="@(IsDark ? "true" : "false")"
+        aria-label="@($"Switch to {(IsDark ? "light" : "dark")} theme")"
+        title="@($"Switch to {(IsDark ? "light" : "dark")} theme")"
+        @onclick="ToggleAsync">
+    <Icon CssClass="site-theme-toggle__icon" IconSize="IconSize.X01" IconStyle="IconStyle.Solid"
+          IconName="@(IsDark ? "fa-sun" : "fa-moon")" />
+    <span class="site-theme-toggle__label">@(IsDark ? "Light" : "Dark")</span>
+</button>

@@ -1,0 +1,142 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@inherits LayoutComponentBase
+@implements IDisposable
+
+<PageTitle>Jenin FontAwesome Blazor</PageTitle>
+
+<div class="app-shell @( _navOpen ? "is-nav-open" : null ) @( _sidebarCollapsed ? "is-sidebar-collapsed" : null )" @onkeydown="OnShellKeyDown">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Site navigation">
+        <NavMenu />
+    </aside>
+    @if (_navOpen) {
+        <div class="app-shell__backdrop" role="presentation" @onclick="CloseNav"></div>
+    }
+    <div class="app-main">
+        @if (_interactive) {
+            <span class="app-shell__ready" data-testid="app-interactive" hidden></span>
+        }
+        <header class="app-header">
+            <button type="button"
+                    class="app-header__menu-toggle"
+                    aria-label="@(_navOpen ? "Close navigation" : "Open navigation")"
+                    aria-expanded="@(_navOpen ? "true" : "false")"
+                    aria-controls="app-sidebar"
+                    @onclick="ToggleNav">
+                <Icon IconSize="IconSize.X01" IconStyle="IconStyle.Solid" IconName="fa-bars" />
+            </button>
+            <button type="button"
+                    class="app-header__sidebar-toggle"
+                    aria-label="@(_sidebarCollapsed ? "Expand navigation" : "Collapse navigation")"
+                    aria-expanded="@(_sidebarCollapsed ? "false" : "true")"
+                    aria-controls="app-sidebar"
+                    title="@(_sidebarCollapsed ? "Expand navigation" : "Collapse navigation")"
+                    @onclick="ToggleSidebar">
+                <Icon IconSize="IconSize.X01" IconStyle="IconStyle.Solid" IconName="@(_sidebarCollapsed ? "fa-angles-right" : "fa-angles-left")" />
+            </button>
+            <a class="app-header__brand" href="">
+                <Icon CssClass="app-header__logo" IconSize="IconSize.X02" IconStyle="IconStyle.Brands" IconName="fa-font-awesome" />
+                <span class="app-header__title">Font Awesome Blazor</span>
+            </a>
+            <div class="app-header__actions">
+                <a class="app-header__link" href="explorer" title="Open the icon explorer">
+                    <Icon CssClass="me-2" IconSize="IconSize.X01" IconStyle="IconStyle.Solid" IconName="fa-compass" />
+                    <span>Explorer</span>
+                </a>
+                <SiteThemeToggle />
+            </div>
+        </header>
+        <main class="app-content">
+            @Body
+        </main>
+    </div>
+</div>
+
+@code {
+    private bool _navOpen;
+    private bool _sidebarCollapsed;
+    private bool _interactive;
+    private string? _lastPath;
+
+    [Inject]
+    private NavigationManager Navigation { get; set; } = default!;
+
+    [Inject]
+    private IJSRuntime JS { get; set; } = default!;
+
+    protected override void OnInitialized() {
+        _lastPath = PathOf(Navigation.Uri);
+        Navigation.LocationChanged += OnLocationChanged;
+    }
+
+    /// <inheritdoc />
+    protected override void OnAfterRender(bool firstRender) {
+        if(!firstRender) {
+            return;
+        }
+
+        // `OnAfterRender` only runs once the component is rendered on the interactive circuit, so this
+        // marks the moment the page actually responds to interaction. The browser tests wait for it
+        // before clicking, otherwise a click can land on the prerendered markup and be lost.
+        _interactive = true;
+        StateHasChanged();
+    }
+
+    private void ToggleNav() => _navOpen = !_navOpen;
+
+    private void ToggleSidebar() => _sidebarCollapsed = !_sidebarCollapsed;
+
+    private void CloseNav() => _navOpen = false;
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs args) {
+        // Any navigation dismisses the drawer, which is what a visitor expects after tapping a link
+        // in the mobile menu.
+        if(_navOpen) {
+            _navOpen = false;
+            InvokeAsync(StateHasChanged);
+        }
+
+        // Moving to a different page restarts the content scroller at the top so the new example is
+        // shown from its beginning. Fragment-only moves (the per-page Blazor/HTML tabs) and query
+        // changes (the explorer facets) keep their position.
+        var path = PathOf(args.Location);
+        if(string.Equals(path, _lastPath, StringComparison.OrdinalIgnoreCase)) {
+            return;
+        }
+
+        _lastPath = path;
+
+        _ = InvokeAsync(async () => {
+            try {
+                await JS.InvokeVoidAsync("scrollSampleContentToTop");
+            }
+            catch(Exception exception) when (exception is JSException or InvalidOperationException) {
+                // Scrolling is best-effort; the user can still scroll manually.
+            }
+        });
+    }
+
+    private static string PathOf(string uri) {
+        var hash = uri.IndexOf('#');
+        var clean = hash >= 0 ? uri[..hash] : uri;
+        var query = clean.IndexOf('?');
+        return query >= 0 ? clean[..query] : clean;
+    }
+
+    private void OnShellKeyDown(KeyboardEventArgs args) {
+        if(args.Key == "Escape" && _navOpen) {
+            CloseNav();
+        }
+    }
+
+    public void Dispose() {
+        Navigation.LocationChanged -= OnLocationChanged;
+        GC.SuppressFinalize(this);
+    }
+}

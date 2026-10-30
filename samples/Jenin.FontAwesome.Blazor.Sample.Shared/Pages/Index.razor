@@ -1,0 +1,96 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/"
+
+<PageTitle>JENIN Font Awesome Blazor Components</PageTitle>
+
+<section class="home-hero">
+    <div class="home-hero__badge">
+        <Icon CssClass="me-2" IconSize="IconSize.X01" IconStyle="IconStyle.Brands" IconName="fa-font-awesome" />
+        <span>Font Awesome Free 7</span>
+    </div>
+    <h1 class="home-hero__title">Font Awesome Blazor Components</h1>
+    <p class="home-hero__lead">
+        Free Font Awesome 7 components for ASP.NET Blazor — icons, animations, transforms, duotone,
+        masking, layering and accessibility helpers, all driven by strongly-typed Razor components.
+    </p>
+    <div class="home-hero__actions">
+        <a class="btn btn-primary btn-lg" href="explorer">
+            <Icon CssClass="me-2" IconSize="IconSize.X01" IconStyle="IconStyle.Solid" IconName="fa-compass" />
+            Open the icon explorer
+        </a>
+        <a class="btn btn-outline-secondary btn-lg" href="icon-catalogue">
+            <Icon CssClass="me-2" IconSize="IconSize.X01" IconStyle="IconStyle.Solid" IconName="fa-book" />
+            Browse the catalogue
+        </a>
+    </div>
+</section>
+
+<section class="home-cards" aria-label="Feature overview">
+    <a class="home-card" href="explorer">
+        <span class="home-card__icon"><Icon IconSize="IconSize.X02" IconStyle="IconStyle.Solid" IconName="fa-compass" /></span>
+        <span class="home-card__title">Interactive explorer</span>
+        <span class="home-card__text">Search the whole Free catalogue, tune every parameter live and copy ready-to-paste Razor.</span>
+    </a>
+    <a class="home-card" href="animation">
+        <span class="home-card__icon"><Icon IconSize="IconSize.X02" IconStyle="IconStyle.Solid" IconName="fa-radiation" /></span>
+        <span class="home-card__title">Effects &amp; animations</span>
+        <span class="home-card__text">Beat, bounce, fade, flip, shake and spin — with duration, iteration and direction control.</span>
+    </a>
+    <a class="home-card" href="duotone">
+        <span class="home-card__icon"><Icon IconSize="IconSize.X02" IconStyle="IconStyle.Solid" IconName="fa-braille" /></span>
+        <span class="home-card__title">Duotone &amp; colour</span>
+        <span class="home-card__text">Two-layer icons with independent primary and secondary colours and opacity.</span>
+    </a>
+    <a class="home-card" href="accessibility">
+        <span class="home-card__icon"><Icon IconSize="IconSize.X02" IconStyle="IconStyle.Solid" IconName="fa-universal-access" /></span>
+        <span class="home-card__title">Accessible by default</span>
+        <span class="home-card__text">Decorative, labelled and forced-labelled rendering, plus SVG and web-font modes.</span>
+    </a>
+</section>
+
+<h2 class="home-heading">Getting started</h2>
+
+<h3 class="home-subheading">Prerequisites</h3>
+<p>Jenin.FontAwesome.Blazor components have the following requirements:</p>
+<ul>
+    <li>.NET 9.0 or .NET 10.0</li>
+    <li>Any Blazor hosting model: Blazor WebAssembly, Blazor Server, or a Blazor Web App (static SSR, Interactive Server, Interactive WebAssembly, Interactive Auto)</li>
+</ul>
+
+<h3 class="home-subheading">Installation</h3>
+
+<h4 class="home-step">1. Install the package</h4>
+<p>Find the <a class="link-primary" href="https://www.nuget.org/packages/Jenin.FontAwesome.Blazor/">Jenin.FontAwesome.Blazor</a> package through NuGet Package Manager or install it with following command:</p>
+<CodeSnippet Language="none">
+    <Snippet>
+        dotnet add package Jenin.FontAwesome.Blazor
+    </Snippet>
+</CodeSnippet>
+
+<h4 class="home-step">2. Add CSS &amp; JavaScript references</h4>
+<h5 class="home-step-label">A. CSS</h5>
+<p>Add the following to your HTML head section, it's either <code>index.html</code>, <code>_Host.cshtml</code> or <code>_Layout.cshtml</code> depending on whether you're running WebAssembly or Server:</p>
+<CodeSnippet SnippetFile="~\Pages\Installation\MainCssSnippet.cshtml" />
+
+<p class="home-note">
+    For more details of how to host it yourself see Font Awesome
+    <a class="link-primary" href="https://docs.fontawesome.com/web/setup/host-yourself/webfonts/">Host Yourself — Web Fonts</a>.
+</p>
+
+<h5 class="home-step-label">B. JavaScript</h5>
+<p>At the end of HTML <code>&lt;body&gt;</code> section of either <code>index.html</code>, <code>_Host.cshtml</code> or <code>_Layout.cshtml</code> add this:</p>
+<CodeSnippet SnippetFile="~\Pages\Installation\MainJavaScriptSnippet.cshtml" />
+
+<h4 class="home-step">3. Import namespaces</h4>
+<p>Add following to your <code>_Imports.razor</code> file:</p>
+<CodeSnippet SnippetFile="~\Pages\Installation\ImportNamespacesSnippet.cshtml" />
+
+<Sample CssClass="my-5" SnippetComponent=typeof(Installation.FluentApiSnippet) Heading="Fluent API" />
+<Sample CssClass="my-5" SnippetComponent=typeof(Installation.ReadySnippet) Heading="Ready, set, go!" />

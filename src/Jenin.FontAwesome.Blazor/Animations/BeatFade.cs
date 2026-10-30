@@ -1,5 +1,9 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
 namespace Jenin.FontAwesome.Blazor.Animations;
 
 /// <summary>
@@ -8,45 +12,30 @@ namespace Jenin.FontAwesome.Blazor.Animations;
 /// <a href="https://fontawesome.com/docs/web/style/animate#beat-fade">Font Awesome Beat Fade</a>.
 /// </para>
 /// </summary>
-public class BeatFade : Animation {
-    public BeatFade() : base("fa-beat-fade") { }
+public sealed record BeatFade : Animation<BeatFade, BeatFadeOptions> {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BeatFade"/> animation.
+    /// </summary>
+    /// <param name="options">Optional options; when <see langword="null"/> Font Awesome defaults are used.</param>
+    public BeatFade(BeatFadeOptions? options = null) : base(options) { }
 
     /// <summary>
-    /// Set lowest opacity value an icon will fade to and from
+    /// The Font Awesome CSS class that activates the <see cref="BeatFade"/> animation (<c>fa-beat-fade</c>).
     /// </summary>
-    public float? Opacity { get; set; }
+    protected override string CssClass => "fa-beat-fade";
 
     /// <summary>
-    /// Set max value that an icon will scale.
+    /// Returns a copy of this <see cref="BeatFade"/> animation with the specified options.
     /// </summary>
-    public float? Scale { get; set; }
+    /// <param name="options">The options to apply.</param>
+    /// <returns>A new <see cref="BeatFade"/> instance carrying <paramref name="options"/>.</returns>
+    protected override BeatFade WithOptions(BeatFadeOptions options) => this with { Options = options };
 
-    public override Dictionary<string, string> AddStyles(Dictionary<string, string> styles) => base.AddStyles(styles)
-                                                                                                   .AddIfNotNull("--fa-beat-fade-opacity", Opacity)
-                                                                                                   .AddIfNotNull("--fa-beat-fade-scale", Scale);
-
-    public static BeatFade Animate(float? opacity, float? scale) => new() { Opacity = opacity, Scale = scale };
-    public static BeatFade Animate
-        (
-            float? opacity = null,
-            float? scale = null,
-            DurationUnit delayUnit = DurationUnit.Seconds,
-            float? delay = null,
-            AnimationDirection direction = AnimationDirection.None,
-            DurationUnit durationUnit = DurationUnit.Seconds,
-            float? duration = null,
-            float? iterationCount = null,
-            string timingFunction = null
-        )
-        => new() {
-            DelayUnit = delayUnit,
-            Delay = delay,
-            Direction = direction,
-            DurationUnit = durationUnit,
-            Duration = duration,
-            IterationCount = iterationCount,
-            TimingFunction = timingFunction,
-            Opacity = opacity,
-            Scale = scale
-        };
+    /// <summary>
+    /// Adds the <see cref="BeatFade"/> animation's CSS custom properties to <paramref name="styles"/>.
+    /// </summary>
+    /// <param name="styles">The CSS custom property bag to populate.</param>
+    protected override void AddStyles(Dictionary<string, string> styles)
+        => styles.AddOrUpdateIfNotNull("--fa-beat-fade-opacity", Options.Opacity)
+                  .AddOrUpdateIfNotNull("--fa-beat-fade-scale", Options.Scale);
 }

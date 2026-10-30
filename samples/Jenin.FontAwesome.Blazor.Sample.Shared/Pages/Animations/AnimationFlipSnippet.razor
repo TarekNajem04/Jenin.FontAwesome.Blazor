@@ -1,0 +1,17 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<IconContainer CssClass="mb-1 ps-4" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-compact-disc"          Animation=@Animate.Flip() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-camera-rotate"         Animation=@Animate.Flip() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-suitcase"              Animation=@Animate.Flip(new FlipOptions { FlipZ = 1F, FlipX = 0F, FlipY = 0F }) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-scroll"                Animation=@Animate.Flip(new FlipOptions { FlipX = 1F, FlipY = 0F }) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-money-check-dollar"    Animation=@Animate.Flip(new FlipOptions { Duration = TimeSpan.FromSeconds(3) }) Color="#007AFF" />
+    </Icons>
+</IconContainer>

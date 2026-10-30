@@ -1,0 +1,81 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+@inherits InputBase<string>
+
+@{
+    var results = GetResults();
+}
+
+<div class="fa-icon-picker-field">
+    <div class="fa-icon-picker-field__box">
+        @if (ShowPreview && Selected is not null)
+        {
+            <span class="fa-icon-picker-field__preview">
+                <Icon IconName="@Selected.CssClass" IconStyle="@Selected.PrimaryStyle" AriaLabel="@Selected.Label" />
+            </span>
+        }
+        <input type="text"
+               id="@InputId"
+               role="combobox"
+               aria-expanded="@_open"
+               aria-controls="@_listId"
+               aria-autocomplete="list"
+               aria-activedescendant="@(_open && results.Count > 0 ? $"{_listId}-{Math.Min(_activeIndex, results.Count - 1)}" : null)"
+               class="fa-icon-picker-field__input @CssClass"
+               placeholder="@Placeholder"
+               aria-label="@Placeholder"
+               value="@CurrentValueAsString"
+               @oninput="OnTextInput"
+               @onkeydown="OnKeyDown"
+               @onfocus="OnFocus"
+               @onblur="OnBlur"
+               @attributes="ForwardedAttributes" />
+        @if (!string.IsNullOrEmpty(Value))
+        {
+            <button type="button"
+                    class="fa-icon-picker-field__clear"
+                    aria-label="@ClearLabel"
+                    title="@ClearLabel"
+                    @onmousedown:preventDefault
+                    @onclick="Clear">×</button>
+        }
+    </div>
+
+    @if (_open)
+    {
+        <ul id="@_listId" class="fa-icon-picker-field__results" role="listbox" aria-label="@ResultsLabel">
+            @if (results.Count == 0)
+            {
+                <li class="fa-icon-picker-field__empty">@NoResultsText</li>
+            }
+            else
+            {
+                @for (var index = 0; index < results.Count; index++)
+                {
+                    var icon = results[index];
+                    var current = index;
+
+                    <li id="@($"{_listId}-{current}")"
+                        class="fa-icon-picker-field__option @(current == _activeIndex ? "is-active" : null)"
+                        role="option"
+                        aria-selected="@(current == _activeIndex)">
+                        <button type="button"
+                                tabindex="-1"
+                                @onmousedown:preventDefault
+                                @onclick="() => Select(icon)">
+                            <Icon IconName="@icon.CssClass" IconStyle="@icon.PrimaryStyle" AriaLabel="@icon.Label" />
+                            <span>@icon.Label</span>
+                            <code>@icon.CssClass</code>
+                        </button>
+                    </li>
+                }
+            }
+        </ul>
+    }
+</div>

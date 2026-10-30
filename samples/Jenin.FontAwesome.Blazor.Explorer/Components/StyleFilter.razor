@@ -1,0 +1,18 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<div class="explorer-filter" role="group" aria-label="Filter by icon style">
+    <button type="button" class="@ButtonClass(null)" aria-pressed="@(Style is null)" @onclick="() => SelectAsync(null)">
+        All <span class="explorer-filter__count">@TotalCount</span>
+    </button>
+    @foreach(var option in _options) {
+        <button type="button" class="@ButtonClass(option.Style)" aria-pressed="@(Style == option.Style)" @onclick="() => SelectAsync(option.Style)">
+            @option.Label <span class="explorer-filter__count">@option.Count</span>
+        </button>
+    }
+</div>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <!-- Template-free fixture host: renders the family x style x mode matrix
+         with the library's own components. Test infrastructure only: never packed. -->
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <RootNamespace>ProMatrix</RootNamespace>
+        <IsTestProject>true</IsTestProject>
+        <IsPackable>false</IsPackable>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\src\Jenin.FontAwesome.Blazor\Jenin.FontAwesome.Blazor.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/interactive-webassembly"
+@rendermode InteractiveWebAssembly
+
+<PageTitle>Interactive WebAssembly</PageTitle>
+
+<h1>Interactive WebAssembly</h1>
+
+<p>
+    This page is rendered interactively by Blazor WebAssembly. The client assembly, including the
+    shared showcase component, is downloaded to the browser. The library's <code>AddJeninFontAwesome</code>
+    registration runs inside the WebAssembly host, and click events execute in the browser.
+</p>
+
+<FeatureShowcase />

@@ -1,0 +1,93 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/icon-catalogue"
+
+<PageTitle>Font Awesome Blazor Icon Catalogue</PageTitle>
+
+<div class="container-fluid mt-3 mb-4">
+    <h1>Icon catalogue</h1>
+
+    <p>
+        Every icon is addressed with a CSS class such as <code>fa-house</code>. On top of that raw form
+        the library gives you two compile-time checked shortcuts, so a renamed icon becomes a build
+        error instead of a silently blank glyph:
+    </p>
+
+    <ul>
+        <li>
+            <strong>Typed constants</strong> from <code>Jenin.FontAwesome.Blazor</code> — grouped as
+            <code>IconNames.Solid</code>, <code>IconNames.Regular</code>, and
+            <code>IconNames.Brands</code>.
+        </li>
+        <li>
+            <strong>Preset components</strong> from the optional
+            <code>Jenin.FontAwesome.Blazor.Icons</code> package — one component per icon
+            (<code>HouseIcon</code>, <code>GithubIcon</code>, &hellip;) that bakes in the icon name and its
+            primary Free style while leaving every style, size, transform, animation, and accessibility
+            parameter overridable.
+        </li>
+    </ul>
+
+    <p>Install the optional preset package:</p>
+
+    <CodeSnippet Language="none">
+        <Snippet>
+            dotnet add package Jenin.FontAwesome.Blazor.Icons
+        </Snippet>
+    </CodeSnippet>
+
+    <p>
+        Looking for an icon you only half remember? Use the <a class="link-primary" href="icon-browser">icon browser</a> to
+        search by name, alias, or keyword.
+    </p>
+</div>
+
+<div class="icon-catalogue-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IconNamesSnippet) Heading="Typed constants" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(PresetComponentsSnippet) Heading="Preset components" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>
+
+<div class="container-fluid mt-4 mb-5">
+    <h2>Which one should I use?</h2>
+
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Approach</th>
+                <th>Package</th>
+                <th>Typical use</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>IconName="fa-house"</code></td>
+                <td><code>Jenin.FontAwesome.Blazor</code></td>
+                <td>Dynamic names, data-driven markup, no extra dependency.</td>
+            </tr>
+            <tr>
+                <td><code>IconName="@@IconNames.Solid.House"</code></td>
+                <td><code>Jenin.FontAwesome.Blazor</code></td>
+                <td>Compile-time checked name, autocomplete and rename refactoring.</td>
+            </tr>
+            <tr>
+                <td><code>&lt;HouseIcon /&gt;</code></td>
+                <td><code>Jenin.FontAwesome.Blazor.Icons</code></td>
+                <td>Shortest markup, correct default style baked in.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

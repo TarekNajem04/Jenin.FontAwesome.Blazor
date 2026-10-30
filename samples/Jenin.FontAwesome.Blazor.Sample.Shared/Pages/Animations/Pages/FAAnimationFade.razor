@@ -1,0 +1,20 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/animation-fade"
+
+<PageTitle>Font Awesome Animation Fade</PageTitle>
+
+<IconContainer CssClass="mb-1" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-triangle-exclamation" Animation=@Animate.Fade() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-skull-crossbones" Animation=@Animate.Fade() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-computer" Animation=@Animate.Fade() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-i-cursor" Animation=@Animate.Fade(new FadeOptions { Duration = TimeSpan.FromSeconds(2), Opacity = 0.6F }) Color="#007AFF" />
+    </Icons>
+</IconContainer>

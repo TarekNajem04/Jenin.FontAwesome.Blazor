@@ -1,0 +1,43 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/explorer"
+
+<PageTitle>Icon Explorer</PageTitle>
+
+<div class="explorer" @onkeydown="OnGlobalKeyDownAsync">
+    <header class="explorer__toolbar">
+        <SearchBar Query="@_state.Query"
+                   QueryChanged="OnQueryChangedAsync"
+                   ResultCount="@_results.Count"
+                   TotalCount="@_catalogue.TotalCount" />
+        <StyleFilter Style="@_state.Style"
+                     StyleChanged="OnStyleChangedAsync"
+                     TotalCount="@_catalogue.TotalCount" />
+        <div class="explorer__toolbar-actions">
+            <button type="button"
+                    class="explorer-help-toggle"
+                    aria-label="Show keyboard shortcuts"
+                    title="Keyboard shortcuts (?)"
+                    @onclick="OpenHelpAsync">
+                <span aria-hidden="true">?</span>
+                <span>Shortcuts</span>
+            </button>
+            <ThemeToggle IsDark="@_isDark" ThemeChanged="OnThemeChangedAsync" Visible="@(!_inheritsHostTheme)" />
+        </div>
+    </header>
+    <div class="explorer__body">
+        <section class="explorer__results" aria-label="Icon results">
+            <IconGrid Items="@_results" Selected="@_state.Selected" OnSelect="OnSelectAsync" />
+        </section>
+        <aside class="explorer__aside" aria-label="Icon details">
+            <PreviewPanel @ref="_preview" Selected="@_state.Selected" Preview="@_state.Preview" />
+        </aside>
+    </div>
+    <KeyboardHelp Visible="@_helpVisible" OnClose="CloseHelpAsync" />
+</div>

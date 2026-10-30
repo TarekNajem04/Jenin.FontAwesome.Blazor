@@ -1,0 +1,37 @@
+@page "/"
+
+<PageTitle>JeninFaApp — Font Awesome for Blazor</PageTitle>
+
+<section class="hero">
+    <h1>
+        <Icon IconName="fa-house" IconStyle="IconStyle.Solid" IconSize="IconSize.X02" />
+        Hello, Font Awesome!
+    </h1>
+    <p class="lede">
+        This page rendered with <code>AddJeninFontAwesome()</code> and static asset tags in
+        <code>wwwroot/index.html</code> — standalone WebAssembly has no server pipeline, so the
+        matching static mode-config file is referenced directly.
+    </p>
+</section>
+
+<section class="showcase">
+    <h2>Styles</h2>
+    <p class="row">
+        <Icon IconName="fa-star" IconStyle="IconStyle.Solid" Color="gold" />
+        <Icon IconName="fa-star" IconStyle="IconStyle.Regular" Color="gold" />
+        <Icon IconName="fa-github" IconStyle="IconStyle.Brands" />
+    </p>
+
+    <h2>Sizes</h2>
+    <p class="row">
+        <Icon IconName="fa-bell" />
+        <Icon IconName="fa-bell" IconSize="IconSize.X02" />
+        <Icon IconName="fa-bell" IconSize="IconSize.X04" Color="dodgerblue" />
+    </p>
+
+    <h2>Motion</h2>
+    <p class="row">
+        <Icon IconName="fa-spinner" Animation="@Animate.Spin()" />
+        <IconButton IconName="fa-floppy-disk" Label="Save" />
+    </p>
+</section>

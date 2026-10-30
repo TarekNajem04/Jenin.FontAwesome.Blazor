@@ -1,0 +1,55 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<IconContainer CssClass="mb-1 p-5">
+    <Icons>
+        <HouseIcon @ref=HouseIcon />            @* IconSize = HouseIcon default value *@
+        <HouseIcon IconSize=IconSize.NotSet />  @* IconSize = FontAwesome default value *@
+        <HouseIcon IconSize=IconSize.X02 />
+        <HouseIcon IconSize=IconSize.X03 />
+        <HouseIcon IconSize=IconSize.X04 />
+        <HouseIcon IconSize=IconSize.X05 />
+
+        <SettingIcon IconSize=IconSize.X05 />
+        <SettingIcon IconSize=IconSize.X04 />
+        <SettingIcon IconSize=IconSize.X03 />
+        <SettingIcon IconSize=IconSize.X02 />
+        <SettingIcon IconSize=IconSize.NotSet />    @* IconSize = FontAwesome default value *@
+        <SettingIcon @ref=SettingIcon />            @* IconSize = SettingIcon default value *@
+    </Icons>
+</IconContainer>
+
+@code {
+    public HouseIcon HouseIcon { get; set; } = default!;
+    public SettingIcon SettingIcon { get; set; } = default!;
+
+        /*
+         * ~\Inheritance\HouseIcon.cs
+         public class HouseIcon : Icon {
+             public HouseIcon() {
+                IconStyle = IconStyle.Solid;    // Default value
+                IconName = "fa-house";          // Default value
+                IconSize = IconSize.X01;        // Default value
+                Color = "#553592";              // Default value
+                Bordered = true;                // Default value
+                BorderColor = "#FF0090";        // Default value
+             }
+         }
+         * ~\Inheritance\SettingIcon.cs
+         public class SettingIcon : Icon {
+                 public SettingIcon() {
+                 IconStyle = IconStyle.Solid;
+                 IconName = "fa-gear";
+                 IconSize = IconSize.X01;
+                 Color = "#553592";
+                 Bordered = true;
+                 BorderColor = "#FF0090";
+              }
+         }
+         */
+}

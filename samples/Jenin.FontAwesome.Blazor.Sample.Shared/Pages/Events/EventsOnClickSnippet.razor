@@ -1,0 +1,38 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<h5>
+    Click Counter:
+    @{
+        var numbers = Counter.ToString();
+        foreach(var num in numbers) {
+            <Icon CssClass="me-1" IconStyle=IconStyle.Solid IconName=@($"fa-{num}") />
+        }
+    }
+</h5>
+
+<IconContainer CssClass="mb-1 p-5" IconSize=IconSize.X02>
+    <Icons>
+        <Icon IconStyle=IconStyle.Solid
+              IconName=@(IsChecked ? "fa-check-square" : "fa-square")
+              Bordered=true
+              BorderColor=@(IsChecked ? "green" : "red")
+              BorderWidth="4px"
+              OnClick=IconClicked
+              @ref=Icon />
+    </Icons>
+</IconContainer>
+
+@code {
+    public Icon Icon { get; set; } = default!;
+
+    private int Counter { get; set; } = 1;
+    private bool IsChecked => Counter % 2 == 0;
+
+    private void IconClicked(MouseEventArgs eventArgs) => Counter++;
+}

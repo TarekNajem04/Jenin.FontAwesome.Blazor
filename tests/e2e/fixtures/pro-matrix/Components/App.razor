@@ -1,0 +1,15 @@
+﻿@* Fixture shell: the document itself carries no Font Awesome tags; each
+   route renders its own head assets (nest vs webfont, Free vs Pro URLs from env). *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <HeadOutlet />
+</head>
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+</body>
+</html>

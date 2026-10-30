@@ -1,5 +1,9 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
 namespace Jenin.FontAwesome.Blazor.Animations;
 
 /// <summary>
@@ -8,36 +12,29 @@ namespace Jenin.FontAwesome.Blazor.Animations;
 /// <a href="https://fontawesome.com/docs/web/style/animate#fade">Font Awesome Fade</a>.
 /// </para>
 /// </summary>
-public class Fade : Animation {
-    public Fade() : base("fa-fade") { }
+public sealed record Fade : Animation<Fade, FadeOptions> {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Fade"/> animation.
+    /// </summary>
+    /// <param name="options">Optional options; when <see langword="null"/> Font Awesome defaults are used.</param>
+    public Fade(FadeOptions? options = null) : base(options) { }
 
     /// <summary>
-    /// Set lowest opacity value an icon will fade to and from
+    /// The Font Awesome CSS class that activates the <see cref="Fade"/> animation (<c>fa-fade</c>).
     /// </summary>
-    public float? Opacity { get; set; }
+    protected override string CssClass => "fa-fade";
 
-    public override Dictionary<string, string> AddStyles(Dictionary<string, string> styles) => base.AddStyles(styles)
-                                                                                                   .AddIfNotNull("--fa-fade-opacity", Opacity);
-    public static Fade Animate(float? opacity) => new() { Opacity = opacity };
-    public static Fade Animate
-        (
-            float? opacity = null,
-            DurationUnit delayUnit = DurationUnit.Seconds,
-            float? delay = null,
-            AnimationDirection direction = AnimationDirection.None,
-            DurationUnit durationUnit = DurationUnit.Seconds,
-            float? duration = null,
-            float? iterationCount = null,
-            string timingFunction = null
-        )
-        => new() {
-            DelayUnit = delayUnit,
-            Delay = delay,
-            Direction = direction,
-            DurationUnit = durationUnit,
-            Duration = duration,
-            IterationCount = iterationCount,
-            TimingFunction = timingFunction,
-            Opacity = opacity
-        };
+    /// <summary>
+    /// Returns a copy of this <see cref="Fade"/> animation with the specified options.
+    /// </summary>
+    /// <param name="options">The options to apply.</param>
+    /// <returns>A new <see cref="Fade"/> instance carrying <paramref name="options"/>.</returns>
+    protected override Fade WithOptions(FadeOptions options) => this with { Options = options };
+
+    /// <summary>
+    /// Adds the <see cref="Fade"/> animation's CSS custom properties to <paramref name="styles"/>.
+    /// </summary>
+    /// <param name="styles">The CSS custom property bag to populate.</param>
+    protected override void AddStyles(Dictionary<string, string> styles)
+        => styles.AddOrUpdateIfNotNull("--fa-fade-opacity", Options.Opacity);
 }

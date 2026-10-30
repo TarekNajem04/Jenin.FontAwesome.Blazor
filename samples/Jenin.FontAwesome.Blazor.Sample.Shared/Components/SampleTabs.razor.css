@@ -1,0 +1,41 @@
+/*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*/
+
+.sample-tabs {
+    margin-bottom: 2rem;
+}
+
+.sample-tabs__nav {
+    gap: .25rem;
+    border-bottom: 1px solid var(--site-border);
+}
+
+.sample-tabs__nav .nav-link {
+    padding: .5rem 1rem;
+    font-weight: 500;
+    color: var(--site-text-muted);
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: .5rem .5rem 0 0;
+}
+
+.sample-tabs__nav .nav-link:hover {
+    color: var(--site-text-strong);
+    background-color: var(--site-surface-muted);
+}
+
+.sample-tabs__nav .nav-link.active {
+    color: var(--site-accent);
+    background-color: var(--site-surface);
+    border-color: var(--site-border) var(--site-border) var(--site-surface);
+}
+
+.sample-tabs__content {
+    padding-top: 1.5rem;
+}

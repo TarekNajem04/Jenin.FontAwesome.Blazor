@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Roslyn analyzer + code fix for the typed API. Ships only under
+         analyzers/dotnet/cs: IncludeBuildOutput=false so no runtime assembly is referenced by
+         consumers. Targets netstandard2.0 to load in every compiler host.
+         No .snupkg by design: there is no runtime lib to symbol-index (DevelopmentDependency).
+         License is MIT-only by design: the embedded name/style/alias lists are functional
+         identifiers, not redistributed artwork/metadata; FA attribution lives in LICENSES/README. -->
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <DevelopmentDependency>true</DevelopmentDependency>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <!-- Pack the dependency closure: the IDE loads fixes from the analyzers folder, which the
+             compiler host does not provide. RS1038 is not applicable: command-line compilers never
+             load CodeFixProviders, and analyzer execution paths never touch Workspaces types.
+             RS2007 is not applicable: the release files follow the documented
+             (header + rule rows) format byte-for-byte, yet this SDK's tracker rejects them
+             regardless of content (verified across line endings, BOM, per-row bisection, and
+             clean rebuilds); release history is maintained manually in AnalyzerReleases.*.md and
+             published in docs/diagnostics.md instead. Revisit on SDK upgrade. -->
+        <!-- Analyzer packs ship no runtime lib by design (DevelopmentDependency); NU5128 does not apply. -->
+        <NoWarn>$(NoWarn);RS1038;RS2007;NU5128</NoWarn>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>Roslyn analyzer and code fixes for Jenin.FontAwesome.Blazor: unknown icon names, raw class strings in name positions (with fix), and Pro-only styles without licensed assets.</Description>
+        <PackageId>Jenin.FontAwesome.Blazor.Analyzers</PackageId>
+        <Authors>Tarek Najem</Authors>
+        <Company>Jenin</Company>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageTags>blazor fontawesome font-awesome-7 icons roslyn analyzer codefix</PackageTags>
+        <PackageReleaseNotes>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/releases</PackageReleaseNotes>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <NeutralLanguage>en</NeutralLanguage>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="KnownIconNames.txt" />
+        <EmbeddedResource Include="KnownIconStyles.txt" />
+        <EmbeddedResource Include="KnownIconAliases.txt" />
+        <None Include="$(OutputPath)*.dll" Pack="true" PackagePath="analyzers/dotnet/cs/" Visible="false" />
+        <None Include="..\..\LICENSES" Pack="true" PackagePath="\" />
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+</Project>

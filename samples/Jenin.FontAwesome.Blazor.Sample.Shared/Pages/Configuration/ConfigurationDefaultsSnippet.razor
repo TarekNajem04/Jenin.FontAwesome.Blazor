@@ -1,0 +1,22 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<div class="mb-3 text-white-50">
+    The first three icons inherit Brands and X03 from the enclosing defaults:
+</div>
+
+<FontAwesomeDefaults IconStyle=IconStyle.Brands IconSize=IconSize.X03>
+    <div class="d-flex flex-wrap align-items-center gap-4 mb-0">
+        <Icon IconName="fa-github" />
+        <Icon IconName="fa-gitlab" />
+        <Icon IconName="fa-firefox" />
+
+        <span class="text-white-50">&mdash; an explicit X01 wins over the cascade:</span>
+        <Icon IconName="fa-android" IconSize=IconSize.X01 />
+    </div>
+</FontAwesomeDefaults>

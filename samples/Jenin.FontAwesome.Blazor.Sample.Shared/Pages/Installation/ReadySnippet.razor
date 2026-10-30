@@ -1,0 +1,19 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<button class="btn btn-outline-primary mb-4 ms-2 d-flex align-items-center gap-2" @onclick=GotoStartPage>
+    <Icon IconStyle=IconStyle.Solid IconSize=IconSize.X02 IconName="fa-bell" Animation=@Animate.Shake() Color="gold"/>
+    <span>Are you ready?</span>
+</button>
+
+@code{
+    [Inject]
+    private NavigationManager NavigationManager{ get; set; } = default!;
+
+    private void GotoStartPage() => NavigationManager.NavigateTo("/icon-basics-style");
+}

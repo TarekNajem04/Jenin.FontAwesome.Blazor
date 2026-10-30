@@ -1,0 +1,23 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+<IconContainer CssClass="mb-1 p-5 d-flex gap-3 align-items-center" IconSize=IconSize.X02>
+    <Icons>
+        <IconToggleButton IconName="fa-bell" IconStyle=IconStyle.Regular
+                          PressedIconName="fa-bell-slash" PressedIconStyle=IconStyle.Regular
+                          Title="Enable notifications" PressedTitle="Disable notifications"
+                          Pressed=@NotificationsOn PressedChanged="value => NotificationsOn = value" />
+        <FavoriteButton Pressed=@IsFavorite PressedChanged="value => IsFavorite = value" />
+        <span>Notifications @(NotificationsOn ? "on" : "off"), favorite @(IsFavorite ? "saved" : "unsaved").</span>
+    </Icons>
+</IconContainer>
+
+@code {
+    private bool NotificationsOn;
+    private bool IsFavorite;
+}

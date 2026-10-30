@@ -1,0 +1,7 @@
+# Default code owner for the whole repository.
+#
+# Justification: this repository currently has a single maintainer and does not use organisation
+# teams. A default owner causes the maintainer to be requested automatically as a reviewer on pull
+# requests from contributors, and it documents ownership for review. Extend or replace this file
+# when additional maintainers or teams are added.
+* @TarekNajem04

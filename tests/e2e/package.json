@@ -1,0 +1,12 @@
+{
+  "name": "jenin-fontawesome-blazor-e2e",
+  "private": true,
+  "type": "module",
+  "description": "Opt-in Playwright end-to-end scaffold. Not part of the .NET build.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

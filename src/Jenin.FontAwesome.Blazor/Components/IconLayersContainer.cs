@@ -1,26 +1,23 @@
-﻿namespace Jenin.FontAwesome.Blazor.Components;
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+namespace Jenin.FontAwesome.Blazor.Components;
 
 /// <summary>
 /// Layers are the new way to place icons and text visually on top of each other,
 /// replacing Font Awesome classic icons stacks.
 /// With this approach, you can use more than two icons.
 /// <para>
-/// <a href="https://fontawesome.com/docs/web/style/layer">Layering Text & Counters</a>
+/// <a href="https://fontawesome.com/docs/web/style/layer">Layering Text &amp; Counters</a>
 /// </para>
 /// </summary>
 public class IconLayersContainer : IconContainer {
-    /*
-        <span @attributes=AdditionalAttributes
-           @onclick=@OnClickHandlerAsync
-           @ondblclick=@OnDoubleClickHandlerAsync
-           @onmouseover=@OnMouseOverHandlerAsync
-           @onmouseout=@OnMouseOutHandlerAsync>
-            <CascadingValue Value=this Name="Container" IsFixed=true>@Icons</CascadingValue>
-        </span>
-     */
-    protected override string GetRootTag() => "span";
+    private protected override string GetRootTag() => "span";
 
-    protected override List<string> AddClasses(List<string> classes) {
+    private protected override List<string?> AddClasses(List<string?> classes) {
         classes = base.AddClasses(classes);
         classes.Add("fa-layers");
 

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <!-- Hosted on GitHub Pages under /<repository-name>/. The deployment workflow rewrites the
+             base href in the published index.html (and its 404.html fallback) to match. -->
+        <BlazorWebAssemblyLoadAllGlobalizationData>false</BlazorWebAssemblyLoadAllGlobalizationData>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Jenin.FontAwesome.Blazor.Sample.Shared\Jenin.FontAwesome.Blazor.Sample.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

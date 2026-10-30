@@ -1,0 +1,81 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+@page "/cookbook"
+
+<PageTitle>Cookbook — copy-paste recipes</PageTitle>
+
+<div class="container-fluid mt-3 mb-4">
+    <h1>Cookbook</h1>
+    <p>
+        Fifteen copy-paste recipes using only this library's typed API. Each recipe shows the
+        live result first and its exact Razor source below (rendered automatically from the
+        snippet file), and every one is asserted by <c>tests/e2e/cookbook.spec.ts</c>.
+        The same snippets feed the AI-ready docs — see <c>llms.txt</c> at the repo root.
+    </p>
+
+    <section data-testid="recipe-busy-button">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookBusyButtonSnippet)" Heading="1. Icon button with loading state" />
+    </section>
+
+    <section data-testid="recipe-notification-badge">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookNotificationBadgeSnippet)" Heading="2. Notification badge on an icon" />
+    </section>
+
+    <section data-testid="recipe-empty-state">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookEmptyStateSnippet)" Heading="3. Empty state for a list" />
+    </section>
+
+    <section data-testid="recipe-icon-list">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookIconListSnippet)" Heading="4. Icon list" />
+    </section>
+
+    <section data-testid="recipe-stat-card">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookStatCardSnippet)" Heading="5. Stat card with delta" />
+    </section>
+
+    <section data-testid="recipe-animated-trigger">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookAnimatedTriggerSnippet)" Heading="6. Animated icon on hover" />
+    </section>
+
+    <section data-testid="recipe-duotone-theme">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookDuotoneThemeSnippet)" Heading="7. Theme-aware duotone icon" />
+    </section>
+
+    <section data-testid="recipe-accessible-icon">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookAccessibleIconSnippet)" Heading="8. Accessible named icon" />
+    </section>
+
+    <section data-testid="recipe-icon-toggle">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookIconToggleSnippet)" Heading="9. Icon toggle button" />
+    </section>
+
+    <section data-testid="recipe-avatar-status">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookAvatarStatusSnippet)" Heading="10. Avatar with status dot" />
+    </section>
+
+    <section data-testid="recipe-rating-input">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookRatingSnippet)" Heading="11. Star rating input" />
+    </section>
+
+    <section data-testid="recipe-two-state">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookTwoStateSnippet)" Heading="12. Animated two-state icon" />
+    </section>
+
+    <section data-testid="recipe-share-buttons">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookShareSnippet)" Heading="13. Share buttons" />
+    </section>
+
+    <section data-testid="recipe-timeline">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookTimelineSnippet)" Heading="14. Timeline from an icon list" />
+    </section>
+
+    <section data-testid="recipe-toast">
+        <Sample CssClass="mb-5" SnippetComponent="typeof(CookbookToastSnippet)" Heading="15. Toast notification (composed)" />
+    </section>
+</div>

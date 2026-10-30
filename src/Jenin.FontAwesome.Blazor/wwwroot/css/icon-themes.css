@@ -1,0 +1,20 @@
+/*
+ * Duotone theming for Jenin.FontAwesome.Blazor.
+ *
+ * IconTheme scopes duotone layer colors to a subtree through inherited custom properties, so a
+ * single palette adapts every duotone Icon inside it to the current theme. The host signals dark
+ * mode with data-theme="dark" (the convention used by the samples and Bootstrap 5.3+); without
+ * it the light values apply. An Icon with its own PrimaryColor/SecondaryColor always wins over
+ * the inherited theme values.
+ *
+ * <link href="_content/Jenin.FontAwesome.Blazor/css/icon-themes.css" rel="stylesheet" />
+ */
+.jfa-duotone-theme {
+    --fa-primary-color: var(--duo-primary);
+    --fa-secondary-color: var(--duo-secondary);
+}
+
+[data-theme="dark"] .jfa-duotone-theme {
+    --fa-primary-color: var(--duo-primary-dark, var(--duo-primary));
+    --fa-secondary-color: var(--duo-secondary-dark, var(--duo-secondary));
+}

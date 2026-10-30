@@ -1,0 +1,85 @@
+name: Bug report
+description: Report a reproducible defect in Jenin.FontAwesome.Blazor.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report. Please search existing issues first.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight checklist
+      options:
+        - label: I have read the documentation and searched existing issues.
+          required: true
+        - label: I can reproduce this issue with the latest release.
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of the defect.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, deterministic steps. Include a code snippet or repository if possible.
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: package-version
+    attributes:
+      label: Jenin.FontAwesome.Blazor version
+      placeholder: 1.2.0
+    validations:
+      required: true
+  - type: dropdown
+    id: hosting
+    attributes:
+      label: Blazor hosting model
+      options:
+        - Blazor Server
+        - Blazor WebAssembly
+        - Other / not sure
+    validations:
+      required: true
+  - type: input
+    id: dotnet
+    attributes:
+      label: .NET version
+      placeholder: .NET 10.0
+    validations:
+      required: true
+  - type: input
+    id: fontawesome
+    attributes:
+      label: Font Awesome version
+      placeholder: 6.4.2
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots, logs, browser, or anything else relevant.
+    validations:
+      required: false

@@ -1,0 +1,121 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/configuration"
+
+<PageTitle>Font Awesome Blazor Configuration</PageTitle>
+
+<div class="container-fluid mt-3 mb-4">
+    <h1>Configuration</h1>
+
+    <p>
+        Every value the library can default &mdash; icon style, typeface, size, and accessibility mode &mdash; can be
+        set in two places. Both are pure host-side configuration: no JavaScript interop, no runtime discovery.
+    </p>
+
+    <h2>1. Application-wide defaults (dependency injection)</h2>
+
+    <p>
+        Register <code>FontAwesomeOptions</code> once at startup. Any component that does not set the value
+        itself picks it up:
+    </p>
+
+    <CodeSnippet Language="csharp">
+        <Snippet>
+            builder.Services.AddJeninFontAwesome(options =&gt; {
+                options.IconStyle = IconStyle.Solid;
+                options.IconSize = IconSize.X03;
+                options.Typeface = Typeface.Classic;
+            });
+        </Snippet>
+    </CodeSnippet>
+
+    <p class="mb-4">
+        The icon picker has its own optional registration. It is not required &mdash; without it the picker falls back
+        to <code>IconMetadataProvider.Default</code> &mdash; but registering keeps a single shared provider when several
+        pickers live in the same app:
+    </p>
+
+    <CodeSnippet Language="csharp">
+        <Snippet>
+            builder.Services.AddJeninFontAwesomeIconPicker();
+        </Snippet>
+    </CodeSnippet>
+
+    <h2 class="mt-4">2. Subtree defaults (cascading component)</h2>
+
+    <p>
+        Wrap a region in <code>FontAwesomeDefaults</code> to scope defaults without touching DI. Nested usages merge
+        with &mdash; and override &mdash; their ancestors, and an explicit parameter on any descendant still wins:
+    </p>
+
+    <div class="configuration-page sample-page">
+        <SampleTabs>
+            <Tabs>
+                <SampleTab Text="Blazor">
+                    <Samples>
+                        <Sample CssClass="mb-5" SnippetComponent=typeof(ConfigurationDefaultsSnippet) Heading="FontAwesomeDefaults" />
+                    </Samples>
+                </SampleTab>
+            </Tabs>
+        </SampleTabs>
+    </div>
+
+    <h2>Precedence</h2>
+
+    <ol>
+        <li>An explicit parameter on the component.</li>
+        <li>The nearest enclosing <code>FontAwesomeDefaults</code>.</li>
+        <li>Options registered with <code>AddJeninFontAwesome</code>.</li>
+        <li>The built-in library default.</li>
+    </ol>
+
+    <h2>Configurable values</h2>
+
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Built-in default</th>
+                <th>Affects</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>IconStyle</code></td>
+                <td><code>IconStyle?</code></td>
+                <td>Solid</td>
+                <td>Style used when <code>Icon.IconStyle</code> is omitted.</td>
+            </tr>
+            <tr>
+                <td><code>Typeface</code></td>
+                <td><code>Typeface?</code></td>
+                <td>Classic</td>
+                <td>Typeface used when <code>Icon.Typeface</code> is omitted.</td>
+            </tr>
+            <tr>
+                <td><code>IconSize</code></td>
+                <td><code>IconSize?</code></td>
+                <td>X01</td>
+                <td>Size used when <code>IconSize</code> is omitted.</td>
+            </tr>
+            <tr>
+                <td><code>Decorative</code></td>
+                <td><code>bool?</code></td>
+                <td>Inferred per component</td>
+                <td>Global accessibility mode &mdash; see <a class="link-primary" href="accessibility">Accessibility</a>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-info" role="note">
+        A <code>null</code> property means "no configured default": the built-in default is used instead, so an empty
+        <code>AddJeninFontAwesome()</code> call changes nothing.
+    </div>
+</div>

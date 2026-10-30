@@ -1,0 +1,785 @@
+/*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*/
+
+/*
+ * Theme tokens. The explorer is self-contained: every colour is a custom property so the whole
+ * surface can switch between light and dark without touching the rules below. Light is the default;
+ * dark applies when the host sets `data-theme="dark"` on any ancestor (the explorer writes it on its
+ * own root) or when the operating system prefers a dark colour scheme and no explicit theme is set.
+ */
+.explorer {
+    --ex-bg: #ffffff;
+    --ex-surface: #ffffff;
+    --ex-surface-muted: #f8f9fa;
+    --ex-surface-subtle: #f1f3f5;
+    --ex-border: #e9ecef;
+    --ex-border-strong: #ced4da;
+    --ex-text: #212529;
+    --ex-text-muted: #6c757d;
+    --ex-text-strong: #495057;
+    --ex-accent: #0d6efd;
+    --ex-accent-contrast: #ffffff;
+    --ex-accent-soft: #f0f6ff;
+    --ex-accent-count: #dbeafe;
+    --ex-success: #198754;
+    --ex-focus: #0d6efd;
+    --ex-code-bg: #f8f9fa;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    min-height: 0;
+    color: var(--ex-text);
+}
+
+.explorer[data-theme="dark"] {
+    --ex-bg: #1b1f24;
+    --ex-surface: #22272e;
+    --ex-surface-muted: #1b1f24;
+    --ex-surface-subtle: #2b3138;
+    --ex-border: #343b43;
+    --ex-border-strong: #495057;
+    --ex-text: #e9ecef;
+    --ex-text-muted: #adb5bd;
+    --ex-text-strong: #ced4da;
+    --ex-accent: #4d94ff;
+    --ex-accent-contrast: #0b1220;
+    --ex-accent-soft: #20304a;
+    --ex-accent-count: #bcd6ff;
+    --ex-success: #2fbf71;
+    --ex-focus: #79b8ff;
+    --ex-code-bg: #171b20;
+}
+
+@media (prefers-color-scheme: dark) {
+    .explorer:not([data-theme="light"]) {
+        --ex-bg: #1b1f24;
+        --ex-surface: #22272e;
+        --ex-surface-muted: #1b1f24;
+        --ex-surface-subtle: #2b3138;
+        --ex-border: #343b43;
+        --ex-border-strong: #495057;
+        --ex-text: #e9ecef;
+        --ex-text-muted: #adb5bd;
+        --ex-text-strong: #ced4da;
+        --ex-accent: #4d94ff;
+        --ex-accent-contrast: #0b1220;
+        --ex-accent-soft: #20304a;
+        --ex-accent-count: #bcd6ff;
+        --ex-success: #2fbf71;
+        --ex-focus: #79b8ff;
+        --ex-code-bg: #171b20;
+    }
+}
+
+.explorer__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.explorer__toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-left: auto;
+}
+
+.explorer-search {
+    display: flex;
+    flex: 1 1 320px;
+    align-items: center;
+    gap: .5rem;
+}
+
+.explorer-search__field {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.explorer-search__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.explorer-search__input {
+    width: 100%;
+    padding: .6rem .9rem;
+    font: inherit;
+    color: var(--ex-text);
+    background: var(--ex-surface);
+    border: 1px solid var(--ex-border-strong);
+    border-radius: .5rem;
+}
+
+.explorer-search__input:focus-visible {
+    outline: 2px solid var(--ex-focus);
+    outline-offset: 1px;
+    border-color: var(--ex-accent);
+}
+
+.explorer-search__clear {
+    padding: .25rem .5rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--ex-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+.explorer-search__clear:hover {
+    color: var(--ex-text);
+}
+
+.explorer-search__clear:focus-visible {
+    outline: 2px solid var(--ex-focus);
+    outline-offset: 1px;
+}
+
+.explorer-search__status {
+    font-size: .875rem;
+    color: var(--ex-text-muted);
+    white-space: nowrap;
+}
+
+.explorer-theme-toggle,
+.explorer-help-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .4rem .7rem;
+    font: inherit;
+    font-size: .85rem;
+    color: var(--ex-text);
+    background: var(--ex-surface);
+    border: 1px solid var(--ex-border-strong);
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.explorer-theme-toggle:hover,
+.explorer-help-toggle:hover {
+    border-color: var(--ex-accent);
+}
+
+.explorer-theme-toggle:focus-visible,
+.explorer-help-toggle:focus-visible {
+    outline: 2px solid var(--ex-focus);
+    outline-offset: 2px;
+}
+
+.explorer-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.explorer-filter__button {
+    padding: .4rem .9rem;
+    font: inherit;
+    color: var(--ex-text);
+    background: var(--ex-surface);
+    border: 1px solid var(--ex-border-strong);
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.explorer-filter__button:hover {
+    border-color: var(--ex-accent);
+}
+
+.explorer-filter__button:focus-visible {
+    outline: 2px solid var(--ex-focus);
+    outline-offset: 2px;
+}
+
+.explorer-filter__button.is-active {
+    color: var(--ex-accent-contrast);
+    background: var(--ex-accent);
+    border-color: var(--ex-accent);
+}
+
+.explorer-filter__count {
+    margin-left: .25rem;
+    font-size: .8rem;
+    color: var(--ex-text-muted);
+}
+
+.explorer-filter__button.is-active .explorer-filter__count {
+    color: var(--ex-accent-count);
+}
+
+.explorer__body {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: stretch;
+    min-height: 360px;
+    gap: 1.25rem;
+}
+
+.explorer__results {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.explorer-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: .25rem;
+}
+
+.explorer-grid--empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--ex-text-muted);
+}
+
+.explorer-grid__empty-title {
+    margin: 0 0 .25rem;
+    font-weight: 600;
+    color: var(--ex-text-strong);
+}
+
+.explorer-grid__empty-hint {
+    margin: 0;
+    font-size: .875rem;
+}
+
+.explorer-grid__row {
+    display: grid;
+    align-items: start;
+    gap: 0 12px;
+}
+
+.explorer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+    height: 120px;
+    padding: .5rem;
+    font: inherit;
+    color: var(--ex-text);
+    text-align: center;
+    background: var(--ex-surface);
+    border: 1px solid var(--ex-border);
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.explorer-card:hover {
+    border-color: var(--ex-accent);
+}
+
+.explorer-card:focus-visible {
+    outline: 2px solid var(--ex-focus);
+    outline-offset: 2px;
+}
+
+.explorer-card.is-selected {
+    background: var(--ex-accent-soft);
+    border-color: var(--ex-accent);
+    box-shadow: inset 0 0 0 1px var(--ex-accent);
+}
+
+.explorer-card__icon {
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.explorer-card__name {
+    max-width: 100%;
+    overflow: hidden;
+    font-size: .75rem;
+    color: var(--ex-text-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.explorer__aside {
+    display: flex;
+    flex: 0 0 320px;
+    min-width: 0;
+}
+
+/*
+ * The preview panel is split into two regions: a fixed ("sticky") region that always shows the icon
+ * and its metadata, and a scrollable region that holds the live controls and snippets. The panel
+ * stretches to the height of its column (matching the results grid) so it never looks stunted, and
+ * its scroll region absorbs any overflow so the icon never scrolls out of view.
+ */
+.explorer-preview {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 1rem;
+    background: var(--ex-surface);
+    border: 1px solid var(--ex-border);
+    border-radius: .75rem;
+}
+
+.explorer-preview__sticky {
+    flex: 0 0 auto;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--ex-border);
+}
+
+.explorer-preview__scroll {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: .25rem;
+}
+
+.explorer-preview__canvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    font-size: 4rem;
+    color: var(--ex-text);
+    background: var(--ex-surface-muted);
+    border-radius: .5rem;
+}
+
+/*
+ * The previewed icon is centred in a fixed-size, clipped canvas so a growing icon (size class or
+ * power transform) never spills over the surrounding controls and never reflows the panel: the icon
+ * stays visually anchored while options are applied.
+ */
+.explorer-preview__canvas > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.explorer-preview__meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .35rem 1rem;
+    margin: 0;
+    font-size: .875rem;
+}
+
+.explorer-preview__meta dt {
+    color: var(--ex-text-muted);
+}
+
+.explorer-preview__meta dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.explorer-preview__note {
+    margin: 1rem 0 0;
+    font-size: .8rem;
+    color: var(--ex-text-muted);
+}
+
+.explorer-preview--empty {
+    align-items: center;
+    justify-content: center;
+    color: var(--ex-text-muted);
+    text-align: center;
+}
+
+.explorer-preview__empty-title {
+    margin: 0 0 .25rem;
+    font-weight: 600;
+    color: var(--ex-text-strong);
+}
+
+.explorer-preview__empty-hint {
+    margin: 0;
+    font-size: .875rem;
+}
+
+.explorer-notice {
+    margin-bottom: 1rem;
+    padding: .5rem .75rem;
+    font-size: .8rem;
+    color: var(--ex-text);
+    background: var(--ex-surface-subtle);
+    border: 1px solid var(--ex-border-strong);
+    border-left: 3px solid var(--ex-accent);
+    border-radius: .25rem;
+}
+
+.explorer-notice__item {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+    margin: 0;
+}
+
+.explorer-notice__item + .explorer-notice__item {
+    margin-top: .4rem;
+}
+
+.explorer-notice__badge {
+    flex: 0 0 auto;
+    padding: .05rem .4rem;
+    font-size: .7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--ex-accent-contrast);
+    background: var(--ex-accent);
+    border-radius: .25rem;
+}
+
+.explorer-notice__text {
+    flex: 1 1 auto;
+}
+
+.explorer-preview__attribution {
+    margin: 1rem 0 0;
+    font-size: .72rem;
+    color: var(--ex-text-muted);
+}
+
+.explorer-preview__attribution a {
+    color: var(--ex-accent);
+}
+
+.explorer-controls {
+    padding-top: .25rem;
+}
+
+.explorer-controls__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .5rem;
+    margin-bottom: .75rem;
+}
+
+.explorer-controls__title {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.explorer-controls__reset {
+    padding: .15rem .5rem;
+    font-size: .75rem;
+    color: var(--ex-text-strong);
+    background: var(--ex-surface-subtle);
+    border: 1px solid var(--ex-border);
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+.explorer-controls__reset:focus-visible {
+    outline: 2px solid var(--ex-focus);
+}
+
+.explorer-controls__group {
+    margin-bottom: 1rem;
+}
+
+.explorer-controls__group-title {
+    display: block;
+    margin-bottom: .35rem;
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--ex-text-muted);
+}
+
+.explorer-controls .form-label {
+    margin-bottom: .15rem;
+    font-size: .8rem;
+}
+
+/*
+ * Controls always fill the width of their grid column; long option labels in a select or the odd
+ * numeric value must never force the panel wider than its 320 px aside.
+ */
+.explorer-controls .form-select,
+.explorer-controls .form-control {
+    width: 100%;
+    min-width: 0;
+}
+
+/*
+ * Range inputs sit next to a live value readout so the current number is always visible, and the
+ * readout keeps a fixed width so dragging the slider never reflows the panel.
+ */
+.explorer-controls__range {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.explorer-controls__range .form-range {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-bottom: .25rem;
+}
+
+.explorer-controls__value {
+    flex: 0 0 auto;
+    min-width: 3rem;
+    font-size: .75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ex-text-muted);
+    text-align: right;
+}
+
+/*
+ * Colour swatches fill their column instead of the Bootstrap default 3rem square, so the control uses
+ * the full width of its container like the other inputs.
+ */
+.explorer-controls__color {
+    display: block;
+    width: 100%;
+    height: 2rem;
+    padding: .15rem;
+}
+
+.explorer-snippets {
+    margin-top: 1rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--ex-border);
+}
+
+.explorer-snippets__title {
+    margin: 0 0 .5rem;
+    font-size: 1rem;
+}
+
+.explorer-snippets__tabs {
+    display: flex;
+    gap: .25rem;
+    margin-bottom: .5rem;
+    flex-wrap: wrap;
+}
+
+.explorer-snippets__tab {
+    padding: .2rem .6rem;
+    font-size: .8rem;
+    color: var(--ex-text-strong);
+    background: var(--ex-surface-subtle);
+    border: 1px solid var(--ex-border);
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+.explorer-snippets__tab:focus-visible {
+    outline: 2px solid var(--ex-focus);
+    outline-offset: 2px;
+}
+
+.explorer-snippets__tab.is-active {
+    color: var(--ex-accent-contrast);
+    background: var(--ex-accent);
+    border-color: var(--ex-accent);
+}
+
+.explorer-snippets__body {
+    position: relative;
+    background: var(--ex-code-bg);
+    border: 1px solid var(--ex-border);
+    border-radius: .25rem;
+}
+
+.explorer-snippets__code {
+    margin: 0;
+    padding: .6rem 3.5rem .6rem .6rem;
+    max-height: 16rem;
+    overflow: auto;
+    font-size: .78rem;
+    line-height: 1.4;
+    color: var(--ex-text);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.explorer-snippets__copy {
+    position: absolute;
+    top: .4rem;
+    right: .4rem;
+    padding: .15rem .5rem;
+    font-size: .75rem;
+    color: var(--ex-accent-contrast);
+    background: var(--ex-text-muted);
+    border: none;
+    border-radius: .25rem;
+    cursor: pointer;
+}
+
+.explorer-snippets__copy:focus-visible {
+    outline: 2px solid var(--ex-focus);
+    outline-offset: 2px;
+}
+
+.explorer-snippets__copy.is-copied {
+    background: var(--ex-success);
+}
+
+.explorer-help {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, .5);
+}
+
+.explorer-help__dialog {
+    width: min(28rem, 100%);
+    padding: 1.25rem;
+    color: var(--ex-text);
+    background: var(--ex-surface);
+    border: 1px solid var(--ex-border);
+    border-radius: .75rem;
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, .35);
+}
+
+.explorer-help__title {
+    margin: 0 0 .75rem;
+    font-size: 1.1rem;
+}
+
+.explorer-help__list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .4rem 1rem;
+    margin: 0;
+    font-size: .875rem;
+}
+
+.explorer-help__key {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .8rem;
+    color: var(--ex-text-strong);
+    background: var(--ex-surface-subtle);
+    border: 1px solid var(--ex-border-strong);
+    border-radius: .25rem;
+    padding: .05rem .4rem;
+}
+
+.explorer-help__close {
+    margin-top: 1rem;
+    padding: .4rem .9rem;
+    font: inherit;
+    color: var(--ex-accent-contrast);
+    background: var(--ex-accent);
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .explorer__body {
+        flex-direction: column;
+        height: auto;
+        min-height: 0;
+    }
+
+    .explorer__aside {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
+
+/*
+ * Small screens: the preview panel becomes a full-width sheet stacked under the grid; the grid keeps
+ * usable height so cards remain reachable at 360 px.
+ */
+@media (max-width: 768px) {
+    .explorer__results {
+        display: block;
+    }
+
+    .explorer-grid {
+        height: auto;
+        max-height: 60vh;
+        min-height: 240px;
+    }
+
+    .explorer__aside {
+        flex: 0 0 auto;
+    }
+
+    .explorer-preview {
+        max-height: none;
+    }
+
+    .explorer-preview__scroll {
+        overflow-y: visible;
+    }
+
+    .explorer-preview__canvas {
+        height: 140px;
+        font-size: 3rem;
+    }
+}
+
+/*
+ * Reduced motion: the user's preference disables preview animations and smooth transitions. Font
+ * Awesome animation classes are neutralised so a selected animation still shows statically.
+ */
+@media (prefers-reduced-motion: reduce) {
+    .explorer *,
+    .explorer *::before,
+    .explorer *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .explorer-preview__canvas .fa-beat,
+    .explorer-preview__canvas .fa-fade,
+    .explorer-preview__canvas .fa-beat-fade,
+    .explorer-preview__canvas .fa-bounce,
+    .explorer-preview__canvas .fa-flip,
+    .explorer-preview__canvas .fa-shake,
+    .explorer-preview__canvas .fa-spin,
+    .explorer-preview__canvas .fa-spin-pulse,
+    .explorer-preview__canvas .fa-buzz,
+    .explorer-preview__canvas .fa-float,
+    .explorer-preview__canvas .fa-jello,
+    .explorer-preview__canvas .fa-swing,
+    .explorer-preview__canvas .fa-wag {
+        animation: none !important;
+    }
+}

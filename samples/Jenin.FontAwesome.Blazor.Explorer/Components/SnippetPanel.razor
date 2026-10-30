@@ -1,0 +1,31 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<div class="explorer-snippets">
+    <h3 class="explorer-snippets__title">Code</h3>
+    <div class="explorer-snippets__tabs" role="tablist" aria-label="Snippet format">
+        @foreach(var kind in _kinds) {
+            <button type="button"
+                    role="tab"
+                    class="explorer-snippets__tab @(kind == _activeKind ? "is-active" : null)"
+                    aria-selected="@(kind == _activeKind ? "true" : "false")"
+                    @onclick="() => SelectKind(kind)">
+                @Label(kind)
+            </button>
+        }
+    </div>
+    <div class="explorer-snippets__body" role="tabpanel">
+        <pre class="explorer-snippets__code"><code class="language-@Current.Language">@Current.Code</code></pre>
+        <button type="button"
+                class="explorer-snippets__copy @(_copied ? "is-copied" : null)"
+                aria-live="polite"
+                @onclick="CopyAsync">
+            @(_copied ? "Copied!" : "Copy")
+        </button>
+    </div>
+</div>

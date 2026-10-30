@@ -1,0 +1,18 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@if (Messages.Count > 0) {
+    <div class="explorer-notice" role="status" aria-live="polite">
+        @foreach (var message in Messages) {
+            <p class="explorer-notice__item">
+                <span class="explorer-notice__badge" aria-hidden="true">@message.Badge</span>
+                <span class="explorer-notice__text">@message.Text</span>
+            </p>
+        }
+    </div>
+}

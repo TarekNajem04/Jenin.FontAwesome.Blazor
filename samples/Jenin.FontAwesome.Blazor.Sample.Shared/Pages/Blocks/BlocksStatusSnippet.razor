@@ -1,0 +1,42 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+<div class="mb-1 p-5 d-flex flex-column gap-2">
+    @foreach (var order in Orders)
+    {
+        <span class="d-inline-flex align-items-center gap-2">
+            <IconFor Value="@order.Status" />
+            <span>Order #@order.Id — @order.Status</span>
+        </span>
+    }
+</div>
+
+@code {
+    private readonly IReadOnlyList<Order> Orders =
+    [
+        new(101, Status.Pending),
+        new(102, Status.Shipped),
+        new(103, Status.Delivered),
+        new(104, Status.Cancelled),
+    ];
+
+    private sealed record Order(int Id, Status Status);
+
+    private enum Status {
+        [Icon("fa-clock")]
+        Pending,
+
+        [Icon("fa-truck", Style = IconStyle.Solid, Color = "#0d6efd")]
+        Shipped,
+
+        [Icon("fa-circle-check", Style = IconStyle.Solid, Color = "#16a34a")]
+        Delivered,
+
+        Cancelled,
+    }
+}

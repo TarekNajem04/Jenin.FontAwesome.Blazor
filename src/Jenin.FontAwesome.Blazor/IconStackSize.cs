@@ -1,27 +1,30 @@
-﻿namespace Jenin.FontAwesome.Blazor;
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+namespace Jenin.FontAwesome.Blazor;
 
 /// <summary>
-/// Represents a different look of the same icons.
-/// <para>
-/// <a href="https://fontawesome.com/v6/docs/apis/javascript/import-icons#referencing-icons">Referencing Icons [Style]</a>
-/// </para>
+/// Selects the relative size of an icon within a stack (<c>fa-stack-1x</c> or <c>fa-stack-2x</c>).
 /// </summary>
 public enum IconStackSize {
     /// <summary>
     /// The icon stack size will not be applied.
     /// </summary>
     [Value("")]
-    NotSet,
+    NotSet = 0,
 
     /// <summary>
     /// Used on the icon which should be displayed at base size when stacked.
     /// </summary>
     [Value("fa-stack-1x")]
-    Same,
+    Same = 1,
 
     /// <summary>
-    /// Used on the icon which should be displayed larger when stackedr.
+    /// Used on the icon which should be displayed larger when stacked.
     /// </summary>
     [Value("fa-stack-2x")]
-    Larger,
+    Larger = 2,
 }

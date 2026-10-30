@@ -1,0 +1,27 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+<p class="mb-3">Hover the icons, tab to the bell, or scroll the reveal row into view.</p>
+
+<div class="mb-1 p-5 d-flex gap-4 align-items-center" style="font-size: 3rem;">
+    <span title="Hover me">
+        <i class="fa-solid fa-bell fa-shake jfa-anim-hover" style="color: #E32934;"></i>
+    </span>
+    <span class="jfa-anim-hover-within d-inline-flex align-items-center gap-2 border rounded p-3" title="Hover the card">
+        <i class="fa-solid fa-heart fa-beat jfa-anim-parent-hover" style="color: #E32934;"></i>
+        <span style="font-size: 1rem;">Hover the card</span>
+    </span>
+    <i class="fa-solid fa-circle-plus fa-spin jfa-anim-focus" tabindex="0" title="Focus me (Tab)"></i>
+</div>
+
+<div style="height: 60vh;" aria-hidden="true"></div>
+
+<div class="mb-1 p-5 d-flex gap-4 align-items-center" style="font-size: 4rem;">
+    <i class="fa-solid fa-rocket fa-float jfa-anim-reveal-target" style="--fa-animation-iteration-count: 1; color: #0d6efd;"></i>
+    <i class="fa-solid fa-star fa-beat jfa-anim-reveal-target" style="--fa-animation-iteration-count: 1; color: #E32934;"></i>
+</div>

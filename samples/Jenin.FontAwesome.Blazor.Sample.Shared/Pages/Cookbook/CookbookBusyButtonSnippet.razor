@@ -1,0 +1,27 @@
+﻿@*
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+*@
+<IconContainer CssClass="mb-1 p-5 d-flex gap-3 align-items-center" IconSize=IconSize.X02>
+    <Icons>
+        <IconButton IconName="fa-cloud-arrow-up" IconStyle=IconStyle.Solid Label="Upload" Busy=@IsBusy OnClick=UploadAsync />
+        <span>@(IsBusy ? "Uploading…" : "Idle")</span>
+    </Icons>
+</IconContainer>
+
+@code {
+    private bool IsBusy;
+
+    private async Task UploadAsync() {
+        IsBusy = true;
+
+        try {
+            await Task.Delay(TimeSpan.FromSeconds(2));
+        }
+        finally {
+            IsBusy = false;
+        }
+    }
+}

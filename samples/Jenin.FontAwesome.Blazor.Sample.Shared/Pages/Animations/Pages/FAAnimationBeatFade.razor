@@ -1,0 +1,20 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/animation-beat-fade"
+
+<PageTitle>Font Awesome Animation Beat-Fade</PageTitle>
+
+<IconContainer CssClass="mb-1" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-person-digging" Animation=@Animate.BeatFade() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-heart-circle-exclamation" Animation=@Animate.BeatFade() Color="#E32934" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-poo-bolt" Animation=@Animate.BeatFade(new BeatFadeOptions { Opacity = 0.1F, Scale = 1.25F }) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-circle-info" Animation=@Animate.BeatFade(new BeatFadeOptions { Opacity = 0.67F, Scale = 1.075F }) Color="#007AFF" />
+    </Icons>
+</IconContainer>

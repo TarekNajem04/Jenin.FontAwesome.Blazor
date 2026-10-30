@@ -1,0 +1,50 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+@using Jenin.FontAwesome.Blazor.IconPicker
+@using System.ComponentModel.DataAnnotations
+
+<EditForm Model="@Model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="mb-1 p-5 d-flex flex-column gap-3">
+        <div>
+            <label class="form-label" for="demo-icon">Favorite icon (required)</label>
+            <IconPickerField id="demo-icon" @bind-Value="Model.Icon" />
+            <ValidationMessage For="() => Model.Icon" />
+        </div>
+        <div>
+            <span class="form-label d-block" id="demo-rating-label">Service rating</span>
+            <IconRating @bind-Value="Model.Rating" RatingLabel="Service rating" Max="5" />
+            <ValidationMessage For="() => Model.Rating" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        @if (!string.IsNullOrEmpty(Result)) {
+            <p class="alert alert-success mb-0" role="status">@Result</p>
+        }
+    </div>
+</EditForm>
+
+@code {
+    private InputDemoModel Model { get; } = new();
+
+    private string? Result { get; set; }
+
+    private void HandleValidSubmit() {
+        Result = $"Icon: {Model.Icon}, rating: {Model.Rating:0.#} of 5.";
+    }
+
+    private sealed class InputDemoModel {
+        [Required(ErrorMessage = "Pick an icon.")]
+        public string? Icon { get; set; }
+
+        [Range(1, 5, ErrorMessage = "Rate 1 to 5.")]
+        public float Rating { get; set; }
+    }
+}

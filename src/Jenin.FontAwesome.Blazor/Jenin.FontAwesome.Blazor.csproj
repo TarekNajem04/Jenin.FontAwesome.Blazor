@@ -1,45 +1,39 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+        <!-- Declare trimming/AOT compatibility so the linker and analyzers verify the library is
+             safe for trimmed and Native AOT hosts. -->
+        <IsTrimmable>true</IsTrimmable>
+        <IsAotCompatible>true</IsAotCompatible>
+        <!--<RazorLangVersion>8.0</RazorLangVersion>-->
         <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
-        <LangVersion>latest</LangVersion>
-        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup>
-        <EnableNETAnalyzers>true</EnableNETAnalyzers>
-        <AnalysisLevel>latest</AnalysisLevel>
-        <!--<AnalysisMode>recommended</AnalysisMode>-->
-        <AnalysisMode>minimum</AnalysisMode>
-        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <Compile Remove="Components\ElementInverseable.cs" />
-    </ItemGroup>
-
-    <PropertyGroup>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <Description>Jenin Blazor Library - Free Font Awesome 6 components for ASP.NET Blazor</Description>
+        <Description>Jenin Blazor Library - Free Font Awesome 7 components for ASP.NET Blazor</Description>
         <PackageId>Jenin.FontAwesome.Blazor</PackageId>
-        <!-- ComponentsPackagesVersion - variable from Directory.Build.props -->
-        <PackageVersion>$(ComponentsPackagesVersion)</PackageVersion>
         <Authors>Tarek Najem</Authors>
         <Company>Jenin</Company>
 
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <!--<PackageProjectUrl>https://Jenin.FontAwesome.Blazor.net</PackageProjectUrl>-->
+        <PackageProjectUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
         <PackageReleaseNotes>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/releases</PackageReleaseNotes>
-        <PackageTags>blazor FontAwesome components webassembly wasm FontAwesome6; blazor Prism CodeSnippet</PackageTags>
+        <PackageTags>blazor fontawesome font-awesome-7 icons accessibility a11y trimming aot wasm components webassembly</PackageTags>
         <RepositoryUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <NeutralLanguage>en</NeutralLanguage>
-        <Version>1.2.0</Version>
+    </PropertyGroup>
 
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnablePackageValidation>true</EnablePackageValidation>
     </PropertyGroup>
 
     <ItemGroup>
@@ -51,11 +45,19 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
 
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.11" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.11" />
+        <PackageReference Include="Microsoft.AspNetCore.Components" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+        <!-- Request-pipeline abstractions only (netstandard2.0): the one-line setup serves the
+             generated mode-config script without taking a server-framework reference, so the
+             package stays consumable by browser-hosted WebAssembly clients. -->
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" />
     </ItemGroup>
 </Project>

@@ -1,0 +1,17 @@
+{
+    "$schema": "./format.schema.json",
+
+    "version": 1,
+
+    "dotnet": {
+        "verbosity": "diagnostic",
+        "severity": "warn"
+    },
+
+    "commands": {
+        "format": true,
+        "whitespace": true,
+        "style": true,
+        "analyzers": true
+    }
+}

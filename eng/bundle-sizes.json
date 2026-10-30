@@ -1,0 +1,63 @@
+{
+  "generated_utc": "2026-10-26",
+  "tfm": "net10.0",
+  "configuration": "Release",
+  "threshold_pct": 5.0,
+  "sources": {
+    "fontAwesome": "7.3.1 Free (vendored under samples/.../wwwroot/fontawesome)",
+    "subset_fixture": "tests/e2e/fixtures/fa-subset (2 icons: house + star)",
+    "sprite_fixture": "tests/e2e/fixtures/fa-sprite/fa-sprite.svg (2 icons: house + star)",
+    "brotli": ".NET default encoder; consistent comparator, not a wire-size promise",
+    "peers": "Third-party trimmed-size tables live in vendor docs and are not copied here so they cannot go stale; the status-quo row is this repo's own dated baseline."
+  },
+  "cells": {
+    "subset-webfont": {
+      "raw": 48367,
+      "brotli": 9936,
+      "files": [
+        "fontawesome-subset.css",
+        "fa-brands-400.subset.woff2",
+        "fa-solid-900.subset.woff2",
+        "fa-v4compatibility.woff2"
+      ]
+    },
+    "icons-10": {
+      "raw": 6144,
+      "brotli": 2200
+    },
+    "svg-1": {
+      "raw": 9728,
+      "brotli": 4563
+    },
+    "package-svg": {
+      "raw": 2843469
+    },
+    "svg-10": {
+      "raw": 19456,
+      "brotli": 7152
+    },
+    "status-quo-svgjs": {
+      "raw": 1993834,
+      "brotli": 760886,
+      "files": [
+        "all.min.js",
+        "all.css",
+        "fa-brands-400.woff2",
+        "fa-regular-400.woff2",
+        "fa-solid-900.woff2",
+        "fa-v4compatibility.woff2"
+      ]
+    },
+    "package-icons": {
+      "raw": 305167
+    },
+    "sprite": {
+      "raw": 1954,
+      "brotli": 636
+    },
+    "icons-1": {
+      "raw": 5120,
+      "brotli": 1974
+    }
+  }
+}

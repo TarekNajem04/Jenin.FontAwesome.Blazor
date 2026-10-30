@@ -1,0 +1,22 @@
+﻿@*
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+*@
+<div class="mb-1 p-5 d-flex gap-3 align-items-center">
+    <button type="button" class="btn btn-outline-primary" @onclick="() => IsPlaying = !IsPlaying">
+        @(IsPlaying ? "Pause" : "Play")
+    </button>
+    <IconContainer IconSize=IconSize.X02>
+        <Icons>
+            <TwoStateIcon IconName="fa-play" AlternateIconName="fa-pause" IconStyle=IconStyle.Solid
+                          ShowAlternate=IsPlaying Transition=IconTransitionKind.Crossfade />
+        </Icons>
+    </IconContainer>
+    <span>Now showing: @(IsPlaying ? "pause" : "play").</span>
+</div>
+
+@code {
+    private bool IsPlaying;
+}
