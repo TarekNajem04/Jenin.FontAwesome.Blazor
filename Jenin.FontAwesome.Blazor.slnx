@@ -1,10 +1,124 @@
 ﻿<Solution>
+    <Folder Name="/.github/">
+        <File Path=".github/CODEOWNERS" />
+        <File Path=".github/dependabot.yml" />
+        <File Path=".github/PULL_REQUEST_TEMPLATE.md" />
+    </Folder>
+    <Folder Name="/.github/ISSUE_TEMPLATE/">
+        <File Path=".github/ISSUE_TEMPLATE/bug_report.yml" />
+        <File Path=".github/ISSUE_TEMPLATE/config.yml" />
+        <File Path=".github/ISSUE_TEMPLATE/feature_request.yml" />
+    </Folder>
+    <Folder Name="/.github/workflows/">
+        <File Path=".github/workflows/auto-approve-dependabot.yml" />
+        <File Path=".github/workflows/ci.yml" />
+        <File Path=".github/workflows/docs-build.yml" />
+        <File Path=".github/workflows/nuget-publish.yml" />
+        <File Path=".github/workflows/sonarcloud.yml" />
+    </Folder>
+
+    <Folder Name="/scripts/">
+        <File Path="scripts/README.md" />
+    </Folder>
+    <Folder Name="/scripts/badges/">
+        <File Path="scripts/badges/generate.ps1" />
+    </Folder>
+    <Folder Name="/scripts/clean/">
+        <File Path="scripts/clean/clean.config.json" />
+        <File Path="scripts/clean/clean.ps1" />
+        <File Path="scripts/clean/clean.schema.json" />
+        <File Path="scripts/clean/README.md" />
+    </Folder>
+    <Folder Name="/scripts/common/">
+        <File Path="scripts/common/Common.psd1" />
+        <File Path="scripts/common/Common.psm1" />
+        <File Path="scripts/common/README.md" />
+    </Folder>
+    <Folder Name="/scripts/coverage/">
+        <File Path="scripts/coverage/coverage.config.json" />
+        <File Path="scripts/coverage/coverage.ps1" />
+        <File Path="scripts/coverage/coverage.schema.json" />
+        <File Path="scripts/coverage/README.md" />
+    </Folder>
+    <Folder Name="/scripts/docs/">
+        <File Path="scripts/docs/check-api-reference.ps1" />
+        <File Path="scripts/docs/check-arabic-text.ps1" />
+        <File Path="scripts/docs/check-doc-links.ps1" />
+        <File Path="scripts/docs/check-readme-claims.ps1" />
+    </Folder>
+    <Folder Name="/scripts/format/">
+        <File Path="scripts/format/format.config.json" />
+        <File Path="scripts/format/format.ps1" />
+        <File Path="scripts/format/format.schema.json" />
+        <File Path="scripts/format/README.md" />
+    </Folder>
+    <Folder Name="/scripts/sonar/">
+        <File Path="scripts/sonar/preview.ps1" />
+        <File Path="scripts/sonar/README.md" />
+    </Folder>
+
+    <Folder Name="/Solution Items/">
+        <File Path=".editorconfig" />
+        <File Path=".gitattributes" />
+        <File Path=".gitignore" />
+        <File Path="CHANGELOG.md" />
+        <File Path="CODE_OF_CONDUCT.md" />
+        <File Path="CONTRIBUTING.md" />
+        <File Path="Directory.Build.props" />
+        <File Path="Directory.Build.targets" />
+        <File Path="Directory.Packages.props" />
+        <File Path="global.json" />
+        <File Path="icon.png" />
+        <File Path="LICENSES" />
+        <File Path="llms.txt" />
+        <File Path="MIGRATION.md" />
+        <File Path="README.md" />
+        <File Path="SECURITY.md" />
+        <File Path="TESTING.md" />
+    </Folder>
+
+    <Folder Name="/doc/">
+        <File Path="docs/docfx.json" />
+        <File Path="docs/index.md" />
+        <File Path="docs/toc.yml" />
+        <File Path="docs/custom-icons.md" />
+        <File Path="docs/diagnostics.md" />
+        <File Path="docs/gallery.md" />
+        <File Path="docs/hosting-with-kits.md" />
+        <File Path="docs/pro-setup.md" />
+        <File Path="docs/using-with-ui-suites.md" />
+    </Folder>
+    <Folder Name="/doc/migration/">
+        <File Path="docs/migration/index.md" />
+        <File Path="docs/migration/toc.yml" />
+        <File Path="docs/migration/from-blazicons.md" />
+        <File Path="docs/migration/from-blazorise.md" />
+        <File Path="docs/migration/from-easyappdev.md" />
+        <File Path="docs/migration/from-mudblazor.md" />
+        <File Path="docs/migration/from-raw-fontawesome.md" />
+    </Folder>
+
     <Folder Name="/src/">
         <Project Path="src/Jenin.FontAwesome.Blazor/Jenin.FontAwesome.Blazor.csproj" />
         <Project Path="src/Jenin.FontAwesome.Blazor.IconPicker/Jenin.FontAwesome.Blazor.IconPicker.csproj" />
         <Project Path="src/Jenin.FontAwesome.Blazor.Icons/Jenin.FontAwesome.Blazor.Icons.csproj" />
         <Project Path="src/Jenin.FontAwesome.Blazor.Svg/Jenin.FontAwesome.Blazor.Svg.csproj" />
+        <Project Path="src/Jenin.FontAwesome.Blazor.Analyzers/Jenin.FontAwesome.Blazor.Analyzers.csproj" />
+        <Project Path="src/Jenin.FontAwesome.Blazor.MudBlazor/Jenin.FontAwesome.Blazor.MudBlazor.csproj" />
+        <Project Path="src/Jenin.FontAwesome.Blazor.Blazorise/Jenin.FontAwesome.Blazor.Blazorise.csproj" />
     </Folder>
+
+    <Folder Name="/tests/">
+        <Project Path="tests/Jenin.FontAwesome.Blazor.Tests/Jenin.FontAwesome.Blazor.Tests.csproj" />
+        <Project Path="tests/Jenin.FontAwesome.Blazor.IconPicker.Tests/Jenin.FontAwesome.Blazor.IconPicker.Tests.csproj" />
+        <Project Path="tests/Jenin.FontAwesome.Blazor.Icons.Tests/Jenin.FontAwesome.Blazor.Icons.Tests.csproj" />
+        <Project Path="tests/Jenin.FontAwesome.Blazor.Svg.Tests/Jenin.FontAwesome.Blazor.Svg.Tests.csproj" />
+        <Project Path="tests/Jenin.FontAwesome.Blazor.Explorer.Tests/Jenin.FontAwesome.Blazor.Explorer.Tests.csproj" />
+        <Project Path="tests/Jenin.FontAwesome.Blazor.Analyzers.Tests/Jenin.FontAwesome.Blazor.Analyzers.Tests.csproj" />
+        <Project Path="tests/Jenin.FontAwesome.Blazor.MudBlazor.Tests/Jenin.FontAwesome.Blazor.MudBlazor.Tests.csproj" />
+        <Project Path="tests/Jenin.FontAwesome.Blazor.Blazorise.Tests/Jenin.FontAwesome.Blazor.Blazorise.Tests.csproj" />
+    </Folder>
+
     <Folder Name="/samples/">
         <Project Path="samples/Jenin.FontAwesome.Blazor.Docs/Jenin.FontAwesome.Blazor.Docs.csproj" />
         <Project Path="samples/Jenin.FontAwesome.Blazor.Explorer/Jenin.FontAwesome.Blazor.Explorer.csproj" />
@@ -14,40 +128,8 @@
         <Project Path="samples/Jenin.FontAwesome.Blazor.WebApp.Sample/Jenin.FontAwesome.Blazor.WebApp.Sample.csproj" />
         <Project Path="samples/Jenin.FontAwesome.Blazor.WebApp.Sample.Client/Jenin.FontAwesome.Blazor.WebApp.Sample.Client.csproj" />
     </Folder>
-        <Folder Name="/tests/">        <Project Path="tests/Jenin.FontAwesome.Blazor.Tests/Jenin.FontAwesome.Blazor.Tests.csproj" />
-        <Project Path="tests/Jenin.FontAwesome.Blazor.IconPicker.Tests/Jenin.FontAwesome.Blazor.IconPicker.Tests.csproj" />
-        <Project Path="tests/Jenin.FontAwesome.Blazor.Icons.Tests/Jenin.FontAwesome.Blazor.Icons.Tests.csproj" />
-        <Project Path="tests/Jenin.FontAwesome.Blazor.Svg.Tests/Jenin.FontAwesome.Blazor.Svg.Tests.csproj" />
-        <Project Path="tests/Jenin.FontAwesome.Blazor.Explorer.Tests/Jenin.FontAwesome.Blazor.Explorer.Tests.csproj" />
-        <Project Path="tests/Jenin.FontAwesome.Blazor.Analyzers.Tests/Jenin.FontAwesome.Blazor.Analyzers.Tests.csproj" />
-        <Project Path="tests/Jenin.FontAwesome.Blazor.MudBlazor.Tests/Jenin.FontAwesome.Blazor.MudBlazor.Tests.csproj" />
-        <Project Path="tests/Jenin.FontAwesome.Blazor.Blazorise.Tests/Jenin.FontAwesome.Blazor.Blazorise.Tests.csproj" />
-    </Folder>
+
     <Folder Name="/templates/">
         <Project Path="templates/Jenin.FontAwesome.Blazor.Templates.csproj" />
-    </Folder>
-    <Folder Name="/analyzers/">
-        <Project Path="src/Jenin.FontAwesome.Blazor.Analyzers/Jenin.FontAwesome.Blazor.Analyzers.csproj" />
-    </Folder>
-    <Folder Name="/adapters/">
-        <Project Path="src/Jenin.FontAwesome.Blazor.MudBlazor/Jenin.FontAwesome.Blazor.MudBlazor.csproj" />
-        <Project Path="src/Jenin.FontAwesome.Blazor.Blazorise/Jenin.FontAwesome.Blazor.Blazorise.csproj" />
-    </Folder>
-    <Folder Name="/Solution Items/">
-        <File Path=".editorconfig" />
-        <File Path="CHANGELOG.md" />
-        <File Path="CODE_OF_CONDUCT.md" />
-        <File Path="CONTRIBUTING.md" />
-        <File Path="Directory.Build.props" />
-        <File Path="Directory.Build.targets" />
-        <File Path="Directory.Packages.props" />
-        <File Path="docs/docfx.json" />
-        <File Path="global.json" />
-        <File Path="icon.png" />
-        <File Path="LICENSES" />
-        <File Path="MIGRATION.md" />
-        <File Path="README.md" />
-        <File Path="SECURITY.md" />
-        <File Path="TESTING.md" />
     </Folder>
 </Solution>

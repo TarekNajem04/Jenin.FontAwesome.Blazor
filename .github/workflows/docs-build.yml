@@ -26,6 +26,8 @@ on:
       - '.github/workflows/docs-build.yml'
 
   pull_request:
+    branches:
+      - main
     paths:
       - 'docs/**'
       - 'src/**'
