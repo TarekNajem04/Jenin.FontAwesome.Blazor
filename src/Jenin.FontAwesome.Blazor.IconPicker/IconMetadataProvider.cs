@@ -165,7 +165,7 @@ public sealed class IconMetadataProvider {
         }
 
         candidates.Sort(static (left, right) => {
-            var byScore = right.Score.CompareTo(left.Score);
+            var byScore = right.Rank.CompareTo(left.Rank);
 
             return byScore != 0 ? byScore : string.CompareOrdinal(left.Metadata.Name, right.Metadata.Name);
         });
@@ -309,5 +309,5 @@ public sealed class IconMetadataProvider {
 
     private sealed record IconsAndIndex(IReadOnlyList<IconMetadata> Icons, Dictionary<string, IconMetadata> ByName);
 
-    private readonly record struct RankedIcon(IconMetadata Metadata, int Score);
+    private readonly record struct RankedIcon(IconMetadata Metadata, int Rank);
 }

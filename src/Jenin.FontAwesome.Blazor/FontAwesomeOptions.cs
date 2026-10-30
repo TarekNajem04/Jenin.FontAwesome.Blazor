@@ -121,7 +121,7 @@ public class FontAwesomeOptions {
         }
 
         KitCode = kitCode.Trim();
-        JavaScriptUrl = new UriBuilder("https", KitScriptHost) { Path = "/" + KitCode + ".js" }.Uri.AbsoluteUri;
+        JavaScriptUrl = new UriBuilder("https", KitScriptHost) { Path = KitCode + ".js" }.Uri.AbsoluteUri;
         StyleSheetUrl = null;
     }
 
