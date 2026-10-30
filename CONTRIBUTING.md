@@ -3,29 +3,55 @@
 Thank you for your interest in Jenin.FontAwesome.Blazor: Blazor components, analyzers,
 and templates for Font Awesome Free (plus optional licensed-Pro support).
 
-## How you can contribute
+## Current Project Status
 
-Community participation is highly appreciated. The most valuable contributions at this stage are:
+Jenin.FontAwesome.Blazor is currently in a pre-release stabilization phase ahead of 2.0.0.
+
+During this stage, the public API surface, CI/CD pipelines, quality gates, and release process
+are still being refined and validated. To maintain consistency and avoid unnecessary breaking
+changes, source-code contributions are temporarily limited to project maintainers.
+
+## How You Can Contribute Today
+
+Community participation is highly appreciated.
+
+The most valuable contributions at this stage are:
 
 * Bug reports
 * Feature requests
 * Design discussions
+* API design feedback
 * Documentation improvements
 * Real-world usage feedback
 
 Please use GitHub Issues or Discussions to share ideas and suggestions.
 
-## Pull requests
+## Pull Requests
 
-Keep the change focused and limited to one concern. Every pull request is expected to meet
-the checklist in `.github/PULL_REQUEST_TEMPLATE.md`:
+At the current stage of the project:
 
-* `dotnet build "Jenin.FontAwesome.Blazor.slnx"` succeeds with zero errors and zero warnings.
-* Formatting and analyzers are clean (`./build.ps1 -Target Format` or equivalent `dotnet format` verify).
-* No analyzer diagnostic was suppressed or downgraded, and no `.editorconfig` rule was weakened.
-* Documentation and samples were updated where behavior changed.
+* Pull requests containing source-code changes may not be accepted.
+* Pull requests that improve documentation may be considered on a case-by-case basis.
+* Large design proposals should begin as an Issue or Discussion before implementation.
+* Dependabot dependency PRs are auto-approved; minor and patch updates auto-merge (squash).
+  Major version bumps are approved but never auto-merged — they need a human decision.
 
-## Project structure
+Once the project reaches a stable baseline, external code contributions will be opened publicly.
+
+### Branch and merge policy
+
+* The default branch is `main`. All changes land through pull requests — direct pushes are restricted.
+* Merges use squash with the PR title as the commit message; head branches are deleted on merge.
+* Every pull request must satisfy the required checks (format, build and test on
+  Windows/Ubuntu/macOS, package validation, SonarCloud analysis) and a CODEOWNERS review.
+* Keep the change focused and limited to one concern. Every pull request is expected to meet
+  the checklist in `.github/PULL_REQUEST_TEMPLATE.md`:
+  * `dotnet build "Jenin.FontAwesome.Blazor.slnx"` succeeds with zero errors and zero warnings.
+  * Formatting and analyzers are clean (`dotnet format Jenin.FontAwesome.Blazor.slnx --verify-no-changes --no-restore`).
+  * No analyzer diagnostic was suppressed or downgraded, and no `.editorconfig` rule was weakened.
+  * Documentation and samples were updated where behavior changed.
+
+## Project Structure
 
 ```text
 src/          # Shipped libraries (core, IconPicker, Icons, Svg, adapters, analyzers)
@@ -38,8 +64,34 @@ scripts/      # Repository maintenance tooling (see scripts/README.md)
 .github/      # CI workflows and pull-request automation
 ```
 
+## Design Philosophy
+
+The architecture emphasizes:
+
+* Host-owned Font Awesome assets: the library emits markup and ships no runtime, fonts, or interop bridge
+* A typed, discoverable Blazor API surface with deterministic rendering
+* Trimmability and Native AOT compatibility, verified per package at publish level
+* Deterministic generation: every generated file is byte-reproducible and CI-verified
+* Long-term API stability enforced by a committed public-API baseline
+
+When evaluating proposals, maintainability and long-term API stability are generally preferred over short-term convenience.
+
+## Development Standards
+
+The project follows modern .NET engineering practices including:
+
+* Automated CI validation
+* Static analysis and quality gates (including SonarCloud)
+* Package validation
+* Public API surface baselines
+* Cross-platform testing (Windows, Ubuntu, macOS)
+
+Any future code contributions will be expected to satisfy these requirements.
+
 ## Testing
 
 Run the checks described in [TESTING.md](TESTING.md): build, unit and contract tests on all
 supported target frameworks, formatting verification, encoding verification, and the
 generator `-Verify` gates. Analyzer behavior is documented in [docs/diagnostics.md](docs/diagnostics.md).
+
+Thank you for helping improve Jenin.FontAwesome.Blazor.

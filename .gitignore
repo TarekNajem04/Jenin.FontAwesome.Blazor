@@ -381,9 +381,9 @@ artifacts/coverage/
 src/**/*.xml
 archive/**/*.xml
 
-# Ignore local configuration files
-[pP]rivate/*
-![pP]rivate/archives/
+# Local-only engineering scaffolding — never commit (repository constitution,
+# governance records). Everything under private/ stays untracked; no exceptions.
+[pP]rivate/
 
 # DocFX generated output (docs/docfx.json)
 docs/_site/
