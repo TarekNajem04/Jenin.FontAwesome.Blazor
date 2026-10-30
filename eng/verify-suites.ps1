@@ -53,6 +53,9 @@ try {
     Write-Host 'Suite-adapters fixture serves both adapter pages.' -ForegroundColor Green
 
     $env:SAMPLE_URL = 'http://localhost:5006'
+    # Marker consumed by suites.spec.ts: the spec skips unless the fixture host is up, so a
+    # plain `npm test` (main sample host) never runs it against the wrong pages.
+    $env:SUITES_FIXTURE = '1'
     try {
         Push-Location (Join-Path $root 'tests' 'e2e')
         & npx playwright test suites.spec.ts
@@ -61,6 +64,7 @@ try {
     finally {
         Pop-Location
         Remove-Item Env:SAMPLE_URL -ErrorAction SilentlyContinue
+        Remove-Item Env:SUITES_FIXTURE -ErrorAction SilentlyContinue
     }
 
     Write-Host 'UI-suite adapter verification PASSED.' -ForegroundColor Green

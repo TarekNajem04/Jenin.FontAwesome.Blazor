@@ -66,8 +66,10 @@ public class ReducedMotionCssTests {
             $"AnimationTrigger.{trigger} renders '{cssClass}', which the reduced-motion block must neutralize.");
     }
 
-    private static string RepoRoot([CallerFilePath] string sourceFile = "") {
-        var directory = new DirectoryInfo(Path.GetDirectoryName(sourceFile)!);
+    // Resolved from the test assembly directory, not [CallerFilePath]: deterministic CI builds
+    // (ContinuousIntegrationBuild) rewrite compile-time paths, so source-file discovery fails there.
+    private static string RepoRoot() {
+        var directory = new DirectoryInfo(AppContext.BaseDirectory);
 
         while(directory is not null && !File.Exists(Path.Combine(directory.FullName, "Jenin.FontAwesome.Blazor.slnx"))) {
             directory = directory.Parent;

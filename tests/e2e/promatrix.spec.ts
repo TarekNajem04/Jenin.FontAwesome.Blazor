@@ -33,6 +33,8 @@ function tagFor(page: Page, cell: Cell, tag: string) {
 }
 
 test('pro matrix: emitted contract, engine resolution, and edition behavior', async ({ page }) => {
+    test.skip(!process.env.PRO_MATRIX_MODE, 'Requires the pro-matrix fixture host (run eng/verify-pro-render.ps1).');
+
     await page.goto('/');
     const edition = (await page.getAttribute('#edition', 'data-edition')) ?? 'free';
     const mode = (await page.getAttribute('#edition', 'data-mode')) ?? 'nest';

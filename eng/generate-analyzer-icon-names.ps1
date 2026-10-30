@@ -59,8 +59,7 @@ function Get-FileBytes([string[]] $Lines) {
     return [System.Text.Encoding]::GetEncoding('utf-8').GetBytes($content)
 }
 
-function Test-FileBytes([string] $Path, [byte[]] $Bytes) {
-    if(-not (Test-Path -LiteralPath $Path)) {
+function Test-FileBytes([string] $Path, [byte[]] $Bytes) {    if(-not (Test-Path -LiteralPath $Path)) {
         Write-Error "Generated file is missing: $Path. Run pwsh ./eng/generate-analyzer-icon-names.ps1."
     }
 
@@ -74,6 +73,15 @@ function Test-FileBytes([string] $Path, [byte[]] $Bytes) {
     }
 
     return $true
+}
+
+# Ordinal (byte-order) sort. Sort-Object -Culture is linguistic: NLS (Windows) and ICU (Linux)
+# collation disagree on edge cases, so culture sorting breaks byte-identical determinism across
+# platforms. Ordinal matches the documented "ordinal order" and is identical everywhere.
+function Sort-Ordinal([System.Collections.IEnumerable] $Lines) {
+    $array = [string[]]@($Lines)
+    [System.Array]::Sort($array, [System.StringComparer]::Ordinal)
+    return $array
 }
 
 $metadata = Get-Content -LiteralPath $MetadataPath -Raw | ConvertFrom-Json
@@ -102,9 +110,9 @@ foreach($property in $styles.styles.PSObject.Properties) {
     }
 }
 
-$sortedNames = $names | Sort-Object -Culture '' -CaseSensitive
-$sortedStyles = $styleLines | Sort-Object -Culture '' -CaseSensitive -Unique
-$sortedAliases = $aliasNameLines | Sort-Object -Culture '' -CaseSensitive
+$sortedNames = Sort-Ordinal $names
+$sortedStyles = Sort-Ordinal $styleLines | Select-Object -Unique
+$sortedAliases = Sort-Ordinal $aliasNameLines
 
 $nameBytes = Get-FileBytes $sortedNames
 $styleBytes = Get-FileBytes $sortedStyles

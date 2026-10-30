@@ -4,6 +4,8 @@ import { expect, test } from '@playwright/test';
 // The fixture serves vendored FA 7.3.1 CSS, so glyphs resolve with no live dependencies.
 
 test.describe('mudblazor adapter page', () => {
+    test.skip(!process.env.SUITES_FIXTURE, 'Requires the suite-adapters fixture host (run eng/verify-suites.ps1).');
+
     test.beforeEach(async ({ page }) => {
         await page.goto('/mud');
         await expect(page.locator('h1').first()).toContainText('MudBlazor adapter');
@@ -41,6 +43,8 @@ test.describe('mudblazor adapter page', () => {
 });
 
 test.describe('blazorise adapter page', () => {
+    test.skip(!process.env.SUITES_FIXTURE, 'Requires the suite-adapters fixture host (run eng/verify-suites.ps1).');
+
     test.beforeEach(async ({ page }) => {
         await page.goto('/blazorise');
         await expect(page.locator('h1').first()).toContainText('Blazorise adapter');

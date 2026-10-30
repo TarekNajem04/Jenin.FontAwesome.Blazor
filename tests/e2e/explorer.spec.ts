@@ -188,8 +188,10 @@ test.describe('icon explorer', () => {
 
         const animGroup = page.locator('.explorer-controls__group', { hasText: 'Animation' });
         const duration = animGroup.locator('input[type=range]').first();
-        await duration.focus();
-        await page.keyboard.press('ArrowRight');
+        // locator.press() focuses before dispatching, closing the focus-then-act race that
+        // leaves the value at 1.0 on loaded runners (separate focus() + keyboard.press() can
+        // straddle a Blazor re-render and drop focus).
+        await duration.press('ArrowRight');
 
         // The slider must move by its 0.1 step, not jump to the maximum, regardless of host culture.
         await expect.poll(async () => Number.parseFloat(await duration.inputValue()), { timeout: 10_000 })

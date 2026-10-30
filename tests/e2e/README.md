@@ -39,6 +39,18 @@ npm test
 SAMPLE_URL=http://localhost:5000 npm test
 ```
 
+## Fixture-scoped specs
+
+Two specs need dedicated fixture hosts instead of the main sample and skip by default:
+
+- `suites.spec.ts` targets the suite-adapters fixture (`/mud`, `/blazorise`) — it runs only when
+  `SUITES_FIXTURE` is set, which `eng/verify-suites.ps1` does after booting that fixture.
+- `promatrix.spec.ts` targets the pro-matrix fixture (`PRO_MATRIX_MODE`) — it runs only under
+  `eng/verify-pro-render.ps1`, which boots the fixture per mode.
+
+A plain `npm test` (main sample host) skips both, so the default suite stays green without the
+fixtures; the fixture gates prove those specs in CI (`verify-gates`) and locally respectively.
+
 ## Deployed docs-site smoke
 
 `docs-site.spec.ts` is opt-in: it skips unless `DOCS_SITE_URL` is set, so the default suite never

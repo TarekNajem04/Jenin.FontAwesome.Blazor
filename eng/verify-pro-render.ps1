@@ -131,6 +131,9 @@ try {
 
         if(-not $SkipBrowser) {
             $env:SAMPLE_URL = ("http://localhost:{0}" -f $run.Port)
+            # Marker consumed by promatrix.spec.ts (PRO_MATRIX_MODE only exists inside the fixture
+            # job otherwise): the spec skips unless its fixture host serves the current mode.
+            $env:PRO_MATRIX_MODE = $run.Mode
             try {
                 Push-Location (Join-Path $root 'tests' 'e2e')
                 & npx playwright test promatrix.spec.ts
@@ -139,6 +142,7 @@ try {
             finally {
                 Pop-Location
                 Remove-Item Env:SAMPLE_URL -ErrorAction SilentlyContinue
+                Remove-Item Env:PRO_MATRIX_MODE -ErrorAction SilentlyContinue
             }
         }
 
