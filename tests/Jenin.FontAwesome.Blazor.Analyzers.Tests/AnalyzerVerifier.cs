@@ -40,15 +40,15 @@ internal static class AnalyzerVerifier<TAnalyzer>
             ReferenceAssemblies = References,
         };
 
-        // Pin the formatting newline: the harness formats the fixed tree with the workspace
-        // newline option (Environment.NewLine by default), so LF hosts would emit LF against
-        // CRLF expectations. The repository mandates CRLF (verify-encoding.ps1).
-        test.SolutionTransforms.Add((solution, projectId) => {
-            var options = solution.Workspace.Options.WithChangedOption(
-                FormattingOptions.NewLine, LanguageNames.CSharp, "\r\n");
-            solution.Workspace.TryApplyChanges(solution.WithOptions(options));
-            return solution.Workspace.CurrentSolution;
-        });
+        // Pin the formatter newline: the fixed tree is formatted with the solution's editorconfig
+        // end_of_line (Environment.NewLine by default), so LF hosts would emit LF against CRLF
+        // expectations. The repository mandates CRLF (verify-encoding.ps1).
+        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", """
+            root = true
+
+            [*]
+            end_of_line = crlf
+            """));
 
         test.TestState.Sources.Add(source);
         test.TestState.AdditionalReferences.Add(typeof(Icon).Assembly);

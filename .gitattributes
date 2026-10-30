@@ -37,6 +37,12 @@
 # generate-icon-metadata.ps1 and byte-verified by its -Verify mode;
 # keep LF so checkouts match the generator output.
 src/Jenin.FontAwesome.Blazor.IconPicker/Resources/*.json text eol=lf
+# The analyzer embedded catalogue files are CRLF-terminated by
+# generate-analyzer-icon-names.ps1 and byte-verified by its -Verify mode;
+# keep CRLF so checkouts match the generator output on every OS.
+src/Jenin.FontAwesome.Blazor.Analyzers/KnownIconNames.txt text eol=crlf
+src/Jenin.FontAwesome.Blazor.Analyzers/KnownIconStyles.txt text eol=crlf
+src/Jenin.FontAwesome.Blazor.Analyzers/KnownIconAliases.txt text eol=crlf
 *.md text eol=crlf
 *.yml text eol=lf
 *.yaml text eol=lf
