@@ -1,0 +1,78 @@
+/*
+ * Font Awesome animation triggers for Jenin.FontAwesome.Blazor.
+ *
+ * The library's animations are Font Awesome keyframes; these library-owned classes only gate
+ * WHEN they run. Link this file after the Font Awesome CSS:
+ *
+ * <link href="_content/Jenin.FontAwesome.Blazor/css/animation-triggers.css" rel="stylesheet" />
+ *
+ * Trigger classes are emitted by Icon.AnimationTrigger. The reveal helper script adds
+ * .jfa-anim-reveal-visible at the right moment; everything else is pure CSS.
+ *
+ * Hiding is scoped under .js, which animation-triggers.js adds to the document element only
+ * when IntersectionObserver is available. Pages without the script (or without the observer)
+ * never hide content.
+ */
+.jfa-anim-hover,
+.jfa-anim-parent-hover,
+.jfa-anim-focus,
+.js .jfa-anim-reveal-target {
+    animation-play-state: paused;
+}
+
+.jfa-anim-hover:hover,
+.jfa-anim-hover-within:hover .jfa-anim-parent-hover,
+.jfa-anim-focus:focus-visible,
+.js .jfa-anim-reveal-target.jfa-anim-reveal-visible {
+    animation-play-state: running;
+}
+
+.js .jfa-anim-reveal-target {
+    opacity: 0;
+}
+
+.js .jfa-anim-reveal-target.jfa-anim-reveal-visible {
+    opacity: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Icon state transitions (IconTransition / TwoStateIcon)                     */
+/* -------------------------------------------------------------------------- */
+
+/* Both layers share one grid cell, so the component keeps the largest layer's
+ * size and swapping never shifts layout. Only opacity/transform/visibility are
+ * ever inlined by the component; everything else lives here. */
+.jfa-anim-transition {
+    display: inline-grid;
+}
+
+.jfa-anim-transition-layer {
+    grid-area: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--jfa-transition-duration, 0.25s) ease,
+        transform var(--jfa-transition-duration, 0.25s) ease,
+        visibility var(--jfa-transition-duration, 0.25s);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Reduced motion                                                            */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .jfa-anim-hover,
+    .jfa-anim-parent-hover,
+    .jfa-anim-focus,
+    .jfa-anim-reveal-target {
+        animation: none;
+    }
+
+    .jfa-anim-reveal-target {
+        opacity: 1;
+    }
+
+    .jfa-anim-transition-layer {
+        transition: none;
+    }
+}

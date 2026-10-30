@@ -1,0 +1,145 @@
+/*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*/
+
+/*
+ * Landing page. These rules are global because the page renders icons through the `Icon` component,
+ * and Blazor's scoped CSS does not stamp its scope attribute on elements a child component renders.
+ */
+
+.home-hero {
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg,
+        color-mix(in srgb, var(--site-accent) 12%, var(--site-surface)) 0%,
+        var(--site-surface) 60%);
+    border: 1px solid var(--site-border);
+    border-radius: 1rem;
+    box-shadow: var(--site-shadow);
+}
+
+.home-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: .3rem .85rem;
+    margin-bottom: 1rem;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--site-accent);
+    background-color: color-mix(in srgb, var(--site-accent) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--site-accent) 35%, transparent);
+    border-radius: 999px;
+}
+
+.home-hero__title {
+    margin: 0 0 .75rem;
+    font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--site-text-strong);
+}
+
+.home-hero__lead {
+    max-width: 46rem;
+    margin: 0 auto 1.75rem;
+    font-size: 1.05rem;
+    color: var(--site-text-muted);
+}
+
+.home-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    justify-content: center;
+}
+
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.home-card {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1.25rem;
+    color: var(--site-text);
+    text-decoration: none;
+    background-color: var(--site-surface);
+    border: 1px solid var(--site-border);
+    border-radius: .75rem;
+    box-shadow: var(--site-shadow);
+    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.home-card:hover {
+    color: var(--site-text);
+    text-decoration: none;
+    border-color: var(--site-accent);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+    transform: translateY(-2px);
+}
+
+.home-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--site-accent);
+    background-color: color-mix(in srgb, var(--site-accent) 12%, transparent);
+    border-radius: .6rem;
+}
+
+.home-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--site-text-strong);
+}
+
+.home-card__text {
+    font-size: .875rem;
+    color: var(--site-text-muted);
+}
+
+.home-heading {
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--site-text-strong);
+}
+
+.home-subheading {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--site-text-strong);
+}
+
+.home-step {
+    margin-top: 1.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--site-text-strong);
+}
+
+.home-step-label {
+    margin-top: 1.25rem;
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--site-text-muted);
+}
+
+.home-note {
+    margin-top: .75rem;
+    font-size: .9rem;
+    color: var(--site-text-muted);
+}

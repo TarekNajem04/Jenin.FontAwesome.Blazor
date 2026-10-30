@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Jenin",
+    "classifications": ["Blazor", "Font Awesome", "WebAssembly", "Web"],
+    "identity": "Jenin.FontAwesome.Blazor.Templates.BlazorWasm",
+    "name": "Jenin FA Blazor WebAssembly App",
+    "description": "Standalone Blazor WebAssembly app with Jenin.FontAwesome.Blazor installed, static asset tags wired, and a first icon on the home page.",
+    "shortName": "jenin-fa-blazor-wasm",
+    "sourceName": "JeninFaApp",
+    "preferNameDirectory": true,
+    "defaultName": "JeninFaApp",
+    "primaryOutputs": [{ "path": "JeninFaApp.csproj" }],
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "symbols": {
+        "Framework": {
+            "type": "parameter",
+            "datatype": "choice",
+            "description": "The target framework.",
+            "choices": [
+                { "choice": "net8.0", "description": "Target .NET 8 (LTS)." },
+                { "choice": "net9.0", "description": "Target .NET 9 (STS)." },
+                { "choice": "net10.0", "description": "Target .NET 10 (STS)." }
+            ],
+            "defaultValue": "net10.0",
+            "replaces": "JENIN_TFM"
+        },
+        "FaMode": {
+            "type": "parameter",
+            "datatype": "choice",
+            "description": "The Font Awesome delivery mode wired by the static tags (nest = SVG enhancement, webfont = static fonts).",
+            "choices": [
+                { "choice": "nest", "description": "SVG enhancement with nesting (full feature set)." },
+                { "choice": "webfont", "description": "Static webfonts (no SVG engine)." }
+            ],
+            "defaultValue": "nest",
+            "replaces": "JENIN_FA_CONFIG"
+        },
+        "JfaVersion": {
+            "type": "parameter",
+            "datatype": "string",
+            "description": "The Jenin.FontAwesome.Blazor package version to reference.",
+            "defaultValue": "2.0.0",
+            "replaces": "JENIN_FA_VERSION"
+        }
+    },
+    "postActions": [
+        {
+            "description": "Restore NuGet packages required by this project.",
+            "manualInstructions": [{ "text": "Run 'dotnet restore'" }],
+            "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+            "continueOnError": true
+        }
+    ]
+}

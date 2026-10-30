@@ -1,0 +1,43 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/stacking"
+
+<PageTitle>Font Awesome Stacking</PageTitle>
+
+<div class="container-fluid mt-3 mb-5">
+    <div class="mt-4 p-5 bg-warning text-dark rounded">
+        <span class="badge bg-danger">Web Font &amp; SVG+JS</span>
+        <h1>Font Awesome Stacking</h1>
+        <p>Stack icons with <code>IconStackContainer</code> and Font Awesome's <code>fa-stack</code> utilities. For finer control with SVG+JS, Font Awesome recommends layers.</p>
+    </div>
+</div>
+
+<div class="stacking-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(StackingSnippet) Heading="Stacking Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(StackingAligningSnippet) Heading="Aligning Stacked and Regular Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(StackingFontSizeSnippet) Heading="Changing the Default Font Size with Stacking" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(StackingCustomizationSnippet) Heading="Customization" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(StackingHtmlSnippet) Heading="Stacking Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(StackingAligningHtmlSnippet) Heading="Aligning Stacked and Regular Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(StackingFontSizeHtmlSnippet) Heading="Changing the Default Font Size with Stacking" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(StackingCustomizationHtmlSnippet) Heading="Customization" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

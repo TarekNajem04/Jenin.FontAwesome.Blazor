@@ -1,0 +1,26 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<div class="explorer-search">
+    <label class="explorer-search__field">
+        <span class="explorer-search__label">Search icons</span>
+        <input type="search"
+               id="ctl-query"
+               class="explorer-search__input"
+               placeholder="Search by name, alias, or keyword"
+               autocomplete="off"
+               spellcheck="false"
+               value="@Query"
+               @oninput="OnInputAsync"
+               @onkeydown="OnKeyDownAsync" />
+    </label>
+    @if (HasQuery) {
+        <button type="button" class="explorer-search__clear" aria-label="Clear search" @onclick="ClearAsync">&times;</button>
+    }
+    <span class="explorer-search__status" role="status" aria-live="polite">@Status</span>
+</div>

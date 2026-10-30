@@ -1,0 +1,35 @@
+﻿@* Shared family x style matrix (both modes render the same cells). *@
+<div id="edition" data-edition="@Edition" data-mode="@Mode"></div>
+
+<table class="matrix">
+    <tbody>
+        <tr>
+            <td><Icon data-testid="s-solid" IconName="fa-camera" IconStyle="IconStyle.Solid" /></td>
+            <td><Icon data-testid="s-regular" IconName="fa-camera" IconStyle="IconStyle.Regular" /></td>
+            <td><Icon data-testid="s-brands" IconName="fa-github" IconStyle="IconStyle.Brands" /></td>
+        </tr>
+        <tr>
+            <td><Icon data-testid="s-light" IconName="fa-camera" IconStyle="IconStyle.Light" /></td>
+            <td><Icon data-testid="s-thin" IconName="fa-camera" IconStyle="IconStyle.Thin" /></td>
+            <td><Icon data-testid="s-duotone" IconName="fa-camera" IconStyle="IconStyle.Duotone" /></td>
+        </tr>
+        <tr>
+            <td><Icon data-testid="t-sharp" IconName="fa-camera" IconStyle="IconStyle.Solid" Typeface="Typeface.Sharp" /></td>
+            <td><Icon data-testid="t-duotone" IconName="fa-camera" IconStyle="IconStyle.Solid" Typeface="Typeface.Duotone" /></td>
+            <td><Icon data-testid="t-sharpduotone" IconName="fa-camera" IconStyle="IconStyle.Solid" Typeface="Typeface.SharpDuotone" /></td>
+        </tr>
+        <tr>
+            <td><Icon data-testid="m-custom" IconName="fa-acme-widget" IconStyle="IconStyle.Solid" Title="Acme" /></td>
+        </tr>
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public string Mode { get; set; } = "nest";
+
+    private static string Edition =>
+        System.Environment.GetEnvironmentVariable("FA_EDITION") is { } edition && edition.Length > 0
+            ? edition
+            : "free";
+}

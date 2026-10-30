@@ -1,0 +1,27 @@
+/*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*/
+
+/*
+ * Code blocks keep the always-dark Prism "tomorrow" theme on purpose: a dark editor surface reads
+ * the same in both site themes and keeps syntax colours stable.
+ */
+.code-snippet {
+    overflow: hidden;
+    background-color: #2d2d2d;
+    border-radius: 0 0 .75rem .75rem;
+}
+
+.code-snippet pre[class*=language-] {
+    margin: 0;
+    border-radius: 0;
+}
+
+.code-snippet :not(pre) > code[class*=language-] {
+    background: transparent;
+}

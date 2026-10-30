@@ -1,0 +1,74 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+
+    <link href="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/css/theme.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/css/app-shell.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/css/home.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/css/site.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor/css/animation-triggers.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor/css/icon-themes.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/prism/prism.css" rel="stylesheet" />
+    <link href="/Jenin.FontAwesome.Blazor.Sample.styles.css" rel="stylesheet" />
+    <link href="/_content/Jenin.FontAwesome.Blazor.Explorer/css/explorer.css" rel="stylesheet" />
+
+    <script>
+        // Apply the persisted (or OS-preferred) theme before first paint to avoid a flash.
+        (function () {
+            try {
+                var stored = localStorage.getItem('jenin-fa-theme');
+                var theme = stored === 'light' || stored === 'dark'
+                    ? stored
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+                document.documentElement.style.colorScheme = theme;
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <HeadOutlet @rendermode="RenderMode.InteractiveServer" />
+</head>
+<body>
+    <Routes @rendermode="RenderMode.InteractiveServer" />
+
+    <div id="blazor-error-ui">
+        An unhandled exception has occurred. The application may no longer respond until reloaded.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="@Assets["_framework/blazor.web.js"]"></script>
+
+    <script src="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/bootstrap/js/bootstrap.bundle.js" type="text/javascript"></script>
+    <script src="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/js/theme.js" type="text/javascript"></script>
+    <script src="/_content/Jenin.FontAwesome.Blazor/js/animation-triggers.js" type="text/javascript"></script>
+
+    <script src="_content/Jenin.FontAwesome.Blazor/js/fontawesome-config-nest.js" type="text/javascript"></script>
+    <script src="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/fontawesome/js/all.min.js" type="text/javascript"></script>
+    <script src="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/js/site.js" type="text/javascript"></script>
+
+    <script>
+        window.Prism = window.Prism || {};
+        Prism.disableWorkerMessageHandler = true;
+        Prism.manual = true;
+    </script>
+    <script src="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/prism/prism.js" type="text/javascript"></script>
+    <script src="/_content/Jenin.FontAwesome.Blazor.Sample.Shared/js/PrismUtilities.js" type="text/javascript"></script>
+</body>
+</html>

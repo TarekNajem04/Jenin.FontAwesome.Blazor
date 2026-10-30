@@ -1,0 +1,22 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/interactive-server"
+@rendermode InteractiveServer
+
+<PageTitle>Interactive Server</PageTitle>
+
+<h1>Interactive Server</h1>
+
+<p>
+    This page is prerendered on the server, then upgraded to an interactive SignalR circuit. The
+    <code>AddJeninFontAwesome</code> registration runs in the server host. The shared showcase below
+    lives in the client assembly but is executed on the server here.
+</p>
+
+<FeatureShowcase />

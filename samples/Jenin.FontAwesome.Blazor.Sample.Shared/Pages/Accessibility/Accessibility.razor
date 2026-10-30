@@ -1,0 +1,109 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/accessibility"
+
+<PageTitle>Font Awesome Blazor Accessibility</PageTitle>
+
+<div class="container-fluid mt-3 mb-4">
+    <h1>Accessibility</h1>
+
+    <p>
+        Font Awesome glyphs carry meaning visually, and assistive technology has no way to guess it.
+        The library therefore makes a deliberate choice for every element it renders:
+    </p>
+
+    <ul>
+        <li>
+            <strong>Decorative</strong> (the default for <code>Icon</code>) &rarr; the element is emitted with
+            <code>role="presentation"</code> and <code>aria-hidden="true"</code>, so a screen reader skips it and
+            only the surrounding text is announced once.
+        </li>
+        <li>
+            <strong>Meaningful</strong> &rarr; the element is emitted with <code>role="img"</code> and
+            <code>aria-hidden="false"</code>, and Font Awesome's SVG enhancement keeps the accessible name in a
+            <code>&lt;title&gt;</code> element.
+        </li>
+    </ul>
+
+    <h2>Choosing the mode</h2>
+
+    <p>
+        Supplying <code>Title</code> or <code>AriaLabel</code> is enough to make an icon meaningful &mdash; there is
+        nothing else to wire up. Forcing it with the <code>Decorative</code> parameter overrides that inference in
+        either direction. Resolution order, from highest precedence to lowest:
+    </p>
+
+    <ol>
+        <li>An explicit <code>Decorative</code> parameter on the component.</li>
+        <li>A configured default from <a class="link-primary" href="configuration"><code>FontAwesomeOptions</code></a> or <code>FontAwesomeDefaults</code>.</li>
+        <li>Inference: meaningful when <code>Title</code>/<code>AriaLabel</code> is present, otherwise the component's own default (<code>Icon</code> defaults to decorative).</li>
+    </ol>
+
+    <div class="alert alert-info" role="note">
+        <strong>Rule of thumb:</strong> an icon that sits beside visible text should stay decorative &mdash; the text
+        already says it. An icon that <em>is</em> the label (icon-only buttons and links) needs a name: put
+        <code>aria-label</code> on the control itself and, when the glyph is the only content, also give the
+        <code>Icon</code> a <code>Title</code>.
+    </div>
+</div>
+
+<div class="accessibility-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(AccessibilityDecorativeSnippet) Heading="Decorative by default" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(AccessibilityNamedSnippet) Heading="Named with Title" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(AccessibilityForcedSnippet) Heading="Forced with Decorative" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>
+
+<div class="container-fluid mt-4 mb-5">
+    <h2>What the browser receives</h2>
+
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Markup</th>
+                <th>Rendered attributes</th>
+                <th>Announced</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>&lt;Icon IconName="fa-heart" /&gt;</code></td>
+                <td><code>role="presentation"</code> <code>aria-hidden="true"</code></td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><code>&lt;Icon IconName="fa-heart" Title="Loved" /&gt;</code></td>
+                <td><code>title</code> <code>role="img"</code> <code>aria-hidden="false"</code></td>
+                <td>Yes &mdash; "Loved"</td>
+            </tr>
+            <tr>
+                <td><code>&lt;Icon IconName="fa-heart" AriaLabel="Loved" /&gt;</code></td>
+                <td><code>aria-label</code> <code>role="img"</code> <code>aria-hidden="false"</code></td>
+                <td>Yes &mdash; "Loved"</td>
+            </tr>
+            <tr>
+                <td><code>&lt;Icon IconName="fa-heart" Title="Loved" Decorative="true" /&gt;</code></td>
+                <td><code>title</code> <code>role="presentation"</code> <code>aria-hidden="true"</code></td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><code>&lt;Icon IconName="fa-heart" Decorative="false" /&gt;</code></td>
+                <td><code>role="img"</code> <code>aria-hidden="false"</code></td>
+                <td>Yes &mdash; no name until one is supplied</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

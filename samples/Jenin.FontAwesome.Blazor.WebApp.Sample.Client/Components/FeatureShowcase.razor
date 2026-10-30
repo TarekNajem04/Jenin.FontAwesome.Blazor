@@ -1,0 +1,122 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@using System.Globalization
+
+<div class="feature-grid">
+    <section class="feature-card">
+        <h3>Events &amp; re-render</h3>
+        <p>
+            These icons raise Blazor click events. Every click re-renders this component on the active
+            host, and Font Awesome re-enhances the refreshed markup through its mutation observer.
+        </p>
+        <p class="counter" aria-live="polite">
+            Clicks:
+            @{
+                var digits = _clicks.ToString(CultureInfo.InvariantCulture);
+                foreach(var digit in digits) {
+                    <Icon IconStyle=IconStyle.Solid IconName=@($"fa-{digit}") />
+                }
+            }
+        </p>
+        <p>
+            <Icon CssClass="clickable"
+                  IconStyle=IconStyle.Solid
+                  IconName="fa-star"
+                  Color=@(_starred ? "gold" : "grey")
+                  OnClick=ToggleStar
+                  Title="Toggle star" />
+            <button type="button" @onclick="IncrementClicks">Increment</button>
+            <button type="button" @onclick="ToggleStar">Toggle star</button>
+        </p>
+    </section>
+
+    <section class="feature-card">
+        <h3>Layers, text &amp; counters</h3>
+        <p>
+            <IconContainer IconSize=IconSize.X04>
+                <Icons>
+                    <IconLayersContainer>
+                        <Icons>
+                            <Icon IconStyle=IconStyle.Solid IconName="fa-envelope" />
+                            <CounterLayer BackgroundColor="Tomato" Text="1,419" />
+                        </Icons>
+                    </IconLayersContainer>
+
+                    <IconLayersContainer BackgroundColor="#8B9DC3">
+                        <Icons>
+                            <Icon IconStyle=IconStyle.Solid IconName="fa-calendar" />
+                            <TextLayer Inverse=true
+                                       InverseColor="Mediumslateblue"
+                                       Transform=@(new Transform().Shrink(8).Down(3))
+                                       Text="27" />
+                        </Icons>
+                    </IconLayersContainer>
+                </Icons>
+            </IconContainer>
+        </p>
+    </section>
+
+    <section class="feature-card">
+        <h3>Masking</h3>
+        <p>
+            <Icon IconStyle=IconStyle.Solid
+                  IconName="fa-pencil-alt"
+                  MaskIconStyle=IconStyle.Solid
+                  MaskIconName="fa-comment"
+                  BackgroundColor="#7CBB00"
+                  Color="#F7F7F7"
+                  Transform=@(new Transform().Shrink(10F)) />
+            <Icon IconStyle=IconStyle.Brands
+                  IconName="fa-facebook-f"
+                  MaskIconStyle=IconStyle.Solid
+                  MaskIconName="fa-circle"
+                  BackgroundColor="#3B5998"
+                  Color="#F7F7F7"
+                  Transform=@(new Transform().Shrink(3.5F)) />
+        </p>
+    </section>
+
+    <section class="feature-card">
+        <h3>Transforms &amp; animations</h3>
+        <p>
+            <Icon IconStyle=IconStyle.Solid IconName="fa-sun" Color="orange" Animation=@(Animate.Spin()) />
+            <Icon IconStyle=IconStyle.Solid
+                  IconName="fa-heart"
+                  Color="crimson"
+                  Animation=@(Animate.Beat(new BeatOptions { Scale = 1.3F })) />
+            <Icon IconStyle=IconStyle.Solid
+                  IconName="fa-arrow-right"
+                  Transform=@(new Transform().Rotate(45).Grow(2)) />
+        </p>
+    </section>
+
+    <section class="feature-card">
+        <h3>Stacking</h3>
+        <p>
+            <IconStackContainer IconSize=IconSize.X02>
+                <Icons>
+                    <Icon IconStyle=IconStyle.Solid IconName="fa-square" StackSize=IconStackSize.Larger />
+                    <Icon IconStyle=IconStyle.Solid
+                          IconName="fa-terminal"
+                          StackSize=IconStackSize.Same
+                          Inverse=true />
+                </Icons>
+            </IconStackContainer>
+        </p>
+    </section>
+</div>
+
+@code {
+    private int _clicks;
+    private bool _starred;
+
+    private void IncrementClicks(MouseEventArgs eventArgs) => _clicks++;
+
+    private void ToggleStar(MouseEventArgs eventArgs) => _starred = !_starred;
+}

@@ -1,0 +1,21 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/interactive-server-no-prerender"
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<PageTitle>Interactive Server (no prerender)</PageTitle>
+
+<h1>Interactive Server (no prerender)</h1>
+
+<p>
+    This page disables prerendering, so the markup is not produced until the circuit is connected.
+    The icons appear once the interactive server renderer runs.
+</p>
+
+<FeatureShowcase />

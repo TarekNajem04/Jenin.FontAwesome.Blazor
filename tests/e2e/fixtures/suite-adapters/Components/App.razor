@@ -1,0 +1,20 @@
+﻿@* Fixture shell. One Font Awesome stylesheet (vendored 7.3.1, served from
+   FA_VENDOR_DIR by the harness) feeds both suites' font-icon slots; no FA JavaScript runs,
+   so every assertion observes pure server markup + CSS. The Blazorise FA provider CSS is
+   deliberately omitted: the provider renders plain FA classes, which the vendored CSS
+   (including the classic fas/far/fab shorthands) already resolves. *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <link href="/fa-vendored/css/all.css" rel="stylesheet" />
+    <HeadOutlet />
+</head>
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+</body>
+</html>

@@ -1,4 +1,10 @@
-﻿namespace Jenin.FontAwesome.Blazor;
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+namespace Jenin.FontAwesome.Blazor;
 
 /// <summary>
 /// Rotate, Flip, or Mirror icons.
@@ -9,48 +15,48 @@ public enum IconRotate {
     /// The icon rotate will not be applied.
     /// </summary>
     [Value("")]
-    NotSet,
+    NotSet = 0,
 
     /// <summary>
     /// Rotates an icon 90°.
     /// </summary>
     [Value("fa-rotate-90")]
-    Deg090,
+    Deg090 = 1,
 
     /// <summary>
     /// Rotates an icon 180°.
     /// </summary>
     [Value("fa-rotate-180")]
-    Deg180,
+    Deg180 = 2,
 
     /// <summary>
     /// Rotates an icon 270°.
     /// </summary>
     [Value("fa-rotate-270")]
-    Deg270,
+    Deg270 = 3,
 
     /// <summary>
     /// Mirrors an icon horizontally.
     /// </summary>
     [Value("fa-flip-horizontal")]
-    FlipHorizontal,
+    FlipHorizontal = 4,
 
     /// <summary>
     /// Mirrors an icon vertically
     /// </summary>
     [Value("fa-flip-vertical")]
-    FlipVertical,
+    FlipVertical = 5,
 
     /// <summary>
     /// Mirrors an icon both vertically and horizontally.
     /// </summary>
     [Value("fa-flip-both")]
-    FlipBoth,
+    FlipBoth = 6,
 
     /// <summary>
     /// Rotates an icon by a specific degree,
     /// setting an accompanying valid inline value for <see cref="Icon.RotateAngle"/> is required.
     /// </summary>
     [Value("fa-rotate-by")]
-    RotateBy,
+    RotateBy = 7,
 }

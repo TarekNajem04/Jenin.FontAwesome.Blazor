@@ -1,0 +1,583 @@
+{
+  "version": "1",
+  "scanned": "samples",
+  "names": [
+    {
+      "name": "fa-android",
+      "styles": []
+    },
+    {
+      "name": "fa-angular",
+      "styles": []
+    },
+    {
+      "name": "fa-arrow-right",
+      "styles": []
+    },
+    {
+      "name": "fa-arrow-right-arrow-left",
+      "styles": []
+    },
+    {
+      "name": "fa-arrows-left-right-to-line",
+      "styles": []
+    },
+    {
+      "name": "fa-arrows-to-circle",
+      "styles": []
+    },
+    {
+      "name": "fa-ban",
+      "styles": []
+    },
+    {
+      "name": "fa-bars",
+      "styles": []
+    },
+    {
+      "name": "fa-basketball",
+      "styles": []
+    },
+    {
+      "name": "fa-battery-full",
+      "styles": []
+    },
+    {
+      "name": "fa-battery-quarter",
+      "styles": []
+    },
+    {
+      "name": "fa-bell",
+      "styles": [
+        "solid"
+      ]
+    },
+    {
+      "name": "fa-bell-concierge",
+      "styles": []
+    },
+    {
+      "name": "fa-bell-slash",
+      "styles": []
+    },
+    {
+      "name": "fa-bluetooth",
+      "styles": []
+    },
+    {
+      "name": "fa-bolt-lightning",
+      "styles": []
+    },
+    {
+      "name": "fa-bomb",
+      "styles": []
+    },
+    {
+      "name": "fa-book",
+      "styles": []
+    },
+    {
+      "name": "fa-book-medical",
+      "styles": []
+    },
+    {
+      "name": "fa-book-spells",
+      "styles": []
+    },
+    {
+      "name": "fa-book-user",
+      "styles": []
+    },
+    {
+      "name": "fa-bookmark",
+      "styles": []
+    },
+    {
+      "name": "fa-border-none",
+      "styles": []
+    },
+    {
+      "name": "fa-box",
+      "styles": []
+    },
+    {
+      "name": "fa-braille",
+      "styles": []
+    },
+    {
+      "name": "fa-bus-alt",
+      "styles": []
+    },
+    {
+      "name": "fa-calendar",
+      "styles": []
+    },
+    {
+      "name": "fa-camera",
+      "styles": []
+    },
+    {
+      "name": "fa-camera-rotate",
+      "styles": []
+    },
+    {
+      "name": "fa-cart-shopping",
+      "styles": []
+    },
+    {
+      "name": "fa-certificate",
+      "styles": []
+    },
+    {
+      "name": "fa-check-square",
+      "styles": []
+    },
+    {
+      "name": "fa-chrome",
+      "styles": []
+    },
+    {
+      "name": "fa-circle",
+      "styles": []
+    },
+    {
+      "name": "fa-circle-check",
+      "styles": []
+    },
+    {
+      "name": "fa-circle-dot",
+      "styles": []
+    },
+    {
+      "name": "fa-circle-exclamation",
+      "styles": []
+    },
+    {
+      "name": "fa-circle-info",
+      "styles": []
+    },
+    {
+      "name": "fa-circle-notch",
+      "styles": []
+    },
+    {
+      "name": "fa-circle-plus",
+      "styles": []
+    },
+    {
+      "name": "fa-circle-question",
+      "styles": []
+    },
+    {
+      "name": "fa-circle-xmark",
+      "styles": []
+    },
+    {
+      "name": "fa-clock",
+      "styles": []
+    },
+    {
+      "name": "fa-cloud-arrow-up",
+      "styles": []
+    },
+    {
+      "name": "fa-cog",
+      "styles": []
+    },
+    {
+      "name": "fa-comment",
+      "styles": []
+    },
+    {
+      "name": "fa-compact-disc",
+      "styles": []
+    },
+    {
+      "name": "fa-compass",
+      "styles": []
+    },
+    {
+      "name": "fa-computer",
+      "styles": []
+    },
+    {
+      "name": "fa-cubes-stacked",
+      "styles": []
+    },
+    {
+      "name": "fa-docker",
+      "styles": []
+    },
+    {
+      "name": "fa-download",
+      "styles": []
+    },
+    {
+      "name": "fa-edge",
+      "styles": []
+    },
+    {
+      "name": "fa-envelope",
+      "styles": []
+    },
+    {
+      "name": "fa-facebook-f",
+      "styles": []
+    },
+    {
+      "name": "fa-file-exclamation",
+      "styles": []
+    },
+    {
+      "name": "fa-file-plus",
+      "styles": []
+    },
+    {
+      "name": "fa-file-times",
+      "styles": []
+    },
+    {
+      "name": "fa-fill-drip",
+      "styles": []
+    },
+    {
+      "name": "fa-fire-alt",
+      "styles": []
+    },
+    {
+      "name": "fa-firefox",
+      "styles": []
+    },
+    {
+      "name": "fa-flag",
+      "styles": []
+    },
+    {
+      "name": "fa-floppy-disk",
+      "styles": []
+    },
+    {
+      "name": "fa-font-awesome",
+      "styles": []
+    },
+    {
+      "name": "fa-frog",
+      "styles": []
+    },
+    {
+      "name": "fa-gear",
+      "styles": []
+    },
+    {
+      "name": "fa-github",
+      "styles": [
+        "brands"
+      ]
+    },
+    {
+      "name": "fa-gitlab",
+      "styles": []
+    },
+    {
+      "name": "fa-globe",
+      "styles": []
+    },
+    {
+      "name": "fa-group-arrows-rotate",
+      "styles": []
+    },
+    {
+      "name": "fa-headphones",
+      "styles": []
+    },
+    {
+      "name": "fa-heart",
+      "styles": [
+        "regular",
+        "solid"
+      ]
+    },
+    {
+      "name": "fa-heart-circle-exclamation",
+      "styles": []
+    },
+    {
+      "name": "fa-heart-crack",
+      "styles": []
+    },
+    {
+      "name": "fa-home",
+      "styles": []
+    },
+    {
+      "name": "fa-house",
+      "styles": [
+        "solid"
+      ]
+    },
+    {
+      "name": "fa-i-cursor",
+      "styles": []
+    },
+    {
+      "name": "fa-infinity",
+      "styles": []
+    },
+    {
+      "name": "fa-keyboard",
+      "styles": []
+    },
+    {
+      "name": "fa-layer-group",
+      "styles": []
+    },
+    {
+      "name": "fa-list",
+      "styles": []
+    },
+    {
+      "name": "fa-lock",
+      "styles": []
+    },
+    {
+      "name": "fa-magnet",
+      "styles": []
+    },
+    {
+      "name": "fa-magnifying-glass",
+      "styles": [
+        "solid"
+      ]
+    },
+    {
+      "name": "fa-mask",
+      "styles": []
+    },
+    {
+      "name": "fa-microphone",
+      "styles": []
+    },
+    {
+      "name": "fa-microphone-slash",
+      "styles": []
+    },
+    {
+      "name": "fa-money-check-dollar",
+      "styles": []
+    },
+    {
+      "name": "fa-moon",
+      "styles": []
+    },
+    {
+      "name": "fa-pause",
+      "styles": []
+    },
+    {
+      "name": "fa-pencil-alt",
+      "styles": []
+    },
+    {
+      "name": "fa-person-digging",
+      "styles": []
+    },
+    {
+      "name": "fa-play",
+      "styles": []
+    },
+    {
+      "name": "fa-plus",
+      "styles": []
+    },
+    {
+      "name": "fa-poo-bolt",
+      "styles": []
+    },
+    {
+      "name": "fa-quote-left",
+      "styles": []
+    },
+    {
+      "name": "fa-radiation",
+      "styles": []
+    },
+    {
+      "name": "fa-rocket",
+      "styles": []
+    },
+    {
+      "name": "fa-scroll",
+      "styles": []
+    },
+    {
+      "name": "fa-seedling",
+      "styles": []
+    },
+    {
+      "name": "fa-skating",
+      "styles": []
+    },
+    {
+      "name": "fa-skiing",
+      "styles": []
+    },
+    {
+      "name": "fa-skiing-nordic",
+      "styles": []
+    },
+    {
+      "name": "fa-skull-crossbones",
+      "styles": []
+    },
+    {
+      "name": "fa-sliders",
+      "styles": []
+    },
+    {
+      "name": "fa-snowboarding",
+      "styles": []
+    },
+    {
+      "name": "fa-snowplow",
+      "styles": []
+    },
+    {
+      "name": "fa-spinner",
+      "styles": []
+    },
+    {
+      "name": "fa-square",
+      "styles": []
+    },
+    {
+      "name": "fa-star",
+      "styles": [
+        "solid"
+      ]
+    },
+    {
+      "name": "fa-stopwatch",
+      "styles": []
+    },
+    {
+      "name": "fa-suitcase",
+      "styles": []
+    },
+    {
+      "name": "fa-sun",
+      "styles": []
+    },
+    {
+      "name": "fa-sync",
+      "styles": []
+    },
+    {
+      "name": "fa-table-cells-large",
+      "styles": []
+    },
+    {
+      "name": "fa-terminal",
+      "styles": []
+    },
+    {
+      "name": "fa-times",
+      "styles": []
+    },
+    {
+      "name": "fa-toggle-off",
+      "styles": []
+    },
+    {
+      "name": "fa-toggle-on",
+      "styles": []
+    },
+    {
+      "name": "fa-trash",
+      "styles": [
+        "solid"
+      ]
+    },
+    {
+      "name": "fa-triangle-exclamation",
+      "styles": []
+    },
+    {
+      "name": "fa-truck",
+      "styles": []
+    },
+    {
+      "name": "fa-twitter",
+      "styles": []
+    },
+    {
+      "name": "fa-universal-access",
+      "styles": []
+    },
+    {
+      "name": "fa-user-astronaut",
+      "styles": []
+    },
+    {
+      "name": "fa-user-plus",
+      "styles": []
+    },
+    {
+      "name": "fa-users",
+      "styles": []
+    },
+    {
+      "name": "fa-users-line",
+      "styles": []
+    },
+    {
+      "name": "fa-volleyball",
+      "styles": []
+    },
+    {
+      "name": "fa-youtube",
+      "styles": []
+    }
+  ],
+  "dynamic": [
+    {
+      "File": "Jenin.FontAwesome.Blazor.Explorer\\Components\\IconCard.razor",
+      "Line": 17
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Explorer\\Components\\PreviewPanel.razor",
+      "Line": 22
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Explorer\\Components\\PreviewPanel.razor",
+      "Line": 41
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Sample.Shared\\Components\\SiteThemeToggle.razor",
+      "Line": 16
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Sample.Shared\\Layout\\MainLayout.razor",
+      "Line": 41
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Sample.Shared\\Pages\\IconBrowser\\IconPickerSnippet.razor",
+      "Line": 20
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Sample.Shared\\Pages\\IconCatalogue\\IconCatalogue.razor",
+      "Line": 82
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Sample.Shared\\Pages\\IconCatalogue\\IconNamesSnippet.razor",
+      "Line": 11
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Sample.Shared\\Pages\\IconCatalogue\\IconNamesSnippet.razor",
+      "Line": 15
+    },
+    {
+      "File": "Jenin.FontAwesome.Blazor.Sample.Shared\\Pages\\IconCatalogue\\IconNamesSnippet.razor",
+      "Line": 19
+    }
+  ]
+}

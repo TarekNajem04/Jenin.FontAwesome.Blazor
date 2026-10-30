@@ -1,0 +1,31 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+@page "/icon-buttons"
+
+<PageTitle>Font Awesome Icon Buttons</PageTitle>
+
+<div class="buttons-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IconButtonsBasicSnippet) Heading="Buttons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IconButtonsBusySnippet) Heading="Busy State" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IconToggleButtonsSnippet) Heading="Toggle & Favorite" />
+                </Samples>
+            </SampleTab>
+
+            <SampleTab Text="HTML">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IconButtonsHtmlSnippet) Heading="Buttons" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

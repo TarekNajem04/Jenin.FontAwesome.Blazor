@@ -1,0 +1,73 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Jenin FontAwesome Repository Cleanup Configuration",
+    "type": "object",
+
+    "required": [
+        "version",
+        "directories"
+    ],
+
+    "properties": {
+        "version": {
+            "type": "integer",
+            "description": "Configuration version."
+        },
+
+        "directories": {
+            "type": "object",
+
+            "required": [
+                "include",
+                "exclude"
+            ],
+
+            "properties": {
+
+                "include": {
+                    "type": "array",
+                    "description": "Directory patterns to remove.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+
+                "exclude": {
+                    "type": "array",
+                    "description": "Directory names excluded from cleanup.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+
+        "files": {
+            "type": "object",
+
+            "required": [
+                "include",
+                "exclude"
+            ],
+
+            "properties": {
+
+                "include": {
+                    "type": "array",
+                    "description": "File patterns to remove.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+
+                "exclude": {
+                    "type": "array",
+                    "description": "File names excluded from cleanup.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

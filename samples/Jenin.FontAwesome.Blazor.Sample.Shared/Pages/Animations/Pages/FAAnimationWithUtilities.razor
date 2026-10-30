@@ -1,0 +1,22 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/animation-utilities"
+
+<PageTitle>Font Awesome Animation With Utilities</PageTitle>
+
+<h5>Animation Beat Delay(5s), Fade IterationCount(15), Bounce TimingFunction(cubic-bezier(0.2, 3, 0.2, 2)), Spin Direction(Reverse)</h5>
+<IconContainer CssClass="mb-1" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-circle-plus" Animation=@Animate.Beat(new BeatOptions { Delay = TimeSpan.FromSeconds(5) }) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-circle-plus" Animation=@Animate.Beat().SetDelay(TimeSpan.FromSeconds(5)) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-triangle-exclamation" Animation=@Animate.Fade(new FadeOptions { IterationCount = 15F }) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-magnet" Animation=@Animate.Bounce(new BounceOptions { TimingFunction = "cubic-bezier(0.2, 3, 0.2, 2)" }) Rotate=IconRotate.RotateBy RotateAngle=90F Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-sync" Animation=@Animate.Spin(new SpinOptions { Delay = TimeSpan.FromSeconds(3), Direction = AnimationDirection.Reverse }) Color="#007AFF" />
+    </Icons>
+</IconContainer>

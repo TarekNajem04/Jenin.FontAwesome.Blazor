@@ -1,0 +1,16 @@
+﻿@*
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+*@
+<IconContainer CssClass="mb-1 p-5 d-flex gap-3 align-items-center">
+    <Icons>
+        <IconToggleButton IconName="fa-heart" IconStyle=IconStyle.Regular Label="Like" PressedIconStyle=IconStyle.Solid PressedColor="red" @bind-Pressed=IsLiked />
+        <span>@(IsLiked ? "Liked!" : "Not liked yet")</span>
+    </Icons>
+</IconContainer>
+
+@code {
+    private bool IsLiked;
+}

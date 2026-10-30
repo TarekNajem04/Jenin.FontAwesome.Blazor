@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+        <!-- Declare trimming/AOT compatibility so the linker and analyzers verify this optional
+             package independently instead of inheriting the core package's contract. -->
+        <IsTrimmable>true</IsTrimmable>
+        <IsAotCompatible>true</IsAotCompatible>
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>Jenin Blazor Library - Optional Font Awesome icon metadata, search, and IconPicker component for ASP.NET Blazor</Description>
+        <PackageId>Jenin.FontAwesome.Blazor.IconPicker</PackageId>
+        <Authors>Tarek Najem</Authors>
+        <Company>Jenin</Company>
+
+        <!-- Mixed license: library code is MIT; embedded Font Awesome Free icon-metadata
+             resource is CC BY 4.0 (see LICENSES + README). AND keeps the nuspec accurate. -->
+        <PackageLicenseExpression>MIT AND CC-BY-4.0</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReleaseNotes>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/releases</PackageReleaseNotes>
+        <PackageTags>blazor fontawesome font-awesome-7 icons accessibility a11y trimming aot icon-picker icon-search wasm components</PackageTags>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <NeutralLanguage>en</NeutralLanguage>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnablePackageValidation>true</EnablePackageValidation>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\**\*.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\LICENSES">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Jenin.FontAwesome.Blazor\Jenin.FontAwesome.Blazor.csproj" />
+    </ItemGroup>
+
+</Project>

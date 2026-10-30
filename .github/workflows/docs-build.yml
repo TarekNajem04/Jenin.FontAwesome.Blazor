@@ -1,0 +1,164 @@
+name: Documentation
+
+# Builds the interactive documentation app plus the DocFX API/guides site and deploys
+# the combined output to GitHub Pages with the artifact-based Pages workflow.
+#
+# One-time repository setup (owner): Settings -> Pages -> Build and deployment ->
+# Source = "GitHub Actions" (the legacy gh-pages branch is no longer used).
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'src/**'
+      - 'samples/Jenin.FontAwesome.Blazor.Docs/**'
+      - 'samples/Jenin.FontAwesome.Blazor.Explorer/**'
+      - 'samples/Jenin.FontAwesome.Blazor.Sample.Shared/**'
+      - 'scripts/docs/**'
+      - 'eng/docfx-filter.yml'
+      - 'global.json'
+      - 'Directory.Build.props'
+      - 'Directory.Build.targets'
+      - 'Directory.Packages.props'
+      - 'README.md'
+      - '.github/workflows/docs-build.yml'
+
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'src/**'
+      - 'samples/Jenin.FontAwesome.Blazor.Docs/**'
+      - 'samples/Jenin.FontAwesome.Blazor.Explorer/**'
+      - 'samples/Jenin.FontAwesome.Blazor.Sample.Shared/**'
+      - 'scripts/docs/**'
+      - 'eng/docfx-filter.yml'
+      - 'global.json'
+      - 'Directory.Build.props'
+      - 'Directory.Build.targets'
+      - 'Directory.Packages.props'
+      - 'README.md'
+      - '.github/workflows/docs-build.yml'
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+  # Temporary until GitHub fully migrates Actions to Node 24.
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  build:
+
+    name: Build Documentation
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 30
+
+    permissions:
+      contents: read
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      # DocFX 2.78.x runs on the .NET 8 runtime even though the app targets net10.0.
+      - name: Setup .NET 8 runtime
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup .NET SDK (global.json)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Restore local tools
+        run: dotnet tool restore
+
+      - name: Check documentation links
+        run: pwsh scripts/docs/check-doc-links.ps1
+
+      - name: Check README claims
+        run: pwsh scripts/docs/check-readme-claims.ps1
+
+      - name: Build libraries for DocFX metadata
+        run: |
+          set -euo pipefail
+          for project in \
+            src/Jenin.FontAwesome.Blazor/Jenin.FontAwesome.Blazor.csproj \
+            src/Jenin.FontAwesome.Blazor.Icons/Jenin.FontAwesome.Blazor.Icons.csproj \
+            src/Jenin.FontAwesome.Blazor.IconPicker/Jenin.FontAwesome.Blazor.IconPicker.csproj \
+            src/Jenin.FontAwesome.Blazor.Svg/Jenin.FontAwesome.Blazor.Svg.csproj \
+            src/Jenin.FontAwesome.Blazor.Analyzers/Jenin.FontAwesome.Blazor.Analyzers.csproj \
+            src/Jenin.FontAwesome.Blazor.MudBlazor/Jenin.FontAwesome.Blazor.MudBlazor.csproj \
+            src/Jenin.FontAwesome.Blazor.Blazorise/Jenin.FontAwesome.Blazor.Blazorise.csproj; do
+            dotnet build "$project" --configuration Release --nologo
+          done
+
+      - name: Publish interactive documentation app
+        run: >
+          dotnet publish samples/Jenin.FontAwesome.Blazor.Docs/Jenin.FontAwesome.Blazor.Docs.csproj
+          --configuration Release --output release --nologo
+
+      - name: Build documentation site (DocFX)
+        run: dotnet docfx docs/docfx.json
+
+      - name: Check generated API coverage
+        run: pwsh scripts/docs/check-api-reference.ps1
+
+      - name: Prepare static site for GitHub Pages
+        run: |
+          set -euo pipefail
+          sed -i 's#<base href="/" />#<base href="/Jenin.FontAwesome.Blazor/" />#' release/wwwroot/index.html
+          grep -qF '<base href="/Jenin.FontAwesome.Blazor/" />' release/wwwroot/index.html
+          rm -f release/wwwroot/index.html.br release/wwwroot/index.html.gz
+          cp release/wwwroot/index.html release/wwwroot/404.html
+          touch release/wwwroot/.nojekyll
+          test -f docs/_site/index.html
+          rm -rf release/wwwroot/api
+          mkdir -p release/wwwroot/api
+          cp -r docs/_site/. release/wwwroot/api/
+          test -f release/wwwroot/api/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: release/wwwroot
+
+  deploy:
+
+    name: Deploy GitHub Pages
+
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    needs:
+      - build
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

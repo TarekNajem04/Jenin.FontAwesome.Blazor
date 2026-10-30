@@ -1,0 +1,209 @@
+name: Publish NuGet Packages
+
+# Publishes the 2.0.0 package set with NuGet.org trusted publishing (OIDC).
+#
+# One-time setup (owner):
+#   1. nuget.org -> account -> Trusted Publishing: add a policy for
+#      repository `TarekNajem04/Jenin.FontAwesome.Blazor`, workflow `nuget-publish.yml`
+#      and environment `production`.
+#   2. GitHub repository variables: `NUGET_USER` = the nuget.org profile name.
+#   3. GitHub environments: create `production` (optionally require reviewers).
+#
+# No static `NUGET_API_KEY` secret is used: `NuGet/login` exchanges the workflow's
+# GitHub OIDC token for a short-lived API key tied to the trusted-publishing policy.
+# Signing is not part of this pipeline; that remains a separate decision.
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  PACKAGES_DIR: artifacts/packages
+  PROJECTS: >-
+    src/Jenin.FontAwesome.Blazor/Jenin.FontAwesome.Blazor.csproj
+    src/Jenin.FontAwesome.Blazor.Icons/Jenin.FontAwesome.Blazor.Icons.csproj
+    src/Jenin.FontAwesome.Blazor.IconPicker/Jenin.FontAwesome.Blazor.IconPicker.csproj
+    src/Jenin.FontAwesome.Blazor.Svg/Jenin.FontAwesome.Blazor.Svg.csproj
+    src/Jenin.FontAwesome.Blazor.Analyzers/Jenin.FontAwesome.Blazor.Analyzers.csproj
+    src/Jenin.FontAwesome.Blazor.MudBlazor/Jenin.FontAwesome.Blazor.MudBlazor.csproj
+    src/Jenin.FontAwesome.Blazor.Blazorise/Jenin.FontAwesome.Blazor.Blazorise.csproj
+    templates/Jenin.FontAwesome.Blazor.Templates.csproj
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to NuGet
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: production
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      # ---------------------------------------------------------
+      # 1) Checkout repository
+      # ---------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      # ---------------------------------------------------------
+      # 2) Setup .NET
+      # ---------------------------------------------------------
+      - name: Setup .NET 8/9 runtimes (net8.0/net9.0 test hosts)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+
+      # ---------------------------------------------------------
+      # 3) Resolve Version from Tag
+      # ---------------------------------------------------------
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Publishing version: $VERSION"
+
+      # ---------------------------------------------------------
+      # 4) Verify Package Versions match Tag
+      # ---------------------------------------------------------
+      - name: Verify project versions
+        shell: pwsh
+        run: |
+          $expected = "${{ steps.version.outputs.version }}"
+          $projectList = "${{ env.PROJECTS }}".Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries)
+
+          # NuGet treats 1.0.0 and 1.0.0.0 as the same version, so compare four-part numeric forms.
+          function Get-FourPartVersion([string]$version) {
+            $parts = @($version.Split('.'))
+            while ($parts.Count -lt 4) { $parts += '0' }
+            if ($parts.Count -ne 4 -or @($parts | Where-Object { $_ -notmatch '^\d+$' }).Count -ne 0) {
+              return $null
+            }
+            return ($parts -join '.')
+          }
+
+          foreach ($project in $projectList) {
+            # Resolve the effective Version property (projects may inherit it from Directory.Build.props).
+            $actual = (dotnet msbuild $project -getProperty:Version -nologo -verbosity:quiet).Trim()
+            if ($actual -eq $expected) {
+              continue
+            }
+
+            $expectedNormalized = Get-FourPartVersion $expected
+            $actualNormalized = Get-FourPartVersion $actual
+            if ($null -ne $expectedNormalized -and $null -ne $actualNormalized -and $actualNormalized -eq $expectedNormalized) {
+              continue
+            }
+
+            throw "Validation failed: $project version '$actual' does not match tag version '$expected'."
+          }
+
+      # ---------------------------------------------------------
+      # 5) Build and Test
+      # ---------------------------------------------------------
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build solution
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --no-restore --logger "console;verbosity=normal"
+
+      # ---------------------------------------------------------
+      # 6) Pack Projects
+      # ---------------------------------------------------------
+      - name: Create output directory
+        run: mkdir -p ${{ env.PACKAGES_DIR }}
+
+      - name: Pack projects
+        run: |
+          for project in ${{ env.PROJECTS }}; do
+            dotnet pack "$project" \
+              --configuration Release \
+              --no-build \
+              --no-restore \
+              /p:EnablePackageValidation=true \
+              --output ${{ env.PACKAGES_DIR }}
+          done
+
+      - name: Verify package contents
+        run: |
+          set -euo pipefail
+          # Eight packages ship in 2.0 (TASK-RDY-01); only six carry symbols — the analyzer
+          # (DevelopmentDependency, no runtime lib) and template (content-only) packs ship no
+          # .snupkg by design (TASK-RDY-02). Every .nupkg advertises README.md + icon.png.
+          test "$(ls ${{ env.PACKAGES_DIR }}/*.nupkg | wc -l)" -eq 8
+          test "$(ls ${{ env.PACKAGES_DIR }}/*.snupkg | wc -l)" -eq 6
+          for package in ${{ env.PACKAGES_DIR }}/*.nupkg; do
+            unzip -l "$package" | grep -q 'README.md'
+            unzip -l "$package" | grep -q 'icon.png'
+          done
+
+      # ---------------------------------------------------------
+      # 7) Upload and Publish
+      # ---------------------------------------------------------
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: nuget-packages-${{ steps.version.outputs.version }}
+          path: ${{ env.PACKAGES_DIR }}
+          retention-days: 30
+
+      - name: NuGet login (OIDC)
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841
+        id: login
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      # Symbols ride along with this push: NuGet pairs each sibling .snupkg and only
+      # uploads it when the package upload itself succeeds. A separate
+      # `dotnet nuget push *.snupkg` step must NOT exist: on a re-run for an
+      # already-published version it would overwrite the published symbols with PDBs
+      # from a different build (different commit), and nuget.org rejects that with
+      # "The uploaded symbols package contains pdb(s) for a corresponding dll(s)
+      # not found in the nuget package." (NuGet/Home#10475).
+      - name: Push packages to NuGet
+        run: |
+          dotnet nuget push "${{ env.PACKAGES_DIR }}/*.nupkg" \
+            --api-key ${{ steps.login.outputs.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      # ---------------------------------------------------------
+      # 8) Create GitHub Release
+      # ---------------------------------------------------------
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ steps.version.outputs.version }}" \
+            ${{ env.PACKAGES_DIR }}/*.nupkg \
+            ${{ env.PACKAGES_DIR }}/*.snupkg \
+            --title "Release v${{ steps.version.outputs.version }}" \
+            --generate-notes

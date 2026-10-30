@@ -1,0 +1,21 @@
+﻿@*
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+*@
+@if(!IsDismissed) {
+    <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
+        <Icon IconName="fa-circle-check" IconStyle=IconStyle.Solid />
+        <span>Saved! Your changes are live.</span>
+        <IconButton IconName="fa-xmark" IconStyle=IconStyle.Solid AriaLabel="Dismiss notification" Busy=false OnClick=Dismiss />
+    </div>
+}
+
+@code {
+    private bool IsDismissed;
+
+    private void Dismiss() {
+        IsDismissed = true;
+    }
+}

@@ -1,5 +1,9 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
 namespace Jenin.FontAwesome.Blazor.Animations;
 
 /// <summary>
@@ -8,37 +12,29 @@ namespace Jenin.FontAwesome.Blazor.Animations;
 /// <a href="https://fontawesome.com/docs/web/style/animate#beat">Font Awesome Beat</a>.
 /// </para>
 /// </summary>
-public class Beat : Animation {
-    public Beat() : base("fa-beat") { }
+public sealed record Beat : Animation<Beat, BeatOptions> {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Beat"/> animation.
+    /// </summary>
+    /// <param name="options">Optional options; when <see langword="null"/> Font Awesome defaults are used.</param>
+    public Beat(BeatOptions? options = null) : base(options) { }
 
     /// <summary>
-    /// Set max value that an icon will scale.
+    /// The Font Awesome CSS class that activates the <see cref="Beat"/> animation (<c>fa-beat</c>).
     /// </summary>
-    public float? Scale { get; set; }
+    protected override string CssClass => "fa-beat";
 
-    public override Dictionary<string, string> AddStyles(Dictionary<string, string> styles) => base.AddStyles(styles)
-                                                                                                   .AddIfNotNull("--fa-beat-scale", Scale);
+    /// <summary>
+    /// Returns a copy of this <see cref="Beat"/> animation with the specified options.
+    /// </summary>
+    /// <param name="options">The options to apply.</param>
+    /// <returns>A new <see cref="Beat"/> instance carrying <paramref name="options"/>.</returns>
+    protected override Beat WithOptions(BeatOptions options) => this with { Options = options };
 
-    public static Beat Animate(float? scale) => new() { Scale = scale };
-    public static Beat Animate
-        (
-            float? scale = null,
-            DurationUnit delayUnit = DurationUnit.Seconds,
-            float? delay = null,
-            AnimationDirection direction = AnimationDirection.None,
-            DurationUnit durationUnit = DurationUnit.Seconds,
-            float? duration = null,
-            float? iterationCount = null,
-            string timingFunction = null
-        )
-        => new() {
-            DelayUnit = delayUnit,
-            Delay = delay,
-            Direction = direction,
-            DurationUnit = durationUnit,
-            Duration = duration,
-            IterationCount = iterationCount,
-            TimingFunction = timingFunction,
-            Scale = scale
-        };
+    /// <summary>
+    /// Adds the <see cref="Beat"/> animation's CSS custom properties to <paramref name="styles"/>.
+    /// </summary>
+    /// <param name="styles">The CSS custom property bag to populate.</param>
+    protected override void AddStyles(Dictionary<string, string> styles)
+        => styles.AddOrUpdateIfNotNull("--fa-beat-scale", Options.Scale);
 }

@@ -1,0 +1,40 @@
+﻿@*
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+*@
+<div class="mb-1 p-3" style="max-width: 36rem;">
+    <h2 class="h4 mb-3">Notification settings</h2>
+    <div class="d-flex align-items-center gap-3 py-2 border-bottom">
+        <Icon IconName="fa-bell" IconStyle=IconStyle.Solid IconSize=IconSize.Large AriaLabel="Push notifications" />
+        <div class="me-auto">
+            <div class="fw-bold">Push notifications</div>
+            <div class="text-muted small">Breaking changes and mentions only.</div>
+        </div>
+        <IconToggleButton IconName="fa-bell" IconStyle=IconStyle.Regular PressedIconStyle=IconStyle.Solid PressedColor="dodgerblue" @bind-Pressed=PushEnabled AriaLabel="Toggle push notifications" />
+    </div>
+    <div class="d-flex align-items-center gap-3 py-2 border-bottom">
+        <Icon IconName="fa-envelope-open-text" IconStyle=IconStyle.Solid IconSize=IconSize.Large AriaLabel="Weekly digest" />
+        <div class="me-auto">
+            <div class="fw-bold">Weekly digest</div>
+            <div class="text-muted small">Every Monday at 09:00 UTC.</div>
+        </div>
+        <IconToggleButton IconName="fa-envelope" IconStyle=IconStyle.Regular PressedIconName="fa-envelope-open-text" PressedIconStyle=IconStyle.Solid PressedColor="seagreen" @bind-Pressed=DigestEnabled AriaLabel="Toggle weekly digest" />
+    </div>
+    <div class="d-flex align-items-center gap-3 py-2">
+        <Icon IconName="fa-volume-xmark" IconStyle=IconStyle.Solid IconSize=IconSize.Large AriaLabel="Sounds" />
+        <div class="me-auto">
+            <div class="fw-bold">Sounds</div>
+            <div class="text-muted small">Play a tone for incoming mentions.</div>
+        </div>
+        <IconToggleButton IconName="fa-volume-xmark" IconStyle=IconStyle.Solid PressedIconName="fa-volume-high" PressedIconStyle=IconStyle.Solid @bind-Pressed=SoundsEnabled AriaLabel="Toggle sounds" />
+    </div>
+    <p class="text-muted small mt-2">Push: @(PushEnabled ? "on" : "off"), digest: @(DigestEnabled ? "on" : "off"), sounds: @(SoundsEnabled ? "on" : "off").</p>
+</div>
+
+@code {
+    private bool PushEnabled = true;
+    private bool DigestEnabled;
+    private bool SoundsEnabled = true;
+}

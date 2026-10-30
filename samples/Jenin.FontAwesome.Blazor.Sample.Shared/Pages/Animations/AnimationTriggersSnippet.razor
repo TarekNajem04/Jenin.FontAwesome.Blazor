@@ -1,0 +1,31 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+<p class="mb-3">Hover the icons, tab to the bell, or scroll the reveal row into view. Animations stay paused until their trigger fires.</p>
+
+<IconContainer CssClass="mb-1 p-5 d-flex gap-4 align-items-center" IconSize=IconSize.X03>
+    <Icons>
+        <span title="Hover me">
+            <Icon IconStyle=IconStyle.Solid IconName="fa-bell" Animation=@Animate.Shake() Trigger=AnimationTrigger.Hover Color="#E32934" />
+        </span>
+        <span class="jfa-anim-hover-within d-inline-flex align-items-center gap-2 border rounded p-3" title="Hover the card">
+            <Icon IconStyle=IconStyle.Solid IconName="fa-heart" Animation=@Animate.Beat() Trigger=AnimationTrigger.ParentHover Color="#E32934" />
+            <span>Hover the card</span>
+        </span>
+        <Icon IconStyle=IconStyle.Solid IconName="fa-circle-plus" Animation=@Animate.Spin() Trigger=AnimationTrigger.Focus tabindex="0" Title="Focus me (Tab)" />
+    </Icons>
+</IconContainer>
+
+<div style="height: 60vh;" aria-hidden="true"></div>
+
+<IconContainer CssClass="mb-1 p-5 d-flex gap-4 align-items-center" IconSize=IconSize.X04>
+    <Icons>
+        <Icon IconStyle=IconStyle.Solid IconName="fa-rocket" Animation=@Animate.Float().SetIterationCount(1) Trigger=AnimationTrigger.ScrollReveal Color="#0d6efd" />
+        <Icon IconStyle=IconStyle.Solid IconName="fa-star" Animation=@Animate.Beat().SetIterationCount(1) Trigger=AnimationTrigger.ScrollReveal Color="#E32934" />
+    </Icons>
+</IconContainer>

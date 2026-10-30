@@ -1,0 +1,40 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@inherits ComponentBase
+
+<div class="sample @CssClass" @attributes=AdditionalAttributes>
+    @if(!string.IsNullOrEmpty(Heading)) {
+        <span class="sample__heading">
+            <strong>@Heading</strong>
+        </span>
+    }
+
+    <div class="sample__preview">
+        @if(SnippetComponent is not null) {
+            <CascadingValue Value=this IsFixed=true>
+                @(
+                    new RenderFragment(builder => {
+                        builder.OpenComponent(0, SnippetComponent);
+                        builder.CloseComponent();
+                    })
+                )
+            </CascadingValue>
+        }else{
+            @Snippet
+        }
+    </div>
+
+    @if(SnippetCode is not null || !string.IsNullOrEmpty(SnippetFile) || SnippetComponent is not null) {
+        <CodeSnippet SnippetFile=@SnippetFile SnippetComponent=SnippetComponent DrawBorder=false>
+            <Snippet>
+                @SnippetCode
+            </Snippet>
+        </CodeSnippet>
+    }
+</div>

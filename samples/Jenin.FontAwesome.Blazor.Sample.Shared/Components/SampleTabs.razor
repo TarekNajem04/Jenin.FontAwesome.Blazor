@@ -1,0 +1,35 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@inherits ComponentBase
+
+<div class="sample-tabs @CssClass" @attributes=AdditionalAttributes>
+    <CascadingValue Value=this Name="Parent" IsFixed=true>@Tabs</CascadingValue>
+
+    @if(Pages.Count > 0) {
+        <ul class="nav nav-tabs sample-tabs__nav">
+            @for(var index = 0; index < Pages.Count; index++) {
+                var tabPage = Pages[index];
+
+                <li class="nav-item">
+                    <a class="nav-link @(tabPage.Active ? "active" : null)" href="#@tabPage.Id" data-bs-toggle="tab">
+                        @tabPage.Text
+                    </a>
+                </li>
+            }
+        </ul>
+        <div class="tab-content sample-tabs__content">
+            @for(var index = 0; index < Pages.Count; index++) {
+                var tabPage = Pages[index];
+                <div class="tab-pane @(tabPage.Active ? "active" : null)" id="@tabPage.Id" tabindex="0">
+                    @tabPage.Samples
+                </div>
+            }
+        </div>
+    }
+</div>

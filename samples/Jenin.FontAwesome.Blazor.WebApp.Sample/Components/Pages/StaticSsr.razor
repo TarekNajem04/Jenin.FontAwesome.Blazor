@@ -1,0 +1,25 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/static-ssr"
+
+<PageTitle>Static SSR</PageTitle>
+
+<h1>Static server-side rendering</h1>
+
+<p>
+    This page has no <code>@@rendermode</code>, so Blazor renders it on the server as static HTML.
+    Font Awesome enhances that markup in the browser, but no Blazor event handler runs here.
+</p>
+
+<p>
+    Icons render exactly as they do under the interactive modes:
+    <Icon IconStyle=IconStyle.Solid IconName="fa-globe" />
+    <Icon IconStyle=IconStyle.Brands IconName="fa-github" />
+    <Icon IconStyle=IconStyle.Regular IconName="fa-circle-question" />
+</p>

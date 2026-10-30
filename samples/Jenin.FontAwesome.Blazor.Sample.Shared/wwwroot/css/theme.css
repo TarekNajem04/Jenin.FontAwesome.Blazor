@@ -1,0 +1,157 @@
+/*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*/
+
+/*
+ * Site-wide light/dark theme. The sample host vendors Bootstrap 5.2, which predates CSS colour modes
+ * (`data-bs-theme`), so the palette is defined here as custom properties and layered over Bootstrap's
+ * own variables. The document root carries `data-theme="light|dark"` (set before first paint by
+ * theme.js); every rule below keys off that attribute so the whole surface flips atomically. When no
+ * theme has been chosen yet the operating-system preference applies through the same attribute.
+ */
+
+:root,
+:root[data-theme="light"] {
+    --site-accent: #0d6efd;
+    --site-accent-strong: #0b5ed7;
+    --site-accent-contrast: #ffffff;
+    --site-bg: #f6f8fb;
+    --site-surface: #ffffff;
+    --site-surface-muted: #f1f3f5;
+    --site-surface-subtle: #e9ecef;
+    --site-border: #dee2e6;
+    --site-border-strong: #ced4da;
+    --site-text: #212529;
+    --site-text-muted: #6c757d;
+    --site-text-strong: #343a40;
+    --site-code-bg: #f8f9fa;
+    --site-shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 1px 3px rgba(16, 24, 40, .1);
+
+    /* Bridge into Bootstrap's own variables so untouched components follow the theme. */
+    --bs-body-bg: var(--site-bg);
+    --bs-body-color: var(--site-text);
+    --bs-border-color: var(--site-border);
+    --bs-secondary-color: var(--site-text-muted);
+    --bs-emphasis-color: var(--site-text-strong);
+    --bs-tertiary-bg: var(--site-surface-muted);
+    --bs-primary: var(--site-accent);
+}
+
+:root[data-theme="dark"] {
+    --site-accent: #4d94ff;
+    --site-accent-strong: #79b8ff;
+    --site-accent-contrast: #0b1220;
+    --site-bg: #13171c;
+    --site-surface: #1b2027;
+    --site-surface-muted: #22272e;
+    --site-surface-subtle: #2b3138;
+    --site-border: #343b43;
+    --site-border-strong: #495057;
+    --site-text: #e9ecef;
+    --site-text-muted: #adb5bd;
+    --site-text-strong: #f1f3f5;
+    --site-code-bg: #161b21;
+    --site-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 1px 3px rgba(0, 0, 0, .5);
+
+    --bs-body-bg: var(--site-bg);
+    --bs-body-color: var(--site-text);
+    --bs-border-color: var(--site-border);
+    --bs-secondary-color: var(--site-text-muted);
+    --bs-emphasis-color: var(--site-text-strong);
+    --bs-tertiary-bg: var(--site-surface-muted);
+    --bs-primary: var(--site-accent);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--site-text);
+    background-color: var(--site-bg);
+    transition: background-color .2s ease, color .2s ease;
+}
+
+/*
+ * Bootstrap hardcodes `.text-bg-dark` / `.bg-dark` to the dark palette. In the light theme the
+ * surrounding surfaces are light, so those blocks would be jarring; re-map them to the neutral
+ * surface and text tokens. In the dark theme they already read correctly.
+ */
+:root[data-theme="light"] .text-bg-dark,
+:root[data-theme="light"] .bg-dark {
+    color: var(--site-text) !important;
+    background-color: var(--site-surface) !important;
+}
+
+.text-bg-dark,
+.bg-dark {
+    color: var(--site-text) !important;
+    background-color: var(--site-surface) !important;
+}
+
+/* The success accent stays legible on both themes. */
+.border-success {
+    border-color: var(--site-success-border, #198754) !important;
+}
+
+:root[data-theme="dark"] .border-2.border-success,
+:root[data-theme="dark"] .border-success {
+    border-color: #2fbf71 !important;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Shared UI primitives                                                                          */
+/* --------------------------------------------------------------------------------------------- */
+
+.site-surface {
+    background-color: var(--site-surface);
+    border: 1px solid var(--site-border);
+    border-radius: .75rem;
+    box-shadow: var(--site-shadow);
+}
+
+.site-muted {
+    color: var(--site-text-muted);
+}
+
+/* Native controls follow the active theme. */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+}
+
+/* A modern, theme-aware scrollbar (replaces the fixed light scrollbar in site.css). */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--site-border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--site-border-strong);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 999px;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--site-accent);
+}

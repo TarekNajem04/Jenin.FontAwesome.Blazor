@@ -1,0 +1,39 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+@using System.Reflection
+
+<div class="mb-1 p-5">
+    <p class="mb-1"><strong>Rendered output (as an email client would show it):</strong></p>
+    <div class="border rounded p-4 mb-3" style="background: #ffffff;">
+        @((MarkupString)SvgMarkup)
+    </div>
+    <p class="mb-1"><strong>Generated markup:</strong></p>
+    <pre class="border rounded p-3 mb-0" style="white-space: pre-wrap; word-break: break-all;"><code>@SvgMarkup</code></pre>
+</div>
+
+@code {
+    private string SvgMarkup { get; set; } = string.Empty;
+
+    /// <inheritdoc />
+    protected override void OnInitialized() {
+        var assembly = typeof(SvgStringsSnippet).Assembly;
+        var resourceName = assembly.GetManifestResourceNames().FirstOrDefault(static name => name.EndsWith("demo-sprite.svg", StringComparison.Ordinal));
+
+        if(string.IsNullOrEmpty(resourceName)) {
+            SvgMarkup = "<!-- demo sprite is unavailable -->";
+            return;
+        }
+
+        using var stream = assembly.GetManifestResourceStream(resourceName);
+        using var reader = new StreamReader(stream!);
+        var sprite = reader.ReadToEnd();
+
+        SvgMarkup = IconSvg.ToSvgString(sprite, "fa-house", title: "Home", size: 64);
+    }
+}

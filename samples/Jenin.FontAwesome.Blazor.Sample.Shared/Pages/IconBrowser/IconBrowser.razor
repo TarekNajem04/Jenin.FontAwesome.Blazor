@@ -1,0 +1,103 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/icon-browser"
+
+<PageTitle>Font Awesome Blazor Icon Browser</PageTitle>
+
+<div class="container-fluid mt-3 mb-4">
+    <h1>Icon browser</h1>
+
+    <p>
+        The optional <code>Jenin.FontAwesome.Blazor.IconPicker</code> package ships the
+        <code>IconPicker</code> component: an interop-free search box over the whole Font Awesome Free
+        catalogue. It searches by icon name, alias, or keyword, filters by style, previews every result
+        with the core <code>Icon</code> component, and raises the selection you can bind straight back
+        to an icon.
+    </p>
+
+    <p>Install the package when your own app needs icon discovery:</p>
+
+    <CodeSnippet Language="none">
+        <Snippet>
+            dotnet add package Jenin.FontAwesome.Blazor.IconPicker
+        </Snippet>
+    </CodeSnippet>
+
+    <p class="mb-0">
+        Registration is optional — the picker falls back to <code>IconMetadataProvider.Default</code>.
+        When you do register it (recommended for apps that share one catalogue across components),
+        call <code>services.AddJeninFontAwesomeIconPicker()</code> next to
+        <code>services.AddJeninFontAwesome()</code>. See <a class="link-primary" href="configuration">Configuration</a>.
+    </p>
+</div>
+
+<div class="icon-browser-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IconPickerSnippet) Heading="IconPicker" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>
+
+<div class="container-fluid mt-4 mb-5">
+    <h2>Parameters used above</h2>
+
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>Value</code></td>
+                <td><code>string?</code></td>
+                <td><code>null</code></td>
+                <td>Selected icon CSS class (<code>fa-house</code>); supports <code>@@bind-Value</code>.</td>
+            </tr>
+            <tr>
+                <td><code>OnSelect</code></td>
+                <td><code>EventCallback&lt;IconMetadata&gt;</code></td>
+                <td>&mdash;</td>
+                <td>Raised with the full metadata (name, label, styles, aliases, search terms).</td>
+            </tr>
+            <tr>
+                <td><code>MaxResults</code></td>
+                <td><code>int</code></td>
+                <td><code>60</code></td>
+                <td>Upper bound on rendered results; zero or less means unlimited.</td>
+            </tr>
+            <tr>
+                <td><code>Style</code></td>
+                <td><code>IconStyle?</code></td>
+                <td><code>null</code></td>
+                <td>Initial style filter; <code>null</code> shows every Free style.</td>
+            </tr>
+            <tr>
+                <td><code>ShowLabels</code></td>
+                <td><code>bool</code></td>
+                <td><code>true</code></td>
+                <td>Draws the human-readable label beneath each icon.</td>
+            </tr>
+            <tr>
+                <td><code>CssClass</code></td>
+                <td><code>string?</code></td>
+                <td><code>null</code></td>
+                <td>Extra class on the picker root; style the emitted <code>fa-icon-picker*</code> names.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

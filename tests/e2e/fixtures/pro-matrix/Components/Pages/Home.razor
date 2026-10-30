@@ -1,0 +1,18 @@
+﻿@page "/"
+@namespace ProMatrix.Components.Pages
+
+<PageTitle>Pro matrix</PageTitle>
+
+<HeadContent>
+    @* One-line setup: every tag comes from the mapped endpoint + registered options. *@
+    <FontAwesomeHeadAssets />
+</HeadContent>
+
+<MatrixTable Mode="@Mode" />
+
+@code {
+    private static string Mode =>
+        string.Equals(System.Environment.GetEnvironmentVariable("PRO_MATRIX_MODE"), "webfont", System.StringComparison.OrdinalIgnoreCase)
+            ? "webfont"
+            : "nest";
+}

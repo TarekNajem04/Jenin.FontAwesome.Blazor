@@ -1,0 +1,22 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/animation-spin"
+
+<PageTitle>Font Awesome Animation Spin</PageTitle>
+
+<IconContainer CssClass="mb-1" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-sync" Animation=@Animate.Spin() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-circle-notch" Animation=@Animate.Spin() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-cog" Animation=@Animate.Spin() Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-cog" Animation=@Animate.Spin(new SpinOptions { Reverse = true }) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-spinner" Animation=@Animate.Spin(new SpinOptions { Pulse = true }) Color="#007AFF" />
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-spinner" Animation=@Animate.Spin(new SpinOptions { Pulse = true, Reverse = true }) Color="#007AFF" />
+    </Icons>
+</IconContainer>

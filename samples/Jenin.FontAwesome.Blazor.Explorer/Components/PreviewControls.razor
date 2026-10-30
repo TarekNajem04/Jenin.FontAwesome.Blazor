@@ -1,0 +1,283 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<div class="explorer-controls">
+    <div class="explorer-controls__header">
+        <h3 class="explorer-controls__title">Live controls</h3>
+        <button type="button" class="explorer-controls__reset" @onclick="OnResetAsync">Reset</button>
+    </div>
+
+    <div class="explorer-controls__group">
+        <span class="explorer-controls__group-title">Style &amp; typeface</span>
+        <div class="row g-2">
+            <div class="col-6">
+                <label class="form-label" for="ctl-style">Style</label>
+                <select id="ctl-style" class="form-select form-select-sm" @bind="State.Style" @bind:after="NotifyAsync">
+                    @foreach (var value in Enum.GetValues<IconStyle>()) {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="ctl-typeface">Typeface</label>
+                <select id="ctl-typeface" class="form-select form-select-sm" @bind="State.Typeface" @bind:after="NotifyAsync">
+                    @foreach (var value in Enum.GetValues<Typeface>()) {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="explorer-controls__group">
+        <span class="explorer-controls__group-title">Size &amp; width</span>
+        <div class="row g-2">
+            <div class="col-6">
+                <label class="form-label" for="ctl-size">Size</label>
+                <select id="ctl-size" class="form-select form-select-sm" @bind="State.Size" @bind:after="NotifyAsync">
+                    @foreach (var value in Enum.GetValues<IconSize>()) {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+            <div class="col-6">
+                <label class="form-label" for="ctl-width">Width mode</label>
+                <select id="ctl-width" class="form-select form-select-sm" @bind="State.WidthMode" @bind:after="NotifyAsync">
+                    @foreach (var value in Enum.GetValues<IconWidth>()) {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-check mt-1">
+            <input class="form-check-input" type="checkbox" id="ctl-fixed" @bind="State.FixedWidth" @bind:after="NotifyAsync" />
+            <label class="form-check-label" for="ctl-fixed">Fixed width</label>
+        </div>
+    </div>
+
+    <div class="explorer-controls__group">
+        <span class="explorer-controls__group-title">Color</span>
+        <div class="row g-2 align-items-end">
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="ctl-use-color" checked="@State.UseColor" @onchange="OnToggleColorAsync" />
+                    <label class="form-check-label" for="ctl-use-color">Apply foreground</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="form-label" for="ctl-color">Foreground</label>
+                <input id="ctl-color" type="color" class="form-control form-control-color explorer-controls__color" value="@State.Color" @oninput="OnColorInput" disabled="@(!State.UseColor)" />
+            </div>
+            <div class="col-12 mt-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="ctl-use-bg" checked="@State.UseBackgroundColor" @onchange="OnToggleBackgroundAsync" />
+                    <label class="form-check-label" for="ctl-use-bg">Apply background</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="form-label" for="ctl-bg">Background</label>
+                <input id="ctl-bg" type="color" class="form-control form-control-color explorer-controls__color" value="@State.BackgroundColor" @oninput="OnBackgroundInput" disabled="@(!State.UseBackgroundColor)" />
+            </div>
+        </div>
+    </div>
+
+    <div class="explorer-controls__group">
+        <span class="explorer-controls__group-title">Rotate &amp; flip</span>
+        <div class="row g-2">
+            <div class="col-6">
+                <label class="form-label" for="ctl-rotate">Rotate</label>
+                <select id="ctl-rotate" class="form-select form-select-sm" @bind="State.Rotate" @bind:after="NotifyAsync">
+                    @foreach (var value in Enum.GetValues<IconRotate>()) {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+            @if (State.Rotate == IconRotate.RotateBy) {
+                <div class="col-6">
+                    <label class="form-label" for="ctl-angle">Angle (deg)</label>
+                    <input id="ctl-angle" type="number" step="5" class="form-control form-control-sm" value="@FormatNumber(State.RotateAngle)" @oninput="e => OnNumberInputAsync(e, v => State.RotateAngle = v)" />
+                </div>
+            }
+            <div class="col-6">
+                <label class="form-label" for="ctl-pull">Pull</label>
+                <select id="ctl-pull" class="form-select form-select-sm" @bind="State.PullPosition" @bind:after="NotifyAsync">
+                    @foreach (var value in Enum.GetValues<PullPosition>()) {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="explorer-controls__group">
+        <span class="explorer-controls__group-title">Emphasis</span>
+        <div class="d-flex flex-wrap gap-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="ctl-bordered" @bind="State.Bordered" @bind:after="NotifyAsync" />
+                <label class="form-check-label" for="ctl-bordered">Bordered</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="ctl-inverse" @bind="State.Inverse" @bind:after="NotifyAsync" />
+                <label class="form-check-label" for="ctl-inverse">Inverse</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="ctl-swap" @bind="State.SwapOpacity" @bind:after="NotifyAsync" />
+                <label class="form-check-label" for="ctl-swap">Swap opacity</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="explorer-controls__group">
+        <span class="explorer-controls__group-title">Animation</span>
+        <div class="row g-2">
+            <div class="col-12">
+                <label class="form-label" for="ctl-anim">Animation</label>
+                <select id="ctl-anim" class="form-select form-select-sm" value="@State.Animation" @onchange="OnAnimationChangedAsync">
+                    @foreach (var value in Enum.GetValues<PreviewAnimation>()) {
+                        <option value="@value">@value</option>
+                    }
+                </select>
+            </div>
+            @if (State.Animation != PreviewAnimation.None) {
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ctl-use-dur" checked="@State.UseAnimationDuration" @onchange="OnToggleDurationAsync" />
+                        <label class="form-check-label" for="ctl-use-dur">Duration</label>
+                    </div>
+                    <div class="explorer-controls__range">
+                        <input type="range" min="0.1" max="5" step="0.1" class="form-range" value="@FormatNumber(State.AnimationDuration)" @oninput="e => OnNumberInputAsync(e, v => State.AnimationDuration = v)" disabled="@(!State.UseAnimationDuration)" />
+                        <output class="explorer-controls__value">@FormatNumber(State.AnimationDuration)s</output>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ctl-use-iter" checked="@State.UseAnimationIterationCount" @onchange="OnToggleIterationsAsync" />
+                        <label class="form-check-label" for="ctl-use-iter">Iterations</label>
+                    </div>
+                    <div class="explorer-controls__range">
+                        <input type="range" min="1" max="10" step="1" class="form-range" value="@FormatNumber(State.AnimationIterationCount)" @oninput="e => OnNumberInputAsync(e, v => State.AnimationIterationCount = v)" disabled="@(!State.UseAnimationIterationCount)" />
+                        <output class="explorer-controls__value">@FormatNumber(State.AnimationIterationCount)×</output>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="ctl-dir">Direction</label>
+                    <select id="ctl-dir" class="form-select form-select-sm" @bind="State.AnimationDirection" @bind:after="NotifyAsync">
+                        @foreach (var value in Enum.GetValues<AnimationDirection>()) {
+                            <option value="@value">@value</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="ctl-timing">Timing</label>
+                    <input id="ctl-timing" type="text" class="form-control form-control-sm" placeholder="ease-in-out" @bind="State.AnimationTimingFunction" @bind:after="NotifyAsync" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="explorer-controls__group">
+        <span class="explorer-controls__group-title">Transform</span>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ctl-use-transform" @bind="State.UseTransform" @bind:after="NotifyAsync" />
+            <label class="form-check-label" for="ctl-use-transform">Enable power transform</label>
+        </div>
+        @if (State.UseTransform) {
+            <div class="row g-2 mt-1">
+                <div class="col-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ctl-grow" @bind="State.TransformGrow" @bind:after="NotifyAsync" />
+                        <label class="form-check-label" for="ctl-grow">Grow (vs shrink)</label>
+                    </div>
+                    <label class="form-label" for="ctl-scale">Scale</label>
+                    <div class="explorer-controls__range">
+                        <input id="ctl-scale" type="range" min="1" max="16" step="1" class="form-range" value="@FormatNumber(State.TransformScale)" @oninput="e => OnNumberInputAsync(e, v => State.TransformScale = v)" />
+                        <output class="explorer-controls__value">@FormatNumber(State.TransformScale)</output>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="ctl-trotate">Rotate (deg)</label>
+                    <input id="ctl-trotate" type="number" step="15" class="form-control form-control-sm" value="@FormatNumber(State.TransformRotate)" @oninput="e => OnNumberInputAsync(e, v => State.TransformRotate = v)" />
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="ctl-tx">X offset</label>
+                    <input id="ctl-tx" type="number" step="1" class="form-control form-control-sm" value="@FormatNumber(State.TransformX)" @oninput="e => OnNumberInputAsync(e, v => State.TransformX = v)" />
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="ctl-ty">Y offset</label>
+                    <input id="ctl-ty" type="number" step="1" class="form-control form-control-sm" value="@FormatNumber(State.TransformY)" @oninput="e => OnNumberInputAsync(e, v => State.TransformY = v)" />
+                </div>
+                <div class="col-12 d-flex flex-wrap gap-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ctl-fliph" @bind="State.TransformFlipHorizontal" @bind:after="NotifyAsync" />
+                        <label class="form-check-label" for="ctl-fliph">Flip H</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ctl-flipv" @bind="State.TransformFlipVertical" @bind:after="NotifyAsync" />
+                        <label class="form-check-label" for="ctl-flipv">Flip V</label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="explorer-controls__group">
+        <span class="explorer-controls__group-title">Duotone &amp; mask</span>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="ctl-duotone" @bind="State.UseDuotone" @bind:after="NotifyAsync" />
+            <label class="form-check-label" for="ctl-duotone">Duotone layer colors</label>
+        </div>
+        @if (State.UseDuotone) {
+            <div class="row g-2 mt-1">
+                <div class="col-6">
+                    <label class="form-label" for="ctl-primary">Primary</label>
+                    <input id="ctl-primary" type="color" class="form-control form-control-color explorer-controls__color" @bind="State.DuotonePrimary" @bind:after="NotifyAsync" />
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="ctl-secondary">Secondary</label>
+                    <input id="ctl-secondary" type="color" class="form-control form-control-color explorer-controls__color" @bind="State.DuotoneSecondary" @bind:after="NotifyAsync" />
+                </div>
+            </div>
+        }
+        <div class="form-check mt-1">
+            <input class="form-check-input" type="checkbox" id="ctl-duo-opacity" @bind="State.UseDuotoneOpacity" @bind:after="NotifyAsync" />
+            <label class="form-check-label" for="ctl-duo-opacity">Duotone layer opacity</label>
+        </div>
+        @if (State.UseDuotoneOpacity) {
+            <label class="form-label mt-1" for="ctl-primary-opacity">Primary opacity</label>
+            <div class="explorer-controls__range">
+                <input id="ctl-primary-opacity" type="range" min="0" max="1" step="0.05" class="form-range" value="@FormatNumber(State.DuotonePrimaryOpacity)" @oninput="e => OnNumberInputAsync(e, v => State.DuotonePrimaryOpacity = v)" />
+                <output class="explorer-controls__value">@FormatNumber(State.DuotonePrimaryOpacity)</output>
+            </div>
+            <label class="form-label" for="ctl-secondary-opacity">Secondary opacity</label>
+            <div class="explorer-controls__range">
+                <input id="ctl-secondary-opacity" type="range" min="0" max="1" step="0.05" class="form-range" value="@FormatNumber(State.DuotoneSecondaryOpacity)" @oninput="e => OnNumberInputAsync(e, v => State.DuotoneSecondaryOpacity = v)" />
+                <output class="explorer-controls__value">@FormatNumber(State.DuotoneSecondaryOpacity)</output>
+            </div>
+        }
+        <div class="form-check mt-1">
+            <input class="form-check-input" type="checkbox" id="ctl-mask" @bind="State.UseMask" @bind:after="NotifyAsync" />
+            <label class="form-check-label" for="ctl-mask">Mask (example)</label>
+        </div>
+        @if (State.UseMask) {
+            <div class="row g-2 mt-1">
+                <div class="col-7">
+                    <label class="form-label" for="ctl-mask-name">Mask icon</label>
+                    <input id="ctl-mask-name" type="text" class="form-control form-control-sm" @bind="State.MaskIconName" @bind:after="NotifyAsync" />
+                </div>
+                <div class="col-5">
+                    <label class="form-label" for="ctl-mask-style">Mask style</label>
+                    <select id="ctl-mask-style" class="form-select form-select-sm" @bind="State.MaskIconStyle" @bind:after="NotifyAsync">
+                        @foreach (var value in Enum.GetValues<IconStyle>()) {
+                            <option value="@value">@value</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,4 +1,10 @@
-﻿namespace Jenin.FontAwesome.Blazor;
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+namespace Jenin.FontAwesome.Blazor;
 
 /// <summary>
 /// sets the line style for all four sides of an element's border.
@@ -7,55 +13,63 @@
 /// </para>
 /// </summary>
 public enum BorderStyle {
+    /// <summary>
+    /// No border is displayed (border-style: none).
+    /// </summary>
     [Value("none")]
-    None,
+    None = 0,
 
+    /// <summary>
+    /// The border is hidden (border-style: hidden), taking no space.
+    /// </summary>
     [Value("hidden")]
-    Hidden,
+    Hidden = 1,
 
+    /// <summary>
+    /// A dotted border (border-style: dotted).
+    /// </summary>
     [Value("dotted")]
-    Dotted,
+    Dotted = 2,
 
+    /// <summary>
+    /// A dashed border (border-style: dashed).
+    /// </summary>
     [Value("dashed")]
-    Dashed,
+    Dashed = 3,
 
+    /// <summary>
+    /// A solid border (border-style: solid).
+    /// </summary>
     [Value("solid")]
-    Solid,
+    Solid = 4,
 
+    /// <summary>
+    /// A double-line border (border-style: double).
+    /// </summary>
     [Value("double")]
-    Double,
+    Double = 5,
 
+    /// <summary>
+    /// A grooved border (border-style: groove).
+    /// </summary>
     [Value("groove")]
-    Groove,
+    Groove = 6,
 
+    /// <summary>
+    /// A ridged border (border-style: ridge).
+    /// </summary>
     [Value("ridge")]
-    Ridge,
+    Ridge = 7,
 
+    /// <summary>
+    /// An inset border (border-style: inset).
+    /// </summary>
     [Value("inset")]
-    Inset,
+    Inset = 8,
 
+    /// <summary>
+    /// An outset border (border-style: outset).
+    /// </summary>
     [Value("outset")]
-    Outset
-}
-/// <summary>
-/// sets the line style for all four sides of an element's border.
-/// <para>
-/// <a href="https://fontawesome.com/docs/web/style/pull">Bordered and Pulled Classes</a>
-/// </para>
-/// </summary>
-public enum PullPosition {
-    [Value("")]
-    None,
-
-    /// <summary>
-    /// Pulls an icon by floating it left and applying a margin-right
-    /// </summary>
-    [Value("fa-pull-left")]
-    Left,
-
-    /// <summary>
-    /// Pulls an icon by floating it right and applying a margin-left
-    /// </summary>
-    [Value("fa-pull-right")]
-    Right,
+    Outset = 9
 }

@@ -1,0 +1,31 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<IconContainer CssClass="mb-1 ps-4" FixedWidth=false IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-star"
+              Animation=@Animate.Spin().SetDelay(TimeSpan.FromSeconds(2)).SetDuration(TimeSpan.FromSeconds(60))
+              Color="gold" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Brands IconName="fa-twitter"
+              Animation=@Animate.Beat().SetDelay(TimeSpan.FromSeconds(5)).SetDuration(TimeSpan.FromSeconds(120))
+              Color="#1DA1F2" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-triangle-exclamation"
+              Animation=@Animate.Fade(new FadeOptions { IterationCount = 15F })
+              Color="#007AFF" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-magnet"
+              Animation=@Animate.Bounce(new BounceOptions { TimingFunction = "cubic-bezier(0.2, 3, 0.2, 2)" }) Rotate=IconRotate.RotateBy RotateAngle=90F
+              Color="#553592" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-sync"
+              Animation=@Animate.Spin(new SpinOptions { Delay = TimeSpan.FromSeconds(3), Direction = AnimationDirection.Reverse })
+              Color="#007AFF" />
+    </Icons>
+</IconContainer>

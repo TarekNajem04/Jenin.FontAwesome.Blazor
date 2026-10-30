@@ -1,0 +1,75 @@
+.brand {
+    min-height: 3.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+    .brand a {
+        color: white;
+        font-size: 1.05rem;
+        text-decoration: none;
+    }
+
+.navbar-toggler {
+    appearance: none;
+    cursor: pointer;
+    width: 3.5rem;
+    height: 2.5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center/1.75rem rgba(255, 255, 255, 0.1);
+}
+
+    .navbar-toggler:checked {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+}
+
+    .nav ::deep .nav-link {
+        color: #d7d7d7;
+        display: flex;
+        align-items: center;
+        height: 2.75rem;
+        padding: 0 1rem;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+    .nav ::deep a.active {
+        background-color: rgba(255, 255, 255, 0.37);
+        color: white;
+    }
+
+    .nav ::deep .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+.nav-scrollable {
+    display: none;
+}
+
+.navbar-toggler:checked ~ .nav-scrollable {
+    display: block;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler {
+        display: none;
+    }
+
+    .nav-scrollable {
+        display: block;
+        height: calc(100vh - 3.5rem);
+        overflow-y: auto;
+    }
+}

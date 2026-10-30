@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <!--
+    OpenCover coverage collection for the local Sonar preview tool
+    (scripts/sonar/preview.ps1). The canonical gate
+    (eng/verify-coverage.ps1) reads the Cobertura report produced by
+    tests/coverage.runsettings instead.
+
+    Generated sources stay excluded so the Sonar coverage metric describes
+    the shipped hand-written code only.
+  -->
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage"
+                     uri="datacollector://coverlet/XPlatCodeCoverage">
+        <Configuration>
+          <Format>opencover</Format>
+          <ExcludeByFile>**/IconNames.cs,**/GeneratedIconComponents.cs</ExcludeByFile>
+          <Exclude>[*]*.Tests*</Exclude>
+          <IncludeTestAssembly>false</IncludeTestAssembly>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

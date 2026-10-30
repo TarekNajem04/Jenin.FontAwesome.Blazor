@@ -1,0 +1,24 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<div class="brand">
+    <a href="">Jenin.FontAwesome.Blazor · Web App</a>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav">
+        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home (static SSR)</NavLink>
+        <NavLink class="nav-link" href="static-ssr">Static SSR</NavLink>
+        <NavLink class="nav-link" href="interactive-server">Interactive Server</NavLink>
+        <NavLink class="nav-link" href="interactive-server-no-prerender">Interactive Server (no prerender)</NavLink>
+        <NavLink class="nav-link" href="interactive-webassembly">Interactive WebAssembly</NavLink>
+        <NavLink class="nav-link" href="interactive-auto">Interactive Auto</NavLink>
+    </nav>
+</div>

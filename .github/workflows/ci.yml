@@ -1,0 +1,322 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  format:
+
+    name: Format
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 20
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup .NET SDK (global.json)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Verify formatting
+        run: dotnet format --verify-no-changes --no-restore
+
+  build-and-test:
+
+    name: Build & Test (${{ matrix.os }})
+
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os:
+          - windows-latest
+          - ubuntu-latest
+          - macos-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET 8/9 runtimes (net8.0/net9.0 test hosts)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+
+      - name: Setup .NET SDK (global.json)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: >
+          dotnet test
+          --configuration Release
+          --no-build
+          --logger "trx;LogFileName=results.trx"
+          --results-directory TestResults/${{ matrix.os }}
+
+      - name: Collect coverage (canonical net10.0 leg)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/coverage
+          for project in \
+            tests/Jenin.FontAwesome.Blazor.Tests/Jenin.FontAwesome.Blazor.Tests.csproj \
+            tests/Jenin.FontAwesome.Blazor.IconPicker.Tests/Jenin.FontAwesome.Blazor.IconPicker.Tests.csproj \
+            tests/Jenin.FontAwesome.Blazor.Icons.Tests/Jenin.FontAwesome.Blazor.Icons.Tests.csproj \
+            tests/Jenin.FontAwesome.Blazor.Svg.Tests/Jenin.FontAwesome.Blazor.Svg.Tests.csproj; do
+            dotnet test "$project" \
+              -f net10.0 \
+              -c Release \
+              --no-build \
+              --collect:"XPlat Code Coverage" \
+              --settings tests/coverage.runsettings \
+              --results-directory artifacts/coverage
+          done
+          pwsh ./eng/verify-coverage.ps1
+
+      - name: Upload coverage report
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: coverage-report
+          path: artifacts/coverage/**/coverage.cobertura.xml
+          if-no-files-found: error
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: test-results-${{ matrix.os }}
+          path: TestResults/${{ matrix.os }}
+
+  e2e-browser:
+
+    name: E2E (Playwright)
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 45
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup .NET SDK (global.json)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: tests/e2e/package-lock.json
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('tests/e2e/package-lock.json') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - name: Install npm dependencies
+        working-directory: tests/e2e
+        run: npm ci
+
+      - name: Install Chromium
+        working-directory: tests/e2e
+        run: npx playwright install --with-deps chromium
+
+      - name: Run browser tests
+        working-directory: tests/e2e
+        run: npm test
+
+      - name: Upload Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: playwright-results
+          path: |
+            tests/e2e/test-results
+            tests/e2e/playwright-report
+
+  package-validation:
+
+    name: Package Validation
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 45
+
+    needs:
+      - build-and-test
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDK (global.json)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Pack with validation
+        run: |
+          set -euo pipefail
+          for project in \
+            src/Jenin.FontAwesome.Blazor/Jenin.FontAwesome.Blazor.csproj \
+            src/Jenin.FontAwesome.Blazor.Icons/Jenin.FontAwesome.Blazor.Icons.csproj \
+            src/Jenin.FontAwesome.Blazor.IconPicker/Jenin.FontAwesome.Blazor.IconPicker.csproj \
+            src/Jenin.FontAwesome.Blazor.Svg/Jenin.FontAwesome.Blazor.Svg.csproj \
+            src/Jenin.FontAwesome.Blazor.Analyzers/Jenin.FontAwesome.Blazor.Analyzers.csproj \
+            src/Jenin.FontAwesome.Blazor.MudBlazor/Jenin.FontAwesome.Blazor.MudBlazor.csproj \
+            src/Jenin.FontAwesome.Blazor.Blazorise/Jenin.FontAwesome.Blazor.Blazorise.csproj \
+            templates/Jenin.FontAwesome.Blazor.Templates.csproj; do
+            dotnet pack "$project" \
+              -c Release \
+              -o artifacts/packages \
+              /p:EnablePackageValidation=true
+          done
+
+      - name: Verify package contents
+        run: |
+          set -euo pipefail
+          # Eight packages ship in 2.0 (TASK-RDY-01); only six carry symbols — the analyzer
+          # (DevelopmentDependency, no runtime lib) and template (content-only) packs ship no
+          # .snupkg by design (TASK-RDY-02). Every .nupkg advertises README.md + icon.png.
+          test "$(ls artifacts/packages/*.nupkg | wc -l)" -eq 8
+          test "$(ls artifacts/packages/*.snupkg | wc -l)" -eq 6
+          for package in artifacts/packages/*.nupkg; do
+            unzip -l "$package" | grep -q 'README.md'
+            unzip -l "$package" | grep -q 'icon.png'
+          done
+
+      - name: Verify trimming/AOT contracts
+        run: pwsh ./eng/verify-optional-trim.ps1
+
+  verify-gates:
+
+    name: Verify Gates (encoding, generators, templates, bundles, suites)
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 75
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET 8/9 runtimes (net8.0/net9.0 hosts and fixtures)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+
+      - name: Setup .NET SDK (global.json)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: tests/e2e/package-lock.json
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('tests/e2e/package-lock.json') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
+
+      - name: Install npm dependencies
+        working-directory: tests/e2e
+        run: npm ci
+
+      - name: Install Chromium
+        working-directory: tests/e2e
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify encoding
+        run: pwsh ./eng/verify-encoding.ps1
+
+      - name: Verify generated sources
+        run: |
+          pwsh ./eng/generate-icon-catalogue.ps1 -Verify
+          pwsh ./eng/generate-icon-metadata.ps1 -Verify
+          pwsh ./eng/generate-icon-presets.ps1 -Verify
+          pwsh ./eng/generate-analyzer-icon-names.ps1 -Verify
+          pwsh ./eng/generate-llms-txt.ps1 -Verify
+
+      - name: Verify templates
+        run: pwsh ./eng/verify-templates.ps1
+
+      - name: Verify bundle sizes
+        run: pwsh ./eng/measure-bundle-sizes.ps1 -Check
+
+      - name: Verify suite adapters
+        run: pwsh ./eng/verify-suites.ps1
