@@ -30,28 +30,31 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\LICENSES">
+        <!-- Forward slashes throughout: backslash separators break template creation on
+             Linux/macOS runners (the engine resolves a rooted target such as '/Components').
+             MSBuild accepts '/' on Windows too, so packs stay byte-identical there. -->
+        <None Include="../LICENSES">
             <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
+            <PackagePath>/</PackagePath>
         </None>
-        <None Include="..\README.md">
+        <None Include="../README.md">
             <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
+            <PackagePath>/</PackagePath>
         </None>
-        <None Include="..\icon.png">
+        <None Include="../icon.png">
             <Pack>True</Pack>
-            <PackagePath>\</PackagePath>
+            <PackagePath>/</PackagePath>
         </None>
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="BlazorWebApp\**\*" Exclude="BlazorWebApp\bin\**\*;BlazorWebApp\obj\**\*">
+        <Content Include="BlazorWebApp/**/*" Exclude="BlazorWebApp/bin/**/*;BlazorWebApp/obj/**/*">
             <Pack>True</Pack>
-            <PackagePath>content\BlazorWebApp\</PackagePath>
+            <PackagePath>content/BlazorWebApp/</PackagePath>
         </Content>
-        <Content Include="BlazorWasm\**\*" Exclude="BlazorWasm\bin\**\*;BlazorWasm\obj\**\*">
+        <Content Include="BlazorWasm/**/*" Exclude="BlazorWasm/bin/**/*;BlazorWasm/obj/**/*">
             <Pack>True</Pack>
-            <PackagePath>content\BlazorWasm\</PackagePath>
+            <PackagePath>content/BlazorWasm/</PackagePath>
         </Content>
     </ItemGroup>
 
