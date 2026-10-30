@@ -57,20 +57,15 @@ public abstract class SvgIcon : ComponentBase {
     protected override void BuildRenderTree(RenderTreeBuilder builder) {
         ArgumentNullException.ThrowIfNull(builder);
 
-        var accessibleName = !string.IsNullOrWhiteSpace(AriaLabel)
-            ? AriaLabel.Trim()
-            : string.IsNullOrWhiteSpace(Title) ? null : Title.Trim();
+        var accessibleName = string.IsNullOrWhiteSpace(AriaLabel) ? null : AriaLabel.Trim();
+        accessibleName ??= string.IsNullOrWhiteSpace(Title) ? null : Title.Trim();
 
         builder.OpenElement(0, "svg");
         builder.AddAttribute(1, "xmlns", "http://www.w3.org/2000/svg");
         builder.AddAttribute(2, "viewBox", "0 0 512 512");
 
-        var userWidth = AdditionalAttributes is not null && AdditionalAttributes.TryGetValue("width", out var widthValue)
-            ? Convert.ToString(widthValue, CultureInfo.InvariantCulture)
-            : null;
-        var userHeight = AdditionalAttributes is not null && AdditionalAttributes.TryGetValue("height", out var heightValue)
-            ? Convert.ToString(heightValue, CultureInfo.InvariantCulture)
-            : null;
+        var userWidth = GetUserAttribute("width");
+        var userHeight = GetUserAttribute("height");
 
         // A consumer width/height wins; otherwise the default 1em height keeps the glyph on the
         // text line (width derives from the square viewBox).
@@ -82,22 +77,13 @@ public abstract class SvgIcon : ComponentBase {
 
         var mergedClass = string.Join(
             ' ',
-            new[] {
-                CssClass,
-                AdditionalAttributes is not null && AdditionalAttributes.TryGetValue("class", out var extraClass)
-                    ? Convert.ToString(extraClass, CultureInfo.InvariantCulture)
-                    : null,
-            }.Where(static part => !string.IsNullOrWhiteSpace(part)));
+            new[] { CssClass, GetUserAttribute("class") }.Where(static part => !string.IsNullOrWhiteSpace(part)));
 
         if(!string.IsNullOrWhiteSpace(mergedClass)) {
             builder.AddAttribute(5, "class", mergedClass);
         }
 
-        var mergedStyle = "vertical-align:-0.125em;" + (AdditionalAttributes is not null && AdditionalAttributes.TryGetValue("style", out var extraStyle)
-            ? Convert.ToString(extraStyle, CultureInfo.InvariantCulture)
-            : string.Empty);
-
-        builder.AddAttribute(6, "style", mergedStyle);
+        builder.AddAttribute(6, "style", "vertical-align:-0.125em;" + (GetUserAttribute("style") ?? string.Empty));
 
         if(accessibleName is null) {
             builder.AddAttribute(7, "aria-hidden", "true");
@@ -106,23 +92,7 @@ public abstract class SvgIcon : ComponentBase {
             builder.AddAttribute(8, "aria-label", accessibleName);
         }
 
-        if(AdditionalAttributes is not null) {
-            Dictionary<string, object>? rest = null;
-
-            foreach(var attribute in AdditionalAttributes) {
-                if(attribute.Key is "class" or "style" or "xmlns" or "viewBox" or "height" or "width"
-                    or "aria-hidden" or "role" or "aria-label" or "title" || attribute.Value is null) {
-                    continue;
-                }
-
-                rest ??= new Dictionary<string, object>(StringComparer.Ordinal);
-                rest[attribute.Key] = attribute.Value;
-            }
-
-            if(rest is not null) {
-                builder.AddMultipleAttributes(9, rest);
-            }
-        }
+        AppendRestAttributes(builder);
 
         if(accessibleName is not null && !string.IsNullOrWhiteSpace(Title)) {
             builder.OpenElement(10, "title");
@@ -136,5 +106,32 @@ public abstract class SvgIcon : ComponentBase {
         builder.CloseElement();
 
         builder.CloseElement();
+    }
+
+    private string? GetUserAttribute(string name) =>
+        AdditionalAttributes is not null && AdditionalAttributes.TryGetValue(name, out var value)
+            ? Convert.ToString(value, CultureInfo.InvariantCulture)
+            : null;
+
+    private void AppendRestAttributes(RenderTreeBuilder builder) {
+        if(AdditionalAttributes is null) {
+            return;
+        }
+
+        Dictionary<string, object>? rest = null;
+
+        foreach(var attribute in AdditionalAttributes) {
+            if(attribute.Key is "class" or "style" or "xmlns" or "viewBox" or "height" or "width"
+                or "aria-hidden" or "role" or "aria-label" or "title" || attribute.Value is null) {
+                continue;
+            }
+
+            rest ??= new Dictionary<string, object>(StringComparer.Ordinal);
+            rest[attribute.Key] = attribute.Value;
+        }
+
+        if(rest is not null) {
+            builder.AddMultipleAttributes(9, rest);
+        }
     }
 }

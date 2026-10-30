@@ -81,12 +81,35 @@ public class IconToggleButton : IconButton {
 
     private protected override string? CurrentLabel => Pressed ? PressedLabel ?? Label : Label;
 
-    private protected override string? CurrentIconName => Busy ? BusyIconName : Pressed ? PressedIconName ?? IconName : IconName;
+    private protected override string? CurrentIconName {
+        get {
+            if(Busy) {
+                return BusyIconName;
+            }
 
-    private protected override IconStyle ForwardIconStyle
-        => Busy ? BusyIconStyle : Pressed ? PressedIconStyle ?? base.ForwardIconStyle : base.ForwardIconStyle;
+            return Pressed ? PressedIconName ?? IconName : IconName;
+        }
+    }
 
-    private protected override Animation? CurrentAnimation => Busy ? BusyAnimation : Pressed ? PressedAnimation ?? Animation : Animation;
+    private protected override IconStyle ForwardIconStyle {
+        get {
+            if(Busy) {
+                return BusyIconStyle;
+            }
+
+            return Pressed ? PressedIconStyle ?? base.ForwardIconStyle : base.ForwardIconStyle;
+        }
+    }
+
+    private protected override Animation? CurrentAnimation {
+        get {
+            if(Busy) {
+                return BusyAnimation;
+            }
+
+            return Pressed ? PressedAnimation ?? Animation : Animation;
+        }
+    }
 
     private protected override string? CurrentTitle => Pressed ? PressedTitle ?? Title : Title;
 

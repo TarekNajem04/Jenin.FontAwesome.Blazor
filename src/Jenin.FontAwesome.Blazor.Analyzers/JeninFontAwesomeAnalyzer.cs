@@ -224,7 +224,7 @@ public sealed class JeninFontAwesomeAnalyzer : DiagnosticAnalyzer {
             return;
         }
 
-        if(ClassString.TryParse(value, out var style, out var name, out _)) {
+        if(ClassString.TryParse(value, out _, out var name, out _)) {
             context.ReportDiagnostic(Diagnostic.Create(_rawClassString, location, value, name));
             return;
         }

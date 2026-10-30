@@ -20,6 +20,16 @@ namespace Jenin.FontAwesome.Blazor.Components;
 /// </para>
 /// </remarks>
 public class IconRating : Element {
+    /// <summary>
+    /// The well-known <c>aria-label</c> attribute name.
+    /// </summary>
+    private const string AriaLabelAttribute = "aria-label";
+
+    /// <summary>
+    /// The well-known <c>style</c> attribute name.
+    /// </summary>
+    private const string StyleAttribute = "style";
+
     private string? _groupName;
     private int? _focusedOption;
 
@@ -125,13 +135,13 @@ public class IconRating : Element {
             _ = AdditionalAttributes.AddOrUpdate("role", "radiogroup");
         } else {
             _ = AdditionalAttributes.AddOrUpdate("role", "img");
-            _ = AdditionalAttributes.AddOrUpdate("aria-label", $"{FormatValue()} out of {OptionCount}");
+            _ = AdditionalAttributes.AddOrUpdate(AriaLabelAttribute, $"{FormatValue()} out of {OptionCount}");
         }
 
         var name = RatingLabel ?? Title;
 
         if(Interactive && !string.IsNullOrWhiteSpace(name)) {
-            _ = AdditionalAttributes.AddOrUpdate("aria-label", name.Trim());
+            _ = AdditionalAttributes.AddOrUpdate(AriaLabelAttribute, name.Trim());
         }
 
         if(!string.IsNullOrWhiteSpace(Title)) {
@@ -214,7 +224,7 @@ public class IconRating : Element {
             var selected = IsSelected(current);
 
             builder.OpenElement(10 + (current * 10), "label");
-            builder.AddAttribute(11 + (current * 10), "style", FocusStyle(current) + "cursor:pointer;display:inline-flex;");
+            builder.AddAttribute(11 + (current * 10), StyleAttribute, FocusStyle(current) + "cursor:pointer;display:inline-flex;");
             builder.AddAttribute(12 + (current * 10), "title", $"{current} of {OptionCount}");
 
             builder.OpenElement(13 + (current * 10), "input");
@@ -223,8 +233,8 @@ public class IconRating : Element {
             builder.AddAttribute(16 + (current * 10), "value", current);
             builder.AddAttribute(17 + (current * 10), "checked", selected);
             builder.AddAttribute(18 + (current * 10), "disabled", Disabled);
-            builder.AddAttribute(19 + (current * 10), "aria-label", $"{current} of {OptionCount}");
-            builder.AddAttribute(20 + (current * 10), "style", "position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;");
+            builder.AddAttribute(19 + (current * 10), AriaLabelAttribute, $"{current} of {OptionCount}");
+            builder.AddAttribute(20 + (current * 10), StyleAttribute, "position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;");
             builder.AddAttribute(21 + (current * 10), "onchange", EventCallback.Factory.Create<ChangeEventArgs>(this, OnOptionChangedAsync));
             builder.AddAttribute(22 + (current * 10), "onfocus", EventCallback.Factory.Create<FocusEventArgs>(this, () => _focusedOption = current));
             builder.AddAttribute(23 + (current * 10), "onblur", EventCallback.Factory.Create<FocusEventArgs>(this, () => _focusedOption = null));
@@ -247,9 +257,9 @@ public class IconRating : Element {
         if(AllowDeselect && Clamped >= 1 && !Disabled) {
             builder.OpenElement(1000, "button");
             builder.AddAttribute(1001, "type", "button");
-            builder.AddAttribute(1002, "aria-label", ClearLabel ?? "Clear rating");
+            builder.AddAttribute(1002, AriaLabelAttribute, ClearLabel ?? "Clear rating");
             builder.AddAttribute(1003, "title", ClearLabel ?? "Clear rating");
-            builder.AddAttribute(1004, "style", "background:none;border:0;padding:0 0.25em;cursor:pointer;color:inherit;font-size:0.8em;");
+            builder.AddAttribute(1004, StyleAttribute, "background:none;border:0;padding:0 0.25em;cursor:pointer;color:inherit;font-size:0.8em;");
             builder.AddAttribute(1005, "onclick", EventCallback.Factory.Create<MouseEventArgs>(this, ClearAsync));
             builder.AddContent(1006, "×");
             builder.CloseElement();
@@ -264,7 +274,7 @@ public class IconRating : Element {
 
         builder.OpenElement(2000, "span");
         builder.AddAttribute(2001, "aria-hidden", "true");
-        builder.AddAttribute(2002, "style", "display:inline-flex;white-space:nowrap;");
+        builder.AddAttribute(2002, StyleAttribute, "display:inline-flex;white-space:nowrap;");
 
         for(var option = 1; option <= OptionCount; option++) {
             builder.OpenComponent<Icon>(2003 + option);
@@ -278,7 +288,7 @@ public class IconRating : Element {
 
         builder.OpenElement(2100, "span");
         builder.AddAttribute(2101, "aria-hidden", "true");
-        builder.AddAttribute(2102, "style", $"position:absolute;inset-block-start:0;inset-inline-start:0;width:{percent}%;overflow:hidden;white-space:nowrap;color:{Color ?? "inherit"};");
+        builder.AddAttribute(2102, StyleAttribute, $"position:absolute;inset-block-start:0;inset-inline-start:0;width:{percent}%;overflow:hidden;white-space:nowrap;color:{Color ?? "inherit"};");
 
         for(var option = 1; option <= OptionCount; option++) {
             builder.OpenComponent<Icon>(2103 + option);

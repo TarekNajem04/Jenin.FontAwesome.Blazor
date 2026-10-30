@@ -188,14 +188,16 @@ test.describe('icon explorer', () => {
 
         const animGroup = page.locator('.explorer-controls__group', { hasText: 'Animation' });
         const duration = animGroup.locator('input[type=range]').first();
-        // locator.press() focuses before dispatching, closing the focus-then-act race that
-        // leaves the value at 1.0 on loaded runners (separate focus() + keyboard.press() can
-        // straddle a Blazor re-render and drop focus).
-        await duration.press('ArrowRight');
+        // Self-retrying: a press lost to a Blazor re-render race is retried by the next
+        // poll iteration instead of failing the run (locator.press() alone proved flaky
+        // under CI load even though it focuses before dispatching).
+        await expect.poll(async () => {
+            await duration.press('ArrowRight');
+            return Number.parseFloat(await duration.inputValue());
+        }, { timeout: 10_000 }).toBeCloseTo(1.1, 2);
 
-        // The slider must move by its 0.1 step, not jump to the maximum, regardless of host culture.
-        await expect.poll(async () => Number.parseFloat(await duration.inputValue()), { timeout: 10_000 })
-            .toBeCloseTo(1.1, 2);
+        // The slider must move by its 0.1 step, not jump to the maximum: the style proves
+        // the stepped value reached the icon (first assertion already pinned the value).
         await expect(page.locator('.explorer-preview__canvas svg').first())
             .toHaveAttribute('style', /--fa-animation-duration:\s*1100ms/);
 

@@ -102,6 +102,11 @@ public class FontAwesomeOptions {
     public string? KitCode { get; set; }
 
     /// <summary>
+    /// The Font Awesome kit runtime host. Kits are always served from this endpoint.
+    /// </summary>
+    private const string KitScriptHost = "kit.fontawesome.com";
+
+    /// <summary>
     /// Points the one-line setup at a Font Awesome Kit: sets <see cref="JavaScriptUrl"/> to the
     /// kit runtime (<c>https://kit.fontawesome.com/{kitCode}.js</c>) and clears
     /// <see cref="StyleSheetUrl"/> because kits serve their own CSS. The generated mode-config
@@ -116,7 +121,7 @@ public class FontAwesomeOptions {
         }
 
         KitCode = kitCode.Trim();
-        JavaScriptUrl = "https://kit.fontawesome.com/" + KitCode + ".js";
+        JavaScriptUrl = new UriBuilder("https", KitScriptHost) { Path = KitCode + ".js" }.Uri.AbsoluteUri;
         StyleSheetUrl = null;
     }
 

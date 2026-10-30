@@ -50,10 +50,8 @@ public sealed class IconMetadataProvider {
         var index = new Dictionary<string, IconMetadata>(data.ByName, StringComparer.OrdinalIgnoreCase);
         var shadowed = new HashSet<string>(customs.Select(static icon => icon.Name), StringComparer.Ordinal);
 
-        foreach(var icon in data.Icons) {
-            if(!shadowed.Contains(icon.Name)) {
-                merged.Add(icon);
-            }
+        foreach(var icon in data.Icons.Where(icon => !shadowed.Contains(icon.Name))) {
+            merged.Add(icon);
         }
 
         merged.AddRange(customs);
@@ -167,16 +165,16 @@ public sealed class IconMetadataProvider {
         }
 
         candidates.Sort(static (left, right) => {
-            var byScore = right.Score.CompareTo(left.Score);
+            var byScore = right.Rank.CompareTo(left.Rank);
 
-            return byScore != 0 ? byScore : string.CompareOrdinal(left.Icon.Name, right.Icon.Name);
+            return byScore != 0 ? byScore : string.CompareOrdinal(left.Metadata.Name, right.Metadata.Name);
         });
 
         var results = maxResults > 0 && candidates.Count > maxResults
             ? candidates.GetRange(0, maxResults)
             : candidates;
 
-        return [.. results.Select(static ranked => ranked.Icon)];
+        return [.. results.Select(static ranked => ranked.Metadata)];
     }
 
     private static int Score(IconMetadata icon, string query) {
@@ -214,20 +212,16 @@ public sealed class IconMetadataProvider {
     }
 
     private static bool Matches(IReadOnlyList<string> values, string query, int exactScore, int containsScore, out int score) {
-        foreach(var value in values) {
-            if(value.Equals(query, StringComparison.OrdinalIgnoreCase)) {
-                score = exactScore;
+        if(values.Any(value => value.Equals(query, StringComparison.OrdinalIgnoreCase))) {
+            score = exactScore;
 
-                return true;
-            }
+            return true;
         }
 
-        foreach(var value in values) {
-            if(value.Contains(query, StringComparison.OrdinalIgnoreCase)) {
-                score = containsScore;
+        if(values.Any(value => value.Contains(query, StringComparison.OrdinalIgnoreCase))) {
+            score = containsScore;
 
-                return true;
-            }
+            return true;
         }
 
         score = -1;
@@ -315,5 +309,5 @@ public sealed class IconMetadataProvider {
 
     private sealed record IconsAndIndex(IReadOnlyList<IconMetadata> Icons, Dictionary<string, IconMetadata> ByName);
 
-    private readonly record struct RankedIcon(IconMetadata Icon, int Score);
+    private readonly record struct RankedIcon(IconMetadata Metadata, int Rank);
 }
