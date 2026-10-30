@@ -6,8 +6,46 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'samples/**'
+      - 'templates/**'
+      - 'eng/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - '**.csproj'
+      - '**.slnx'
+      - 'Directory.Build.props'
+      - 'Directory.Build.targets'
+      - 'Directory.Packages.props'
+      - 'global.json'
+      - 'llms.txt'
+      - 'README.md'
+      - '.editorconfig'
+      - '.github/workflows/ci.yml'
 
   pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'samples/**'
+      - 'templates/**'
+      - 'eng/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - '**.csproj'
+      - '**.slnx'
+      - 'Directory.Build.props'
+      - 'Directory.Build.targets'
+      - 'Directory.Packages.props'
+      - 'global.json'
+      - 'llms.txt'
+      - 'README.md'
+      - '.editorconfig'
+      - '.github/workflows/ci.yml'
 
 permissions:
   contents: read
@@ -44,10 +82,10 @@ jobs:
           global-json-file: global.json
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore Jenin.FontAwesome.Blazor.slnx
 
       - name: Verify formatting
-        run: dotnet format --verify-no-changes --no-restore
+        run: dotnet format Jenin.FontAwesome.Blazor.slnx --verify-no-changes --no-restore
 
   build-and-test:
 
@@ -86,16 +124,17 @@ jobs:
           global-json-file: global.json
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore Jenin.FontAwesome.Blazor.slnx
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build Jenin.FontAwesome.Blazor.slnx --configuration Release --no-restore
 
       - name: Test
         run: >
-          dotnet test
+          dotnet test Jenin.FontAwesome.Blazor.slnx
           --configuration Release
           --no-build
+          --blame-hang-timeout 3m
           --logger "trx;LogFileName=results.trx"
           --results-directory TestResults/${{ matrix.os }}
 
@@ -153,14 +192,14 @@ jobs:
           global-json-file: global.json
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: 20
           cache: npm
           cache-dependency-path: tests/e2e/package-lock.json
 
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('tests/e2e/package-lock.json') }}
@@ -212,10 +251,10 @@ jobs:
           global-json-file: global.json
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore Jenin.FontAwesome.Blazor.slnx
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build Jenin.FontAwesome.Blazor.slnx --configuration Release --no-restore
 
       - name: Pack with validation
         run: |
@@ -279,14 +318,14 @@ jobs:
           global-json-file: global.json
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: 20
           cache: npm
           cache-dependency-path: tests/e2e/package-lock.json
 
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('tests/e2e/package-lock.json') }}

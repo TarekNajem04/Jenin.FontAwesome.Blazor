@@ -26,6 +26,8 @@ on:
       - '.github/workflows/docs-build.yml'
 
   pull_request:
+    branches:
+      - main
     paths:
       - 'docs/**'
       - 'src/**'
@@ -72,12 +74,6 @@ jobs:
         uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-
-      # DocFX 2.78.x runs on the .NET 8 runtime even though the app targets net10.0.
-      - name: Setup .NET 8 runtime
-        uses: actions/setup-dotnet@v6.0.0
-        with:
-          dotnet-version: 8.0.x
 
       - name: Setup .NET SDK (global.json)
         uses: actions/setup-dotnet@v6.0.0

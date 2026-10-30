@@ -127,10 +127,10 @@ jobs:
       # 5) Build and Test
       # ---------------------------------------------------------
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore Jenin.FontAwesome.Blazor.slnx
 
       - name: Build solution
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build Jenin.FontAwesome.Blazor.slnx --configuration Release --no-restore
 
       - name: Run tests
         run: dotnet test --configuration Release --no-build --no-restore --logger "console;verbosity=normal"

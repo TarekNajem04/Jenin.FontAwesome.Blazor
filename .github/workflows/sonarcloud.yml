@@ -1,0 +1,182 @@
+name: SonarCloud
+
+# ---------------------------------------------------------
+# Trigger workflow on push and pull requests
+# ---------------------------------------------------------
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "samples/**"
+      - "templates/**"
+      - "eng/**"
+      - "**.csproj"
+      - "**.slnx"
+      - "Directory.Packages.props"
+      - "Directory.Build.props"
+      - ".github/workflows/sonarcloud.yml"
+
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "samples/**"
+      - "templates/**"
+      - "eng/**"
+      - "**.csproj"
+      - "**.slnx"
+      - "Directory.Packages.props"
+      - "Directory.Build.props"
+      - ".github/workflows/sonarcloud.yml"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+# ---------------------------------------------------------
+# Global .NET environment settings
+# ---------------------------------------------------------
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+# One-time repository setup (owner): create the SonarCloud project and add the
+# SONAR_TOKEN repository secret. Without a token the analysis steps skip
+# gracefully (build, test, and coverage collection still run).
+
+jobs:
+  build-analyze:
+    name: Build, Test, Analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    # This job will completely bypass the check if the PR is opened from an external account that does not have access to secrets.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    steps:
+      # ---------------------------------------------------------
+      # 1) Checkout repository (disable shallow clone)
+      # ---------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0          # Fetch full git history
+          submodules: recursive   # Avoid internal shallow clones
+
+      # ---------------------------------------------------------
+      # 2) Ensure full git history (safety net)
+      # ---------------------------------------------------------
+      - name: Ensure full git history
+        run: |
+          git fetch --unshallow || true
+          git fetch --all --tags
+
+      # ---------------------------------------------------------
+      # 3) Setup Java (required by SonarScanner)
+      # ---------------------------------------------------------
+      - name: Setup Java 17
+        uses: actions/setup-java@v6.1.0
+        with:
+          distribution: zulu
+          java-version: "17"
+
+      # ---------------------------------------------------------
+      # 4) Setup .NET SDK (global.json)
+      # ---------------------------------------------------------
+      - name: Setup .NET SDK (global.json)
+        uses: actions/setup-dotnet@v6.0.0
+        with:
+          global-json-file: global.json
+
+      # ---------------------------------------------------------
+      # 5) Cache NuGet packages
+      # ---------------------------------------------------------
+      - name: Cache NuGet packages
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+
+      # ---------------------------------------------------------
+      # 6) Cache SonarCloud
+      # ---------------------------------------------------------
+      - name: Cache SonarCloud
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+
+      # ---------------------------------------------------------
+      # 7) Install SonarScanner for .NET
+      # ---------------------------------------------------------
+      - name: Install SonarScanner
+        run: dotnet tool install --global dotnet-sonarscanner
+
+      # ---------------------------------------------------------
+      # 8) Begin SonarCloud analysis
+      # ---------------------------------------------------------
+      - name: Begin SonarCloud analysis
+        if: env.SONAR_TOKEN != ''
+        run: |
+          dotnet sonarscanner begin \
+            /k:"jenin-fontAwesome-blazor" \
+            /o:"jeninnet" \
+            /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.token="$SONAR_TOKEN" \
+            /d:sonar.qualitygate.wait=true \
+            /d:sonar.cs.vstest.reportsPaths="TestResults/**/*.trx" \
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
+            /d:sonar.coverage.exclusions="**/*.ps1,**/*.md,docs/**,scripts/**,eng/**,.github/**,assets/**,badges/**,private/**" \
+            /d:sonar.scm.provider=git \
+            /d:sonar.scm.forceReloadAll=true \
+            /d:sonar.exclusions="samples/**,templates/**,tests/e2e/**,docs/**,scripts/**,eng/**,.github/**,assets/**,badges/**,private/**,**/*.ps1,**/*.md,**/bin/**,**/obj/**,**/TestResults/**,artifacts/**" \
+            /d:sonar.test.exclusions="tests/**"
+
+      # ---------------------------------------------------------
+      # 9) Restore dependencies
+      # ---------------------------------------------------------
+      - name: Restore dependencies
+        run: dotnet restore Jenin.FontAwesome.Blazor.slnx
+
+      # ---------------------------------------------------------
+      # 10) Build solution
+      # ---------------------------------------------------------
+      - name: Build solution
+        run: dotnet build Jenin.FontAwesome.Blazor.slnx -c Release --no-restore
+
+      # ---------------------------------------------------------
+      # 11) Run tests with coverage (OpenCover for SonarCloud;
+      #     the release coverage gate keeps using Cobertura)
+      # ---------------------------------------------------------
+      - name: Run tests with coverage
+        run: |
+          dotnet test Jenin.FontAwesome.Blazor.slnx -c Release \
+            --no-build \
+            --settings tests/coverage.runsettings \
+            --collect:"XPlat Code Coverage;Format=opencover" \
+            --logger "trx;LogFileName=results.trx" \
+            --results-directory TestResults
+
+      - name: List test results (debug)
+        run: ls -R TestResults
+
+      # ---------------------------------------------------------
+      # 12) End SonarCloud analysis
+      # ---------------------------------------------------------
+      - name: End SonarCloud analysis
+        if: env.SONAR_TOKEN != ''
+        run: |
+          dotnet sonarscanner end \
+            /d:sonar.token="$SONAR_TOKEN"
