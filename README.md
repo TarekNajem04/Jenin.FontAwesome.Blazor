@@ -21,7 +21,7 @@ Prerequisites
 
 Jenin.FontAwesome.Blazor components have the following requirements:
 
-*   .NET SDK pinned by `global.json` (11.0.x with `latestFeature` roll-forward) to build the
+*   .NET SDK pinned by `global.json` (10.0.204+ with `latestFeature` roll-forward) to build the
     repository; consuming apps need the targeting packs for .NET 8.0, .NET 9.0, or .NET 10.0
     (the libraries target `net8.0;net9.0;net10.0`)
 *   Any Blazor hosting model: Blazor WebAssembly, Blazor Server, or a Blazor Web App (static server-side rendering, Interactive Server, Interactive WebAssembly, Interactive Auto)
