@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <!-- Razor/Web framework static assets (blazor.web.js) served from the ASP.NET Core pack;
+             required because this project's own folder hosts no .razor content items -->
+        <RequiresAspNetWebAssets>true</RequiresAspNetWebAssets>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor\Jenin.FontAwesome.Blazor.csproj" />
+        <ProjectReference Include="..\Jenin.FontAwesome.Blazor.Sample.Shared\Jenin.FontAwesome.Blazor.Sample.Shared.csproj" />
+    </ItemGroup>
+
+</Project>

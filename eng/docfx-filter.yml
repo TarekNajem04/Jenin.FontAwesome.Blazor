@@ -1,0 +1,7 @@
+apiRules:
+  - exclude:
+      uidRegex: '<Clone>'
+      type: Member
+  - exclude:
+      uidRegex: '^System\.'
+      type: Namespace

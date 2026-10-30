@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Jenin",
+    "classifications": ["Blazor", "Font Awesome", "Web"],
+    "identity": "Jenin.FontAwesome.Blazor.Templates.BlazorWebApp",
+    "name": "Jenin FA Blazor Web App",
+    "description": "Interactive-server Blazor Web App with Jenin.FontAwesome.Blazor installed, one-line asset setup wired, and a first icon on the home page.",
+    "shortName": "jenin-fa-blazor",
+    "sourceName": "JeninFaApp",
+    "preferNameDirectory": true,
+    "defaultName": "JeninFaApp",
+    "primaryOutputs": [{ "path": "JeninFaApp.csproj" }],
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "symbols": {
+        "Framework": {
+            "type": "parameter",
+            "datatype": "choice",
+            "description": "The target framework.",
+            "choices": [
+                { "choice": "net8.0", "description": "Target .NET 8 (LTS)." },
+                { "choice": "net9.0", "description": "Target .NET 9 (STS)." },
+                { "choice": "net10.0", "description": "Target .NET 10 (STS)." }
+            ],
+            "defaultValue": "net10.0",
+            "replaces": "JENIN_TFM"
+        },
+        "FaMode": {
+            "type": "parameter",
+            "datatype": "choice",
+            "description": "The Font Awesome delivery mode wired by the one-line setup.",
+            "choices": [
+                { "choice": "SvgNest", "description": "SVG enhancement with nesting (full feature set)." },
+                { "choice": "Webfont", "description": "Static webfonts (no SVG engine)." }
+            ],
+            "defaultValue": "SvgNest",
+            "replaces": "JENIN_FA_MODE"
+        },
+        "JfaVersion": {
+            "type": "parameter",
+            "datatype": "string",
+            "description": "The Jenin.FontAwesome.Blazor package version to reference.",
+            "defaultValue": "2.0.0",
+            "replaces": "JENIN_FA_VERSION"
+        }
+    },
+    "postActions": [
+        {
+            "description": "Restore NuGet packages required by this project.",
+            "manualInstructions": [{ "text": "Run 'dotnet restore'" }],
+            "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+            "continueOnError": true
+        }
+    ]
+}

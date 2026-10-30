@@ -1,0 +1,44 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/kit-demo"
+
+<PageTitle>Font Awesome Kit demo</PageTitle>
+
+<div class="container-fluid mt-3 mb-4">
+    <h1>Font Awesome Kit demo</h1>
+
+    <p>
+        This page shows the tags the one-line setup emits for a Kit-backed host
+        (<c>FontAwesomeOptions.UseFontAwesomeKit</c>): a single Kit runtime script plus
+        the generated mode-config script. The kit code below is a non-functional demo
+        placeholder, so this page needs no live Kit (and CI stays offline-safe); replace
+        it with a real kit code to light up licensed assets. See
+        <c>docs/hosting-with-kits.md</c> for the setup.
+    </p>
+
+    @* Demo-only inline tags: the app shell already wires the shared assets once. A real Kit
+       host would call UseFontAwesomeKit in Program.cs instead of hand-writing these. *@
+    <FontAwesomeHeadAssets Mode="FontAwesomeAssetMode.SvgNest"
+                           JavaScriptUrl="https://kit.fontawesome.com/demo-kit-code-0000.js" />
+
+    <h2>Kit-provided icons</h2>
+
+    <p>
+        Kit icons (including names uploaded to the kit) are plain <c>fa-*</c> names to this
+        library — no special component is needed:
+    </p>
+
+    <ul>
+    <li><Icon IconName="fa-house" IconStyle="IconStyle.Solid" /> <code>fa-house</code> (Free name, resolves everywhere)</li>
+    @* Kit-custom names are unknown to the Free catalogue, so they are written as raw HTML here:
+       the analyzer deliberately leaves raw markup alone (unregistered names in IconName would
+       warn via JFA1001 by design; registering them is covered in docs/custom-icons.md). *@
+    <li><i class="fa-solid fa-acme-widget"></i> <code>fa-acme-widget</code> (kit-custom name: renders only with a kit that defines it)</li>
+    </ul>
+</div>

@@ -1,0 +1,58 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@{
+    var results = GetResults();
+}
+
+<div class="fa-icon-picker @CssClass">
+    <div class="fa-icon-picker__controls">
+        <input type="search"
+               class="fa-icon-picker__search"
+               placeholder="@Placeholder"
+               aria-label="@Placeholder"
+               value="@_query"
+               @oninput="OnSearchInput" />
+        <select class="fa-icon-picker__filter"
+                aria-label="@StyleFilterLabel"
+                value="@StyleFilterValue"
+                @onchange="OnStyleChanged">
+            <option value="">@AllStylesText</option>
+            <option value="solid">Solid</option>
+            <option value="regular">Regular</option>
+            <option value="brands">Brands</option>
+        </select>
+    </div>
+
+    <div class="fa-icon-picker__results" role="listbox" aria-label="@ResultsLabel">
+        @if (results.Count == 0)
+        {
+            <p class="fa-icon-picker__empty">@NoResultsText</p>
+        }
+        else
+        {
+            @foreach (var icon in results)
+            {
+                var style = _styleFilter ?? icon.PrimaryStyle;
+
+                <button type="button"
+                        class="@ItemCssClass(icon)"
+                        role="option"
+                        aria-selected="@(IsSelected(icon).ToString().ToLowerInvariant())"
+                        title="@icon.Label"
+                        @onclick="() => SelectAsync(icon)">
+                    <Icon IconName="@icon.CssClass" IconStyle="@style" AriaLabel="@icon.Label" />
+                    @if (ShowLabels)
+                    {
+                        <span class="fa-icon-picker__label">@icon.Label</span>
+                    }
+                </button>
+            }
+        }
+    </div>
+</div>

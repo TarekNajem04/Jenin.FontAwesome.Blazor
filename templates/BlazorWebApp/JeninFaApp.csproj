@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>JENIN_TFM</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Font Awesome components for Blazor. Setup (services + generated mode-config
+             endpoint + head tags) is wired in Program.cs and Components/App.razor. -->
+        <PackageReference Include="Jenin.FontAwesome.Blazor" Version="JENIN_FA_VERSION" />
+    </ItemGroup>
+
+</Project>

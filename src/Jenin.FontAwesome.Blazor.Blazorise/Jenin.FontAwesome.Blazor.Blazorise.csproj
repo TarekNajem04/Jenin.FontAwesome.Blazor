@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+        <!-- Thin adapter over the Blazorise component model; annotated for trimming/AOT like the
+             other optional packages so the linker and analyzers verify it independently. -->
+        <IsTrimmable>true</IsTrimmable>
+        <IsAotCompatible>true</IsAotCompatible>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Description>Jenin Blazor Library - Optional Blazorise adapter: typed Font Awesome 7 names for the Blazorise Icon component. Requires a Blazorise icon provider (e.g. Blazorise.Icons.FontAwesome) at runtime.</Description>
+        <PackageId>Jenin.FontAwesome.Blazor.Blazorise</PackageId>
+        <Authors>Tarek Najem</Authors>
+        <Company>Jenin</Company>
+
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReleaseNotes>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/releases</PackageReleaseNotes>
+        <PackageTags>blazor fontawesome font-awesome-7 icons accessibility a11y trimming aot blazorise adapters wasm components</PackageTags>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <NeutralLanguage>en</NeutralLanguage>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnablePackageValidation>true</EnablePackageValidation>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\LICENSES">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+        <PackageReference Include="Blazorise" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Jenin.FontAwesome.Blazor\Jenin.FontAwesome.Blazor.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,34 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+@page "/svg-strings"
+
+<PageTitle>Font Awesome Server-Side SVG Strings</PageTitle>
+
+<div class="svg-strings-page sample-page">
+    <div class="container-fluid mt-3 mb-5">
+        <div class="mt-4 p-5 bg-info text-dark rounded">
+            <span class="badge bg-dark">No Blazor rendering required</span>
+            <h1>Server-Side SVG Strings</h1>
+            <p class="mb-0">
+                <code>IconSvg.ToSvgString</code> turns a sprite symbol into a standalone
+                <code>&lt;svg&gt;</code> string for HTML email, PDFs, and server-generated
+                reports — the same artwork file that feeds <code>SpriteIcon</code> in the browser.
+            </p>
+        </div>
+    </div>
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(SvgStringsSnippet) Heading="Email-Ready SVG" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

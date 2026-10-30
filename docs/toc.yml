@@ -1,0 +1,31 @@
+- name: Overview
+  href: index.md
+- name: API reference
+  href: api/index.md
+- name: Migration guides
+  href: migration/index.md
+  items:
+    - name: From MudBlazor
+      href: migration/from-mudblazor.md
+    - name: From Blazorise
+      href: migration/from-blazorise.md
+    - name: From EasyAppDev FA5/FA6
+      href: migration/from-easyappdev.md
+    - name: From Blazicons
+      href: migration/from-blazicons.md
+    - name: From raw class strings
+      href: migration/from-raw-fontawesome.md
+- name: Guides
+  items:
+    - name: Diagnostics
+      href: diagnostics.md
+    - name: Pro setup
+      href: pro-setup.md
+    - name: Hosting with kits
+      href: hosting-with-kits.md
+    - name: Custom icons
+      href: custom-icons.md
+    - name: UI suites
+      href: using-with-ui-suites.md
+    - name: Gallery
+      href: gallery.md

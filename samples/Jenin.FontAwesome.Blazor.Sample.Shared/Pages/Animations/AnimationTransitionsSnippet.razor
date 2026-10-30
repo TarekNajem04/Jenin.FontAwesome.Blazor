@@ -1,0 +1,32 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+<div class="d-flex gap-3 align-items-center">
+    <button type="button" class="btn btn-outline-primary" @onclick="() => IsPlaying = !IsPlaying">
+        Toggle play state
+    </button>
+    <span class="transitions-sample__stage">
+        <TwoStateIcon IconName="fa-play" AlternateIconName="fa-pause" IconStyle=IconStyle.Solid IconSize=IconSize.X03
+                      ShowAlternate=IsPlaying Transition=IconTransitionKind.Crossfade />
+    </span>
+    <span>Showing: @(IsPlaying ? "pause" : "play").</span>
+</div>
+<div class="mb-1 p-5 d-flex gap-4 align-items-center">
+    <TwoStateIcon IconName="fa-microphone" AlternateIconName="fa-microphone-slash" IconStyle=IconStyle.Solid IconSize=IconSize.X03
+                  ShowAlternate=IsMuted Transition=IconTransitionKind.Flip />
+    <TwoStateIcon IconName="fa-heart" AlternateIconName="fa-heart-crack" IconStyle=IconStyle.Solid IconSize=IconSize.X03 Color="#E32934"
+                  ShowAlternate=IsBroken Transition=IconTransitionKind.Scale Duration=TimeSpan.FromMilliseconds(400) />
+    <button type="button" class="btn btn-outline-secondary" @onclick="() => IsMuted = !IsMuted">Toggle mute</button>
+    <button type="button" class="btn btn-outline-secondary" @onclick="() => IsBroken = !IsBroken">Toggle break</button>
+</div>
+
+@code {
+    private bool IsPlaying;
+    private bool IsMuted = true;
+    private bool IsBroken;
+}

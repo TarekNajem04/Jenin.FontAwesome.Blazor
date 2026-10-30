@@ -1,0 +1,49 @@
+﻿@*
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+*@
+<div class="mb-1 p-3">
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <Icon IconName="fa-gauge-high" IconStyle=IconStyle.Solid IconSize=IconSize.X02 Color="dodgerblue" AriaLabel="Dashboard" />
+        <div>
+            <h2 class="h4 mb-0">Operations overview</h2>
+            <p class="text-muted mb-0">Live this morning, all systems nominal.</p>
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-12 col-md-4">
+            <StatCard IconName="fa-users" IconStyle=IconStyle.Solid IconColor="#0d6efd" Value="12,483" Label="Active users" Delta=StatDelta.Up DeltaText="+4.2% vs yesterday" />
+        </div>
+        <div class="col-12 col-md-4">
+            <StatCard IconName="fa-cart-shopping" IconStyle=IconStyle.Solid IconColor="#198754" Value="312" Label="Orders today" Delta=StatDelta.Up DeltaText="+18 since 9am" />
+        </div>
+        <div class="col-12 col-md-4">
+            <StatCard IconName="fa-triangle-exclamation" IconStyle=IconStyle.Solid IconColor="#dc3545" Value="3" Label="Open incidents" Delta=StatDelta.Down DeltaText="2 resolved" />
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-header d-flex align-items-center gap-2">
+            <Icon IconName="fa-server" IconStyle=IconStyle.Solid />
+            <span>Services</span>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex align-items-center gap-2">
+                <StatusDot BackgroundColor="#16a34a" />
+                <span class="me-auto">API gateway</span>
+                <span class="badge bg-success">99.99%</span>
+            </li>
+            <li class="list-group-item d-flex align-items-center gap-2">
+                <StatusDot BackgroundColor="#eab308" />
+                <span class="me-auto">Background workers</span>
+                <span class="badge bg-warning text-dark">degraded</span>
+            </li>
+            <li class="list-group-item d-flex align-items-center gap-2">
+                <StatusDot BackgroundColor="#dc3545" />
+                <span class="me-auto">Email relay</span>
+                <span class="badge bg-danger">down</span>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<div class="ps-5 btn-group" role="group">
+    <input id="icon-typefaces-classic" name="icon-typefaces" type="radio" class="btn-check" checked=@IsClassic @onchange=@(()=> Typeface = Typeface.Classic) />
+    <label class="btn btn-outline-success" for="icon-typefaces-classic">Classic</label>
+
+    <input id="icon-typefaces-sharp" name="icon-typefaces" type="radio" class="btn-check" checked=@IsSharp @onchange=@(()=> SetSharp()) />
+    <label class="btn btn-outline-success" for="icon-typefaces-sharp">Sharp</label>
+</div>
+
+<IconContainer CssClass="mb-1 p-5">
+    <Icons>
+        <span style="font-size: 3em; color: Tomato;">
+            <Icon Typeface=Typeface IconStyle=IconStyle.Solid IconName="fa-camera" />
+        </span>
+
+        <span style="font-size: 48px; color: Dodgerblue;">
+            <Icon Typeface=Typeface IconStyle=IconStyle.Solid IconName="fa-camera" />
+        </span>
+
+        <span style="font-size: 3rem;">
+            <span style="color: Mediumslateblue;">
+                <Icon Typeface=Typeface IconStyle=IconStyle.Solid IconName="fa-camera" />
+            </span>
+        </span>
+    </Icons>
+</IconContainer>
+
+@code {
+    private bool IsClassic => Typeface is Typeface.Classic;
+    private bool IsSharp => Typeface is Typeface.Sharp;
+
+    private Typeface Typeface { get; set; } = Typeface.Classic;
+
+    // Intentional Pro-style demo: Sharp renders fully only with licensed Pro assets (Free hosts
+    // fall back to the classic style). The pragma models the documented consumer suppression.
+    private void SetSharp() {
+#pragma warning disable JFA1003
+        Typeface = Typeface.Sharp;
+#pragma warning restore JFA1003
+    }
+}

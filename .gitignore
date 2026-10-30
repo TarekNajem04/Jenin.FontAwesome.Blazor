@@ -23,13 +23,16 @@ mono_crash.*
 [Rr]eleases/
 x64/
 x86/
+[Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
 [Oo]bj/
+[Oo]ut/
 [Ll]og/
 [Ll]ogs/
+artifacts/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -60,6 +63,9 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
 
 # StyleCop
 StyleCopReport.xml
@@ -136,6 +142,8 @@ _TeamCity*
 # AxoCover is a Code Coverage Tool
 .axoCover/*
 !.axoCover/settings.json
+
+coverage*.info
 
 # Visual Studio code coverage results
 *.coverage
@@ -348,3 +356,36 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Fody - auto-generated XML schema
+FodyWeavers.xsd
+
+# ==========================================
+# Coverage Reports & Test Results
+# ==========================================
+
+**/TestResults/
+
+# Generated coverage HTML reports
+artifacts/coverage/
+
+# ==========================================
+# SonarQube & SonarLint
+# ==========================================
+.sonarlint/
+.sonar/
+.sonarcloud/
+.sonarqube/
+
+# Build-generated project XML documentation files
+src/**/*.xml
+archive/**/*.xml
+
+# Ignore local configuration files
+[pP]rivate/*
+![pP]rivate/archives/
+
+# DocFX generated output (docs/docfx.json)
+docs/_site/
+docs/api/*.yml
+docs/api/.manifest

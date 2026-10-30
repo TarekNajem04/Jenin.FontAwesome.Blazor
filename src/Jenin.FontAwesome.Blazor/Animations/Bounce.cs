@@ -1,5 +1,9 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
 namespace Jenin.FontAwesome.Blazor.Animations;
 
 /// <summary>
@@ -8,112 +12,37 @@ namespace Jenin.FontAwesome.Blazor.Animations;
 /// <a href="https://fontawesome.com/docs/web/style/animate#bounce">Font Awesome Bounce</a>.
 /// </para>
 /// </summary>
-public class Bounce : Animation {
-    public Bounce() : base("fa-bounce") { }
+public sealed record Bounce : Animation<Bounce, BounceOptions> {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Bounce"/> animation.
+    /// </summary>
+    /// <param name="options">Optional options; when <see langword="null"/> Font Awesome defaults are used.</param>
+    public Bounce(BounceOptions? options = null) : base(options) { }
 
     /// <summary>
-    /// Set the amount of rebound an icon has when landing after the jump.
+    /// The Font Awesome CSS class that activates the <see cref="Bounce"/> animation (<c>fa-bounce</c>).
     /// </summary>
-    public float? Rebound { get; set; }
+    protected override string CssClass => "fa-bounce";
 
     /// <summary>
-    /// Set the max height an icon will jump to when bouncing.
+    /// Returns a copy of this <see cref="Bounce"/> animation with the specified options.
     /// </summary>
-    public float? Height { get; set; }
+    /// <param name="options">The options to apply.</param>
+    /// <returns>A new <see cref="Bounce"/> instance carrying <paramref name="options"/>.</returns>
+    protected override Bounce WithOptions(BounceOptions options) => this with { Options = options };
 
     /// <summary>
-    /// Set the icon's horizontal distortion ("squish") when starting to bounce.
+    /// Adds the <see cref="Bounce"/> animation's CSS custom properties to <paramref name="styles"/>.
     /// </summary>
-    public float? StartScaleX { get; set; }
-
-    /// <summary>
-    /// Set the icon's vertical distortion ("squish") when starting to bounce.
-    /// </summary>
-    public float? StartScaleY { get; set; }
-
-    /// <summary>
-    /// Set the icon's horizontal distortion ("squish") at the top of the jump.
-    /// </summary>
-    public float? JumpScaleX { get; set; }
-
-    /// <summary>
-    /// Set the icon's vertical distortion ("squish") at the top of the jump.
-    /// </summary>
-    public float? JumpScaleY { get; set; }
-
-    /// <summary>
-    /// Set the icon's horizontal distortion ("squish") when landing after the jump.
-    /// </summary>
-    public float? LandScaleX { get; set; }
-
-    /// <summary>
-    /// Set the icon's vertical distortion ("squish") when landing after the jump.
-    /// </summary>
-    public float? LandScaleY { get; set; }
-
-    public override Dictionary<string, string> AddStyles(Dictionary<string, string> styles) => base.AddStyles(styles)
-                                                                                                   .AddIfNotNull("--fa-bounce-rebound", Rebound)
-                                                                                                   .AddIfNotNull("--fa-bounce-height", Height)
-                                                                                                   .AddIfNotNull("--fa-bounce-start-scale-x", StartScaleX)
-                                                                                                   .AddIfNotNull("--fa-bounce-start-scale-y", StartScaleY)
-                                                                                                   .AddIfNotNull("--fa-bounce-jump-scale-x", JumpScaleX)
-                                                                                                   .AddIfNotNull("--fa-bounce-jump-scale-y", JumpScaleY)
-                                                                                                   .AddIfNotNull("--fa-bounce-land-scale-x", LandScaleX)
-                                                                                                   .AddIfNotNull("--fa-bounce-land-scale-y", LandScaleY);
-    public static Bounce Animate
-        (
-            float? rebound,
-            float? height,
-            float? startScaleX,
-            float? startScaleY,
-            float? jumpScaleX,
-            float? jumpScaleY,
-            float? landScaleX,
-            float? landScaleY
-        )
-        => new() {
-            Rebound = rebound,
-            Height = height,
-            StartScaleX = startScaleX,
-            StartScaleY = startScaleY,
-            JumpScaleX = jumpScaleX,
-            JumpScaleY = jumpScaleY,
-            LandScaleX = landScaleX,
-            LandScaleY = landScaleY
-        };
-    public static Bounce Animate
-        (
-            float? rebound = null,
-            float? height = null,
-            float? startScaleX = null,
-            float? startScaleY = null,
-            float? jumpScaleX = null,
-            float? jumpScaleY = null,
-            float? landScaleX = null,
-            float? landScaleY = null,
-            DurationUnit delayUnit = DurationUnit.Seconds,
-            float? delay = null,
-            AnimationDirection direction = AnimationDirection.None,
-            DurationUnit durationUnit = DurationUnit.Seconds,
-            float? duration = null,
-            float? iterationCount = null,
-            string timingFunction = null
-        )
-        => new() {
-            DelayUnit = delayUnit,
-            Delay = delay,
-            Direction = direction,
-            DurationUnit = durationUnit,
-            Duration = duration,
-            IterationCount = iterationCount,
-            TimingFunction = timingFunction,
-            Rebound = rebound,
-            Height = height,
-            StartScaleX = startScaleX,
-            StartScaleY = startScaleY,
-            JumpScaleX = jumpScaleX,
-            JumpScaleY = jumpScaleY,
-            LandScaleX = landScaleX,
-            LandScaleY = landScaleY
-        };
+    /// <param name="styles">The CSS custom property bag to populate.</param>
+    protected override void AddStyles(Dictionary<string, string> styles)
+        => styles.AddOrUpdateIfNotNull("--fa-bounce-rebound", Options.Rebound)
+                  .AddOrUpdateIfNotNull("--fa-bounce-height", Options.Height)
+                  .AddOrUpdateIfNotNull("--fa-bounce-start-scale-x", Options.StartScaleX)
+                  .AddOrUpdateIfNotNull("--fa-bounce-start-scale-y", Options.StartScaleY)
+                  .AddOrUpdateIfNotNull("--fa-bounce-jump-scale-x", Options.JumpScaleX)
+                  .AddOrUpdateIfNotNull("--fa-bounce-jump-scale-y", Options.JumpScaleY)
+                  .AddOrUpdateIfNotNull("--fa-bounce-land-scale-x", Options.LandScaleX)
+                  .AddOrUpdateIfNotNull("--fa-bounce-land-scale-y", Options.LandScaleY)
+                  .AddOrUpdateIfNotNull("--fa-bounce-anticipation", Options.Anticipation);
 }

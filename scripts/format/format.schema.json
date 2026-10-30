@@ -1,0 +1,124 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+    "title": "Jenin FontAwesome Dotnet Format Configuration",
+
+    "description": "Configuration schema for the Jenin FontAwesome repository formatting tool.",
+
+    "type": "object",
+
+    "required": [
+        "version",
+        "dotnet",
+        "commands"
+    ],
+
+    "properties": {
+
+        "version": {
+            "type": "integer",
+            "description": "Configuration version."
+        },
+
+
+        "dotnet": {
+
+            "type": "object",
+
+            "description": "Shared dotnet format command options.",
+
+            "required": [
+                "verbosity",
+                "severity"
+            ],
+
+            "properties": {
+
+                "verbosity": {
+
+                    "type": "string",
+
+                    "description": "Controls the verbosity level passed to dotnet format.",
+
+                    "enum": [
+                        "quiet",
+                        "minimal",
+                        "normal",
+                        "detailed",
+                        "diagnostic"
+                    ]
+                },
+
+
+                "severity": {
+
+                    "type": "string",
+
+                    "description": "Minimum diagnostic severity passed to analyzers and style checks.",
+
+                    "enum": [
+                        "info",
+                        "warn",
+                        "error"
+                    ]
+                }
+            },
+
+            "additionalProperties": false
+        },
+
+
+        "commands": {
+
+            "type": "object",
+
+            "description": "Controls which dotnet format commands are executed.",
+
+            "required": [
+                "format",
+                "whitespace",
+                "style",
+                "analyzers"
+            ],
+
+            "properties": {
+
+                "format": {
+
+                    "type": "boolean",
+
+                    "description": "Runs the default dotnet format command."
+                },
+
+
+                "whitespace": {
+
+                    "type": "boolean",
+
+                    "description": "Runs whitespace formatting."
+                },
+
+
+                "style": {
+
+                    "type": "boolean",
+
+                    "description": "Runs code style formatting."
+                },
+
+
+                "analyzers": {
+
+                    "type": "boolean",
+
+                    "description": "Runs analyzer based formatting and fixes."
+                }
+            },
+
+            "additionalProperties": false
+        }
+    },
+
+
+    "additionalProperties": false
+}

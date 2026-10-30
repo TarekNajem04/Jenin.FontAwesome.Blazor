@@ -1,0 +1,53 @@
+﻿@*
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+*@
+<div class="mb-1 p-3">
+    <div class="d-flex align-items-center gap-2 mb-3">
+        <h2 class="h4 mb-0">Notifications</h2>
+        <NotificationBadge Count=UnreadCount Unit="unread">
+            <Icon IconName="fa-bell" IconStyle=IconStyle.Solid AriaLabel="Notifications" />
+        </NotificationBadge>
+        <button type="button" class="btn btn-sm btn-outline-secondary ms-auto" @onclick="MarkAllRead">Mark all read</button>
+    </div>
+    <IconList>
+        <Items>
+            @foreach(var item in Items.Where(i => !i.IsRead)) {
+                <IconListItem>
+                    <ItemIcon><Icon IconName="@item.Icon" IconStyle=IconStyle.Solid Color="@item.Color" /></ItemIcon>
+                    <ItemContent><strong>@item.Title</strong> <span class="text-muted">@item.When</span><br />@item.Body</ItemContent>
+                </IconListItem>
+            }
+        </Items>
+    </IconList>
+    @if(!Items.Any(i => !i.IsRead)) {
+        <EmptyState IconName="fa-circle-check" IconStyle=IconStyle.Solid Title="All caught up" Description="Nothing unread." />
+    }
+</div>
+
+@code {
+    private List<Notification> Items = new() {
+        new("Deploy finished", "fa-rocket", "dodgerblue", "Production deploy v2.4.1 succeeded.", "2 min ago", false),
+        new("New sign-in", "fa-user-shield", "goldenrod", "New device signed in from Cairo, EG.", "1 hour ago", false),
+        new("Weekly report", "fa-chart-line", "seagreen", "Your weekly summary is ready.", "Yesterday", true),
+    };
+
+    private int UnreadCount => Items.Count(i => !i.IsRead);
+
+    private void MarkAllRead() {
+        foreach(var item in Items) {
+            item.IsRead = true;
+        }
+    }
+
+    private sealed class Notification(string title, string icon, string color, string body, string when, bool isRead) {
+        public string Title { get; } = title;
+        public string Icon { get; } = icon;
+        public string Color { get; } = color;
+        public string Body { get; } = body;
+        public string When { get; } = when;
+        public bool IsRead { get; set; } = isRead;
+    }
+}

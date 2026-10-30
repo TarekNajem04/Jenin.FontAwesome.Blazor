@@ -1,0 +1,22 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+<IconContainer CssClass="mb-1 p-5 d-flex gap-4 align-items-center" IconSize=IconSize.X02>
+    <Icons>
+        <span class="d-flex gap-2 align-items-center">
+            <StatusDot Title="Online" />
+            <StatusDot BackgroundColor="#ef4444" Title="Busy" Pulse=true />
+            <StatusDot BackgroundColor="#f59e0b" Title="Away" />
+            <StatusDot BackgroundColor="#9ca3af" Title="Offline" />
+        </span>
+        <AvatarIcon Initials="TK" Presence=AvatarPresence.Online Title="Tarek Najem" />
+        <AvatarIcon Presence=AvatarPresence.Busy Title="On a call">
+            <Icon IconName="fa-user-astronaut" IconStyle=IconStyle.Solid />
+        </AvatarIcon>
+    </Icons>
+</IconContainer>

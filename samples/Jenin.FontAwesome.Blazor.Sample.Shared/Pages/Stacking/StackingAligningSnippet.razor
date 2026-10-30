@@ -1,0 +1,29 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<IconContainer CssClass="mb-1 p-5" InverseColor="black">
+    <Icons>
+        <Icon IconStyle=IconStyle.Regular IconName="fa-circle" IconSize=IconSize.X02/>
+
+        <IconStackContainer style="vertical-align: top;">
+            <Icons>
+                <Icon IconStyle=IconStyle.Regular IconName="fa-circle" StackSize=IconStackSize.Larger />
+                <Icon IconStyle=IconStyle.Solid IconName="fa-flag" StackSize=IconStackSize.Same />
+            </Icons>
+        </IconStackContainer>
+
+        <IconStackContainer style="vertical-align: top;">
+            <Icons>
+                <Icon IconStyle=IconStyle.Solid IconName="fa-circle" StackSize=IconStackSize.Larger />
+                <Icon IconStyle=IconStyle.Solid IconName="fa-flag" StackSize=IconStackSize.Same Inverse=true />
+            </Icons>
+        </IconStackContainer>
+
+        <Icon IconStyle=IconStyle.Regular IconName="fa-circle" IconSize=IconSize.X02 />
+    </Icons>
+</IconContainer>

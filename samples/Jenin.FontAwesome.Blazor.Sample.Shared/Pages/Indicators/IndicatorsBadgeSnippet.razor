@@ -1,0 +1,33 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+<IconContainer CssClass="mb-1 p-5 d-flex gap-4 align-items-center" IconSize=IconSize.X02>
+    <Icons>
+        <NotificationBadge Count=@Unread Unit="unread messages">
+            <IconButton IconName="fa-envelope" IconStyle=IconStyle.Solid Title="Inbox" OnClick=ReadOne />
+        </NotificationBadge>
+        <NotificationBadge Count="128" MaxCount=99>
+            <IconButton IconName="fa-bell" IconStyle=IconStyle.Regular Title="Notifications" />
+        </NotificationBadge>
+        <NotificationBadge Count="0">
+            <IconButton IconName="fa-comment" IconStyle=IconStyle.Regular Title="Messages" />
+        </NotificationBadge>
+    </Icons>
+</IconContainer>
+
+<p>Unread: @Unread (click the envelope to read one).</p>
+
+@code {
+    private int Unread = 3;
+
+    private void ReadOne() {
+        if(Unread > 0) {
+            Unread--;
+        }
+    }
+}

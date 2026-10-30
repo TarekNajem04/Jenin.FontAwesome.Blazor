@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <!-- The Installation page keeps a few .cshtml fragments purely as text sources for the
+             snippet viewer (embedded by the EmbedSnippets target below). They are not MVC views,
+             so default .cshtml code generation is disabled. -->
+        <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
+    </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor\Jenin.FontAwesome.Blazor.csproj" />
+    <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor.Icons\Jenin.FontAwesome.Blazor.Icons.csproj" />
+    <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor.IconPicker\Jenin.FontAwesome.Blazor.IconPicker.csproj" />
+    <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor.Svg\Jenin.FontAwesome.Blazor.Svg.csproj" />
+    <ProjectReference Include="..\Jenin.FontAwesome.Blazor.Explorer\Jenin.FontAwesome.Blazor.Explorer.csproj" />
+  </ItemGroup>
+
+    <Target Name="EmbedSnippets" BeforeTargets="PrepareForBuild">
+        <!-- Let's embed Snippet sources to the assembly to be able to show sources at runtime. -->
+        <ItemGroup>
+            <EmbeddedResource Include="Pages/**/*Snippet*" />
+        <EmbeddedResource Include="Resources\demo-sprite.svg" />
+        </ItemGroup>
+    </Target>
+
+</Project>
+
+

@@ -1,32 +1,50 @@
-﻿namespace Jenin.FontAwesome.Blazor.Extensions;
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+namespace Jenin.FontAwesome.Blazor.Extensions;
 
-public static class EnumExtensions {
-    public static string GetStringValue(this Enum value, string defaultValue = default) => value.GetValue(defaultValue);
+internal static class EnumExtensions {
+    public static string? GetStringValue<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum>(this TEnum value, string? defaultValue = null) where TEnum : struct, Enum
+        => value.GetField()?.GetCustomAttribute<ValueAttribute>()?.Value as string ?? defaultValue;
 
-    public static TValue GetValue<TValue>(this Enum value, TValue defaultValue = default) => value.GetValue() is TValue enumValue ? enumValue : defaultValue;
-    public static object GetValue(this Enum value) => value.GetCustomAttribute<ValueAttribute>()?.Value;
-    public static string GetDescription(this Enum value) => value.GetCustomAttribute<DescriptionAttribute>()?.Description ?? value.ToString();
-    public static T GetCustomAttribute<T>(this Enum value) where T : Attribute => value.GetType().GetMember(value.ToString())[0].GetCustomAttribute<T>();
+    public static TValue? GetValue<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum, TValue>(this TEnum value, TValue? defaultValue = default) where TEnum : struct, Enum
+        => value.GetField()?.GetCustomAttribute<ValueAttribute>()?.Value is TValue enumValue ? enumValue : defaultValue;
 
-    public static bool HasCustomAttribute<T>(this Enum value) where T : Attribute => value.GetCustomAttribute<T>() is not null;
-    public static bool NotHasCustomAttribute<T>(this Enum value) where T : Attribute => !value.HasCustomAttribute<T>();
+    public static string GetDescription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum>(this TEnum value) where TEnum : struct, Enum
+        => value.GetField()?.GetCustomAttribute<DescriptionAttribute>()?.Description ?? value.ToString();
+
+    /// <summary>
+    /// Resolves the enum member's backing <see cref="FieldInfo"/>.
+    /// </summary>
+    /// <remarks>
+    /// The enum type is supplied as a generic type parameter annotated with
+    /// <see cref="DynamicallyAccessedMemberTypes.PublicFields"/> (rather than reading
+    /// <see cref="object.GetType"/> on a boxed <see cref="Enum"/>). This keeps custom-attribute
+    /// lookup trim- and Native AOT-safe: the analyzer can prove the field annotations are preserved,
+    /// and no dynamic-code path is required.
+    /// </remarks>
+    public static FieldInfo? GetField<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] TEnum>(this TEnum value) where TEnum : struct, Enum
+        => typeof(TEnum).GetField(value.ToString());
 
     public static TEnum ToEnum<TEnum>(this string value, TEnum defaultValue = default) where TEnum : struct
         => string.IsNullOrEmpty(value)
                 ? defaultValue
                 : Enum.TryParse<TEnum>(value, out var enumValue) ? enumValue : defaultValue;
 
-    public static IEnumerable<TEnum> GetAllFlags<TEnum>(this TEnum flags) where TEnum : Enum {
+    public static IEnumerable<TEnum> GetAllFlags<TEnum>(this TEnum flags) where TEnum : struct, Enum {
         ulong flag = 1;
 
-        foreach (var value in Enum.GetValues(flags.GetType()).Cast<TEnum>()) {
-            var bits = Convert.ToUInt64(value);
+        foreach(var value in Enum.GetValues<TEnum>()) {
+            var bits = Convert.ToUInt64(value, CultureInfo.InvariantCulture);
 
-            while (flag < bits) {
+            while(flag < bits) {
                 flag <<= 1;
             }
 
-            if (flag == bits && flags.HasFlag(value)) {
+            if(flag == bits && flags.HasFlag(value)) {
                 yield return value;
             }
         }

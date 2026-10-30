@@ -1,0 +1,32 @@
+{
+  "used_names": [
+    "camera",
+    "youtube"
+  ],
+  "used_count": 2,
+  "alias_hits": {},
+  "missing_names": [],
+  "dynamic_warnings": [],
+  "fonts": [
+    {
+      "font": "fa-solid-900.woff2",
+      "subset": "fa-solid-900.subset.woff2",
+      "glyphs": 1,
+      "bytes_before": 119488,
+      "bytes_after": 628
+    },
+    {
+      "font": "fa-brands-400.woff2",
+      "subset": "fa-brands-400.subset.woff2",
+      "glyphs": 1,
+      "bytes_before": 115420,
+      "bytes_after": 632
+    }
+  ],
+  "font_bytes_before": 234908,
+  "font_bytes_after": 1260,
+  "css_bytes_before": 130150,
+  "css_bytes_after": 36632,
+  "total_bytes_before": 365058,
+  "total_bytes_after": 37892
+}

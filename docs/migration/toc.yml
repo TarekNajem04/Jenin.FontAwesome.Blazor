@@ -1,0 +1,13 @@
+- name: Migration guides
+  href: index.md
+  items:
+    - name: From MudBlazor
+      href: from-mudblazor.md
+    - name: From Blazorise
+      href: from-blazorise.md
+    - name: From EasyAppDev FA5/FA6
+      href: from-easyappdev.md
+    - name: From Blazicons
+      href: from-blazicons.md
+    - name: From raw class strings
+      href: from-raw-fontawesome.md

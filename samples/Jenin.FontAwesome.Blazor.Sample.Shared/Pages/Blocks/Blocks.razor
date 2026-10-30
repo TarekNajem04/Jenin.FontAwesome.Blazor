@@ -1,0 +1,27 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+@page "/content-blocks"
+
+<PageTitle>Font Awesome Content Blocks</PageTitle>
+
+<div class="blocks-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BlocksStatSnippet) Heading="Stat Cards" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BlocksStatusSnippet) Heading="Enum Status Icons" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BlocksEmptySnippet) Heading="Empty State" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BlocksActivitySnippet) Heading="Activity Feed" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(BlocksShareSnippet) Heading="Share Buttons" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

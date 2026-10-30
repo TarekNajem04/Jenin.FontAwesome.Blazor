@@ -1,5 +1,9 @@
-﻿using Jenin.FontAwesome.Blazor.Extensions;
-
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
 namespace Jenin.FontAwesome.Blazor.Animations;
 
 /// <summary>
@@ -8,63 +12,37 @@ namespace Jenin.FontAwesome.Blazor.Animations;
 /// Flipping is helpful for transitions, processing states,
 /// or for using physical objects that one flips in the real world.
 /// <para>
-/// <a href="https://fontawesome.com/docs/web/style/animate#beat-fade">Font Awesome Beat Fade</a>.
+/// <a href="https://fontawesome.com/docs/web/style/animate#flip">Font Awesome Flip</a>.
 /// </para>
 /// </summary>
-public class Flip : Animation {
-    public Flip() : base("fa-flip") { }
+public sealed record Flip : Animation<Flip, FlipOptions> {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Flip"/> animation.
+    /// </summary>
+    /// <param name="options">Optional options; when <see langword="null"/> Font Awesome defaults are used.</param>
+    public Flip(FlipOptions? options = null) : base(options) { }
 
     /// <summary>
-    /// Set x-coordinate of the vector denoting the axis of rotation (between 0 and 1).
+    /// The Font Awesome CSS class that activates the <see cref="Flip"/> animation (<c>fa-flip</c>).
     /// </summary>
-    public float? FlipX { get; set; }
+    protected override string CssClass => "fa-flip";
 
     /// <summary>
-    /// Set y-coordinate of the vector denoting the axis of rotation (between 0 and 1).
+    /// Returns a copy of this <see cref="Flip"/> animation with the specified options.
     /// </summary>
-    public float? FlipY { get; set; }
+    /// <param name="options">The options to apply.</param>
+    /// <returns>A new <see cref="Flip"/> instance carrying <paramref name="options"/>.</returns>
+    protected override Flip WithOptions(FlipOptions options) => this with { Options = options };
 
     /// <summary>
-    /// Set z-coordinate of the vector denoting the axis of rotation (between 0 and 1).
+    /// Adds the <see cref="Flip"/> animation's CSS custom properties to <paramref name="styles"/>.
     /// </summary>
-    public float? FlipZ { get; set; }
-
-    /// <summary>
-    /// Set rotation angle of flip. A positive angle denotes a clockwise rotation, a negative angle a counter-clockwise one.
-    /// </summary>
-    public float? FlipAngle { get; set; }
-
-    public override Dictionary<string, string> AddStyles(Dictionary<string, string> styles)
-        => base.AddStyles(styles)
-               .AddIfNotNull("--fa-flip-x", FlipX = FlipX.HasValue ? MathF.Min(1, Math.Max(0, FlipX.Value)) : FlipX)
-               .AddIfNotNull("--fa-flip-y", FlipY = FlipY.HasValue ? MathF.Min(1, Math.Max(0, FlipY.Value)) : FlipY)
-               .AddIfNotNull("--fa-flip-z", FlipZ = FlipZ.HasValue ? MathF.Min(1, Math.Max(0, FlipZ.Value)) : FlipZ)
-               .AddIfNotNull("--fa-flip-angle", FlipAngle);
-
-    public static Flip Animate(float? flipX, float? flipY, float? flipZ) => new() { FlipX = flipX, FlipY = flipY, FlipZ = flipZ };
-    public static Flip Animate
-        (
-            float? flipX = null,
-            float? flipY = null,
-            float? flipZ = null,
-            DurationUnit delayUnit = DurationUnit.Seconds,
-            float? delay = null,
-            AnimationDirection direction = AnimationDirection.None,
-            DurationUnit durationUnit = DurationUnit.Seconds,
-            float? duration = null,
-            float? iterationCount = null,
-            string timingFunction = null
-        )
-        => new() {
-            DelayUnit = delayUnit,
-            Delay = delay,
-            Direction = direction,
-            DurationUnit = durationUnit,
-            Duration = duration,
-            IterationCount = iterationCount,
-            TimingFunction = timingFunction,
-            FlipX = flipX,
-            FlipY = flipY,
-            FlipZ = flipZ
-        };
+    /// <param name="styles">The CSS custom property bag to populate.</param>
+    protected override void AddStyles(Dictionary<string, string> styles)
+        => styles.AddOrUpdateIfNotNull("--fa-flip-x", Options.FlipX)
+                  .AddOrUpdateIfNotNull("--fa-flip-y", Options.FlipY)
+                  .AddOrUpdateIfNotNull("--fa-flip-z", Options.FlipZ)
+                  .AddOrUpdateIfNotNull("--fa-flip-angle", Options.FlipAngle)
+                  .AddOrUpdateIfNotNull("--fa-flip-overshoot", Options.Overshoot)
+                  .AddOrUpdateIfNotNull("--fa-flip-anticipation-scale", Options.AnticipationScale);
 }

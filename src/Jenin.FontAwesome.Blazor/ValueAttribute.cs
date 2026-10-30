@@ -1,8 +1,12 @@
-﻿namespace Jenin.FontAwesome.Blazor;
+﻿//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+namespace Jenin.FontAwesome.Blazor;
 
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-public class ValueAttribute : Attribute {
-    public ValueAttribute(object value) => Value = value;
-
-    public object Value { get; set; }
+internal class ValueAttribute(object value) : Attribute {
+    public object Value { get; set; } = value;
 }

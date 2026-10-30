@@ -1,0 +1,27 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<IconContainer CssClass="mb-1 ps-4" IconSize=IconSize.X03>
+    <Icons>
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-basketball"
+              Animation=@Animate.Bounce()
+              Color="#007AFF" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-volleyball"
+              Animation=@Animate.Bounce()
+              Color="#007AFF" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-frog"
+              Animation=@Animate.Bounce(new BounceOptions { StartScaleX = 1F, StartScaleY = 1F, JumpScaleX = 1F, JumpScaleY = 1F, LandScaleX = 1F, LandScaleY = 1F })
+              Color="#7CBB00" />
+
+        <Icon CssClass="me-4" IconStyle=IconStyle.Solid IconName="fa-envelope"
+              Animation=@Animate.Bounce(new BounceOptions { StartScaleX = 1F, StartScaleY = 1F, JumpScaleX = 1F, JumpScaleY = 1, LandScaleX = 1F, LandScaleY = 1F, Rebound = 0F })
+              Color="#007AFF" />
+    </Icons>
+</IconContainer>

@@ -1,0 +1,22 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@if(Visible) {
+    <div class="explorer-help" role="dialog" aria-modal="true" aria-labelledby="explorer-help-title" @onkeydown="OnKeyDownAsync">
+        <div class="explorer-help__dialog">
+            <h3 class="explorer-help__title" id="explorer-help-title">Keyboard shortcuts</h3>
+            <dl class="explorer-help__list">
+                @foreach(var shortcut in _shortcuts) {
+                    <dt class="explorer-help__key">@shortcut.Key</dt>
+                    <dd>@shortcut.Description</dd>
+                }
+            </dl>
+            <button type="button" class="explorer-help__close" @onclick="CloseAsync">Close</button>
+        </div>
+    </div>
+}

@@ -1,0 +1,24 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+<IconContainer CssClass="mb-1 p-5 d-flex gap-3 align-items-center" IconSize=IconSize.X02>
+    <Icons>
+        <IconProgress Progress=@Progress AriaLabel="Upload progress" StrokeWidth=5>
+            <Icon IconName="fa-cloud-arrow-up" IconStyle=IconStyle.Solid />
+        </IconProgress>
+        <IconButton IconName="fa-plus" Title="Advance 25%" Label="Advance" OnClick=Advance />
+    </Icons>
+</IconContainer>
+
+@code {
+    private float Progress;
+
+    private void Advance() {
+        Progress = Progress >= 1 ? 0 : MathF.Min(1, Progress + 0.25f);
+    }
+}

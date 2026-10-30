@@ -1,0 +1,20 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+<button type="button"
+        class="@CssClass"
+        title="@Entry.Label"
+        tabindex="@(Tabbable ? "0" : "-1")"
+        aria-pressed="@(Selected ? "true" : "false")"
+        data-icon="@Entry.Name"
+        @onclick="SelectAsync">
+    <span class="explorer-card__icon" aria-hidden="true">
+        <Icon IconName="@Entry.CssClass" IconStyle="@Entry.PrimaryStyle" />
+    </span>
+    <span class="explorer-card__name">@Entry.Name</span>
+</button>

@@ -1,0 +1,133 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://jeninnet.github.io/schemas/coverage.schema.json",
+
+    "version": "1.0.0",
+    "title": "Jenin FontAwesome Coverage Script Configuration",
+    "description": "Configuration for the Jenin FontAwesome repository code coverage tool.",
+
+    "type": "object",
+    "additionalProperties": false,
+
+    "required": [
+        "coverage",
+        "test",
+        "reportGenerator",
+        "behavior"
+    ],
+
+    "properties": {
+        "coverage": {
+            "type": "object",
+            "description": "Coverage report output settings.",
+
+            "additionalProperties": false,
+
+            "required": [
+                "resultsDirectory",
+                "reportDirectory",
+                "reportTypes"
+            ],
+
+            "properties": {
+                "resultsDirectory": {
+                    "type": "string",
+                    "description": "Directory containing coverage result files."
+                },
+
+                "reportDirectory": {
+                    "type": "string",
+                    "description": "Directory where the generated coverage report will be written."
+                },
+
+                "reportTypes": {
+                    "type": "array",
+                    "description": "ReportGenerator output formats.",
+
+                    "items": {
+                        "type": "string"
+                    },
+
+                    "minItems": 1,
+                    "uniqueItems": true
+                }
+            }
+        },
+
+        "test": {
+            "type": "object",
+            "description": "dotnet test command configuration.",
+
+            "additionalProperties": false,
+
+            "required": [
+                "command",
+                "arguments"
+            ],
+
+            "properties": {
+                "command": {
+                    "type": "string",
+                    "description": "Command used to execute the test runner."
+                },
+
+                "arguments": {
+                    "type": "array",
+                    "description": "Arguments passed to the test command.",
+
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+
+        "reportGenerator": {
+            "type": "object",
+            "description": "ReportGenerator configuration.",
+
+            "additionalProperties": false,
+
+            "required": [
+                "toolCommand",
+                "assemblyFilters"
+            ],
+
+            "properties": {
+                "toolCommand": {
+                    "type": "string",
+                    "description": "Executable name used to invoke ReportGenerator."
+                },
+
+                "assemblyFilters": {
+                    "type": "array",
+                    "description": "Assembly include/exclude filters.",
+
+                    "items": {
+                        "type": "string"
+                    },
+
+                    "uniqueItems": true
+                }
+            }
+        },
+
+        "behavior": {
+            "type": "object",
+            "description": "Runtime behavior options.",
+
+            "additionalProperties": false,
+
+            "required": [
+                "openReport"
+            ],
+
+            "properties": {
+                "openReport": {
+                    "type": "boolean",
+                    "description": "Automatically open the generated HTML report."
+                }
+            }
+        }
+    }
+}

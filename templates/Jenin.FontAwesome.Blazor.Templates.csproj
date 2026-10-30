@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Template pack for `dotnet new`. Content-only: nothing here is compiled,
+         so analyzers and trimming rules do not apply. Versioned in lockstep with the library
+         (Directory.Build.props) because the scaffolded projects pin it.
+         No .snupkg by design (IncludeSymbols=false): content-only packs have no binaries to index.
+         License is MIT-only by design: scaffolds reference (never bundle) Font Awesome assets. -->
+    <PropertyGroup>
+        <!-- Arbitrary: nothing here is compiled (EnableDefaultItems=false below), the TFM only
+             satisfies SDK inference. netstandard2.0 builds on every supported SDK. -->
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageType>Template</PackageType>
+        <PackageId>Jenin.FontAwesome.Blazor.Templates</PackageId>
+        <Title>Jenin Font Awesome Blazor app templates</Title>
+        <Authors>Tarek Najem</Authors>
+        <Company>Jenin</Company>
+        <Description>Blazor Web App and standalone WebAssembly starters with Jenin.FontAwesome.Blazor installed, configured, and showing a first icon.</Description>
+        <PackageTags>blazor fontawesome font-awesome-7 icons dotnet-new templates</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReleaseNotes>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/releases</PackageReleaseNotes>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <NeutralLanguage>en</NeutralLanguage>
+        <EnableDefaultItems>false</EnableDefaultItems>
+        <IncludeSymbols>false</IncludeSymbols>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Forward slashes throughout: backslash separators break template creation on
+             Linux/macOS runners (the engine resolves a rooted target such as '/Components').
+             MSBuild accepts '/' on Windows too, so packs stay byte-identical there. -->
+        <None Include="../LICENSES">
+            <Pack>True</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
+        <None Include="../README.md">
+            <Pack>True</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
+        <None Include="../icon.png">
+            <Pack>True</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="BlazorWebApp/**/*" Exclude="BlazorWebApp/bin/**/*;BlazorWebApp/obj/**/*">
+            <Pack>True</Pack>
+            <PackagePath>content/BlazorWebApp/</PackagePath>
+        </Content>
+        <Content Include="BlazorWasm/**/*" Exclude="BlazorWasm/bin/**/*;BlazorWasm/obj/**/*">
+            <Pack>True</Pack>
+            <PackagePath>content/BlazorWasm/</PackagePath>
+        </Content>
+    </ItemGroup>
+
+</Project>

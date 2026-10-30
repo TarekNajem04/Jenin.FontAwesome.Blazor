@@ -1,0 +1,24 @@
+<!--Directory.Build.targets-->
+<Project>
+
+    <!-- Ensure the local package output folder exists before any pack -->
+    <Target Name="EnsureLocalPackagesDirectory"
+            BeforeTargets="Pack">
+        <MakeDir Directories="$(PackageOutputPath)" />
+    </Target>
+
+    <!-- Dogfood gate: every shipped compilation is analyzed by the in-repo
+         analyzer. Test projects are excluded: their suites intentionally cover the full style
+         matrix (including Pro-only values) plus invalid inputs, and the analyzer's own behavior
+         is proven by tests/Jenin.FontAwesome.Blazor.Analyzers.Tests instead. The analyzer and
+         template-pack projects are excluded because they have no product code to analyze. -->
+    <ItemGroup Condition="'$(IsTestProject)' != 'true'
+                    AND '$(MSBuildProjectName)' != 'Jenin.FontAwesome.Blazor.Analyzers'
+                    AND '$(MSBuildProjectName)' != 'Jenin.FontAwesome.Blazor.Templates'">
+        <ProjectReference Include="$(MSBuildThisFileDirectory)src/Jenin.FontAwesome.Blazor.Analyzers/Jenin.FontAwesome.Blazor.Analyzers.csproj"
+                          OutputItemType="Analyzer"
+                          ReferenceOutputAssembly="false"
+                          PrivateAssets="all" />
+    </ItemGroup>
+
+</Project>

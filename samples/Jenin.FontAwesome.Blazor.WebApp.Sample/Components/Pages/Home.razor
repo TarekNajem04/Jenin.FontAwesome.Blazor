@@ -1,0 +1,34 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@page "/"
+
+<PageTitle>Jenin.FontAwesome.Blazor · Web App sample</PageTitle>
+
+<h1>Jenin.FontAwesome.Blazor · Blazor Web App sample</h1>
+
+<p>
+    This sample hosts the same Font Awesome components under every hosting model a Blazor Web App
+    offers: static server-side rendering, Interactive Server, Interactive WebAssembly, and
+    Interactive Auto. The render mode is the only thing that changes; the component markup does not.
+</p>
+
+<p>Pick a page to see the library behave the same way on each host:</p>
+
+<ul>
+    <li><a href="static-ssr">Static SSR</a>: HTML is rendered on the server with no interactivity.</li>
+    <li><a href="interactive-server">Interactive Server</a>: interactivity over a SignalR circuit, prerendered.</li>
+    <li><a href="interactive-server-no-prerender">Interactive Server (no prerender)</a>: the same circuit without prerendering.</li>
+    <li><a href="interactive-webassembly">Interactive WebAssembly</a>: interactivity runs in the browser.</li>
+    <li><a href="interactive-auto">Interactive Auto</a>: server first, then WebAssembly once downloaded.</li>
+</ul>
+
+<p>
+    A meaningful icon renders on this static page without any interactivity:
+    <Icon IconStyle=IconStyle.Solid IconName="fa-house" Title="Home" Decorative=false />
+</p>

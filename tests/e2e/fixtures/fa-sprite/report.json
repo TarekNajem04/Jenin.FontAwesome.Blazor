@@ -1,0 +1,17 @@
+{
+  "used_names": [
+    "fa-camera",
+    "fa-youtube"
+  ],
+  "used_count": 2,
+  "symbols": 2,
+  "per_font_glyphs": {
+    "fa-solid-900.woff2": 1,
+    "fa-regular-400.woff2": 0,
+    "fa-brands-400.woff2": 1
+  },
+  "missing_names": [],
+  "dynamic_warnings": [],
+  "sprite_file": "fa-sprite.svg",
+  "sprite_bytes": 1954
+}

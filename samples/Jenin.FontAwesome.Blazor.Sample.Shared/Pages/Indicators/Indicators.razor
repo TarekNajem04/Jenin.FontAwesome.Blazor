@@ -1,0 +1,25 @@
+﻿@*
+ //
+ // Copyright (c) Jeninnet.
+ // Part of the Jeninnet Platform.
+ // Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+ // Licensed under the MIT License.
+ //
+*@
+@page "/icon-indicators"
+
+<PageTitle>Font Awesome Indicators</PageTitle>
+
+<div class="indicators-page sample-page">
+    <SampleTabs>
+        <Tabs>
+            <SampleTab Text="Blazor">
+                <Samples>
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IndicatorsBadgeSnippet) Heading="Notification Badges" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IndicatorsProgressSnippet) Heading="Progress Ring" />
+                    <Sample CssClass="mb-5" SnippetComponent=typeof(IndicatorsPresenceSnippet) Heading="Presence & Avatars" />
+                </Samples>
+            </SampleTab>
+        </Tabs>
+    </SampleTabs>
+</div>

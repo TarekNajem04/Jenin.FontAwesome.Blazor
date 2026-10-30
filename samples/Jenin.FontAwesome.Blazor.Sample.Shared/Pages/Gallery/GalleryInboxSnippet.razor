@@ -1,0 +1,57 @@
+﻿@*
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+*@
+<div class="mb-1 p-3" style="max-width: 44rem;">
+    <div class="d-flex align-items-center gap-2 mb-3">
+        <h2 class="h4 mb-0">Inbox</h2>
+        <NotificationBadge Count=UnreadCount Unit="unread">
+            <Icon IconName="fa-inbox" IconStyle=IconStyle.Solid AriaLabel="Inbox" />
+        </NotificationBadge>
+    </div>
+    @foreach(var mail in Mails) {
+        <div class="card mb-2" data-testid=@($"inbox-row-{mail.Id}")>
+            <div class="card-body d-flex align-items-center gap-3 py-2">
+                <AvatarIcon Initials="@mail.Initials" AvatarColor="@mail.Color" Size=44 />
+                <div class="@(mail.IsRead ? "text-muted" : "fw-bold")">
+                    <div>@mail.Subject</div>
+                    <div class="small @(mail.IsRead ? "" : "text-body")">@mail.Preview</div>
+                </div>
+                <span class="ms-auto d-flex gap-1">
+                    @if(!mail.IsRead) {
+                        <IconButton IconName="fa-envelope-open" IconStyle=IconStyle.Solid Title="Mark as read" OnClick="() => mail.IsRead = true" />
+                    }
+                    <IconButton IconName="fa-trash-can" IconStyle=IconStyle.Regular Title="Delete" OnClick="() => Delete(mail)" />
+                </span>
+            </div>
+        </div>
+    }
+    @if(!Mails.Any()) {
+        <EmptyState IconName="fa-inbox" IconStyle=IconStyle.Regular Title="Inbox zero" Description="Enjoy the silence." />
+    }
+</div>
+
+@code {
+    private List<Mail> Mails = new() {
+        new(1, "TM", "#0d6efd", false, "Subsetter finished", "Your FA bundle shrank 84.8%."),
+        new(2, "AK", "#6f42c1", false, "Kit invite", "You were invited to the Pro kit."),
+        new(3, "RB", "#198754", true, "Weekly digest", "12 new icons landed in FA 7.3."),
+    };
+
+    private int UnreadCount => Mails.Count(m => !m.IsRead);
+
+    private void Delete(Mail mail) {
+        Mails.Remove(mail);
+    }
+
+    private sealed class Mail(int id, string initials, string color, bool isRead, string subject, string preview) {
+        public int Id { get; } = id;
+        public string Initials { get; } = initials;
+        public string Color { get; } = color;
+        public bool IsRead { get; set; } = isRead;
+        public string Subject { get; } = subject;
+        public string Preview { get; } = preview;
+    }
+}

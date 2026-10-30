@@ -1,0 +1,26 @@
+﻿@*
+//
+// Copyright (c) Jeninnet.
+// Part of the Jeninnet Platform.
+// Repository: https://github.com/TarekNajem04/Jenin.FontAwesome.Blazor/
+// Licensed under the MIT License.
+//
+*@
+@implements IAsyncDisposable
+
+@if (Items.Count == 0) {
+    <div class="explorer-grid explorer-grid--empty" role="status">
+        <p class="explorer-grid__empty-title">No icons match this search.</p>
+        <p class="explorer-grid__empty-hint">Try a different term, or clear the style filter.</p>
+    </div>
+} else {
+    <div class="explorer-grid" @ref="_viewport" role="group" aria-label="Icon results" @onkeydown="OnKeyDownAsync">
+        <Virtualize Items="@_rows" ItemSize="@ROW_HEIGHT" OverscanCount="4" Context="row">
+            <div class="explorer-grid__row" style="@RowStyle">
+                @foreach (var entry in row) {
+                    <IconCard Entry="entry" Selected="@IsSelected(entry)" Tabbable="@IsTabbable(entry)" OnSelect="OnSelect" />
+                }
+            </div>
+        </Virtualize>
+    </div>
+}

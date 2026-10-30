@@ -1,0 +1,915 @@
+TYPE enum Jenin.FontAwesome.Blazor.AnimationTrigger : System.Enum
+F Jenin.FontAwesome.Blazor.AnimationTrigger Focus
+F Jenin.FontAwesome.Blazor.AnimationTrigger Hover
+F Jenin.FontAwesome.Blazor.AnimationTrigger None
+F Jenin.FontAwesome.Blazor.AnimationTrigger ParentHover
+F Jenin.FontAwesome.Blazor.AnimationTrigger ScrollReveal
+TYPE class Jenin.FontAwesome.Blazor.Animations.Animate : System.Object
+M Jenin.FontAwesome.Blazor.Animations.Beat Beat(Jenin.FontAwesome.Blazor.Animations.BeatOptions)
+M Jenin.FontAwesome.Blazor.Animations.BeatFade BeatFade(Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions)
+M Jenin.FontAwesome.Blazor.Animations.Bounce Bounce(Jenin.FontAwesome.Blazor.Animations.BounceOptions)
+M Jenin.FontAwesome.Blazor.Animations.Buzz Buzz(Jenin.FontAwesome.Blazor.Animations.BuzzOptions)
+M Jenin.FontAwesome.Blazor.Animations.Fade Fade(Jenin.FontAwesome.Blazor.Animations.FadeOptions)
+M Jenin.FontAwesome.Blazor.Animations.Flip Flip(Jenin.FontAwesome.Blazor.Animations.FlipOptions)
+M Jenin.FontAwesome.Blazor.Animations.Flip360 Flip360(Jenin.FontAwesome.Blazor.Animations.Flip360Options)
+M Jenin.FontAwesome.Blazor.Animations.Float Float(Jenin.FontAwesome.Blazor.Animations.FloatOptions)
+M Jenin.FontAwesome.Blazor.Animations.Jello Jello(Jenin.FontAwesome.Blazor.Animations.JelloOptions)
+M Jenin.FontAwesome.Blazor.Animations.Shake Shake(Jenin.FontAwesome.Blazor.Animations.ShakeOptions)
+M Jenin.FontAwesome.Blazor.Animations.Spin Spin(Jenin.FontAwesome.Blazor.Animations.SpinOptions)
+M Jenin.FontAwesome.Blazor.Animations.SpinSnap SpinSnap(Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions)
+M Jenin.FontAwesome.Blazor.Animations.Swing Swing(Jenin.FontAwesome.Blazor.Animations.SwingOptions)
+M Jenin.FontAwesome.Blazor.Animations.Wag Wag(Jenin.FontAwesome.Blazor.Animations.WagOptions)
+TYPE abstract class Jenin.FontAwesome.Blazor.Animations.Animation : System.Object
+C Jenin.FontAwesome.Blazor.Animations.Animation..ctor(Jenin.FontAwesome.Blazor.Animations.Animation)
+C Jenin.FontAwesome.Blazor.Animations.Animation..ctor(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M Jenin.FontAwesome.Blazor.Animations.Animation <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Collections.Generic.IReadOnlyDictionary<System.String, System.String> BuildStyles()
+M System.Int32 GetHashCode()
+M System.String BuildClasses()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P Jenin.FontAwesome.Blazor.Animations.AnimationOptions Options { get; set; }
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE enum Jenin.FontAwesome.Blazor.Animations.AnimationDirection : System.Enum
+F Jenin.FontAwesome.Blazor.Animations.AnimationDirection Alternate
+F Jenin.FontAwesome.Blazor.Animations.AnimationDirection AlternateReverse
+F Jenin.FontAwesome.Blazor.Animations.AnimationDirection None
+F Jenin.FontAwesome.Blazor.Animations.AnimationDirection Normal
+F Jenin.FontAwesome.Blazor.Animations.AnimationDirection Reverse
+TYPE abstract class Jenin.FontAwesome.Blazor.Animations.AnimationOptions : System.Object
+C Jenin.FontAwesome.Blazor.Animations.AnimationOptions..ctor()
+C Jenin.FontAwesome.Blazor.Animations.AnimationOptions..ctor(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M Jenin.FontAwesome.Blazor.Animations.AnimationOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.Nullable<System.Single> NormalizeUnitInterval(System.Nullable<System.Single>)
+M System.String ToString()
+P Jenin.FontAwesome.Blazor.Animations.AnimationDirection Direction { get; set; }
+P System.Nullable<System.Single> IterationCount { get; set; }
+P System.Nullable<System.TimeSpan> Delay { get; set; }
+P System.Nullable<System.TimeSpan> Duration { get; set; }
+P System.String TimingFunction { get; set; }
+P System.Type EqualityContract { get; }
+TYPE abstract class Jenin.FontAwesome.Blazor.Animations.Animation<TSelf, TOptions> : Jenin.FontAwesome.Blazor.Animations.Animation
+C Jenin.FontAwesome.Blazor.Animations.Animation<TSelf, TOptions>..ctor(Jenin.FontAwesome.Blazor.Animations.Animation<TSelf, TOptions>)
+C Jenin.FontAwesome.Blazor.Animations.Animation<TSelf, TOptions>..ctor(TOptions)
+M Jenin.FontAwesome.Blazor.Animations.Animation<TSelf, TOptions> <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<TSelf, TOptions>)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M TSelf SetDelay(System.TimeSpan)
+M TSelf SetDirection(Jenin.FontAwesome.Blazor.Animations.AnimationDirection)
+M TSelf SetDuration(System.TimeSpan)
+M TSelf SetIterationCount(System.Nullable<System.Single>)
+M TSelf SetTimingFunction(System.String)
+M TSelf WithOptions(TOptions)
+P System.Type EqualityContract { get; }
+P TOptions Options { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Beat : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Beat, Jenin.FontAwesome.Blazor.Animations.BeatOptions>
+C Jenin.FontAwesome.Blazor.Animations.Beat..ctor(Jenin.FontAwesome.Blazor.Animations.BeatOptions)
+M Jenin.FontAwesome.Blazor.Animations.Beat <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Beat WithOptions(Jenin.FontAwesome.Blazor.Animations.BeatOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Beat, Jenin.FontAwesome.Blazor.Animations.BeatOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Beat)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.BeatFade : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.BeatFade, Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions>
+C Jenin.FontAwesome.Blazor.Animations.BeatFade..ctor(Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions)
+M Jenin.FontAwesome.Blazor.Animations.BeatFade <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.BeatFade WithOptions(Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.BeatFade, Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.BeatFade)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.BeatFadeOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> Opacity { get; set; }
+P System.Nullable<System.Single> Scale { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.BeatOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.BeatOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.BeatOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.BeatOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> Scale { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Bounce : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Bounce, Jenin.FontAwesome.Blazor.Animations.BounceOptions>
+C Jenin.FontAwesome.Blazor.Animations.Bounce..ctor(Jenin.FontAwesome.Blazor.Animations.BounceOptions)
+M Jenin.FontAwesome.Blazor.Animations.Bounce <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Bounce WithOptions(Jenin.FontAwesome.Blazor.Animations.BounceOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Bounce, Jenin.FontAwesome.Blazor.Animations.BounceOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Bounce)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.BounceOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.BounceOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.BounceOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.BounceOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> Height { get; set; }
+P System.Nullable<System.Single> JumpScaleX { get; set; }
+P System.Nullable<System.Single> JumpScaleY { get; set; }
+P System.Nullable<System.Single> LandScaleX { get; set; }
+P System.Nullable<System.Single> LandScaleY { get; set; }
+P System.Nullable<System.Single> Rebound { get; set; }
+P System.Nullable<System.Single> StartScaleX { get; set; }
+P System.Nullable<System.Single> StartScaleY { get; set; }
+P System.String Anticipation { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Buzz : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Buzz, Jenin.FontAwesome.Blazor.Animations.BuzzOptions>
+C Jenin.FontAwesome.Blazor.Animations.Buzz..ctor(Jenin.FontAwesome.Blazor.Animations.BuzzOptions)
+M Jenin.FontAwesome.Blazor.Animations.Buzz <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Buzz WithOptions(Jenin.FontAwesome.Blazor.Animations.BuzzOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Buzz, Jenin.FontAwesome.Blazor.Animations.BuzzOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Buzz)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.BuzzOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.BuzzOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.BuzzOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.BuzzOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.String Distance { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Fade : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Fade, Jenin.FontAwesome.Blazor.Animations.FadeOptions>
+C Jenin.FontAwesome.Blazor.Animations.Fade..ctor(Jenin.FontAwesome.Blazor.Animations.FadeOptions)
+M Jenin.FontAwesome.Blazor.Animations.Fade <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Fade WithOptions(Jenin.FontAwesome.Blazor.Animations.FadeOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Fade, Jenin.FontAwesome.Blazor.Animations.FadeOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Fade)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.FadeOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.FadeOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.FadeOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.FadeOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> Opacity { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Flip : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Flip, Jenin.FontAwesome.Blazor.Animations.FlipOptions>
+C Jenin.FontAwesome.Blazor.Animations.Flip..ctor(Jenin.FontAwesome.Blazor.Animations.FlipOptions)
+M Jenin.FontAwesome.Blazor.Animations.Flip <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Flip WithOptions(Jenin.FontAwesome.Blazor.Animations.FlipOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Flip, Jenin.FontAwesome.Blazor.Animations.FlipOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Flip)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Flip360 : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Flip360, Jenin.FontAwesome.Blazor.Animations.Flip360Options>
+C Jenin.FontAwesome.Blazor.Animations.Flip360..ctor(Jenin.FontAwesome.Blazor.Animations.Flip360Options)
+M Jenin.FontAwesome.Blazor.Animations.Flip360 <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Flip360 WithOptions(Jenin.FontAwesome.Blazor.Animations.Flip360Options)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Flip360, Jenin.FontAwesome.Blazor.Animations.Flip360Options>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Flip360)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Flip360Options : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.Flip360Options..ctor()
+M Jenin.FontAwesome.Blazor.Animations.Flip360Options <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Flip360Options)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.FlipOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.FlipOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.FlipOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.FlipOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> AnticipationScale { get; set; }
+P System.Nullable<System.Single> FlipAngle { get; set; }
+P System.Nullable<System.Single> FlipX { get; set; }
+P System.Nullable<System.Single> FlipY { get; set; }
+P System.Nullable<System.Single> FlipZ { get; set; }
+P System.Nullable<System.Single> Overshoot { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Float : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Float, Jenin.FontAwesome.Blazor.Animations.FloatOptions>
+C Jenin.FontAwesome.Blazor.Animations.Float..ctor(Jenin.FontAwesome.Blazor.Animations.FloatOptions)
+M Jenin.FontAwesome.Blazor.Animations.Float <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Float WithOptions(Jenin.FontAwesome.Blazor.Animations.FloatOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Float, Jenin.FontAwesome.Blazor.Animations.FloatOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Float)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.FloatOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.FloatOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.FloatOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.FloatOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> SquashX { get; set; }
+P System.Nullable<System.Single> SquashY { get; set; }
+P System.Nullable<System.Single> StretchX { get; set; }
+P System.Nullable<System.Single> StretchY { get; set; }
+P System.Nullable<System.Single> Tilt { get; set; }
+P System.String Drift { get; set; }
+P System.String Height { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Jello : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Jello, Jenin.FontAwesome.Blazor.Animations.JelloOptions>
+C Jenin.FontAwesome.Blazor.Animations.Jello..ctor(Jenin.FontAwesome.Blazor.Animations.JelloOptions)
+M Jenin.FontAwesome.Blazor.Animations.Jello <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Jello WithOptions(Jenin.FontAwesome.Blazor.Animations.JelloOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Jello, Jenin.FontAwesome.Blazor.Animations.JelloOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Jello)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.JelloOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.JelloOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.JelloOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.JelloOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> ScaleX { get; set; }
+P System.Nullable<System.Single> ScaleY { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Shake : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Shake, Jenin.FontAwesome.Blazor.Animations.ShakeOptions>
+C Jenin.FontAwesome.Blazor.Animations.Shake..ctor(Jenin.FontAwesome.Blazor.Animations.ShakeOptions)
+M Jenin.FontAwesome.Blazor.Animations.Shake <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Shake WithOptions(Jenin.FontAwesome.Blazor.Animations.ShakeOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Shake, Jenin.FontAwesome.Blazor.Animations.ShakeOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Shake)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.ShakeOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.ShakeOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.ShakeOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.ShakeOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Spin : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Spin, Jenin.FontAwesome.Blazor.Animations.SpinOptions>
+C Jenin.FontAwesome.Blazor.Animations.Spin..ctor(Jenin.FontAwesome.Blazor.Animations.SpinOptions)
+M Jenin.FontAwesome.Blazor.Animations.Spin <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Spin WithOptions(Jenin.FontAwesome.Blazor.Animations.SpinOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Spin, Jenin.FontAwesome.Blazor.Animations.SpinOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Spin)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String BuildClasses()
+M System.String ToString()
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.SpinOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.SpinOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.SpinOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.SpinOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Boolean> Pulse { get; set; }
+P System.Nullable<System.Boolean> Reverse { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.SpinSnap : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.SpinSnap, Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions>
+C Jenin.FontAwesome.Blazor.Animations.SpinSnap..ctor(Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions)
+M Jenin.FontAwesome.Blazor.Animations.SpinSnap <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.SpinSnap WithOptions(Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.SpinSnap, Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.SpinSnap)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.SpinSnapOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P Jenin.FontAwesome.Blazor.Animations.SpinSnapSize Size { get; set; }
+P System.Type EqualityContract { get; }
+TYPE enum Jenin.FontAwesome.Blazor.Animations.SpinSnapSize : System.Enum
+F Jenin.FontAwesome.Blazor.Animations.SpinSnapSize Default
+F Jenin.FontAwesome.Blazor.Animations.SpinSnapSize Eight
+F Jenin.FontAwesome.Blazor.Animations.SpinSnapSize Four
+TYPE class Jenin.FontAwesome.Blazor.Animations.Swing : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Swing, Jenin.FontAwesome.Blazor.Animations.SwingOptions>
+C Jenin.FontAwesome.Blazor.Animations.Swing..ctor(Jenin.FontAwesome.Blazor.Animations.SwingOptions)
+M Jenin.FontAwesome.Blazor.Animations.Swing <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Swing WithOptions(Jenin.FontAwesome.Blazor.Animations.SwingOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Swing, Jenin.FontAwesome.Blazor.Animations.SwingOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Swing)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.SwingOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.SwingOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.SwingOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.SwingOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> Angle { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.Wag : Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Wag, Jenin.FontAwesome.Blazor.Animations.WagOptions>
+C Jenin.FontAwesome.Blazor.Animations.Wag..ctor(Jenin.FontAwesome.Blazor.Animations.WagOptions)
+M Jenin.FontAwesome.Blazor.Animations.Wag <Clone>$()
+M Jenin.FontAwesome.Blazor.Animations.Wag WithOptions(Jenin.FontAwesome.Blazor.Animations.WagOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Animation<Jenin.FontAwesome.Blazor.Animations.Wag, Jenin.FontAwesome.Blazor.Animations.WagOptions>)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.Wag)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void AddStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+P System.String CssClass { get; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.Animations.WagOptions : Jenin.FontAwesome.Blazor.Animations.AnimationOptions
+C Jenin.FontAwesome.Blazor.Animations.WagOptions..ctor()
+M Jenin.FontAwesome.Blazor.Animations.WagOptions <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.AnimationOptions)
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.Animations.WagOptions)
+M System.Boolean Equals(System.Object)
+M System.Boolean PrintMembers(System.Text.StringBuilder)
+M System.Int32 GetHashCode()
+M System.String ToString()
+P System.Nullable<System.Single> Angle { get; set; }
+P System.Type EqualityContract { get; }
+TYPE class Jenin.FontAwesome.Blazor.ApplicationBuilderExtensions : System.Object
+F System.String DefaultConfigEndpointPath
+M Microsoft.AspNetCore.Builder.IApplicationBuilder MapJeninFontAwesomeAssets(Microsoft.AspNetCore.Builder.IApplicationBuilder, System.Action<Jenin.FontAwesome.Blazor.FontAwesomeOptions>)
+TYPE enum Jenin.FontAwesome.Blazor.AvatarPresence : System.Enum
+F Jenin.FontAwesome.Blazor.AvatarPresence Away
+F Jenin.FontAwesome.Blazor.AvatarPresence Busy
+F Jenin.FontAwesome.Blazor.AvatarPresence None
+F Jenin.FontAwesome.Blazor.AvatarPresence Offline
+F Jenin.FontAwesome.Blazor.AvatarPresence Online
+TYPE enum Jenin.FontAwesome.Blazor.BorderStyle : System.Enum
+F Jenin.FontAwesome.Blazor.BorderStyle Dashed
+F Jenin.FontAwesome.Blazor.BorderStyle Dotted
+F Jenin.FontAwesome.Blazor.BorderStyle Double
+F Jenin.FontAwesome.Blazor.BorderStyle Groove
+F Jenin.FontAwesome.Blazor.BorderStyle Hidden
+F Jenin.FontAwesome.Blazor.BorderStyle Inset
+F Jenin.FontAwesome.Blazor.BorderStyle None
+F Jenin.FontAwesome.Blazor.BorderStyle Outset
+F Jenin.FontAwesome.Blazor.BorderStyle Ridge
+F Jenin.FontAwesome.Blazor.BorderStyle Solid
+TYPE enum Jenin.FontAwesome.Blazor.CanvasPadding : System.Enum
+F Jenin.FontAwesome.Blazor.CanvasPadding NotSet
+F Jenin.FontAwesome.Blazor.CanvasPadding Roomy
+F Jenin.FontAwesome.Blazor.CanvasPadding Square
+TYPE class Jenin.FontAwesome.Blazor.Components.ActivityItem : Jenin.FontAwesome.Blazor.Components.ComposedIconElement
+C Jenin.FontAwesome.Blazor.Components.ActivityItem..ctor()
+M System.Void AddComponentStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Jenin.FontAwesome.Blazor.IconStyle IconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.Typeface Typeface { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment IconFragment { get; set; }
+P System.String IconColor { get; set; }
+P System.String IconName { get; set; }
+P System.String MarkerBackground { get; set; }
+P System.String Time { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.AvatarIcon : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.AvatarIcon..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Jenin.FontAwesome.Blazor.AvatarPresence Presence { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+P System.Int32 Size { get; set; }
+P System.String AvatarColor { get; set; }
+P System.String Initials { get; set; }
+P System.String RingColor { get; set; }
+TYPE abstract class Jenin.FontAwesome.Blazor.Components.ComposedIconElement : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.ComposedIconElement..ctor()
+M System.Void AddComponentStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+M System.Void AddRootAndMarker(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder, System.String, System.String, Jenin.FontAwesome.Blazor.IconStyle, Jenin.FontAwesome.Blazor.Typeface, System.String, Microsoft.AspNetCore.Components.RenderFragment)
+TYPE class Jenin.FontAwesome.Blazor.Components.CounterLayer : Jenin.FontAwesome.Blazor.Components.ElementWithTransformations
+C Jenin.FontAwesome.Blazor.Components.CounterLayer..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P System.String Bottom { get; set; }
+P System.String CounterBackgroundColor { get; set; }
+P System.String CounterBorderRadius { get; set; }
+P System.String CounterPadding { get; set; }
+P System.String Left { get; set; }
+P System.String LineHeight { get; set; }
+P System.String MaxWidth { get; set; }
+P System.String MinWidth { get; set; }
+P System.String Right { get; set; }
+P System.String Scale { get; set; }
+P System.String Text { get; set; }
+P System.String Top { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.Element : Jenin.FontAwesome.Blazor.Components.ElementBase
+C Jenin.FontAwesome.Blazor.Components.Element..ctor()
+P Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> OnClick { get; set; }
+P Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> OnDoubleClick { get; set; }
+P Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> OnMouseOut { get; set; }
+P Microsoft.AspNetCore.Components.EventCallback<Microsoft.AspNetCore.Components.Web.MouseEventArgs> OnMouseOver { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.ElementBase : Microsoft.AspNetCore.Components.ComponentBase
+C Jenin.FontAwesome.Blazor.Components.ElementBase..ctor()
+M System.Threading.Tasks.Task SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)
+M System.Void OnParametersSet()
+P Jenin.FontAwesome.Blazor.BorderStyle BorderStyle { get; set; }
+P Jenin.FontAwesome.Blazor.CanvasPadding CanvasPadding { get; set; }
+P Jenin.FontAwesome.Blazor.IconSize IconSize { get; set; }
+P Jenin.FontAwesome.Blazor.IconWidth WidthMode { get; set; }
+P System.Boolean Bordered { get; set; }
+P System.Boolean FixedWidth { get; set; }
+P System.Boolean Inverse { get; set; }
+P System.Collections.Generic.Dictionary<System.String, System.Object> AdditionalAttributes { get; set; }
+P System.Nullable<System.Boolean> Decorative { get; set; }
+P System.String AriaLabel { get; set; }
+P System.String BackgroundColor { get; set; }
+P System.String BorderColor { get; set; }
+P System.String BorderPadding { get; set; }
+P System.String BorderRadius { get; set; }
+P System.String BorderWidth { get; set; }
+P System.String Color { get; set; }
+P System.String CssClass { get; set; }
+P System.String InverseColor { get; set; }
+P System.String Margin { get; set; }
+P System.String Padding { get; set; }
+P System.String Title { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.ElementWithTransformations : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.ElementWithTransformations..ctor()
+M System.Void OnParametersSet()
+P Jenin.FontAwesome.Blazor.Transformations.Transform Transform { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.EmptyState : Jenin.FontAwesome.Blazor.Components.ComposedIconElement
+C Jenin.FontAwesome.Blazor.Components.EmptyState..ctor()
+M System.Void AddComponentStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Jenin.FontAwesome.Blazor.IconStyle IconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.Typeface Typeface { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment IconFragment { get; set; }
+P System.String Description { get; set; }
+P System.String IconColor { get; set; }
+P System.String IconName { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.FavoriteButton : Jenin.FontAwesome.Blazor.Components.IconToggleButton
+C Jenin.FontAwesome.Blazor.Components.FavoriteButton..ctor()
+TYPE class Jenin.FontAwesome.Blazor.Components.FontAwesomeDefaults : Microsoft.AspNetCore.Components.ComponentBase
+C Jenin.FontAwesome.Blazor.Components.FontAwesomeDefaults..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+P System.Nullable<Jenin.FontAwesome.Blazor.IconSize> IconSize { get; set; }
+P System.Nullable<Jenin.FontAwesome.Blazor.IconStyle> IconStyle { get; set; }
+P System.Nullable<Jenin.FontAwesome.Blazor.Typeface> Typeface { get; set; }
+P System.Nullable<System.Boolean> Decorative { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.FontAwesomeHeadAssets : Microsoft.AspNetCore.Components.ComponentBase
+C Jenin.FontAwesome.Blazor.Components.FontAwesomeHeadAssets..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P System.Nullable<Jenin.FontAwesome.Blazor.FontAwesomeAssetMode> Mode { get; set; }
+P System.String ConfigScriptUrl { get; set; }
+P System.String JavaScriptUrl { get; set; }
+P System.String StyleSheetUrl { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.Icon : Jenin.FontAwesome.Blazor.Components.ElementWithTransformations
+C Jenin.FontAwesome.Blazor.Components.Icon..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+M System.Void OnParametersSet()
+P Jenin.FontAwesome.Blazor.AnimationTrigger Trigger { get; set; }
+P Jenin.FontAwesome.Blazor.Animations.Animation Animation { get; set; }
+P Jenin.FontAwesome.Blazor.Components.IconContainer Container { get; set; }
+P Jenin.FontAwesome.Blazor.IconRotate CombiningRotate { get; set; }
+P Jenin.FontAwesome.Blazor.IconRotate Rotate { get; set; }
+P Jenin.FontAwesome.Blazor.IconStackSize StackSize { get; set; }
+P Jenin.FontAwesome.Blazor.IconStyle IconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.IconStyle MaskIconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.PullPosition PullPosition { get; set; }
+P Jenin.FontAwesome.Blazor.Typeface Typeface { get; set; }
+P System.Boolean SwapOpacity { get; set; }
+P System.Nullable<System.Int32> StackZIndex { get; set; }
+P System.Nullable<System.Single> PrimaryOpacity { get; set; }
+P System.Nullable<System.Single> RotateAngle { get; set; }
+P System.Nullable<System.Single> SecondaryOpacity { get; set; }
+P System.String IconName { get; set; }
+P System.String MaskIconName { get; set; }
+P System.String MaskId { get; set; }
+P System.String PrimaryColor { get; set; }
+P System.String PullMargin { get; set; }
+P System.String SecondaryColor { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconButton : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconButton..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+M System.Void OnParametersSet()
+P Jenin.FontAwesome.Blazor.Animations.Animation Animation { get; set; }
+P Jenin.FontAwesome.Blazor.Animations.Animation BusyAnimation { get; set; }
+P Jenin.FontAwesome.Blazor.IconStyle BusyIconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.IconStyle IconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.Typeface Typeface { get; set; }
+P System.Boolean Busy { get; set; }
+P System.Boolean Disabled { get; set; }
+P System.String BusyIconName { get; set; }
+P System.String IconName { get; set; }
+P System.String Label { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconContainer : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconContainer..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Microsoft.AspNetCore.Components.RenderFragment Icons { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconFor<TValue> : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconFor<TValue>..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Jenin.FontAwesome.Blazor.Animations.Animation Animation { get; set; }
+P Jenin.FontAwesome.Blazor.IconStyle FallbackIconStyle { get; set; }
+P System.String FallbackIconName { get; set; }
+P TValue Value { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconLayersContainer : Jenin.FontAwesome.Blazor.Components.IconContainer
+C Jenin.FontAwesome.Blazor.Components.IconLayersContainer..ctor()
+TYPE class Jenin.FontAwesome.Blazor.Components.IconList : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconList..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Microsoft.AspNetCore.Components.RenderFragment Items { get; set; }
+P System.Boolean OrderedList { get; set; }
+P System.String ListItemMargin { get; set; }
+P System.String ListItemWidth { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconListItem : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconListItem..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Microsoft.AspNetCore.Components.RenderFragment ItemContent { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment ItemIcon { get; set; }
+P System.String ItemMargin { get; set; }
+P System.String ItemWidth { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconProgress : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconProgress..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+P System.Int32 Size { get; set; }
+P System.Int32 StrokeWidth { get; set; }
+P System.Single Progress { get; set; }
+P System.String BarColor { get; set; }
+P System.String TrackColor { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconRating : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconRating..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+M System.Void OnInitialized()
+P Jenin.FontAwesome.Blazor.IconStyle EmptyIconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.IconStyle FullIconStyle { get; set; }
+P Microsoft.AspNetCore.Components.EventCallback<System.Single> ValueChanged { get; set; }
+P System.Boolean AllowDeselect { get; set; }
+P System.Boolean Disabled { get; set; }
+P System.Boolean Interactive { get; set; }
+P System.Int32 Max { get; set; }
+P System.Linq.Expressions.Expression<System.Func<System.Single>> ValueExpression { get; set; }
+P System.Single Value { get; set; }
+P System.String ClearLabel { get; set; }
+P System.String FullColor { get; set; }
+P System.String IconName { get; set; }
+P System.String RatingLabel { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconStackContainer : Jenin.FontAwesome.Blazor.Components.IconContainer
+C Jenin.FontAwesome.Blazor.Components.IconStackContainer..ctor()
+P System.String VerticalAlign { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconTheme : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconTheme..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+M System.Void OnParametersSet()
+P Jenin.FontAwesome.Blazor.DuotonePalette Palette { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+P System.String DarkPrimary { get; set; }
+P System.String DarkSecondary { get; set; }
+P System.String LightPrimary { get; set; }
+P System.String LightSecondary { get; set; }
+P System.String PrimaryColor { get; set; }
+P System.String SecondaryColor { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconToggleButton : Jenin.FontAwesome.Blazor.Components.IconButton
+C Jenin.FontAwesome.Blazor.Components.IconToggleButton..ctor()
+M System.Void OnParametersSet()
+P Jenin.FontAwesome.Blazor.Animations.Animation PressedAnimation { get; set; }
+P Microsoft.AspNetCore.Components.EventCallback<System.Boolean> PressedChanged { get; set; }
+P System.Boolean Pressed { get; set; }
+P System.Nullable<Jenin.FontAwesome.Blazor.IconStyle> PressedIconStyle { get; set; }
+P System.String PressedAriaLabel { get; set; }
+P System.String PressedColor { get; set; }
+P System.String PressedIconName { get; set; }
+P System.String PressedLabel { get; set; }
+P System.String PressedTitle { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.IconTransition : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.IconTransition..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Jenin.FontAwesome.Blazor.IconTransitionKind Transition { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment AlternateContent { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+P System.Boolean ShowAlternate { get; set; }
+P System.Nullable<System.TimeSpan> Duration { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.NotificationBadge : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.NotificationBadge..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+M System.Void OnParametersSet()
+P Microsoft.AspNetCore.Components.RenderFragment ChildContent { get; set; }
+P System.Boolean ShowZero { get; set; }
+P System.Int32 Count { get; set; }
+P System.Int32 MaxCount { get; set; }
+P System.String BadgeColor { get; set; }
+P System.String BadgeTextColor { get; set; }
+P System.String Unit { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.ShareButtons : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.ShareButtons..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P System.Boolean IncludeLinkedIn { get; set; }
+P System.Boolean IncludeMail { get; set; }
+P System.Boolean IncludeTelegram { get; set; }
+P System.Boolean IncludeWhatsApp { get; set; }
+P System.Boolean IncludeX { get; set; }
+P System.String ShareLabel { get; set; }
+P System.String Text { get; set; }
+P System.String Url { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.SpriteIcon : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.SpriteIcon..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Jenin.FontAwesome.Blazor.IconStyle IconStyle { get; set; }
+P System.String IconName { get; set; }
+P System.String Sprite { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.StatCard : Jenin.FontAwesome.Blazor.Components.ComposedIconElement
+C Jenin.FontAwesome.Blazor.Components.StatCard..ctor()
+M System.Void AddComponentStyles(System.Collections.Generic.Dictionary<System.String, System.String>)
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Jenin.FontAwesome.Blazor.IconStyle IconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.StatDelta Delta { get; set; }
+P Jenin.FontAwesome.Blazor.Typeface Typeface { get; set; }
+P Microsoft.AspNetCore.Components.RenderFragment IconFragment { get; set; }
+P System.String DeltaDownColor { get; set; }
+P System.String DeltaText { get; set; }
+P System.String DeltaUpColor { get; set; }
+P System.String IconBackground { get; set; }
+P System.String IconColor { get; set; }
+P System.String IconName { get; set; }
+P System.String Label { get; set; }
+P System.String Value { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.StatusDot : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.StatusDot..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P System.Boolean Pulse { get; set; }
+P System.String Diameter { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.TextLayer : Jenin.FontAwesome.Blazor.Components.ElementWithTransformations
+C Jenin.FontAwesome.Blazor.Components.TextLayer..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P System.String Text { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.Components.TwoStateIcon : Jenin.FontAwesome.Blazor.Components.Element
+C Jenin.FontAwesome.Blazor.Components.TwoStateIcon..ctor()
+M System.Void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)
+P Jenin.FontAwesome.Blazor.IconStyle IconStyle { get; set; }
+P Jenin.FontAwesome.Blazor.IconTransitionKind Transition { get; set; }
+P Jenin.FontAwesome.Blazor.Typeface Typeface { get; set; }
+P System.Boolean ShowAlternate { get; set; }
+P System.Nullable<Jenin.FontAwesome.Blazor.IconStyle> AlternateIconStyle { get; set; }
+P System.Nullable<System.TimeSpan> Duration { get; set; }
+P System.String AlternateColor { get; set; }
+P System.String AlternateIconName { get; set; }
+P System.String IconColor { get; set; }
+P System.String IconName { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.CustomIconDefinition : System.Object
+C Jenin.FontAwesome.Blazor.CustomIconDefinition..ctor(System.String, System.String, System.String, System.String, System.Collections.Generic.IReadOnlyList<System.String>)
+F System.String DefaultViewBox
+M System.String ToRazorSnippet()
+P System.Collections.Generic.IReadOnlyList<System.String> SearchTerms { get; }
+P System.String BareName { get; }
+P System.String Label { get; }
+P System.String Name { get; }
+P System.String PathData { get; }
+P System.String ViewBox { get; }
+TYPE class Jenin.FontAwesome.Blazor.DuotonePalette : System.Object
+C Jenin.FontAwesome.Blazor.DuotonePalette..ctor(System.String, System.String, System.String, System.String, System.String)
+M Jenin.FontAwesome.Blazor.DuotonePalette <Clone>$()
+M System.Boolean Equals(Jenin.FontAwesome.Blazor.DuotonePalette)
+M System.Boolean Equals(System.Object)
+M System.Int32 GetHashCode()
+M System.String ToString()
+M System.Void Deconstruct(System.String&, System.String&, System.String&, System.String&, System.String&)
+P System.String DarkPrimary { get; set; }
+P System.String DarkSecondary { get; set; }
+P System.String LightPrimary { get; set; }
+P System.String LightSecondary { get; set; }
+P System.String Name { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.DuotonePalettes : System.Object
+P Jenin.FontAwesome.Blazor.DuotonePalette Brand { get; }
+P Jenin.FontAwesome.Blazor.DuotonePalette Danger { get; }
+P Jenin.FontAwesome.Blazor.DuotonePalette Info { get; }
+P Jenin.FontAwesome.Blazor.DuotonePalette Neutral { get; }
+P Jenin.FontAwesome.Blazor.DuotonePalette Success { get; }
+P Jenin.FontAwesome.Blazor.DuotonePalette Warning { get; }
+TYPE enum Jenin.FontAwesome.Blazor.FontAwesomeAssetMode : System.Enum
+F Jenin.FontAwesome.Blazor.FontAwesomeAssetMode SvgNest
+F Jenin.FontAwesome.Blazor.FontAwesomeAssetMode Webfont
+TYPE class Jenin.FontAwesome.Blazor.FontAwesomeOptions : System.Object
+C Jenin.FontAwesome.Blazor.FontAwesomeOptions..ctor()
+M Jenin.FontAwesome.Blazor.CustomIconDefinition RegisterCustomIcon(System.String, System.String, System.String, System.String, System.Collections.Generic.IReadOnlyList<System.String>)
+M System.Void UseFontAwesomeKit(System.String)
+P System.Collections.Generic.IReadOnlyDictionary<System.String, Jenin.FontAwesome.Blazor.CustomIconDefinition> CustomIcons { get; }
+P System.Nullable<Jenin.FontAwesome.Blazor.FontAwesomeAssetMode> AssetMode { get; set; }
+P System.Nullable<Jenin.FontAwesome.Blazor.IconSize> IconSize { get; set; }
+P System.Nullable<Jenin.FontAwesome.Blazor.IconStyle> IconStyle { get; set; }
+P System.Nullable<Jenin.FontAwesome.Blazor.Typeface> Typeface { get; set; }
+P System.Nullable<System.Boolean> Decorative { get; set; }
+P System.String ConfigEndpointPath { get; set; }
+P System.String ConfigScriptUrl { get; set; }
+P System.String JavaScriptUrl { get; set; }
+P System.String KitCode { get; set; }
+P System.String StyleSheetUrl { get; set; }
+TYPE class Jenin.FontAwesome.Blazor.IconAttribute : System.Attribute
+C Jenin.FontAwesome.Blazor.IconAttribute..ctor(System.String)
+P Jenin.FontAwesome.Blazor.IconStyle Style { get; set; }
+P System.String Color { get; set; }
+P System.String Name { get; }
+TYPE enum Jenin.FontAwesome.Blazor.IconRotate : System.Enum
+F Jenin.FontAwesome.Blazor.IconRotate Deg090
+F Jenin.FontAwesome.Blazor.IconRotate Deg180
+F Jenin.FontAwesome.Blazor.IconRotate Deg270
+F Jenin.FontAwesome.Blazor.IconRotate FlipBoth
+F Jenin.FontAwesome.Blazor.IconRotate FlipHorizontal
+F Jenin.FontAwesome.Blazor.IconRotate FlipVertical
+F Jenin.FontAwesome.Blazor.IconRotate NotSet
+F Jenin.FontAwesome.Blazor.IconRotate RotateBy
+TYPE enum Jenin.FontAwesome.Blazor.IconSize : System.Enum
+F Jenin.FontAwesome.Blazor.IconSize ExtraLarge
+F Jenin.FontAwesome.Blazor.IconSize ExtraLarge_2
+F Jenin.FontAwesome.Blazor.IconSize ExtraSmall
+F Jenin.FontAwesome.Blazor.IconSize ExtraSmall_2
+F Jenin.FontAwesome.Blazor.IconSize Inherits
+F Jenin.FontAwesome.Blazor.IconSize Large
+F Jenin.FontAwesome.Blazor.IconSize NotSet
+F Jenin.FontAwesome.Blazor.IconSize Small
+F Jenin.FontAwesome.Blazor.IconSize X01
+F Jenin.FontAwesome.Blazor.IconSize X02
+F Jenin.FontAwesome.Blazor.IconSize X03
+F Jenin.FontAwesome.Blazor.IconSize X04
+F Jenin.FontAwesome.Blazor.IconSize X05
+F Jenin.FontAwesome.Blazor.IconSize X06
+F Jenin.FontAwesome.Blazor.IconSize X07
+F Jenin.FontAwesome.Blazor.IconSize X08
+F Jenin.FontAwesome.Blazor.IconSize X09
+F Jenin.FontAwesome.Blazor.IconSize X10
+TYPE enum Jenin.FontAwesome.Blazor.IconStackSize : System.Enum
+F Jenin.FontAwesome.Blazor.IconStackSize Larger
+F Jenin.FontAwesome.Blazor.IconStackSize NotSet
+F Jenin.FontAwesome.Blazor.IconStackSize Same
+TYPE enum Jenin.FontAwesome.Blazor.IconStyle : System.Enum
+F Jenin.FontAwesome.Blazor.IconStyle Brands
+F Jenin.FontAwesome.Blazor.IconStyle Duotone
+F Jenin.FontAwesome.Blazor.IconStyle Light
+F Jenin.FontAwesome.Blazor.IconStyle Regular
+F Jenin.FontAwesome.Blazor.IconStyle Solid
+F Jenin.FontAwesome.Blazor.IconStyle Thin
+TYPE class Jenin.FontAwesome.Blazor.IconSvg : System.Object
+M System.String ToSvgString(System.String, System.String, Jenin.FontAwesome.Blazor.IconStyle, System.String, System.String, System.Nullable<System.Int32>)
+TYPE enum Jenin.FontAwesome.Blazor.IconTransitionKind : System.Enum
+F Jenin.FontAwesome.Blazor.IconTransitionKind Crossfade
+F Jenin.FontAwesome.Blazor.IconTransitionKind Flip
+F Jenin.FontAwesome.Blazor.IconTransitionKind Scale
+F Jenin.FontAwesome.Blazor.IconTransitionKind Slide
+TYPE enum Jenin.FontAwesome.Blazor.IconWidth : System.Enum
+F Jenin.FontAwesome.Blazor.IconWidth Auto
+F Jenin.FontAwesome.Blazor.IconWidth Fixed
+F Jenin.FontAwesome.Blazor.IconWidth NotSet
+TYPE enum Jenin.FontAwesome.Blazor.PullPosition : System.Enum
+F Jenin.FontAwesome.Blazor.PullPosition End
+F Jenin.FontAwesome.Blazor.PullPosition Left
+F Jenin.FontAwesome.Blazor.PullPosition None
+F Jenin.FontAwesome.Blazor.PullPosition Right
+F Jenin.FontAwesome.Blazor.PullPosition Start
+TYPE class Jenin.FontAwesome.Blazor.ServiceCollectionExtensions : System.Object
+M Microsoft.Extensions.DependencyInjection.IServiceCollection AddJeninFontAwesome(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Jenin.FontAwesome.Blazor.FontAwesomeOptions>)
+TYPE enum Jenin.FontAwesome.Blazor.StatDelta : System.Enum
+F Jenin.FontAwesome.Blazor.StatDelta Down
+F Jenin.FontAwesome.Blazor.StatDelta Flat
+F Jenin.FontAwesome.Blazor.StatDelta None
+F Jenin.FontAwesome.Blazor.StatDelta Up
+TYPE class Jenin.FontAwesome.Blazor.Transformations.FlipHorizontal : Jenin.FontAwesome.Blazor.Transformations.Transformation
+M Jenin.FontAwesome.Blazor.Transformations.FlipHorizontal Flip()
+M System.String GetTransformation()
+TYPE class Jenin.FontAwesome.Blazor.Transformations.FlipVertical : Jenin.FontAwesome.Blazor.Transformations.Transformation
+M Jenin.FontAwesome.Blazor.Transformations.FlipVertical Flip()
+M System.String GetTransformation()
+TYPE class Jenin.FontAwesome.Blazor.Transformations.Positioning : Jenin.FontAwesome.Blazor.Transformations.Transformation
+M Jenin.FontAwesome.Blazor.Transformations.Positioning Down(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Positioning Left(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Positioning Right(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Positioning Up(System.Single)
+M System.String GetTransformation()
+TYPE class Jenin.FontAwesome.Blazor.Transformations.Rotating : Jenin.FontAwesome.Blazor.Transformations.Transformation
+M Jenin.FontAwesome.Blazor.Transformations.Rotating Rotate(System.Single)
+M System.String GetTransformation()
+TYPE class Jenin.FontAwesome.Blazor.Transformations.Scaling : Jenin.FontAwesome.Blazor.Transformations.Transformation
+M Jenin.FontAwesome.Blazor.Transformations.Scaling Grow(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Scaling Shrink(System.Single)
+M System.String GetTransformation()
+TYPE class Jenin.FontAwesome.Blazor.Transformations.Transform : System.Object
+C Jenin.FontAwesome.Blazor.Transformations.Transform..ctor()
+M Jenin.FontAwesome.Blazor.Transformations.Transform Add(Jenin.FontAwesome.Blazor.Transformations.Transformation[])
+M Jenin.FontAwesome.Blazor.Transformations.Transform Down(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Transform FlipBoth()
+M Jenin.FontAwesome.Blazor.Transformations.Transform FlipH()
+M Jenin.FontAwesome.Blazor.Transformations.Transform FlipV()
+M Jenin.FontAwesome.Blazor.Transformations.Transform Grow(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Transform Left(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Transform Right(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Transform Rotate(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Transform Shrink(System.Single)
+M Jenin.FontAwesome.Blazor.Transformations.Transform Up(System.Single)
+M System.String GetTransformation()
+TYPE abstract class Jenin.FontAwesome.Blazor.Transformations.Transformation : System.Object
+C Jenin.FontAwesome.Blazor.Transformations.Transformation..ctor(System.Single)
+M System.String GetFormattedValue()
+M System.String GetTransformation()
+P System.Single Value { get; }
+TYPE enum Jenin.FontAwesome.Blazor.Typeface : System.Enum
+F Jenin.FontAwesome.Blazor.Typeface Classic
+F Jenin.FontAwesome.Blazor.Typeface Duotone
+F Jenin.FontAwesome.Blazor.Typeface Sharp
+F Jenin.FontAwesome.Blazor.Typeface SharpDuotone
+TYPE class Jenin.FontAwesome.Blazor._Imports : System.Object
+C Jenin.FontAwesome.Blazor._Imports..ctor()
+M System.Void Execute()

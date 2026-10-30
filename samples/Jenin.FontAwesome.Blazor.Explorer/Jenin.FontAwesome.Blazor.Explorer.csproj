@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <!-- Razor class library that hosts the interactive icon explorer sample. It is a
+             demonstration app surface (not a shipped package): it consumes the core and IconPicker
+             projects and may use JavaScript for measurement, unlike the zero-interop library
+             packages. -->
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor\Jenin.FontAwesome.Blazor.csproj" />
+        <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor.IconPicker\Jenin.FontAwesome.Blazor.IconPicker.csproj" />
+    </ItemGroup>
+
+</Project>

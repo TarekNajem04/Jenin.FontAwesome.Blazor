@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <!--
+    Coverage collection for Jenin.FontAwesome.Blazor.
+
+    Exact commands are recorded in TESTING.md. In short: run the three test projects on the
+    canonical net10.0 leg with the XPlat Code Coverage collector pointing at this settings file
+    and collecting results under artifacts/coverage.
+
+    Design:
+      * Cobertura is the only format the gate (eng/verify-coverage.ps1) reads.
+      * Generated sources are excluded by file; they are regenerated from the Font Awesome
+        metadata and guarded by eng/generate-* -Verify. Counting them would pin the metric near
+        100% and hide real drift in the hand-written code.
+      * The test assemblies stay out so the metric describes the shipped libraries only.
+      * `Exclude` filters are appended to coverlet's defaults (coverlet.*, test platform, ...).
+  -->
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage"
+                     uri="datacollector://coverlet/XPlatCodeCoverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <ExcludeByFile>**/FontAwesomeIcons.cs,**/GeneratedIconComponents.cs</ExcludeByFile>
+          <Exclude>[*]*.Tests*</Exclude>
+          <IncludeTestAssembly>false</IncludeTestAssembly>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

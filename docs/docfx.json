@@ -1,0 +1,53 @@
+{
+    "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+
+    "metadata": [
+        {
+            "src": [
+                {
+                    "src": "../src",
+                    "files": [
+                        "Jenin.FontAwesome.Blazor/bin/Release/net10.0/Jenin.FontAwesome.Blazor.dll",
+                        "Jenin.FontAwesome.Blazor.IconPicker/bin/Release/net10.0/Jenin.FontAwesome.Blazor.IconPicker.dll",
+                        "Jenin.FontAwesome.Blazor.Icons/bin/Release/net10.0/Jenin.FontAwesome.Blazor.Icons.dll",
+                        "Jenin.FontAwesome.Blazor.Svg/bin/Release/net10.0/Jenin.FontAwesome.Blazor.Svg.dll",
+                        "Jenin.FontAwesome.Blazor.Analyzers/bin/Release/netstandard2.0/Jenin.FontAwesome.Blazor.Analyzers.dll",
+                        "Jenin.FontAwesome.Blazor.MudBlazor/bin/Release/net10.0/Jenin.FontAwesome.Blazor.MudBlazor.dll",
+                        "Jenin.FontAwesome.Blazor.Blazorise/bin/Release/net10.0/Jenin.FontAwesome.Blazor.Blazorise.dll"
+                    ]
+                }
+            ],
+            "dest": "api",
+            "filter": "../eng/docfx-filter.yml",
+            "disableGitFeatures": true
+        }
+    ],
+
+    "build": {
+        "content": [
+            { "files": [ "api/**.yml", "api/index.md" ] },
+            { "files": [ "index.md", "toc.yml", "migration/**.md", "migration/toc.yml", "diagnostics.md", "pro-setup.md", "hosting-with-kits.md", "custom-icons.md", "using-with-ui-suites.md", "gallery.md" ] }
+        ],
+
+        "output": "_site",
+
+        "template": [ "default", "modern" ],
+
+        "globalMetadata": {
+            "_appName": "Jenin.FontAwesome.Blazor",
+            "_appTitle": "Jenin.FontAwesome.Blazor Documentation",
+            "_enableSearch": true,
+            "_disableContribution": true
+        },
+
+        "sitemap": {
+            "baseUrl": "https://tareknajem04.github.io/Jenin.FontAwesome.Blazor/api"
+        },
+
+        "xref": [
+            "https://learn.microsoft.com/en-us/dotnet/.xrefmap.json"
+        ],
+
+        "pdf": false
+    }
+}
