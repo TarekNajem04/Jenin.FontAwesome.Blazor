@@ -57,7 +57,7 @@ public abstract class SvgIcon : ComponentBase {
     protected override void BuildRenderTree(RenderTreeBuilder builder) {
         ArgumentNullException.ThrowIfNull(builder);
 
-        string? accessibleName = string.IsNullOrWhiteSpace(AriaLabel) ? null : AriaLabel.Trim();
+        var accessibleName = string.IsNullOrWhiteSpace(AriaLabel) ? null : AriaLabel.Trim();
         accessibleName ??= string.IsNullOrWhiteSpace(Title) ? null : Title.Trim();
 
         builder.OpenElement(0, "svg");
