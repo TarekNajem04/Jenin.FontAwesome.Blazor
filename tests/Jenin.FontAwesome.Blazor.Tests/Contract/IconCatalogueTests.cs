@@ -24,7 +24,7 @@ public class IconCatalogueTests {
             directory = directory.Parent;
         }
 
-        Assert.IsNotNull(directory, "Could not locate the repository root.");
+        directory.Should().NotBeNull("Could not locate the repository root.");
 
         return directory!.FullName;
     }
@@ -32,7 +32,7 @@ public class IconCatalogueTests {
     private static Dictionary<string, string[]> LoadVendoredMetadata() {
         var path = Path.Combine(RepoRoot(), METADATA_REPO_RELATIVE_PATH.Replace('/', Path.DirectorySeparatorChar));
 
-        Assert.IsTrue(File.Exists(path), $"Missing vendored metadata: {path}");
+        File.Exists(path).Should().BeTrue($"Missing vendored metadata: {path}");
 
         using var document = JsonDocument.Parse(File.ReadAllText(path));
         var styles = document.RootElement.GetProperty("styles");
@@ -48,7 +48,7 @@ public class IconCatalogueTests {
     private static string[] CatalogueValues(string style) {
         var nested = typeof(IconNames).GetNestedType(style, BindingFlags.Public);
 
-        Assert.IsNotNull(nested, $"IconNames.{style} was not found.");
+        nested.Should().NotBeNull($"IconNames.{style} was not found.");
 
         return [.. nested!.GetFields(BindingFlags.Public | BindingFlags.Static)
             .Where(static field => field.IsLiteral && field.FieldType == typeof(string))
@@ -69,8 +69,8 @@ public class IconCatalogueTests {
         var nested = typeof(IconNames).GetNestedType(style, BindingFlags.Public);
         var field = nested!.GetField(constant, BindingFlags.Public | BindingFlags.Static);
 
-        Assert.IsNotNull(field, $"IconNames.{style}.{constant} was not found.");
-        Assert.AreEqual(expectedCssClass, field!.GetRawConstantValue());
+        field.Should().NotBeNull($"IconNames.{style}.{constant} was not found.");
+        field!.GetRawConstantValue().Should().Be(expectedCssClass);
     }
 
     [TestMethod]
@@ -83,13 +83,13 @@ public class IconCatalogueTests {
         var expected = metadata[metadataKey].Select(static name => "fa-" + name).ToHashSet(StringComparer.Ordinal);
         var actual = CatalogueValues(style).ToHashSet(StringComparer.Ordinal);
 
-        Assert.HasCount(expected.Count, actual,
+        actual.Should().HaveCount(expected.Count,
             $"IconNames.{style} has {actual.Count} entries but the vendored metadata lists {expected.Count}.");
 
         var missing = expected.Except(actual, StringComparer.Ordinal).Take(15).ToArray();
         var unexpected = actual.Except(expected, StringComparer.Ordinal).Take(15).ToArray();
 
-        Assert.IsTrue(expected.SetEquals(actual),
+        expected.SetEquals(actual).Should().BeTrue(
             $"IconNames.{style} diverged from the vendored metadata.\n" +
             $"Missing: {string.Join(", ", missing)}\nAdded: {string.Join(", ", unexpected)}");
     }
@@ -100,10 +100,10 @@ public class IconCatalogueTests {
         foreach(var style in new[] { "Solid", "Regular", "Brands" }) {
             var values = CatalogueValues(style);
 
-            Assert.IsTrue(values.All(static value => value.StartsWith("fa-", StringComparison.Ordinal)),
+            values.All(static value => value.StartsWith("fa-", StringComparison.Ordinal)).Should().BeTrue(
                 $"IconNames.{style} contains a value without the 'fa-' prefix.");
 
-            Assert.HasCount(values.Length, values.Distinct(StringComparer.Ordinal),
+            values.Distinct(StringComparer.Ordinal).Should().HaveCount(values.Length,
                 $"IconNames.{style} contains duplicate values.");
         }
     }

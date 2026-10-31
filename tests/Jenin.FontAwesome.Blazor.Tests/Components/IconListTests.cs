@@ -13,7 +13,7 @@ public class IconListTests {
     public async Task List_RendersUnorderedListWithFa_ulClassAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconList>();
 
-        Assert.AreEqual("<ul class=\"fa-ul\"></ul>", markup);
+        markup.Should().Be("<ul class=\"fa-ul\"></ul>");
     }
 
     [TestMethod]
@@ -21,7 +21,7 @@ public class IconListTests {
     public async Task OrderedList_RendersOrderedListAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconList>(TestHost.Parameters(("OrderedList", true)));
 
-        Assert.AreEqual("<ol class=\"fa-ul\"></ol>", markup);
+        markup.Should().Be("<ol class=\"fa-ul\"></ol>");
     }
 
     [TestMethod]
@@ -31,7 +31,7 @@ public class IconListTests {
             ("ListItemMargin", "0.5em"),
             ("ListItemWidth", "1.25em")));
 
-        Assert.AreEqual("<ul class=\"fa-ul\" style=\"--fa-li-margin:0.5em;--fa-li-width:1.25em;\"></ul>", markup);
+        markup.Should().Be("<ul class=\"fa-ul\" style=\"--fa-li-margin:0.5em;--fa-li-width:1.25em;\"></ul>");
     }
 
     [TestMethod]
@@ -50,8 +50,8 @@ public class IconListTests {
 
         var markup = await TestHost.RenderMarkupAsync<IconList>(TestHost.Parameters(("Items", items)));
 
-        Assert.AreEqual(
-            "<ul class=\"fa-ul\"><li><span class=\"fa-li\"><span><i class=\"fa-solid fa-check\" aria-hidden=\"true\" role=\"presentation\"></i></span></span>Item</li></ul>",
-            markup);
+        markup.Should().Be(
+            "<ul class=\"fa-ul\"><li><span class=\"fa-li\"><span><i class=\"fa-solid fa-check\" aria-hidden=\"true\" role=\"presentation\"></i></span></span>Item</li></ul>"
+        );
     }
 }

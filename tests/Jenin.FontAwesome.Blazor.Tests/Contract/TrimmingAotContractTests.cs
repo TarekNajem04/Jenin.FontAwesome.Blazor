@@ -31,7 +31,7 @@ public class TrimmingAotContractTests {
             directory = directory.Parent;
         }
 
-        Assert.IsNotNull(directory, "Could not locate the repository root.");
+        directory.Should().NotBeNull("Could not locate the repository root.");
 
         return directory!.FullName;
     }
@@ -53,13 +53,13 @@ public class TrimmingAotContractTests {
     public void Library_ProjectDeclaresTrimmingAndAotCompatibility() {
         var csproj = File.ReadAllText(LibraryCsproj);
 
-        Assert.Contains("<IsTrimmable>true</IsTrimmable>", csproj, "The library must set <IsTrimmable>true</IsTrimmable> so hosts can trim safely.");
-        Assert.Contains("<IsAotCompatible>true</IsAotCompatible>", csproj, "The library must set <IsAotCompatible>true</IsAotCompatible> to keep the trim/AOT analyzers on.");
+        csproj.Should().Contain("<IsTrimmable>true</IsTrimmable>", "The library must set <IsTrimmable>true</IsTrimmable> so hosts can trim safely.");
+        csproj.Should().Contain("<IsAotCompatible>true</IsAotCompatible>", "The library must set <IsAotCompatible>true</IsAotCompatible> to keep the trim/AOT analyzers on.");
     }
 
     [TestMethod]
     [TestCategory("Contract")]
-    public void Library_AssemblyIsMarkedTrimmable()
-        => Assert.AreEqual("True", MetadataValue("IsTrimmable"),
+    public void Library_AssemblyIsMarkedTrimmable() =>
+        MetadataValue("IsTrimmable").Should().Be("True",
             "The linker must see IsTrimmable=true in the compiled assembly metadata.");
 }

@@ -18,9 +18,9 @@ public class CustomIconTests {
 
         var definition = options.RegisterCustomIcon("fa-acme-widget", PATH);
 
-        Assert.AreSame(definition, options.CustomIcons["fa-acme-widget"]);
-        Assert.AreEqual("0 0 512 512", definition.ViewBox);
-        Assert.AreEqual("fa-acme-widget", definition.Label);
+        options.CustomIcons["fa-acme-widget"].Should().BeSameAs(definition);
+        definition.ViewBox.Should().Be("0 0 512 512");
+        definition.Label.Should().Be("fa-acme-widget");
     }
 
     [TestMethod]
@@ -29,13 +29,13 @@ public class CustomIconTests {
     [DataRow("acme-widget")]
     [DataRow("fa-")]
     public void RegisterCustomIcon_RejectsBadNames(string name) {
-        Assert.ThrowsExactly<ArgumentException>(() => new FontAwesomeOptions().RegisterCustomIcon(name, PATH));
+        FluentActions.Invoking(() => new FontAwesomeOptions().RegisterCustomIcon(name, PATH)).Should().ThrowExactly<ArgumentException>();
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void RegisterCustomIcon_RejectsEmptyPath() {
-        Assert.ThrowsExactly<ArgumentException>(() => new FontAwesomeOptions().RegisterCustomIcon("fa-acme-widget", "  "));
+        FluentActions.Invoking(() => new FontAwesomeOptions().RegisterCustomIcon("fa-acme-widget", "  ")).Should().ThrowExactly<ArgumentException>();
     }
 
     [TestMethod]
@@ -43,7 +43,7 @@ public class CustomIconTests {
     public void ToRazorSnippet_EmitsIconUsage() {
         var definition = new CustomIconDefinition("fa-acme-widget", PATH);
 
-        Assert.AreEqual("<Icon IconName=\"fa-acme-widget\" />", definition.ToRazorSnippet());
+        definition.ToRazorSnippet().Should().Be("<Icon IconName=\"fa-acme-widget\" />");
     }
 
     [TestMethod]
@@ -53,9 +53,9 @@ public class CustomIconTests {
             TestHost.Parameters(("IconName", "fa-acme-widget")),
             services => services.AddJeninFontAwesome(options => options.RegisterCustomIcon("fa-acme-widget", PATH, VIEWBOX)));
 
-        Assert.AreEqual(
-            "<span><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" height=\"1em\" aria-hidden=\"true\" role=\"presentation\" data-icon=\"acme-widget\"><path d=\"M0 0H24V24H0Z\" fill=\"currentColor\"></path></svg></span>",
-            markup);
+        markup.Should().Be(
+            "<span><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" height=\"1em\" aria-hidden=\"true\" role=\"presentation\" data-icon=\"acme-widget\"><path d=\"M0 0H24V24H0Z\" fill=\"currentColor\"></path></svg></span>"
+        );
     }
 
     [TestMethod]
@@ -68,13 +68,13 @@ public class CustomIconTests {
                 ("CssClass", "hero")),
             services => services.AddJeninFontAwesome(options => options.RegisterCustomIcon("fa-acme-widget", PATH)));
 
-        Assert.Contains("class=\"hero\"", markup);
-        Assert.Contains("title=\"Acme\"", markup);
-        Assert.Contains("role=\"img\"", markup);
-        Assert.Contains("<title>Acme</title>", markup);
-        Assert.Contains("viewBox=\"0 0 512 512\"", markup);
-        Assert.DoesNotContain("fa-solid", markup);
-        Assert.DoesNotContain("fa-acme-widget\"", markup.Replace("<title>Acme</title>", string.Empty, StringComparison.Ordinal));
+        markup.Should().Contain("class=\"hero\"");
+        markup.Should().Contain("title=\"Acme\"");
+        markup.Should().Contain("role=\"img\"");
+        markup.Should().Contain("<title>Acme</title>");
+        markup.Should().Contain("viewBox=\"0 0 512 512\"");
+        markup.Should().NotContain("fa-solid");
+        markup.Replace("<title>Acme</title>", string.Empty, StringComparison.Ordinal).Should().NotContain("fa-acme-widget\"");
     }
 
     [TestMethod]
@@ -86,8 +86,8 @@ public class CustomIconTests {
                 ("AdditionalAttributes", new Dictionary<string, object?> { ["width"] = "64", ["height"] = "64" })),
             services => services.AddJeninFontAwesome(options => options.RegisterCustomIcon("fa-acme-widget", PATH)));
 
-        Assert.Contains("width=\"64\"", markup);
-        Assert.AreEqual(1, markup.Split("height=\"64\"", StringSplitOptions.None).Length - 1);
+        markup.Should().Contain("width=\"64\"");
+        (markup.Split("height=\"64\"", StringSplitOptions.None).Length - 1).Should().Be(1);
     }
 
     [TestMethod]
@@ -99,8 +99,8 @@ public class CustomIconTests {
             ("IconName", "fa-not-registered"),
             ("IconStyle", IconStyle.Solid)));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-not-registered\" aria-hidden=\"true\" role=\"presentation\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-not-registered\" aria-hidden=\"true\" role=\"presentation\"></i></span>"
+        );
     }
 }

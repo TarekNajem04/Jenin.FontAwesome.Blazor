@@ -12,7 +12,7 @@ public sealed class PreviewIconFactoryTests {
     public void BuildAnimation_Returns_Null_For_None() {
         var state = new ExplorerPreviewState { Animation = PreviewAnimation.None };
 
-        Assert.IsNull(PreviewIconFactory.BuildAnimation(state));
+        PreviewIconFactory.BuildAnimation(state).Should().BeNull();
     }
 
     [TestMethod]
@@ -24,8 +24,8 @@ public sealed class PreviewIconFactoryTests {
 
             var animation = PreviewIconFactory.BuildAnimation(new ExplorerPreviewState { Animation = value });
 
-            Assert.IsNotNull(animation, value.ToString());
-            Assert.IsFalse(string.IsNullOrEmpty(animation.BuildClasses()), value.ToString());
+            animation.Should().NotBeNull(value.ToString());
+            string.IsNullOrEmpty(animation!.BuildClasses()).Should().BeFalse(value.ToString());
         }
     }
 
@@ -43,11 +43,11 @@ public sealed class PreviewIconFactoryTests {
 
         var animation = PreviewIconFactory.BuildAnimation(state);
 
-        Assert.IsNotNull(animation);
-        Assert.AreEqual(TimeSpan.FromSeconds(2), animation.Options.Duration);
-        Assert.AreEqual(5f, animation.Options.IterationCount);
-        Assert.AreEqual(AnimationDirection.Reverse, animation.Options.Direction);
-        Assert.AreEqual("linear", animation.Options.TimingFunction);
+        animation.Should().NotBeNull();
+        animation!.Options.Duration.Should().Be(TimeSpan.FromSeconds(2));
+        animation.Options.IterationCount.Should().Be(5f);
+        animation.Options.Direction.Should().Be(AnimationDirection.Reverse);
+        animation.Options.TimingFunction.Should().Be("linear");
     }
 
     [TestMethod]
@@ -56,18 +56,18 @@ public sealed class PreviewIconFactoryTests {
 
         var animation = PreviewIconFactory.BuildAnimation(state);
 
-        Assert.IsNotNull(animation);
-        Assert.IsNull(animation.Options.Duration);
-        Assert.IsNull(animation.Options.IterationCount);
-        Assert.AreEqual(AnimationDirection.None, animation.Options.Direction);
-        Assert.IsNull(animation.Options.TimingFunction);
+        animation.Should().NotBeNull();
+        animation!.Options.Duration.Should().BeNull();
+        animation.Options.IterationCount.Should().BeNull();
+        animation.Options.Direction.Should().Be(AnimationDirection.None);
+        animation.Options.TimingFunction.Should().BeNull();
     }
 
     [TestMethod]
     public void BuildTransform_Returns_Null_When_Disabled() {
         var state = new ExplorerPreviewState { UseTransform = false, TransformGrow = true };
 
-        Assert.IsNull(PreviewIconFactory.BuildTransform(state));
+        PreviewIconFactory.BuildTransform(state).Should().BeNull();
     }
 
     [TestMethod]
@@ -82,11 +82,11 @@ public sealed class PreviewIconFactoryTests {
 
         var transform = PreviewIconFactory.BuildTransform(state);
 
-        Assert.IsNotNull(transform);
-        var value = transform.GetTransformation();
-        Assert.Contains("grow-8", value);
-        Assert.Contains("right-4", value);
-        Assert.Contains("up-2", value);
+        transform.Should().NotBeNull();
+        var value = transform!.GetTransformation();
+        value.Should().Contain("grow-8");
+        value.Should().Contain("right-4");
+        value.Should().Contain("up-2");
     }
 
     [TestMethod]
@@ -102,11 +102,11 @@ public sealed class PreviewIconFactoryTests {
 
         var transform = PreviewIconFactory.BuildTransform(state);
 
-        Assert.IsNotNull(transform);
-        var value = transform.GetTransformation();
-        Assert.Contains("shrink-6", value);
-        Assert.Contains("rotate--15", value);
-        Assert.Contains("flip-h", value);
-        Assert.Contains("flip-v", value);
+        transform.Should().NotBeNull();
+        var value = transform!.GetTransformation();
+        value.Should().Contain("shrink-6");
+        value.Should().Contain("rotate--15");
+        value.Should().Contain("flip-h");
+        value.Should().Contain("flip-v");
     }
 }

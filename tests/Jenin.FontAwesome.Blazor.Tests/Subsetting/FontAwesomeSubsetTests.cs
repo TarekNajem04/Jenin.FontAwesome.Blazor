@@ -29,9 +29,9 @@ public class FontAwesomeSubsetTests {
             directory = directory.Parent;
         }
 
-        Assert.IsNotNull(directory, "Could not locate the repository root (Jenin.FontAwesome.Blazor.slnx).");
+        directory.Should().NotBeNull("Could not locate the repository root (Jenin.FontAwesome.Blazor.slnx).");
 
-        return directory.FullName;
+        return directory!.FullName;
     }
 
     private static string FixturePath(string name) => Path.Combine(RepoRoot(), FIXTURE_DIR, name);
@@ -48,13 +48,13 @@ public class FontAwesomeSubsetTests {
         using var report = FixtureReport();
         var root = report.RootElement;
 
-        Assert.AreEqual(2, root.GetProperty("used_count").GetInt32());
-        Assert.AreEqual(0, root.GetProperty("missing_names").GetArrayLength());
-        Assert.AreEqual(0, root.GetProperty("dynamic_warnings").GetArrayLength());
+        root.GetProperty("used_count").GetInt32().Should().Be(2);
+        root.GetProperty("missing_names").GetArrayLength().Should().Be(0);
+        root.GetProperty("dynamic_warnings").GetArrayLength().Should().Be(0);
 
         var names = root.GetProperty("used_names").EnumerateArray().Select(element => element.GetString()).ToArray();
 
-        CollectionAssert.AreEquivalent(_expectedNames, names);
+        names.Should().BeEquivalentTo(_expectedNames);
     }
 
     [TestMethod]
@@ -66,7 +66,7 @@ public class FontAwesomeSubsetTests {
         var before = root.GetProperty("total_bytes_before").GetInt32();
         var after = root.GetProperty("total_bytes_after").GetInt32();
 
-        Assert.IsTrue(after < before / 2, $"Subset should at least halve the payload (before={before}, after={after}).");
+        (after < before / 2).Should().BeTrue($"Subset should at least halve the payload (before={before}, after={after}).");
     }
 
     [TestMethod]
@@ -74,11 +74,11 @@ public class FontAwesomeSubsetTests {
     public void SubsetCssKeepsUsedDropsUnusedIconBlocks() {
         var css = File.ReadAllText(FixturePath(FIXTURE_CSS));
 
-        Assert.IsTrue(css.Contains(".fa-camera {", StringComparison.Ordinal), "The used fa-camera block must be kept.");
-        Assert.IsTrue(css.Contains(".fa-youtube {", StringComparison.Ordinal), "The used fa-youtube block must be kept.");
-        Assert.IsFalse(css.Contains(".fa-docker {", StringComparison.Ordinal), "The unused fa-docker block must be dropped.");
-        Assert.IsTrue(css.Contains("fontawesome-subset.css", StringComparison.Ordinal) is false, "No self-reference expected.");
-        Assert.IsTrue(css.Contains(".subset.woff2", StringComparison.Ordinal), "Font faces must point at subset files.");
+        css.Contains(".fa-camera {", StringComparison.Ordinal).Should().BeTrue("The used fa-camera block must be kept.");
+        css.Contains(".fa-youtube {", StringComparison.Ordinal).Should().BeTrue("The used fa-youtube block must be kept.");
+        css.Contains(".fa-docker {", StringComparison.Ordinal).Should().BeFalse("The unused fa-docker block must be dropped.");
+        (css.Contains("fontawesome-subset.css", StringComparison.Ordinal) is false).Should().BeTrue("No self-reference expected.");
+        css.Contains(".subset.woff2", StringComparison.Ordinal).Should().BeTrue("Font faces must point at subset files.");
     }
 
     [TestMethod]
@@ -87,8 +87,8 @@ public class FontAwesomeSubsetTests {
         foreach(var file in _expectedFonts) {
             var path = FixturePath(file);
 
-            Assert.IsTrue(File.Exists(path), $"Missing subset font: {file}.");
-            Assert.IsTrue(new FileInfo(path).Length > 0, $"Empty subset font: {file}.");
+            File.Exists(path).Should().BeTrue($"Missing subset font: {file}.");
+            (new FileInfo(path).Length > 0).Should().BeTrue($"Empty subset font: {file}.");
         }
 
         var solid = new FileInfo(FixturePath("fa-solid-900.subset.woff2")).Length;
@@ -96,6 +96,6 @@ public class FontAwesomeSubsetTests {
             RepoRoot(),
             "samples/Jenin.FontAwesome.Blazor.Sample.Shared/wwwroot/fontawesome/webfonts/fa-solid-900.woff2")).Length;
 
-        Assert.IsTrue(solid < vendored / 10, $"Subset solid font ({solid} B) should be an order of magnitude smaller than vendored ({vendored} B).");
+        (solid < vendored / 10).Should().BeTrue($"Subset solid font ({solid} B) should be an order of magnitude smaller than vendored ({vendored} B).");
     }
 }

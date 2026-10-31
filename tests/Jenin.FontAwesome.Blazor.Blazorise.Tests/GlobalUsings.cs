@@ -16,6 +16,7 @@ global using Blazorise.Icons.FontAwesome;
 global using Jenin.FontAwesome.Blazor;
 global using Jenin.FontAwesome.Blazor.Blazorise.Tests.TestSupport;
 global using Jenin.FontAwesome.Blazor.Components;
+global using Jeninnet.Assertions;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Web;
 global using Microsoft.Extensions.DependencyInjection;

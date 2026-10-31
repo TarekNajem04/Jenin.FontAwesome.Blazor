@@ -10,17 +10,17 @@ namespace Jenin.FontAwesome.Blazor.Tests.Animations;
 public class BeatTests {
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildClasses_ReturnsFaBeat() => Assert.AreEqual("fa-beat", new Beat().BuildClasses());
+    public void BuildClasses_ReturnsFaBeat() => new Beat().BuildClasses().Should().Be("fa-beat");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildStyles_WithoutScale_OmitsScale() => Assert.IsFalse(new Beat().BuildStyles().ContainsKey("--fa-beat-scale"));
+    public void BuildStyles_WithoutScale_OmitsScale() => new Beat().BuildStyles().ContainsKey("--fa-beat-scale").Should().BeFalse();
 
     [TestMethod]
     [TestCategory("Model")]
     public void BuildStyles_WithScale_EmitsInvariantTwoDecimalValue() {
         var styles = new Beat(new BeatOptions { Scale = 2 }).BuildStyles();
 
-        Assert.AreEqual("2.00", styles["--fa-beat-scale"]);
+        styles["--fa-beat-scale"].Should().Be("2.00");
     }
 }

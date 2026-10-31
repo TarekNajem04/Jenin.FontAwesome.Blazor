@@ -15,6 +15,7 @@ global using System.Threading.Tasks;
 global using Jenin.FontAwesome.Blazor;
 global using Jenin.FontAwesome.Blazor.IconPicker;
 global using Jenin.FontAwesome.Blazor.IconPicker.Tests.TestSupport;
+global using Jeninnet.Assertions;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Web;
 global using Microsoft.Extensions.DependencyInjection;

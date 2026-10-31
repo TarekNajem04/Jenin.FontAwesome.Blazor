@@ -12,23 +12,23 @@ public sealed class IconMetadataProviderTests {
 
     [TestMethod]
     public void Icons_AreLoaded_From_Embedded_Metadata() {
-        Assert.IsGreaterThanOrEqualTo(1900, Provider.Icons.Count);
-        Assert.IsNotNull(Provider.Find("house"));
+        Provider.Icons.Count.Should().BeGreaterThanOrEqualTo(1900);
+        Provider.Find("house").Should().NotBeNull();
     }
 
     [TestMethod]
     public void Find_By_Name_Returns_Metadata() {
         var icon = Provider.Find("house");
 
-        Assert.IsNotNull(icon);
-        Assert.AreEqual("house", icon.Name);
-        Assert.AreEqual("fa-house", icon.CssClass);
-        Assert.AreEqual("House", icon.Label);
-        Assert.AreEqual("house", icon.ToString());
-        Assert.IsTrue(icon.SupportsStyle(IconStyle.Solid));
-        Assert.IsTrue(icon.SupportsStyle(IconStyle.Regular));
-        Assert.IsFalse(icon.SupportsStyle(IconStyle.Brands));
-        Assert.AreEqual(IconStyle.Solid, icon.PrimaryStyle);
+        icon.Should().NotBeNull();
+        icon!.Name.Should().Be("house");
+        icon.CssClass.Should().Be("fa-house");
+        icon.Label.Should().Be("House");
+        icon.ToString().Should().Be("house");
+        icon.SupportsStyle(IconStyle.Solid).Should().BeTrue();
+        icon.SupportsStyle(IconStyle.Regular).Should().BeTrue();
+        icon.SupportsStyle(IconStyle.Brands).Should().BeFalse();
+        icon.PrimaryStyle.Should().Be(IconStyle.Solid);
     }
 
     [TestMethod]
@@ -36,8 +36,8 @@ public sealed class IconMetadataProviderTests {
         var byClass = Provider.Find("fa-house");
         var byName = Provider.Find("house");
 
-        Assert.IsNotNull(byClass);
-        Assert.AreSame(byName, byClass);
+        byClass.Should().NotBeNull();
+        byClass.Should().BeSameAs(byName);
     }
 
     [TestMethod]
@@ -48,74 +48,74 @@ public sealed class IconMetadataProviderTests {
     public void Find_Is_Case_Insensitive_And_Trims(string query) {
         var icon = Provider.Find(query);
 
-        Assert.IsNotNull(icon);
-        Assert.AreEqual("house", icon.Name);
+        icon.Should().NotBeNull();
+        icon!.Name.Should().Be("house");
     }
 
     [TestMethod]
     [DataRow("")]
     [DataRow("   ")]
     [DataRow("definitely-not-an-icon")]
-    public void Find_Unknown_Returns_Null(string query) => Assert.IsNull(Provider.Find(query));
+    public void Find_Unknown_Returns_Null(string query) => Provider.Find(query).Should().BeNull();
 
     [TestMethod]
     public void Brands_Icon_Uses_Brands_Primary_Style() {
         var icon = Provider.Find("github");
 
-        Assert.IsNotNull(icon);
-        Assert.AreEqual(IconStyle.Brands, icon.PrimaryStyle);
-        Assert.IsTrue(icon.SupportsStyle(IconStyle.Brands));
-        Assert.IsFalse(icon.SupportsStyle(IconStyle.Solid));
+        icon.Should().NotBeNull();
+        icon!.PrimaryStyle.Should().Be(IconStyle.Brands);
+        icon.SupportsStyle(IconStyle.Brands).Should().BeTrue();
+        icon.SupportsStyle(IconStyle.Solid).Should().BeFalse();
     }
 
     [TestMethod]
     public void Search_By_Exact_Name_Ranks_First() {
         var results = Provider.Search("house");
 
-        Assert.IsNotEmpty(results);
-        Assert.AreEqual("house", results[0].Name);
+        results.Should().NotBeEmpty();
+        results[0].Name.Should().Be("house");
     }
 
     [TestMethod]
     public void Search_By_Prefix_Finds_Icon() {
         var results = Provider.Search("mug");
 
-        Assert.Contains(static icon => icon.Name == "mug-hot", results);
+        results.Should().Contain(static icon => icon.Name == "mug-hot");
     }
 
     [TestMethod]
     public void Search_By_Alias_Finds_Canonical_Icon() {
         var results = Provider.Search("home");
 
-        Assert.IsNotEmpty(results);
-        Assert.AreEqual("house", results[0].Name);
+        results.Should().NotBeEmpty();
+        results[0].Name.Should().Be("house");
     }
 
     [TestMethod]
     public void Search_By_Keyword_Finds_Icon() {
         var results = Provider.Search("zero");
 
-        Assert.Contains(static icon => icon.Name == "0", results);
+        results.Should().Contain(static icon => icon.Name == "0");
     }
 
     [TestMethod]
     public void Search_Filters_By_Style() {
-        Assert.Contains(static icon => icon.Name == "github", Provider.Search("github", IconStyle.Brands));
-        Assert.DoesNotContain(static icon => icon.Name == "github", Provider.Search("github", IconStyle.Solid));
-        Assert.IsEmpty(Provider.Search("github", IconStyle.Regular));
+        Provider.Search("github", IconStyle.Brands).Should().Contain(static icon => icon.Name == "github");
+        Provider.Search("github", IconStyle.Solid).Should().NotContain(static icon => icon.Name == "github");
+        Provider.Search("github", IconStyle.Regular).Should().BeEmpty();
     }
 
     [TestMethod]
     public void Search_With_Empty_Query_Returns_All_Icons() {
-        Assert.HasCount(Provider.Icons.Count, Provider.Search(null));
-        Assert.HasCount(Provider.Icons.Count, Provider.Search(""));
-        Assert.HasCount(Provider.Icons.Count, Provider.Search("   "));
+        Provider.Search(null).Should().HaveCount(Provider.Icons.Count);
+        Provider.Search("").Should().HaveCount(Provider.Icons.Count);
+        Provider.Search("   ").Should().HaveCount(Provider.Icons.Count);
     }
 
     [TestMethod]
     public void Search_Respects_Max_Results() {
-        Assert.HasCount(10, Provider.Search(null, maxResults: 10));
-        Assert.HasCount(5, Provider.Search("a", maxResults: 5));
+        Provider.Search(null, maxResults: 10).Should().HaveCount(10);
+        Provider.Search("a", maxResults: 5).Should().HaveCount(5);
     }
 
     [TestMethod]
@@ -123,22 +123,22 @@ public sealed class IconMetadataProviderTests {
         var first = Provider.Search("home");
         var second = Provider.Search("home");
 
-        Assert.AreSequenceEqual(first.Select(static icon => icon.Name), second.Select(static icon => icon.Name));
+        second.Select(static icon => icon.Name).Should().Equal(first.Select(static icon => icon.Name));
     }
 
     [TestMethod]
     public void Search_Results_Respect_Style_Filter() {
         var results = Provider.Search("star", IconStyle.Regular);
 
-        Assert.IsNotEmpty(results);
-        Assert.IsTrue(results.All(static icon => icon.SupportsStyle(IconStyle.Regular)));
+        results.Should().NotBeEmpty();
+        results.All(static icon => icon.SupportsStyle(IconStyle.Regular)).Should().BeTrue();
     }
 
     [TestMethod]
     public void Default_And_New_Instances_Share_The_Catalogue() {
         var other = new IconMetadataProvider();
 
-        Assert.AreSame(Provider.Icons, other.Icons);
+        ReferenceEquals(other.Icons, Provider.Icons).Should().BeTrue();
     }
 
     [TestMethod]
@@ -146,16 +146,16 @@ public sealed class IconMetadataProviderTests {
         var names = Provider.Icons.Select(static icon => icon.Name).ToList();
         var sorted = names.OrderBy(static name => name, StringComparer.Ordinal).ToList();
 
-        Assert.AreSequenceEqual(sorted, names);
+        names.Should().Equal(sorted);
     }
 
     [TestMethod]
     public void Metadata_Exposes_Search_Terms_And_Aliases() {
         var icon = Provider.Find("house");
 
-        Assert.IsNotNull(icon);
-        Assert.Contains("home", icon.Aliases);
-        Assert.Contains("residence", icon.SearchTerms);
-        Assert.DoesNotContain("home-alt", icon.SearchTerms);
+        icon.Should().NotBeNull();
+        icon!.Aliases.Should().Contain("home");
+        icon.SearchTerms.Should().Contain("residence");
+        icon.SearchTerms.Should().NotContain("home-alt");
     }
 }

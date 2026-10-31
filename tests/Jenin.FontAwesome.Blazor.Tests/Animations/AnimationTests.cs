@@ -13,7 +13,7 @@ public class AnimationTests {
     public void BuildClasses_ReturnsBaseFontAwesomeClass() {
         Animation animation = new Beat();
 
-        Assert.AreEqual("fa-beat", animation.BuildClasses());
+        animation.BuildClasses().Should().Be("fa-beat");
     }
 
     [TestMethod]
@@ -21,7 +21,7 @@ public class AnimationTests {
     public void BuildStyles_WithoutOptions_IsEmpty() {
         var styles = new Beat().BuildStyles();
 
-        Assert.IsEmpty(styles);
+        styles.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -37,11 +37,11 @@ public class AnimationTests {
 
         var styles = new Beat(options).BuildStyles();
 
-        Assert.AreEqual("500ms", styles["--fa-animation-delay"]);
-        Assert.AreEqual("2000ms", styles["--fa-animation-duration"]);
-        Assert.AreEqual("reverse", styles["--fa-animation-direction"]);
-        Assert.AreEqual("3.00", styles["--fa-animation-iteration-count"]);
-        Assert.AreEqual("ease-in", styles["--fa-animation-timing"]);
+        styles["--fa-animation-delay"].Should().Be("500ms");
+        styles["--fa-animation-duration"].Should().Be("2000ms");
+        styles["--fa-animation-direction"].Should().Be("reverse");
+        styles["--fa-animation-iteration-count"].Should().Be("3.00");
+        styles["--fa-animation-timing"].Should().Be("ease-in");
     }
 
     [TestMethod]
@@ -49,7 +49,7 @@ public class AnimationTests {
     public void BuildStyles_DirectionNone_OmitsDirection() {
         var styles = new Beat(new BeatOptions { Direction = AnimationDirection.None }).BuildStyles();
 
-        Assert.IsFalse(styles.ContainsKey("--fa-animation-direction"));
+        styles.ContainsKey("--fa-animation-direction").Should().BeFalse();
     }
 
     [TestMethod]
@@ -57,7 +57,7 @@ public class AnimationTests {
     public void BuildStyles_PartialMilliseconds_FormatsInvariantly() {
         var styles = new Beat(new BeatOptions { Delay = TimeSpan.FromMilliseconds(250.5) }).BuildStyles();
 
-        Assert.AreEqual("250.5ms", styles["--fa-animation-delay"]);
+        styles["--fa-animation-delay"].Should().Be("250.5ms");
     }
 
     [TestMethod]
@@ -69,7 +69,7 @@ public class AnimationTests {
     public void BuildStyles_Direction_EmitsDirectionToken(AnimationDirection direction, string expected) {
         var styles = new Beat(new BeatOptions { Direction = direction }).BuildStyles();
 
-        Assert.AreEqual(expected, styles["--fa-animation-direction"]);
+        styles["--fa-animation-direction"].Should().Be(expected);
     }
 
     [TestMethod]
@@ -77,7 +77,7 @@ public class AnimationTests {
     public void AnimationOptions_NegativeIterationCount_IsClampedToZero() {
         var options = new BeatOptions { IterationCount = -3 };
 
-        Assert.AreEqual(0f, options.IterationCount!.Value);
+        options.IterationCount!.Value.Should().Be(0f);
     }
 
     [TestMethod]
@@ -87,10 +87,10 @@ public class AnimationTests {
 
         var updated = original.SetDelay(TimeSpan.FromSeconds(1));
 
-        Assert.IsInstanceOfType<Beat>(updated);
-        Assert.AreNotSame(original, updated);
-        Assert.IsNull(original.Options.Delay);
-        Assert.AreEqual(TimeSpan.FromSeconds(1), updated.Options.Delay);
+        updated.Should().BeOfType<Beat>();
+        ReferenceEquals(original, updated).Should().BeFalse();
+        original.Options.Delay.Should().BeNull();
+        updated.Options.Delay.Should().Be(TimeSpan.FromSeconds(1));
     }
 
     [TestMethod]
@@ -100,9 +100,9 @@ public class AnimationTests {
 
         var updated = original.SetDuration(TimeSpan.FromSeconds(2));
 
-        Assert.IsInstanceOfType<Fade>(updated);
-        Assert.IsNull(original.Options.Duration);
-        Assert.AreEqual(TimeSpan.FromSeconds(2), updated.Options.Duration);
+        updated.Should().BeOfType<Fade>();
+        original.Options.Duration.Should().BeNull();
+        updated.Options.Duration.Should().Be(TimeSpan.FromSeconds(2));
     }
 
     [TestMethod]
@@ -112,9 +112,9 @@ public class AnimationTests {
 
         var updated = original.SetDirection(AnimationDirection.Alternate);
 
-        Assert.IsInstanceOfType<Shake>(updated);
-        Assert.AreEqual(AnimationDirection.None, original.Options.Direction);
-        Assert.AreEqual(AnimationDirection.Alternate, updated.Options.Direction);
+        updated.Should().BeOfType<Shake>();
+        original.Options.Direction.Should().Be(AnimationDirection.None);
+        updated.Options.Direction.Should().Be(AnimationDirection.Alternate);
     }
 
     [TestMethod]
@@ -124,9 +124,9 @@ public class AnimationTests {
 
         var updated = original.SetIterationCount(4);
 
-        Assert.IsInstanceOfType<Bounce>(updated);
-        Assert.IsNull(original.Options.IterationCount);
-        Assert.AreEqual(4f, updated.Options.IterationCount!.Value);
+        updated.Should().BeOfType<Bounce>();
+        original.Options.IterationCount.Should().BeNull();
+        updated.Options.IterationCount!.Value.Should().Be(4f);
     }
 
     [TestMethod]
@@ -136,9 +136,9 @@ public class AnimationTests {
 
         var updated = original.SetTimingFunction("linear");
 
-        Assert.IsInstanceOfType<Shake>(updated);
-        Assert.IsNull(original.Options.TimingFunction);
-        Assert.AreEqual("linear", updated.Options.TimingFunction);
+        updated.Should().BeOfType<Shake>();
+        original.Options.TimingFunction.Should().BeNull();
+        updated.Options.TimingFunction.Should().Be("linear");
     }
 
     [TestMethod]
@@ -151,12 +151,12 @@ public class AnimationTests {
             .SetIterationCount(2)
             .SetTimingFunction("ease-out");
 
-        Assert.IsInstanceOfType<Beat>(animation);
-        Assert.AreEqual(TimeSpan.FromMilliseconds(100), animation.Options.Delay);
-        Assert.AreEqual(TimeSpan.FromMilliseconds(200), animation.Options.Duration);
-        Assert.AreEqual(AnimationDirection.Reverse, animation.Options.Direction);
-        Assert.AreEqual(2f, animation.Options.IterationCount!.Value);
-        Assert.AreEqual("ease-out", animation.Options.TimingFunction);
+        animation.Should().BeOfType<Beat>();
+        animation.Options.Delay.Should().Be(TimeSpan.FromMilliseconds(100));
+        animation.Options.Duration.Should().Be(TimeSpan.FromMilliseconds(200));
+        animation.Options.Direction.Should().Be(AnimationDirection.Reverse);
+        animation.Options.IterationCount!.Value.Should().Be(2f);
+        animation.Options.TimingFunction.Should().Be("ease-out");
     }
 
     [TestMethod]
@@ -167,12 +167,12 @@ public class AnimationTests {
         var first = animation.BuildStyles();
         var second = animation.BuildStyles();
 
-        Assert.HasCount(first.Count, second);
+        second.Should().HaveCount(first.Count);
 
         foreach(var pair in first) {
-            Assert.AreEqual(pair.Value, second[pair.Key]);
+            second[pair.Key].Should().Be(pair.Value);
         }
 
-        Assert.AreEqual(2f, animation.Options.Scale);
+        animation.Options.Scale.Should().Be(2f);
     }
 }

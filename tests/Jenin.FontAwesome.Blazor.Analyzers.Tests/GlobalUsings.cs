@@ -11,6 +11,7 @@ global using System.Linq;
 global using System.Threading.Tasks;
 global using Jenin.FontAwesome.Blazor.Analyzers;
 global using Jenin.FontAwesome.Blazor.Components;
+global using Jeninnet.Assertions;
 global using Microsoft.CodeAnalysis;
 global using Microsoft.CodeAnalysis.CSharp.Testing;
 global using Microsoft.CodeAnalysis.Testing;

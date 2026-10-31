@@ -13,7 +13,7 @@ public class IconContainerTests {
     public async Task EmptyContainer_RendersDivRootAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconContainer>();
 
-        Assert.AreEqual("<div></div>", markup);
+        markup.Should().Be("<div></div>");
     }
 
     [TestMethod]
@@ -27,7 +27,7 @@ public class IconContainerTests {
 
         var markup = await TestHost.RenderMarkupAsync<IconContainer>(TestHost.Parameters(("Icons", icons)));
 
-        Assert.AreEqual("<div><span><i class=\"fa-solid fa-star\" aria-hidden=\"true\" role=\"presentation\"></i></span></div>", markup);
+        markup.Should().Be("<div><span><i class=\"fa-solid fa-star\" aria-hidden=\"true\" role=\"presentation\"></i></span></div>");
     }
 
     [TestMethod]
@@ -35,6 +35,6 @@ public class IconContainerTests {
     public async Task Container_AppliesCssClassToRootAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconContainer>(TestHost.Parameters(("CssClass", "wrap")));
 
-        Assert.AreEqual("<div class=\"wrap\"></div>", markup);
+        markup.Should().Be("<div class=\"wrap\"></div>");
     }
 }

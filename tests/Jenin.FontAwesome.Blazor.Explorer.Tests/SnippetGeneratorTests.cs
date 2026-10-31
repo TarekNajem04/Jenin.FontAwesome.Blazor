@@ -21,25 +21,25 @@ public sealed class SnippetGeneratorTests {
     public void Razor_Emits_IconName_Reference_And_Style() {
         var snippet = Generate(House, new ExplorerPreviewState());
 
-        Assert.AreEqual("razor", snippet.Language);
-        Assert.Contains("IconName=\"@(IconNames.Solid.House)\"", snippet.Code);
-        Assert.Contains("IconStyle=\"IconStyle.Solid\"", snippet.Code);
-        Assert.StartsWith("<Icon", snippet.Code, StringComparison.Ordinal);
-        Assert.EndsWith("/>", snippet.Code, StringComparison.Ordinal);
+        snippet.Language.Should().Be("razor");
+        snippet.Code.Should().Contain("IconName=\"@(IconNames.Solid.House)\"");
+        snippet.Code.Should().Contain("IconStyle=\"IconStyle.Solid\"");
+        snippet.Code.StartsWith("<Icon", StringComparison.Ordinal).Should().BeTrue();
+        snippet.Code.EndsWith("/>", StringComparison.Ordinal).Should().BeTrue();
     }
 
     [TestMethod]
     public void Razor_Omits_Default_Parameters() {
         var snippet = Generate(House, new ExplorerPreviewState());
 
-        Assert.DoesNotContain("Typeface", snippet.Code, StringComparison.Ordinal);
-        Assert.DoesNotContain("IconSize", snippet.Code, StringComparison.Ordinal);
-        Assert.DoesNotContain("WidthMode", snippet.Code, StringComparison.Ordinal);
-        Assert.DoesNotContain("FixedWidth", snippet.Code, StringComparison.Ordinal);
-        Assert.DoesNotContain("Color=", snippet.Code, StringComparison.Ordinal);
-        Assert.DoesNotContain("Rotate", snippet.Code, StringComparison.Ordinal);
-        Assert.DoesNotContain("Animation", snippet.Code, StringComparison.Ordinal);
-        Assert.DoesNotContain("Transform", snippet.Code, StringComparison.Ordinal);
+        snippet.Code.Contains("Typeface", StringComparison.Ordinal).Should().BeFalse();
+        snippet.Code.Contains("IconSize", StringComparison.Ordinal).Should().BeFalse();
+        snippet.Code.Contains("WidthMode", StringComparison.Ordinal).Should().BeFalse();
+        snippet.Code.Contains("FixedWidth", StringComparison.Ordinal).Should().BeFalse();
+        snippet.Code.Contains("Color=", StringComparison.Ordinal).Should().BeFalse();
+        snippet.Code.Contains("Rotate", StringComparison.Ordinal).Should().BeFalse();
+        snippet.Code.Contains("Animation", StringComparison.Ordinal).Should().BeFalse();
+        snippet.Code.Contains("Transform", StringComparison.Ordinal).Should().BeFalse();
     }
 
     [TestMethod]
@@ -55,13 +55,13 @@ public sealed class SnippetGeneratorTests {
 
         var snippet = Generate(House, state);
 
-        Assert.Contains("IconSize=\"IconSize.Large\"", snippet.Code);
-        Assert.Contains("WidthMode=\"IconWidth.Fixed\"", snippet.Code);
-        Assert.Contains("FixedWidth", snippet.Code);
-        Assert.Contains("Bordered", snippet.Code);
-        Assert.Contains("Inverse", snippet.Code);
-        Assert.Contains("Rotate=\"IconRotate.Deg090\"", snippet.Code);
-        Assert.DoesNotContain("RotateAngle", snippet.Code, StringComparison.Ordinal);
+        snippet.Code.Should().Contain("IconSize=\"IconSize.Large\"");
+        snippet.Code.Should().Contain("WidthMode=\"IconWidth.Fixed\"");
+        snippet.Code.Should().Contain("FixedWidth");
+        snippet.Code.Should().Contain("Bordered");
+        snippet.Code.Should().Contain("Inverse");
+        snippet.Code.Should().Contain("Rotate=\"IconRotate.Deg090\"");
+        snippet.Code.Contains("RotateAngle", StringComparison.Ordinal).Should().BeFalse();
     }
 
     [TestMethod]
@@ -73,8 +73,8 @@ public sealed class SnippetGeneratorTests {
 
         var snippet = Generate(House, state);
 
-        Assert.Contains("Rotate=\"IconRotate.RotateBy\"", snippet.Code);
-        Assert.Contains("RotateAngle=\"-30f\"", snippet.Code);
+        snippet.Code.Should().Contain("Rotate=\"IconRotate.RotateBy\"");
+        snippet.Code.Should().Contain("RotateAngle=\"-30f\"");
     }
 
     [TestMethod]
@@ -89,11 +89,11 @@ public sealed class SnippetGeneratorTests {
 
         var snippet = Generate(House, state);
 
-        Assert.Contains("Transform=", snippet.Code);
-        Assert.Contains("new Transform()", snippet.Code);
-        Assert.Contains(".Shrink(6)", snippet.Code);
-        Assert.Contains(".Left(2)", snippet.Code);
-        Assert.Contains(".Rotate(-15)", snippet.Code);
+        snippet.Code.Should().Contain("Transform=");
+        snippet.Code.Should().Contain("new Transform()");
+        snippet.Code.Should().Contain(".Shrink(6)");
+        snippet.Code.Should().Contain(".Left(2)");
+        snippet.Code.Should().Contain(".Rotate(-15)");
     }
 
     [TestMethod]
@@ -106,7 +106,7 @@ public sealed class SnippetGeneratorTests {
         var snippet = Generate(House, state);
 
         // The animation expression contains string literals, so the attribute must use single quotes.
-        Assert.Contains("Animation='Animate.Spin(new SpinOptions { TimingFunction = \"ease-in-out\" })'", snippet.Code);
+        snippet.Code.Should().Contain("Animation='Animate.Spin(new SpinOptions { TimingFunction = \"ease-in-out\" })'");
     }
 
     [TestMethod]
@@ -115,31 +115,31 @@ public sealed class SnippetGeneratorTests {
 
         var snippet = Generate(House, state);
 
-        Assert.Contains("Animation=\"Animate.Beat()\"", snippet.Code);
+        snippet.Code.Should().Contain("Animation=\"Animate.Beat()\"");
     }
 
     [TestMethod]
     public void Preset_Uses_Group_Component_And_Omits_Defaults() {
         var snippet = Generate(House, new ExplorerPreviewState(), SnippetKind.Preset);
 
-        Assert.AreEqual("razor", snippet.Language);
-        Assert.StartsWith("<HouseIcon", snippet.Code, StringComparison.Ordinal);
-        Assert.Contains("IconStyle=\"IconStyle.Solid\"", snippet.Code);
+        snippet.Language.Should().Be("razor");
+        snippet.Code.StartsWith("<HouseIcon", StringComparison.Ordinal).Should().BeTrue();
+        snippet.Code.Should().Contain("IconStyle=\"IconStyle.Solid\"");
     }
 
     [TestMethod]
     public void Preset_Generates_Brands_Component() {
         var snippet = Generate(Github, new ExplorerPreviewState { Style = IconStyle.Brands }, SnippetKind.Preset);
 
-        Assert.StartsWith("<GithubIcon", snippet.Code, StringComparison.Ordinal);
-        Assert.Contains("IconStyle=\"IconStyle.Brands\"", snippet.Code);
+        snippet.Code.StartsWith("<GithubIcon", StringComparison.Ordinal).Should().BeTrue();
+        snippet.Code.Should().Contain("IconStyle=\"IconStyle.Brands\"");
     }
 
     [TestMethod]
     public void IconNamesReference_Uses_Selected_Style_Group() {
-        Assert.AreEqual("IconNames.Solid.House", IconNamesReference.Build("fa-house", IconStyle.Solid, [IconStyle.Solid, IconStyle.Regular]));
-        Assert.AreEqual("IconNames.Regular.House", IconNamesReference.Build("fa-house", IconStyle.Regular, [IconStyle.Solid, IconStyle.Regular]));
-        Assert.AreEqual("IconNames.Brands.Github", IconNamesReference.Build("fa-github", IconStyle.Brands, [IconStyle.Brands]));
+        IconNamesReference.Build("fa-house", IconStyle.Solid, [IconStyle.Solid, IconStyle.Regular]).Should().Be("IconNames.Solid.House");
+        IconNamesReference.Build("fa-house", IconStyle.Regular, [IconStyle.Solid, IconStyle.Regular]).Should().Be("IconNames.Regular.House");
+        IconNamesReference.Build("fa-github", IconStyle.Brands, [IconStyle.Brands]).Should().Be("IconNames.Brands.Github");
     }
 
     [TestMethod]
@@ -147,16 +147,16 @@ public sealed class SnippetGeneratorTests {
         // A Pro-only selection falls back to the first Free style the icon is available in.
         var reference = IconNamesReference.Build("fa-house", IconStyle.Light, [IconStyle.Solid, IconStyle.Regular]);
 
-        Assert.AreEqual("IconNames.Solid.House", reference);
+        reference.Should().Be("IconNames.Solid.House");
     }
 
     [TestMethod]
     public void IconNamesReference_Returns_Null_When_No_Free_Group_Applies() =>
         // An empty style list defaults to Solid; a Pro-only first style yields no group.
-        Assert.IsNull(IconNamesReference.Build("fa-house", IconStyle.Light, [IconStyle.Light]));
+        IconNamesReference.Build("fa-house", IconStyle.Light, [IconStyle.Light]).Should().BeNull();
 
     [TestMethod]
-    public void IconNamesReference_Prefixes_Leading_Digit() => Assert.AreEqual("IconNames.Solid._0", IconNamesReference.Build("fa-0", IconStyle.Solid, [IconStyle.Solid]));
+    public void IconNamesReference_Prefixes_Leading_Digit() => IconNamesReference.Build("fa-0", IconStyle.Solid, [IconStyle.Solid]).Should().Be("IconNames.Solid._0");
 
     [TestMethod]
     public void Html_Emits_Class_Tokens_And_Styles() {
@@ -169,10 +169,10 @@ public sealed class SnippetGeneratorTests {
 
         var snippet = Generate(House, state, SnippetKind.Html);
 
-        Assert.AreEqual("html", snippet.Language);
-        Assert.Contains("class=\"fa-house fa-solid fa-rotate-by\"", snippet.Code);
-        Assert.Contains("color:#0d6efd", snippet.Code);
-        Assert.Contains("--fa-rotate-angle:-30deg", snippet.Code);
+        snippet.Language.Should().Be("html");
+        snippet.Code.Should().Contain("class=\"fa-house fa-solid fa-rotate-by\"");
+        snippet.Code.Should().Contain("color:#0d6efd");
+        snippet.Code.Should().Contain("--fa-rotate-angle:-30deg");
     }
 
     [TestMethod]
@@ -181,7 +181,7 @@ public sealed class SnippetGeneratorTests {
 
         var snippet = Generate(House, state, SnippetKind.Html);
 
-        Assert.Contains("data-fa-transform=\"", snippet.Code);
+        snippet.Code.Should().Contain("data-fa-transform=\"");
     }
 
     [TestMethod]
@@ -194,7 +194,7 @@ public sealed class SnippetGeneratorTests {
 
         var snippet = Generate(House, state, SnippetKind.Html);
 
-        Assert.Contains("--fa-primary-color:#0d6efd", snippet.Code);
-        Assert.Contains("--fa-secondary-color:#fd7e14", snippet.Code);
+        snippet.Code.Should().Contain("--fa-primary-color:#0d6efd");
+        snippet.Code.Should().Contain("--fa-secondary-color:#fd7e14");
     }
 }

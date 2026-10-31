@@ -29,58 +29,58 @@ public class EnumExtensionsTests {
 
     [TestMethod]
     [TestCategory("Model")]
-    public void GetStringValue_ReturnsMappedValue() => Assert.AreEqual("fa-2x", IconSize.X02.GetStringValue());
+    public void GetStringValue_ReturnsMappedValue() => IconSize.X02.GetStringValue().Should().Be("fa-2x");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void GetStringValue_UnmappedValue_ReturnsNull() => Assert.IsNull(Plain.A.GetStringValue());
+    public void GetStringValue_UnmappedValue_ReturnsNull() => Plain.A.GetStringValue().Should().BeNull();
 
     [TestMethod]
     [TestCategory("Model")]
-    public void GetStringValue_UnmappedValue_ReturnsSuppliedDefault() => Assert.AreEqual("fallback", Plain.A.GetStringValue("fallback"));
+    public void GetStringValue_UnmappedValue_ReturnsSuppliedDefault() => Plain.A.GetStringValue("fallback").Should().Be("fallback");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void GetDescription_WithAttribute_ReturnsDescription() => Assert.AreEqual("hello", Described.A.GetDescription());
+    public void GetDescription_WithAttribute_ReturnsDescription() => Described.A.GetDescription().Should().Be("hello");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void GetDescription_WithoutAttribute_ReturnsName() => Assert.AreEqual("B", Described.B.GetDescription());
+    public void GetDescription_WithoutAttribute_ReturnsName() => Described.B.GetDescription().Should().Be("B");
 
     [TestMethod]
     [TestCategory("Model")]
     public void GetField_ReturnsFieldCarryingValueAttribute() {
         var attribute = IconSize.X02.GetField()?.GetCustomAttribute<ValueAttribute>();
 
-        Assert.IsNotNull(attribute);
-        Assert.AreEqual("fa-2x", attribute.Value);
+        attribute.Should().NotBeNull();
+        attribute!.Value.Should().Be("fa-2x");
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void GetField_ReflectsAttributePresence() {
-        Assert.IsNotNull(IconSize.X02.GetField()?.GetCustomAttribute<ValueAttribute>());
-        Assert.IsNull(Plain.A.GetField()?.GetCustomAttribute<ValueAttribute>());
+        (IconSize.X02.GetField()?.GetCustomAttribute<ValueAttribute>()).Should().NotBeNull();
+        (Plain.A.GetField()?.GetCustomAttribute<ValueAttribute>()).Should().BeNull();
     }
 
     [TestMethod]
     [TestCategory("Model")]
-    public void ToEnum_ParsesDefinedName() => Assert.AreEqual(IconStyle.Duotone, "Duotone".ToEnum<IconStyle>());
+    public void ToEnum_ParsesDefinedName() => "Duotone".ToEnum<IconStyle>().Should().Be(IconStyle.Duotone);
 
     [TestMethod]
     [TestCategory("Model")]
-    public void ToEnum_EmptyString_ReturnsDefault() => Assert.AreEqual(IconStyle.Solid, "".ToEnum<IconStyle>());
+    public void ToEnum_EmptyString_ReturnsDefault() => "".ToEnum<IconStyle>().Should().Be(IconStyle.Solid);
 
     [TestMethod]
     [TestCategory("Model")]
-    public void ToEnum_UnknownName_ReturnsDefault() => Assert.AreEqual(IconStyle.Solid, "nonsense".ToEnum<IconStyle>());
+    public void ToEnum_UnknownName_ReturnsDefault() => "nonsense".ToEnum<IconStyle>().Should().Be(IconStyle.Solid);
 
     [TestMethod]
     [TestCategory("Model")]
     public void GetAllFlags_YieldsEachSetFlagInDefinitionOrder() {
         var flags = (Flagsy.A | Flagsy.C).GetAllFlags().ToList();
 
-        Assert.AreSequenceEqual([Flagsy.A, Flagsy.C], flags);
+        flags.Should().Equal([Flagsy.A, Flagsy.C]);
     }
 
     [TestMethod]
@@ -88,6 +88,6 @@ public class EnumExtensionsTests {
     public void GetAllFlags_None_YieldsNoFlags() {
         var flags = Flagsy.None.GetAllFlags().ToList();
 
-        Assert.IsEmpty(flags);
+        flags.Should().BeEmpty();
     }
 }

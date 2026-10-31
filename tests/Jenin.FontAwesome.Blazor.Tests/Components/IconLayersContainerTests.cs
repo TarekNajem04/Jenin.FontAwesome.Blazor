@@ -13,7 +13,7 @@ public class IconLayersContainerTests {
     public async Task EmptyContainer_RendersSpanWithFa_layersClassAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconLayersContainer>();
 
-        Assert.AreEqual("<span class=\"fa-layers\"></span>", markup);
+        markup.Should().Be("<span class=\"fa-layers\"></span>");
     }
 
     [TestMethod]
@@ -27,6 +27,6 @@ public class IconLayersContainerTests {
 
         var markup = await TestHost.RenderMarkupAsync<IconLayersContainer>(TestHost.Parameters(("Icons", icons)));
 
-        Assert.AreEqual("<span class=\"fa-layers\"><span><i class=\"fa-solid fa-circle\" aria-hidden=\"true\" role=\"presentation\"></i></span></span>", markup);
+        markup.Should().Be("<span class=\"fa-layers\"><span><i class=\"fa-solid fa-circle\" aria-hidden=\"true\" role=\"presentation\"></i></span></span>");
     }
 }

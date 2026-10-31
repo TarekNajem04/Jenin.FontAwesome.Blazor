@@ -19,7 +19,7 @@ public class MudIconMapperTests {
     [DataRow("fa-github", IconStyle.Brands, "fa-brands fa-github")]
     [DataRow("fa-acme-widget", IconStyle.Solid, "fa-solid fa-acme-widget")]
     public void ToFontClass_MapsNameAndStyle(string iconName, IconStyle style, string expected) {
-        Assert.AreEqual(expected, MudIconMapper.ToFontClass(iconName, style));
+        MudIconMapper.ToFontClass(iconName, style).Should().Be(expected);
     }
 
     [TestMethod]
@@ -28,15 +28,15 @@ public class MudIconMapperTests {
     [DataRow("")]
     [DataRow("   ")]
     public void ToFontClass_RejectsEmpty(string? iconName) {
-        Assert.AreEqual(string.Empty, MudIconMapper.ToFontClass(iconName));
+        MudIconMapper.ToFontClass(iconName).Should().Be(string.Empty);
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void ToMudSize_MapsOverlappingSteps() {
-        Assert.AreEqual(global::MudBlazor.Size.Small, MudIconMapper.ToMudSize(IconSize.Small));
-        Assert.AreEqual(global::MudBlazor.Size.Large, MudIconMapper.ToMudSize(IconSize.Large));
-        Assert.AreEqual(global::MudBlazor.Size.Medium, MudIconMapper.ToMudSize(IconSize.NotSet) ?? global::MudBlazor.Size.Medium);
+        MudIconMapper.ToMudSize(IconSize.Small).Should().Be(global::MudBlazor.Size.Small);
+        MudIconMapper.ToMudSize(IconSize.Large).Should().Be(global::MudBlazor.Size.Large);
+        (MudIconMapper.ToMudSize(IconSize.NotSet) ?? global::MudBlazor.Size.Medium).Should().Be(global::MudBlazor.Size.Medium);
     }
 
     [TestMethod]
@@ -46,7 +46,7 @@ public class MudIconMapperTests {
     [DataRow(IconSize.ExtraSmall)]
     [DataRow(null)]
     public void ToMudSize_ReturnsNullOutsideOverlap(IconSize? size) {
-        Assert.IsNull(MudIconMapper.ToMudSize(size));
+        MudIconMapper.ToMudSize(size).Should().BeNull();
     }
 
     [TestMethod]
@@ -57,9 +57,9 @@ public class MudIconMapperTests {
             ("IconStyle", IconStyle.Solid),
             ("Title", "Home")));
 
-        Assert.Contains("mud-icon-root", markup);
-        Assert.Contains("fa-solid fa-house", markup);
-        Assert.Contains("title=\"Home\"", markup);
+        markup.Should().Contain("mud-icon-root");
+        markup.Should().Contain("fa-solid fa-house");
+        markup.Should().Contain("title=\"Home\"");
     }
 
     [TestMethod]
@@ -69,6 +69,6 @@ public class MudIconMapperTests {
             ("IconName", "github"),
             ("IconStyle", IconStyle.Brands)));
 
-        Assert.Contains("fa-brands fa-github", markup);
+        markup.Should().Contain("fa-brands fa-github");
     }
 }

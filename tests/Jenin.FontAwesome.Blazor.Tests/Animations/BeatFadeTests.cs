@@ -10,15 +10,15 @@ namespace Jenin.FontAwesome.Blazor.Tests.Animations;
 public class BeatFadeTests {
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildClasses_ReturnsFaBeatFade() => Assert.AreEqual("fa-beat-fade", new BeatFade().BuildClasses());
+    public void BuildClasses_ReturnsFaBeatFade() => new BeatFade().BuildClasses().Should().Be("fa-beat-fade");
 
     [TestMethod]
     [TestCategory("Model")]
     public void BuildStyles_EmitsOpacityAndScale() {
         var styles = new BeatFade(new BeatFadeOptions { Opacity = 0.25f, Scale = 2 }).BuildStyles();
 
-        Assert.AreEqual("0.25", styles["--fa-beat-fade-opacity"]);
-        Assert.AreEqual("2.00", styles["--fa-beat-fade-scale"]);
+        styles["--fa-beat-fade-opacity"].Should().Be("0.25");
+        styles["--fa-beat-fade-scale"].Should().Be("2.00");
     }
 
     [TestMethod]
@@ -26,6 +26,6 @@ public class BeatFadeTests {
     public void Opacity_IsClampedToUnitInterval() {
         var styles = new BeatFade(new BeatFadeOptions { Opacity = 5 }).BuildStyles();
 
-        Assert.AreEqual("1.00", styles["--fa-beat-fade-opacity"]);
+        styles["--fa-beat-fade-opacity"].Should().Be("1.00");
     }
 }

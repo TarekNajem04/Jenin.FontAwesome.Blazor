@@ -20,7 +20,7 @@ public class EasyAppDevMigrationTests {
         // Before: <Fa6SolidHome />
         var markup = await TestHost.RenderMarkupAsync<HouseIcon>();
 
-        Assert.Contains("class=\"fa-solid fa-house\"", markup);
+        markup.Should().Contain("class=\"fa-solid fa-house\"");
     }
 
     [TestMethod]
@@ -30,7 +30,7 @@ public class EasyAppDevMigrationTests {
         var markup = await TestHost.RenderMarkupAsync<StarIcon>(TestHost.Parameters(
             ("IconStyle", IconStyle.Regular)));
 
-        Assert.Contains("class=\"fa-regular fa-star\"", markup);
+        markup.Should().Contain("class=\"fa-regular fa-star\"");
     }
 
     [TestMethod]
@@ -39,7 +39,7 @@ public class EasyAppDevMigrationTests {
         // Before: <Fa6BrandsDiscord />
         var markup = await TestHost.RenderMarkupAsync<DiscordIcon>();
 
-        Assert.Contains("class=\"fa-brands fa-discord\"", markup);
+        markup.Should().Contain("class=\"fa-brands fa-discord\"");
     }
 
     [TestMethod]
@@ -48,7 +48,7 @@ public class EasyAppDevMigrationTests {
         // Before: <Fa5SolidHome /> — FA5 names carry over (v6 classes work unchanged in v7).
         var markup = await TestHost.RenderMarkupAsync<HouseIcon>();
 
-        Assert.Contains("fa-house", markup);
+        markup.Should().Contain("fa-house");
     }
 
     [TestMethod]
@@ -57,11 +57,11 @@ public class EasyAppDevMigrationTests {
         // After (zero-asset shape): <HouseSolidIcon />
         var markup = await TestHost.RenderMarkupAsync<HouseSolidIcon>();
 
-        Assert.Contains("<svg", markup);
-        Assert.Contains("viewBox=\"0 0 512 512\"", markup);
-        Assert.Contains("<path", markup);
-        Assert.DoesNotContain("data-fa-i2svg", markup);
-        Assert.DoesNotContain("<use", markup);
+        markup.Should().Contain("<svg");
+        markup.Should().Contain("viewBox=\"0 0 512 512\"");
+        markup.Should().Contain("<path");
+        markup.Should().NotContain("data-fa-i2svg");
+        markup.Should().NotContain("<use");
     }
 
     [TestMethod]
@@ -70,7 +70,7 @@ public class EasyAppDevMigrationTests {
         // After (zero-asset shape): <GithubBrandsIcon /> for <Fa6BrandsGithub />.
         var markup = await TestHost.RenderMarkupAsync<GithubBrandsIcon>();
 
-        Assert.Contains("<svg", markup);
-        Assert.Contains("<path", markup);
+        markup.Should().Contain("<svg");
+        markup.Should().Contain("<path");
     }
 }

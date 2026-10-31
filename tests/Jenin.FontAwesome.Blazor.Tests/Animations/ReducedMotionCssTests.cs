@@ -24,7 +24,7 @@ public class ReducedMotionCssTests {
         var css = File.ReadAllText(StylesheetPath());
         var start = css.IndexOf("@media (prefers-reduced-motion: reduce)", StringComparison.Ordinal);
 
-        Assert.AreNotEqual(-1, start, "The reduced-motion media query is missing from animation-triggers.css.");
+        start.Should().NotBe(-1, "The reduced-motion media query is missing from animation-triggers.css.");
 
         reducedMotionBlock = css.Substring(start);
     }
@@ -37,15 +37,15 @@ public class ReducedMotionCssTests {
     [DataRow(".jfa-anim-reveal-target")]
     [DataRow(".jfa-anim-transition-layer")]
     public void ReducedMotionBlock_CoversLibraryOwnedMotion(string selector) {
-        Assert.Contains(selector, reducedMotionBlock, $"The reduced-motion block must neutralize '{selector}'.");
+        reducedMotionBlock.Should().Contain(selector, $"The reduced-motion block must neutralize '{selector}'.");
     }
 
     [TestMethod]
     [TestCategory("Contract")]
     public void ReducedMotionBlock_RemovesAnimationAndTransitions() {
-        Assert.Contains("animation: none", reducedMotionBlock, "Trigger keyframes must be disabled, not just paused.");
-        Assert.Contains("transition: none", reducedMotionBlock, "Icon transitions must complete instantly, not animate.");
-        Assert.Contains("opacity: 1", reducedMotionBlock, "Scroll-reveal targets must stay visible instead of hidden.");
+        reducedMotionBlock.Should().Contain("animation: none", "Trigger keyframes must be disabled, not just paused.");
+        reducedMotionBlock.Should().Contain("transition: none", "Icon transitions must complete instantly, not animate.");
+        reducedMotionBlock.Should().Contain("opacity: 1", "Scroll-reveal targets must stay visible instead of hidden.");
     }
 
     [TestMethod]
@@ -60,9 +60,8 @@ public class ReducedMotionCssTests {
             return;
         }
 
-        Assert.Contains(
+        reducedMotionBlock.Should().Contain(
             cssClass,
-            reducedMotionBlock,
             $"AnimationTrigger.{trigger} renders '{cssClass}', which the reduced-motion block must neutralize.");
     }
 
@@ -75,14 +74,14 @@ public class ReducedMotionCssTests {
             directory = directory.Parent;
         }
 
-        Assert.IsNotNull(directory, "Could not locate the repository root (Jenin.FontAwesome.Blazor.slnx).");
-        return directory.FullName;
+        directory.Should().NotBeNull("Could not locate the repository root (Jenin.FontAwesome.Blazor.slnx).");
+        return directory!.FullName;
     }
 
     private static string StylesheetPath() {
         var path = Path.Combine(RepoRoot(), CSS_REPO_RELATIVE_PATH.Replace('/', Path.DirectorySeparatorChar));
 
-        Assert.IsTrue(File.Exists(path), $"Shipped stylesheet not found at '{path}'.");
+        File.Exists(path).Should().BeTrue($"Shipped stylesheet not found at '{path}'.");
 
         return path;
     }

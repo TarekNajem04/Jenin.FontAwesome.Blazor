@@ -13,7 +13,7 @@ public class TextLayerTests {
     public async Task RendersBoundarySpanWrappingLayeredTextAsync() {
         var markup = await TestHost.RenderMarkupAsync<TextLayer>(TestHost.Parameters(("Text", "hi")));
 
-        Assert.AreEqual("<span><span class=\"fa-layers-text\">hi</span></span>", markup);
+        markup.Should().Be("<span><span class=\"fa-layers-text\">hi</span></span>");
     }
 
     [TestMethod]
@@ -21,7 +21,7 @@ public class TextLayerTests {
     public async Task Text_IsTrimmedAsync() {
         var markup = await TestHost.RenderMarkupAsync<TextLayer>(TestHost.Parameters(("Text", "  hi  ")));
 
-        Assert.AreEqual("<span><span class=\"fa-layers-text\">hi</span></span>", markup);
+        markup.Should().Be("<span><span class=\"fa-layers-text\">hi</span></span>");
     }
 
     [TestMethod]
@@ -29,7 +29,7 @@ public class TextLayerTests {
     public async Task WithoutText_RendersEmptyLayeredTextElementAsync() {
         var markup = await TestHost.RenderMarkupAsync<TextLayer>();
 
-        Assert.AreEqual("<span><span class=\"fa-layers-text\"></span></span>", markup);
+        markup.Should().Be("<span><span class=\"fa-layers-text\"></span></span>");
     }
 
     [TestMethod]
@@ -39,6 +39,6 @@ public class TextLayerTests {
             ("Text", "hi"),
             ("Transform", new Transform().Grow(2))));
 
-        Assert.Contains("data-fa-transform=\"grow-2.00\"", markup);
+        markup.Should().Contain("data-fa-transform=\"grow-2.00\"");
     }
 }

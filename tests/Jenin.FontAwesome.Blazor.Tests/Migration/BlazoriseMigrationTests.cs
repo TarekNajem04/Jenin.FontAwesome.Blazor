@@ -20,7 +20,7 @@ public class BlazoriseMigrationTests {
         var markup = await TestHost.RenderMarkupAsync<Icon>(TestHost.Parameters(
             ("IconName", "fa-envelope")));
 
-        Assert.Contains("class=\"fa-solid fa-envelope\"", markup);
+        markup.Should().Contain("class=\"fa-solid fa-envelope\"");
     }
 
     [TestMethod]
@@ -32,7 +32,7 @@ public class BlazoriseMigrationTests {
             ("IconName", IconNames.Solid.Phone),
             ("IconStyle", IconStyle.Solid)));
 
-        Assert.Contains("class=\"fa-solid fa-phone\"", markup);
+        markup.Should().Contain("class=\"fa-solid fa-phone\"");
     }
 
     [TestMethod]
@@ -42,7 +42,7 @@ public class BlazoriseMigrationTests {
         var markup = await TestHost.RenderMarkupAsync<Icon>(TestHost.Parameters(
             ("IconName", "fa-phone")));
 
-        Assert.Contains("fa-phone", markup);
+        markup.Should().Contain("fa-phone");
     }
 
     [TestMethod]
@@ -53,7 +53,7 @@ public class BlazoriseMigrationTests {
             ("IconName", "fa-envelope"),
             ("IconStyle", IconStyle.Regular)));
 
-        Assert.Contains("class=\"fa-regular fa-envelope\"", markup);
+        markup.Should().Contain("class=\"fa-regular fa-envelope\"");
     }
 
     [TestMethod]
@@ -70,9 +70,9 @@ public class BlazoriseMigrationTests {
             ("IconName", "fa-envelope"),
             ("IconSize", IconSize.X02)));
 
-        Assert.Contains("fa-sm", small);
-        Assert.Contains("fa-lg", large);
-        Assert.Contains("fa-2x", x2);
+        small.Should().Contain("fa-sm");
+        large.Should().Contain("fa-lg");
+        x2.Should().Contain("fa-2x");
     }
 
     [TestMethod]
@@ -86,6 +86,6 @@ public class BlazoriseMigrationTests {
                 options.IconSize = IconSize.Large;
             }));
 
-        Assert.Contains("class=\"fa-lg fa-regular fa-envelope\"", markup);
+        markup.Should().Contain("class=\"fa-lg fa-regular fa-envelope\"");
     }
 }

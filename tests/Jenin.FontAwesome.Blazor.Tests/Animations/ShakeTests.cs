@@ -10,9 +10,9 @@ namespace Jenin.FontAwesome.Blazor.Tests.Animations;
 public class ShakeTests {
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildClasses_ReturnsFaShake() => Assert.AreEqual("fa-shake", new Shake().BuildClasses());
+    public void BuildClasses_ReturnsFaShake() => new Shake().BuildClasses().Should().Be("fa-shake");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildStyles_IsEmpty() => Assert.IsEmpty(new Shake().BuildStyles());
+    public void BuildStyles_IsEmpty() => new Shake().BuildStyles().Should().BeEmpty();
 }

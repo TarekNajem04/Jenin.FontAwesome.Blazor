@@ -10,25 +10,25 @@ namespace Jenin.FontAwesome.Blazor.Tests.Animations;
 public class SpinTests {
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildClasses_DefaultsToFaSpin() => Assert.AreEqual("fa-spin", new Spin().BuildClasses());
+    public void BuildClasses_DefaultsToFaSpin() => new Spin().BuildClasses().Should().Be("fa-spin");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildClasses_WithPulse_UsesPulseClass() => Assert.AreEqual("fa-spin-pulse", new Spin(new SpinOptions { Pulse = true }).BuildClasses());
+    public void BuildClasses_WithPulse_UsesPulseClass() => new Spin(new SpinOptions { Pulse = true }).BuildClasses().Should().Be("fa-spin-pulse");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildClasses_WithReverse_AppendsReverseClass() => Assert.AreEqual("fa-spin fa-spin-reverse", new Spin(new SpinOptions { Reverse = true }).BuildClasses());
+    public void BuildClasses_WithReverse_AppendsReverseClass() => new Spin(new SpinOptions { Reverse = true }).BuildClasses().Should().Be("fa-spin fa-spin-reverse");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildClasses_WithPulseAndReverse_CombinesClasses() => Assert.AreEqual("fa-spin-pulse fa-spin-reverse", new Spin(new SpinOptions { Pulse = true, Reverse = true }).BuildClasses());
+    public void BuildClasses_WithPulseAndReverse_CombinesClasses() => new Spin(new SpinOptions { Pulse = true, Reverse = true }).BuildClasses().Should().Be("fa-spin-pulse fa-spin-reverse");
 
     [TestMethod]
     [TestCategory("Model")]
     public void Pulse_RoundTripsThroughSerialization() {
         var styles = new Spin(new SpinOptions { Pulse = true }).SetDelay(TimeSpan.FromMilliseconds(10)).BuildStyles();
 
-        Assert.AreEqual("10ms", styles["--fa-animation-delay"]);
+        styles["--fa-animation-delay"].Should().Be("10ms");
     }
 }

@@ -39,12 +39,12 @@ public class PublicApiBaselineTests {
             return;
         }
 
-        Assert.IsTrue(File.Exists(baselinePath), $"Public API baseline not found at '{baselinePath}'. Regenerate with JFA_UPDATE_PUBLIC_API_BASELINE=1.");
+        File.Exists(baselinePath).Should().BeTrue($"Public API baseline not found at '{baselinePath}'. Regenerate with JFA_UPDATE_PUBLIC_API_BASELINE=1.");
 
         var expected = Normalize(File.ReadAllText(baselinePath));
         var actual = Normalize(snapshot);
 
-        Assert.IsTrue(string.Equals(expected, actual, StringComparison.Ordinal),
+        string.Equals(expected, actual, StringComparison.Ordinal).Should().BeTrue(
             "The public API member surface diverged from the frozen baseline.\n" + DescribeDifference(expected, actual));
     }
 
@@ -55,9 +55,9 @@ public class PublicApiBaselineTests {
             dir = dir.Parent;
         }
 
-        Assert.IsNotNull(dir, "Could not locate the repository root (Jenin.FontAwesome.Blazor.slnx).");
+        dir.Should().NotBeNull("Could not locate the repository root (Jenin.FontAwesome.Blazor.slnx).");
 
-        return Path.Combine(dir.FullName, BASELINE_REPO_RELATIVE_PATH.Replace('/', Path.DirectorySeparatorChar));
+        return Path.Combine(dir!.FullName, BASELINE_REPO_RELATIVE_PATH.Replace('/', Path.DirectorySeparatorChar));
     }
 
     private static string Normalize(string value) => value.Replace("\r\n", "\n", StringComparison.Ordinal).TrimEnd('\n');

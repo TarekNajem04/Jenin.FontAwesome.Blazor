@@ -26,7 +26,7 @@ public class SvgPackageTrimmingAotContractTests {
             directory = directory.Parent;
         }
 
-        Assert.IsNotNull(directory, "Could not locate the repository root.");
+        directory.Should().NotBeNull("Could not locate the repository root.");
 
         return directory!.FullName;
     }
@@ -48,23 +48,23 @@ public class SvgPackageTrimmingAotContractTests {
     public void SvgPackage_ProjectDeclaresTrimmingAndAotCompatibility() {
         var csproj = File.ReadAllText(PackageCsproj);
 
-        Assert.Contains("<IsTrimmable>true</IsTrimmable>", csproj, "The Svg package must set <IsTrimmable>true</IsTrimmable> so hosts can trim it independently.");
-        Assert.Contains("<IsAotCompatible>true</IsAotCompatible>", csproj, "The Svg package must set <IsAotCompatible>true</IsAotCompatible> to keep its trim/AOT analyzers on.");
+        csproj.Should().Contain("<IsTrimmable>true</IsTrimmable>", "The Svg package must set <IsTrimmable>true</IsTrimmable> so hosts can trim it independently.");
+        csproj.Should().Contain("<IsAotCompatible>true</IsAotCompatible>", "The Svg package must set <IsAotCompatible>true</IsAotCompatible> to keep its trim/AOT analyzers on.");
     }
 
     [TestMethod]
     [TestCategory("Contract")]
     public void SvgPackage_AssemblyIsMarkedTrimmable() {
-        Assert.AreEqual("True", MetadataValue("IsTrimmable"),
+        MetadataValue("IsTrimmable").Should().Be("True",
             "The linker must see IsTrimmable=true in the Svg assembly metadata.");
     }
 
     [TestMethod]
     [TestCategory("Contract")]
     public void SvgPackage_DeclaresNoJavaScriptInteropSurface() {
-        var jsRuntimeReferences = Svg.GetReferencedAssemblies()
-            .Where(static name => string.Equals(name.Name, "Microsoft.JSInterop", StringComparison.Ordinal));
-
-        Assert.HasCount(0, jsRuntimeReferences.ToList(), "The Svg package must stay interop-free: no Microsoft.JSInterop reference allowed.");
+        Svg.GetReferencedAssemblies()
+            .Where(static name => string.Equals(name.Name, "Microsoft.JSInterop", StringComparison.Ordinal))
+            .ToList()
+            .Should().HaveCount(0, "The Svg package must stay interop-free: no Microsoft.JSInterop reference allowed.");
     }
 }

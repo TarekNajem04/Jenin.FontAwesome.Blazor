@@ -32,6 +32,7 @@
         <PackageVersion Include="MSTest.TestFramework" Version="4.5.2" />
         <PackageVersion Include="MSTest.TestAdapter" Version="4.5.2" />
         <PackageVersion Include="coverlet.collector" Version="10.1.0" />
+        <PackageVersion Include="Jeninnet.Assertions" Version="1.0.0" />
         <PackageVersion Include="MudBlazor" Version="9.12.0" />
         <PackageVersion Include="Blazorise" Version="2.4.1" />
         <PackageVersion Include="Blazorise.Bootstrap5" Version="2.4.1" />

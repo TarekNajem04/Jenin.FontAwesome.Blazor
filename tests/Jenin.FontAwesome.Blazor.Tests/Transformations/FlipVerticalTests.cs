@@ -10,5 +10,5 @@ namespace Jenin.FontAwesome.Blazor.Tests.Transformations;
 public class FlipVerticalTests {
     [TestMethod]
     [TestCategory("Model")]
-    public void Flip_EmitsFlipVToken() => Assert.AreEqual("flip-v", FlipVertical.Flip().GetTransformation());
+    public void Flip_EmitsFlipVToken() => FlipVertical.Flip().GetTransformation().Should().Be("flip-v");
 }
