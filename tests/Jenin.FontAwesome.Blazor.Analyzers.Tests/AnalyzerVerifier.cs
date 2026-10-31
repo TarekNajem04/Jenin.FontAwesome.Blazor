@@ -17,14 +17,14 @@ internal static class AnalyzerVerifier<TAnalyzer>
     // Analysis-only references: the product assembly targets net10.0, so the compilation under
     // test must resolve net10 ref assemblies (the cached 10.0.9 targeting pack). The analyzed
     // code is never executed, so one ref set serves every test leg (net8/9/10).
-    private static readonly ReferenceAssemblies References = new(
+    private static readonly ReferenceAssemblies _references = new(
         "net10.0",
         new PackageIdentity("Microsoft.NETCore.App.Ref", "10.0.9"),
         Path.Combine("ref", "net10.0"));
 
     public static async Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected) {
         var test = new CSharpAnalyzerTest<TAnalyzer, TestVerifier> {
-            ReferenceAssemblies = References,
+            ReferenceAssemblies = _references,
         };
 
         test.TestState.Sources.Add(source);
@@ -37,7 +37,7 @@ internal static class AnalyzerVerifier<TAnalyzer>
 
     public static async Task VerifyCodeFixAsync(string source, DiagnosticResult expected, string fixedSource, int index = 0) {
         var test = new CSharpCodeFixTest<JeninFontAwesomeAnalyzer, RawClassStringCodeFixProvider, TestVerifier> {
-            ReferenceAssemblies = References,
+            ReferenceAssemblies = _references,
         };
 
         // Pin the formatter newline: the fixed tree is formatted with the solution's editorconfig

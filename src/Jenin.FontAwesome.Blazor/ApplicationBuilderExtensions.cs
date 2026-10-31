@@ -23,7 +23,7 @@ public static class ApplicationBuilderExtensions {
     /// <summary>
     /// The default path the generated mode-config script is served from.
     /// </summary>
-    public const string DefaultConfigEndpointPath = "/_content/Jenin.FontAwesome.Blazor/js/fontawesome-config-auto.js";
+    public const string DEFAULT_CONFIG_ENDPOINT_PATH = "/_content/Jenin.FontAwesome.Blazor/js/fontawesome-config-auto.js";
 
     /// <summary>
     /// Serves a <c>GET</c> endpoint that returns the mode-config script matching the registered
@@ -52,7 +52,7 @@ public static class ApplicationBuilderExtensions {
 
         configure?.Invoke(options);
 
-        var path = string.IsNullOrEmpty(options.ConfigEndpointPath) ? DefaultConfigEndpointPath : options.ConfigEndpointPath;
+        var path = string.IsNullOrEmpty(options.ConfigEndpointPath) ? DEFAULT_CONFIG_ENDPOINT_PATH : options.ConfigEndpointPath;
 
         if(string.IsNullOrEmpty(options.ConfigScriptUrl)) {
             options.ConfigScriptUrl = path;

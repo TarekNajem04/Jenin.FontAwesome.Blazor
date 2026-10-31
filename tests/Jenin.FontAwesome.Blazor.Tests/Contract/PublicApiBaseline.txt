@@ -432,7 +432,7 @@ M System.String ToString()
 P System.Nullable<System.Single> Angle { get; set; }
 P System.Type EqualityContract { get; }
 TYPE class Jenin.FontAwesome.Blazor.ApplicationBuilderExtensions : System.Object
-F System.String DefaultConfigEndpointPath
+F System.String DEFAULT_CONFIG_ENDPOINT_PATH
 M Microsoft.AspNetCore.Builder.IApplicationBuilder MapJeninFontAwesomeAssets(Microsoft.AspNetCore.Builder.IApplicationBuilder, System.Action<Jenin.FontAwesome.Blazor.FontAwesomeOptions>)
 TYPE enum Jenin.FontAwesome.Blazor.AvatarPresence : System.Enum
 F Jenin.FontAwesome.Blazor.AvatarPresence Away
@@ -753,7 +753,7 @@ P System.String IconColor { get; set; }
 P System.String IconName { get; set; }
 TYPE class Jenin.FontAwesome.Blazor.CustomIconDefinition : System.Object
 C Jenin.FontAwesome.Blazor.CustomIconDefinition..ctor(System.String, System.String, System.String, System.String, System.Collections.Generic.IReadOnlyList<System.String>)
-F System.String DefaultViewBox
+F System.String DEFAULT_VIEW_BOX
 M System.String ToRazorSnippet()
 P System.Collections.Generic.IReadOnlyList<System.String> SearchTerms { get; }
 P System.String BareName { get; }

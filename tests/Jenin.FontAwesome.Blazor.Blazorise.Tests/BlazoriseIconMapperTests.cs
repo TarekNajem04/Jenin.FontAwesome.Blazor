@@ -13,17 +13,13 @@ public class BlazoriseIconMapperTests {
     [DataRow("fa-phone", "fa-phone")]
     [DataRow("phone", "fa-phone")]
     [DataRow("fa-acme-widget", "fa-acme-widget")]
-    public void ToIconName_NormalizesToFaForm(string iconName, string expected) {
-        BlazoriseIconMapper.ToIconName(iconName).Should().Be(expected);
-    }
+    public void ToIconName_NormalizesToFaForm(string iconName, string expected) => BlazoriseIconMapper.ToIconName(iconName).Should().Be(expected);
 
     [TestMethod]
     [TestCategory("Model")]
     [DataRow(null)]
     [DataRow("")]
-    public void ToIconName_RejectsEmpty(string? iconName) {
-        BlazoriseIconMapper.ToIconName(iconName).Should().Be(string.Empty);
-    }
+    public void ToIconName_RejectsEmpty(string? iconName) => BlazoriseIconMapper.ToIconName(iconName).Should().Be(string.Empty);
 
     [TestMethod]
     [TestCategory("Model")]

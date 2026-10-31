@@ -31,7 +31,7 @@ public class RawClassStringTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.RawClassStringId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.RAW_CLASS_STRING_ID, DiagnosticSeverity.Warning)
             .WithSpan(4, 55, 4, 74)
             .WithArguments("fa-solid fa-house", "fa-house");
 
@@ -58,7 +58,7 @@ public class RawClassStringTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.RawClassStringId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.RAW_CLASS_STRING_ID, DiagnosticSeverity.Warning)
             .WithSpan(4, 55, 4, 73)
             .WithArguments("fa-solid fa-home", "fa-home");
 
@@ -78,7 +78,7 @@ public class RawClassStringTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.RawClassStringId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.RAW_CLASS_STRING_ID, DiagnosticSeverity.Warning)
             .WithSpan(4, 55, 4, 80)
             .WithArguments("fa-solid fa-house fa-2x", "fa-house");
 

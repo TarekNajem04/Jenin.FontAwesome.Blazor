@@ -50,9 +50,7 @@ public sealed class IconMetadataProvider {
         var index = new Dictionary<string, IconMetadata>(data.ByName, StringComparer.OrdinalIgnoreCase);
         var shadowed = new HashSet<string>(customs.Select(static icon => icon.Name), StringComparer.Ordinal);
 
-        foreach(var icon in data.Icons.Where(icon => !shadowed.Contains(icon.Name))) {
-            merged.Add(icon);
-        }
+        merged.AddRange(data.Icons.Where(icon => !shadowed.Contains(icon.Name)));
 
         merged.AddRange(customs);
         merged.Sort(static (left, right) => string.CompareOrdinal(left.Name, right.Name));

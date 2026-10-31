@@ -12,8 +12,6 @@
 
 namespace Jenin.FontAwesome.Blazor.Tests.Components;
 
-
-
 [TestClass]
 
 public class IconAnimationTriggerTests {
@@ -30,13 +28,9 @@ public class IconAnimationTriggerTests {
 
             ("Animation", Animate.Spin())));
 
-
-
         markup.Contains("jfa-anim", StringComparison.Ordinal).Should().BeFalse();
 
     }
-
-
 
     [TestMethod]
 
@@ -60,11 +54,8 @@ public class IconAnimationTriggerTests {
 
             ("Trigger", trigger)));
 
-
-
         markup.Should().Contain(cssClass);
         markup.Should().Contain("fa-spin");
     }
-
 }
 

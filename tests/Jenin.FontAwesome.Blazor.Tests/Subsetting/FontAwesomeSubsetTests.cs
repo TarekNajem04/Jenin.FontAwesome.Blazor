@@ -77,7 +77,7 @@ public class FontAwesomeSubsetTests {
         css.Contains(".fa-camera {", StringComparison.Ordinal).Should().BeTrue("The used fa-camera block must be kept.");
         css.Contains(".fa-youtube {", StringComparison.Ordinal).Should().BeTrue("The used fa-youtube block must be kept.");
         css.Contains(".fa-docker {", StringComparison.Ordinal).Should().BeFalse("The unused fa-docker block must be dropped.");
-        (css.Contains("fontawesome-subset.css", StringComparison.Ordinal) is false).Should().BeTrue("No self-reference expected.");
+        css.Contains("fontawesome-subset.css", StringComparison.Ordinal).Should().BeFalse("No self-reference expected.");
         css.Contains(".subset.woff2", StringComparison.Ordinal).Should().BeTrue("Font faces must point at subset files.");
     }
 

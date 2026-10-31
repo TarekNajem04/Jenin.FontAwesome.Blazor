@@ -12,15 +12,11 @@
 
 namespace Jenin.FontAwesome.Blazor.Tests.Components;
 
-
-
 [TestClass]
 
 public class IndicatorTests {
 
     private static RenderFragment Text(string value) => builder => builder.AddContent(0, value);
-
-
 
     [TestMethod]
 
@@ -36,8 +32,6 @@ public class IndicatorTests {
 
             ("Unit", "unread messages")));
 
-
-
         markup.Should().Be(
             "<span style=\"position:relative;display:inline-flex;\">Inbox" +
 
@@ -46,8 +40,6 @@ public class IndicatorTests {
         );
 
     }
-
-
 
     [TestMethod]
 
@@ -61,14 +53,10 @@ public class IndicatorTests {
 
             ("Count", 0)));
 
-
-
         markup.Contains("role=\"status\"", StringComparison.Ordinal).Should().BeFalse();
 
         markup.Should().Contain("Inbox");
     }
-
-
 
     [TestMethod]
 
@@ -82,12 +70,8 @@ public class IndicatorTests {
 
             ("Count", 150)));
 
-
-
         markup.Should().Contain(">99&#x2B;</span>");
     }
-
-
 
     [TestMethod]
 
@@ -101,14 +85,10 @@ public class IndicatorTests {
 
             TestHost.Parameters(("ChildContent", Text("Inbox")), ("Count", 5)));
 
-
-
         markup.Should().Contain(">5</span>");
         markup.Contains(">2</span>", StringComparison.Ordinal).Should().BeFalse();
 
     }
-
-
 
     [TestMethod]
 
@@ -124,16 +104,12 @@ public class IndicatorTests {
 
             ("Title", "Busy")));
 
-
-
         markup.Should().Be(
             "<span style=\"background-color:#ef4444;display:inline-block;border-radius:50%;width:12px;height:12px;\" role=\"status\" aria-label=\"Busy\" title=\"Busy\"></span>"
 
         );
 
     }
-
-
 
     [TestMethod]
 
@@ -145,12 +121,8 @@ public class IndicatorTests {
 
             ("Pulse", true)));
 
-
-
         markup.Should().Contain("class=\"fa-beat\"");
     }
-
-
 
     [TestMethod]
 
@@ -166,16 +138,12 @@ public class IndicatorTests {
 
             ("ChildContent", Text("25"))));
 
-
-
         markup.Should().Contain("role=\"progressbar\"");
         markup.Should().Contain("aria-valuenow=\"25\"");
         markup.Should().Contain("stroke-dasharray=\"138.23\"");
         markup.Should().Contain("stroke-dashoffset=\"103.67\"");
         markup.Should().Contain("font-size:19.20px;");
     }
-
-
 
     [TestMethod]
 
@@ -189,15 +157,11 @@ public class IndicatorTests {
 
             ("Presence", AvatarPresence.Online)));
 
-
-
         markup.Should().Contain("role=\"img\"");
         markup.Should().Contain("aria-label=\"TK\"");
         markup.Should().Contain(">TK<");
         markup.Should().Contain("background-color:#22c55e");
     }
-
-
 
     [TestMethod]
 
@@ -207,10 +171,7 @@ public class IndicatorTests {
 
         var markup = await TestHost.RenderMarkupAsync<AvatarIcon>();
 
-
-
         markup.Should().Contain("class=\"fa-solid fa-user\"");
     }
-
 }
 

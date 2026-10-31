@@ -28,15 +28,11 @@ public class CustomIconTests {
     [DataRow("")]
     [DataRow("acme-widget")]
     [DataRow("fa-")]
-    public void RegisterCustomIcon_RejectsBadNames(string name) {
-        FluentActions.Invoking(() => new FontAwesomeOptions().RegisterCustomIcon(name, PATH)).Should().ThrowExactly<ArgumentException>();
-    }
+    public void RegisterCustomIcon_RejectsBadNames(string name) => FluentActions.Invoking(() => new FontAwesomeOptions().RegisterCustomIcon(name, PATH)).Should().ThrowExactly<ArgumentException>();
 
     [TestMethod]
     [TestCategory("Model")]
-    public void RegisterCustomIcon_RejectsEmptyPath() {
-        FluentActions.Invoking(() => new FontAwesomeOptions().RegisterCustomIcon("fa-acme-widget", "  ")).Should().ThrowExactly<ArgumentException>();
-    }
+    public void RegisterCustomIcon_RejectsEmptyPath() => FluentActions.Invoking(() => new FontAwesomeOptions().RegisterCustomIcon("fa-acme-widget", "  ")).Should().ThrowExactly<ArgumentException>();
 
     [TestMethod]
     [TestCategory("Model")]

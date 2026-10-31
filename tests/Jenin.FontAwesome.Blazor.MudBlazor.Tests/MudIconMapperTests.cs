@@ -18,18 +18,14 @@ public class MudIconMapperTests {
     [DataRow("fa-house", IconStyle.Duotone, "fa-duotone fa-house")]
     [DataRow("fa-github", IconStyle.Brands, "fa-brands fa-github")]
     [DataRow("fa-acme-widget", IconStyle.Solid, "fa-solid fa-acme-widget")]
-    public void ToFontClass_MapsNameAndStyle(string iconName, IconStyle style, string expected) {
-        MudIconMapper.ToFontClass(iconName, style).Should().Be(expected);
-    }
+    public void ToFontClass_MapsNameAndStyle(string iconName, IconStyle style, string expected) => MudIconMapper.ToFontClass(iconName, style).Should().Be(expected);
 
     [TestMethod]
     [TestCategory("Model")]
     [DataRow(null)]
     [DataRow("")]
     [DataRow("   ")]
-    public void ToFontClass_RejectsEmpty(string? iconName) {
-        MudIconMapper.ToFontClass(iconName).Should().Be(string.Empty);
-    }
+    public void ToFontClass_RejectsEmpty(string? iconName) => MudIconMapper.ToFontClass(iconName).Should().Be(string.Empty);
 
     [TestMethod]
     [TestCategory("Model")]
@@ -45,9 +41,7 @@ public class MudIconMapperTests {
     [DataRow(IconSize.X10)]
     [DataRow(IconSize.ExtraSmall)]
     [DataRow(null)]
-    public void ToMudSize_ReturnsNullOutsideOverlap(IconSize? size) {
-        MudIconMapper.ToMudSize(size).Should().BeNull();
-    }
+    public void ToMudSize_ReturnsNullOutsideOverlap(IconSize? size) => MudIconMapper.ToMudSize(size).Should().BeNull();
 
     [TestMethod]
     [TestCategory("Rendering")]

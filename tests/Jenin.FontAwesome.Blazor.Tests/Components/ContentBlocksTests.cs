@@ -12,8 +12,6 @@
 
 namespace Jenin.FontAwesome.Blazor.Tests.Components;
 
-
-
 [TestClass]
 
 public class ContentBlocksTests {
@@ -34,8 +32,6 @@ public class ContentBlocksTests {
 
             ("DeltaText", "+12%")));
 
-
-
         markup.Should().Contain("role=\"group\"");
         markup.Should().Contain("aria-label=\"Active users: 1,234\"");
         markup.Should().Contain("fa-chart-line");
@@ -43,8 +39,6 @@ public class ContentBlocksTests {
         markup.Should().Contain("fa-arrow-trend-up");
         markup.Should().Contain("&#x2B;12%");
     }
-
-
 
     [TestMethod]
 
@@ -58,15 +52,11 @@ public class ContentBlocksTests {
 
             ("Label", "Drafts")));
 
-
-
         markup.Contains("fa-arrow-trend", StringComparison.Ordinal).Should().BeFalse();
 
         markup.Contains("fa-minus", StringComparison.Ordinal).Should().BeFalse();
 
     }
-
-
 
     [TestMethod]
 
@@ -82,15 +72,11 @@ public class ContentBlocksTests {
 
             ("ChildContent", (RenderFragment)(builder => builder.AddContent(0, "Retry")))));
 
-
-
         markup.Should().Contain("fa-inbox");
         markup.Should().Contain("No results");
         markup.Should().Contain("Try a different term.");
         markup.Should().Contain("Retry");
     }
-
-
 
     [TestMethod]
 
@@ -106,15 +92,11 @@ public class ContentBlocksTests {
 
             ("ChildContent", (RenderFragment)(builder => builder.AddContent(0, "Production is live.")))));
 
-
-
         markup.Should().Contain("fa-bell");
         markup.Should().Contain("Deploy finished");
         markup.Should().Contain("Production is live.");
         markup.Should().Contain("2h ago");
     }
-
-
 
     [TestMethod]
 
@@ -128,8 +110,6 @@ public class ContentBlocksTests {
 
             ("Text", "Hello & welcome")));
 
-
-
         markup.Should().Contain("role=\"group\"");
         markup.Should().Contain("aria-label=\"Share\"");
         markup.Should().Contain("https://twitter.com/intent/tweet?url=https%3A%2F%2Fexample.com%2Fa%20b&amp;text=Hello%20%26%20welcome");
@@ -138,8 +118,6 @@ public class ContentBlocksTests {
         markup.Should().Contain("https://t.me/share/url?url=https%3A%2F%2Fexample.com%2Fa%20b&amp;text=Hello%20%26%20welcome");
         markup.Should().Contain("mailto:?subject=Hello%20%26%20welcome&amp;body=https%3A%2F%2Fexample.com%2Fa%20b");
     }
-
-
 
     [TestMethod]
 
@@ -161,14 +139,11 @@ public class ContentBlocksTests {
 
             ("IncludeMail", true)));
 
-
-
         markup.Should().Contain("mailto:");
         markup.Contains("twitter.com", StringComparison.Ordinal).Should().BeFalse();
 
         markup.Contains("linkedin.com", StringComparison.Ordinal).Should().BeFalse();
 
     }
-
 }
 

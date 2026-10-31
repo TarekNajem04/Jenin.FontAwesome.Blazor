@@ -12,8 +12,6 @@
 
 namespace Jenin.FontAwesome.Blazor.Tests.Components;
 
-
-
 [TestClass]
 
 public class SpriteIconTests {
@@ -30,8 +28,6 @@ public class SpriteIconTests {
 
             ("IconStyle", IconStyle.Solid)));
 
-
-
         markup.Should().Be(
             "<svg viewBox=\"0 0 512 512\" height=\"1em\" style=\"vertical-align:-0.125em;\" aria-hidden=\"true\">" +
 
@@ -40,8 +36,6 @@ public class SpriteIconTests {
         );
 
     }
-
-
 
     [TestMethod]
 
@@ -57,12 +51,8 @@ public class SpriteIconTests {
 
             ("Sprite", "/assets/icons.svg")));
 
-
-
         markup.Should().Contain("href=\"/assets/icons.svg#fa-brands-github\"");
     }
-
-
 
     [TestMethod]
 
@@ -76,14 +66,11 @@ public class SpriteIconTests {
 
             ("Title", "Home")));
 
-
-
         markup.Should().Contain("role=\"img\"");
         markup.Should().Contain("aria-label=\"Home\"");
         markup.Should().Contain("<title>Home</title>");
         markup.Contains("aria-hidden", StringComparison.Ordinal).Should().BeFalse();
 
     }
-
 }
 

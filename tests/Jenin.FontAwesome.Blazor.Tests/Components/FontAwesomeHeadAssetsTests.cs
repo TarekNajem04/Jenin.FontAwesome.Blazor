@@ -89,10 +89,10 @@ public class FontAwesomeHeadAssetsTests {
         var markup = await TestHost.RenderMarkupAsync<FontAwesomeHeadAssets>(
             null,
             services => services.AddJeninFontAwesome(options =>
-                options.ConfigScriptUrl = ApplicationBuilderExtensions.DefaultConfigEndpointPath));
+                options.ConfigScriptUrl = ApplicationBuilderExtensions.DEFAULT_CONFIG_ENDPOINT_PATH));
 
         markup.Should().Be(
-            $"<script src=\"{ApplicationBuilderExtensions.DefaultConfigEndpointPath}\" type=\"text/javascript\"></script>"
+            $"<script src=\"{ApplicationBuilderExtensions.DEFAULT_CONFIG_ENDPOINT_PATH}\" type=\"text/javascript\"></script>"
         );
     }
 

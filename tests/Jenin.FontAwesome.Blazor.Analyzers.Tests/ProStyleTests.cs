@@ -23,7 +23,7 @@ public class ProStyleTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.ProStyleId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.PRO_STYLE_ID, DiagnosticSeverity.Warning)
             .WithSpan(5, 79, 5, 94)
             .WithArguments("IconStyle.Light");
 
@@ -41,7 +41,7 @@ public class ProStyleTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.ProStyleId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.PRO_STYLE_ID, DiagnosticSeverity.Warning)
             .WithSpan(5, 78, 5, 92)
             .WithArguments("Typeface.Sharp");
 

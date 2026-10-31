@@ -25,7 +25,7 @@ public class UnknownIconNameTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UnknownIconNameId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UNKNOWN_ICON_NAME_ID, DiagnosticSeverity.Warning)
             .WithSpan(5, 55, 5, 65)
             .WithArguments("fa-huose");
 
@@ -43,7 +43,7 @@ public class UnknownIconNameTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UnknownIconNameId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UNKNOWN_ICON_NAME_ID, DiagnosticSeverity.Warning)
             .WithSpan(4, 11, 4, 21)
             .WithArguments("fa-huose");
 
@@ -63,7 +63,7 @@ public class UnknownIconNameTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UnknownIconNameId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UNKNOWN_ICON_NAME_ID, DiagnosticSeverity.Warning)
             .WithSpan(6, 29, 6, 45)
             .WithArguments("fa-not-an-icon");
 
@@ -113,7 +113,7 @@ public class UnknownIconNameTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UnknownIconNameId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UNKNOWN_ICON_NAME_ID, DiagnosticSeverity.Warning)
             .WithSpan(4, 55, 4, 71)
             .WithArguments("fa-acme-widget");
 
