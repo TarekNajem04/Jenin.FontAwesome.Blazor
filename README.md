@@ -35,12 +35,10 @@ Find the [Jenin.FontAwesome.Blazor](https://www.nuget.org/packages/Jenin.FontAwe
 
     dotnet add package Jenin.FontAwesome.Blazor
 
-> **Release status:** nuget.org currently hosts the 1.x line (core package only, through
-> `1.2.0`). Everything in this guide targets the upcoming `2.0.0` release — the core update
-> plus the new `IconPicker`/`Icons`/`Svg`/`Analyzers`/adapter/template package IDs. Until
-> 2.0.0 ships, install 2.0.0 builds from a local pack feed (`dotnet pack <project> -o feed`
-> plus a `NuGet.config` pointing at it — see [Project templates](#project-templates)); after
-> release the same commands restore from nuget.org with no extra setup.
+> **Release status:** `2.0.0` is live on nuget.org — eight packages: core
+> `Jenin.FontAwesome.Blazor` plus `IconPicker`/`Icons`/`Svg`/`Analyzers`/MudBlazor-Blazorise
+> adapters/template pack. For pre-release builds use a local pack feed
+> (`dotnet pack <project> -o feed` plus a `NuGet.config` pointing at it).
 
 ### 2. Wire the assets (one line + one component)
 
@@ -168,21 +166,20 @@ timeline, settings, inbox — each e2e-verified including mobile and dark theme.
 **Already on MudBlazor or Blazorise?** Map typed names straight into their icon slots with the
 `Jenin.FontAwesome.Blazor.MudBlazor` and `Jenin.FontAwesome.Blazor.Blazorise` adapter packages —
 see [docs/using-with-ui-suites.md](docs/using-with-ui-suites.md) (adapter packages are new in
-the upcoming 2.0 release — see the release-status note under Installation).
+2.0).
 
-**Compile-time guidance:** the optional `Jenin.FontAwesome.Blazor.Analyzers` package (new in the
-upcoming 2.0 release — see the release-status note under Installation) warns on
+**Compile-time guidance:** the optional `Jenin.FontAwesome.Blazor.Analyzers` package (new in 2.0) warns on
 unknown icon names (`JFA1001`), raw class strings in name positions with a code fix to the typed
 equivalent (`JFA1002`), and Pro-only styles without licensed assets (`JFA1003`) — never errors,
 `.editorconfig`-tunable. See [docs/diagnostics.md](docs/diagnostics.md) for the full list.
 
 ### Project templates
 
-Start from a working app instead of wiring one up. The template pack is new in the upcoming
-2.0 release: until it ships to nuget.org, install it from a local pack
+Start from a working app instead of wiring one up. The template pack ships with 2.0:
+install it by ID (`dotnet new install Jenin.FontAwesome.Blazor.Templates`). For pre-release
+builds install from a local pack instead
 (`dotnet pack templates/Jenin.FontAwesome.Blazor.Templates.csproj -o feed`, then
-`dotnet new install feed/Jenin.FontAwesome.Blazor.Templates.2.0.0.nupkg`); after release
-install it by ID (`dotnet new install Jenin.FontAwesome.Blazor.Templates`) with no extra setup.
+`dotnet new install feed/Jenin.FontAwesome.Blazor.Templates.2.0.0.nupkg`).
 Then scaffold:
 
 ```powershell
@@ -192,17 +189,8 @@ dotnet new jenin-fa-blazor-wasm -n MyWasmApp   # standalone WebAssembly
 ```
 
 Parameters: `--Framework net8.0|net9.0|net10.0` (default `net10.0`); `--FaMode` (`SvgNest|Webfont`
-for the Web App, `nest|webfont` for WASM); `--JfaVersion` (default `2.0.0`). Until 2.0 ships to
-nuget.org, point restore at a local feed (`dotnet pack src/Jenin.FontAwesome.Blazor -o feed`, plus
-a `NuGet.config`); after release the templates restore with no extra setup. Every template is
-smoke-verified end to end — `pwsh ./eng/verify-templates.ps1` scaffolds each one with no edits,
-builds, runs, and asserts the first icon renders (SSR markup for the Web App, plus a
-headless-browser DOM check for WebAssembly).
-
-Parameters: `--Framework net8.0|net9.0|net10.0` (default `net10.0`); `--FaMode` (`SvgNest|Webfont`
-for the Web App, `nest|webfont` for WASM); `--JfaVersion` (default `2.0.0`). Until 2.0 ships to
-nuget.org, point restore at a local feed (`dotnet pack src/Jenin.FontAwesome.Blazor -o feed`, plus
-a `NuGet.config`); after release the templates restore with no extra setup. Every template is
+for the Web App, `nest|webfont` for WASM); `--JfaVersion` (default `2.0.0`). The templates restore
+with no extra setup. Every template is
 smoke-verified end to end — `pwsh ./eng/verify-templates.ps1` scaffolds each one with no edits,
 builds, runs, and asserts the first icon renders (SSR markup for the Web App, plus a
 headless-browser DOM check for WebAssembly).
@@ -773,8 +761,7 @@ it, so a global default never overrides a value you typed on an individual compo
 
 ## Icon Discovery & IconPicker
 
-The optional `Jenin.FontAwesome.Blazor.IconPicker` package (new in the upcoming 2.0 release —
-see the release-status note under Installation) adds a runtime, interop-free model of the
+The optional `Jenin.FontAwesome.Blazor.IconPicker` package (new in 2.0) adds a runtime, interop-free model of the
 Font Awesome Free catalogue plus a ready-made picker component. It ships as a separate package so the
 core library stays lean; reference it only when you need discovery.
 
@@ -869,8 +856,7 @@ explorer's unit and Playwright tests.
 
 ## Per-Icon Preset Components
 
-The optional `Jenin.FontAwesome.Blazor.Icons` package (new in the upcoming 2.0 release — see
-the release-status note under Installation) ships a strongly-typed component for every Font
+The optional `Jenin.FontAwesome.Blazor.Icons` package (new in 2.0) ships a strongly-typed component for every Font
 Awesome Free icon (1992 components). Each one derives from `Icon`, bakes the icon name in, and defaults
 to the icon's primary Free style, so you can write `<HouseIcon />` instead of
 `<Icon IconStyle="IconStyle.Solid" IconName="fa-house" />`. Reference it only when you prefer components
@@ -905,8 +891,7 @@ metadata is redistributed under CC BY 4.0; see `LICENSES` for attribution.
 
 ## Self-Contained Inline SVG Components
 
-The optional `Jenin.FontAwesome.Blazor.Svg` package (new in the upcoming 2.0 release — see the
-release-status note under Installation) ships a strongly-typed component for every
+The optional `Jenin.FontAwesome.Blazor.Svg` package (new in 2.0) ships a strongly-typed component for every
 Free icon *and style* (2,163 components, e.g. `HouseSolidIcon`, `HouseRegularIcon`,
 `GithubBrandsIcon`). Each one renders a standalone `<svg>` with the glyph path data baked in —
 no Font Awesome JavaScript, CSS, fonts, or sprite file is needed at all:

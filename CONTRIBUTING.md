@@ -5,11 +5,9 @@ and templates for Font Awesome Free (plus optional licensed-Pro support).
 
 ## Current Project Status
 
-Jenin.FontAwesome.Blazor is currently in a pre-release stabilization phase ahead of 2.0.0.
-
-During this stage, the public API surface, CI/CD pipelines, quality gates, and release process
-are still being refined and validated. To maintain consistency and avoid unnecessary breaking
-changes, source-code contributions are temporarily limited to project maintainers.
+Jenin.FontAwesome.Blazor 2.0.0 is released. The public API surface, CI/CD pipelines, quality
+gates, and release process are now at a stable baseline; source-code contributions remain
+limited to project maintainers until external contributions are opened publicly.
 
 ## How You Can Contribute Today
 

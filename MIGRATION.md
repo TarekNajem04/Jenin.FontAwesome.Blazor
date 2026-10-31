@@ -22,7 +22,10 @@ Steps:
 1. Update `<TargetFramework>` to `net8.0`, `net9.0`, or `net10.0`.
 2. Update the package reference to `2.0.0`.
 3. Re-apply the CSS/JS setup from the [README](README.md#2-wire-the-assets-one-line--one-component) —
-   the shipped JavaScript asset names changed (see §5).
+   the shipped JavaScript asset names changed (see §5). The recommended 2.0 path is the
+   one-line setup (`AddJeninFontAwesome()` + `MapJeninFontAwesomeAssets(...)` +
+   `<FontAwesomeHeadAssets />`, which serves the generated `fontawesome-config-auto.js`);
+   keep the manual `<script>` wiring in §5 only if you own every tag yourself.
 
 ## 2. Namespaces
 
@@ -86,6 +89,12 @@ The shipped assets were renamed and reduced to exactly two:
 | `fontawesome-Svg[nest]-config.js` | `fontawesome-config-nest.js` (recommended) |
 | `fontawesome-Svg[false]-config.js` | `fontawesome-config-webfont.js` |
 | `fontawesome-config-utilities.js`, `fontawesome-utilities.js` | removed (no library interop) |
+
+When you use the recommended one-line setup (`MapJeninFontAwesomeAssets` +
+`<FontAwesomeHeadAssets />`), neither file is referenced by hand: the endpoint serves a
+generated `fontawesome-config-auto.js` derived from your options so the config can never
+drift from the mode. Reference `fontawesome-config-nest.js` / `fontawesome-config-webfont.js`
+directly only on the manual-wiring path.
 
 Load the config **before** your Font Awesome runtime script:
 
@@ -157,7 +166,9 @@ event surface is `EventCallback<MouseEventArgs>`: `OnClick`, `OnDoubleClick`, `O
 ## 9. Verification checklist
 
 - [ ] Host targets `net8.0`/`net9.0`/`net10.0` and references `2.0.0`.
-- [ ] CSS/JS references use the new asset names and load the config before Font Awesome.
+- [ ] CSS/JS references use the new asset names and load the config before Font Awesome
+      (or use the recommended `MapJeninFontAwesomeAssets` + `<FontAwesomeHeadAssets />`,
+      which serves the generated `fontawesome-config-auto.js`).
 - [ ] All `Animation`/`Transform` usage migrated to the `Animate`/`Transform` surfaces.
 - [ ] No references to removed members (see §6).
 - [ ] Reviewed the behavior changes for out-of-range/fractional inputs (see §7).
