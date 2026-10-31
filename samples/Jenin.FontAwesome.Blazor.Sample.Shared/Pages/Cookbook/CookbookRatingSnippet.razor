@@ -5,8 +5,10 @@
 // Licensed under the MIT License.
 *@
 <IconContainer CssClass="mb-1 p-5 d-flex gap-3 align-items-center">
-    <IconRating @bind-Value=Rating Max=5 RatingLabel="Rate this sample" />
-    <span>Your rating: @Rating.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)</span>
+    <Icons>
+        <IconRating @bind-Value=Rating Max=5 RatingLabel="Rate this sample" />
+        <span>Your rating: @Rating.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture)</span>
+    </Icons>
 </IconContainer>
 
 @code {
