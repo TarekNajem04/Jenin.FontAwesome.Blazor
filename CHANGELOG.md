@@ -7,7 +7,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [2.0.0]
+## [2.0.0] - 2026-10-31
 
 2.0 is a **generation reset** and is intentionally **not backward compatible** with 1.x: removed
 members are not shimmed and there are no `[Obsolete]` bridges. See
