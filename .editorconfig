@@ -485,6 +485,8 @@ dotnet_diagnostic.RCS1213.severity = none
 # stays mandatory for production code (see the naming rule above, still suggestion there).
 [tests/**.cs]
 dotnet_naming_rule.async_method_should_be_async_method.severity = none
+dotnet_naming_rule.async_method_should_be_async_method.symbols = async_method
+dotnet_naming_rule.async_method_should_be_async_method.style = async_method
 # MSTEST0049: tests deliberately call the tokenless overloads to pin exact behavior; token
 # forwarding is covered by the dedicated cancellation cases (AsyncEnumerableAssertionsTests
 # CanceledToken_*, CancellationAssertionsTests), and threading TestContext.CancellationToken
