@@ -12,8 +12,6 @@
 
 namespace Jenin.FontAwesome.Blazor.Tests;
 
-
-
 [TestClass]
 
 public class IconSvgTests {
@@ -30,8 +28,6 @@ public class IconSvgTests {
 
         """;
 
-
-
     [TestMethod]
 
     [TestCategory("Rendering")]
@@ -39,8 +35,6 @@ public class IconSvgTests {
     public void ToSvgString_InlinesPathWithViewBox() {
 
         var markup = IconSvg.ToSvgString(SPRITE, "fa-house");
-
-
 
         markup.Should().Contain("<svg");
         markup.Should().Contain("viewBox=\"0 0 512 512\"");
@@ -50,8 +44,6 @@ public class IconSvgTests {
 
     }
 
-
-
     [TestMethod]
 
     [TestCategory("Rendering")]
@@ -60,12 +52,8 @@ public class IconSvgTests {
 
         var markup = IconSvg.ToSvgString(SPRITE, "fa-github", IconStyle.Brands);
 
-
-
         markup.Should().Contain("<path d=\"M2 2H3Z\"");
     }
-
-
 
     [TestMethod]
 
@@ -74,8 +62,6 @@ public class IconSvgTests {
     public void ToSvgString_AppliesColorSizeAndTitle() {
 
         var markup = IconSvg.ToSvgString(SPRITE, "house", color: "#e11d48", title: "Home", size: 32);
-
-
 
         markup.Should().Contain("fill=\"#e11d48\"");
         markup.Should().Contain("width=\"32\"");
@@ -87,31 +73,17 @@ public class IconSvgTests {
 
     }
 
+    [TestMethod]
 
+    [TestCategory("Rendering")]
+
+    public void ToSvgString_MissingSymbol_Throws() => FluentActions.Invoking(() => IconSvg.ToSvgString(SPRITE, "fa-nope")).Should().ThrowExactly<ArgumentException>();
 
     [TestMethod]
 
     [TestCategory("Rendering")]
 
-    public void ToSvgString_MissingSymbol_Throws() {
-
-        FluentActions.Invoking(() => IconSvg.ToSvgString(SPRITE, "fa-nope")).Should().ThrowExactly<ArgumentException>();
-
-    }
-
-
-
-    [TestMethod]
-
-    [TestCategory("Rendering")]
-
-    public void ToSvgString_MalformedSprite_Throws() {
-
-        FluentActions.Invoking(() => IconSvg.ToSvgString("<svg><oops", "fa-house")).Should().ThrowExactly<ArgumentException>();
-
-    }
-
-
+    public void ToSvgString_MalformedSprite_Throws() => FluentActions.Invoking(() => IconSvg.ToSvgString("<svg><oops", "fa-house")).Should().ThrowExactly<ArgumentException>();
 
     [TestMethod]
 
@@ -124,6 +96,5 @@ public class IconSvgTests {
         FluentActions.Invoking(() => IconSvg.ToSvgString(SPRITE, "  ")).Should().ThrowExactly<ArgumentException>();
 
     }
-
 }
 

@@ -58,7 +58,7 @@ internal static class ClassString {
         foreach(var part in bareName.Split(_separators, StringSplitOptions.RemoveEmptyEntries)) {
             builder.Append(char.ToUpperInvariant(part[0]));
             if(part.Length > 1) {
-                builder.Append(part.Substring(1));
+                builder.Append(part, 1, part.Length - 1);
             }
         }
 

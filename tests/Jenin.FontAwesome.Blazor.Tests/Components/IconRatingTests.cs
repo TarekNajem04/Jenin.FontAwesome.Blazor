@@ -12,8 +12,6 @@
 
 namespace Jenin.FontAwesome.Blazor.Tests.Components;
 
-
-
 [TestClass]
 
 public class IconRatingTests {
@@ -32,14 +30,10 @@ public class IconRatingTests {
 
             ("AriaLabel", "Product rating")));
 
-
-
         markup.Should().Contain("role=\"img\"");
         markup.Should().Contain("aria-label=\"3.5 out of 5\"");
         markup.Should().Contain("width:70.00%;");
     }
-
-
 
     [TestMethod]
 
@@ -53,12 +47,8 @@ public class IconRatingTests {
 
             ("Interactive", false)));
 
-
-
         markup.Should().Contain("aria-label=\"4 out of 5\"");
     }
-
-
 
     [TestMethod]
 
@@ -72,8 +62,6 @@ public class IconRatingTests {
 
             ("RatingLabel", "Service rating")));
 
-
-
         markup.Should().Contain("role=\"radiogroup\"");
         markup.Should().Contain("aria-label=\"Service rating\"");
         CountOccurrences(markup, "type=\"radio\"").Should().Be(5);
@@ -86,8 +74,6 @@ public class IconRatingTests {
 
     }
 
-
-
     [TestMethod]
 
     [TestCategory("Rendering")]
@@ -98,13 +84,9 @@ public class IconRatingTests {
 
             ("Value", 0f)));
 
-
-
         CountOccurrences(markup, "checked").Should().Be(0);
 
     }
-
-
 
     [TestMethod]
 
@@ -118,15 +100,11 @@ public class IconRatingTests {
 
             ("Disabled", true)));
 
-
-
         CountOccurrences(markup, "disabled").Should().Be(5);
 
         markup.Contains("Clear rating", StringComparison.Ordinal).Should().BeFalse();
 
     }
-
-
 
     [TestMethod]
 
@@ -138,12 +116,8 @@ public class IconRatingTests {
 
             ("Value", 3f)));
 
-
-
         markup.Should().Contain("aria-label=\"Clear rating\"");
     }
-
-
 
     [TestMethod]
 
@@ -157,21 +131,15 @@ public class IconRatingTests {
 
             ("AllowDeselect", false)));
 
-
-
         markup.Contains("Clear rating", StringComparison.Ordinal).Should().BeFalse();
 
     }
-
-
 
     private static int CountOccurrences(string source, string token) {
 
         var count = 0;
 
         var index = 0;
-
-
 
         while((index = source.IndexOf(token, index, StringComparison.Ordinal)) >= 0) {
 
@@ -181,11 +149,8 @@ public class IconRatingTests {
 
         }
 
-
-
         return count;
 
     }
-
 }
 

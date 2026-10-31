@@ -54,17 +54,13 @@ public class SvgPackageTrimmingAotContractTests {
 
     [TestMethod]
     [TestCategory("Contract")]
-    public void SvgPackage_AssemblyIsMarkedTrimmable() {
-        MetadataValue("IsTrimmable").Should().Be("True",
+    public void SvgPackage_AssemblyIsMarkedTrimmable() => MetadataValue("IsTrimmable").Should().Be("True",
             "The linker must see IsTrimmable=true in the Svg assembly metadata.");
-    }
 
     [TestMethod]
     [TestCategory("Contract")]
-    public void SvgPackage_DeclaresNoJavaScriptInteropSurface() {
-        Svg.GetReferencedAssemblies()
+    public void SvgPackage_DeclaresNoJavaScriptInteropSurface() => Svg.GetReferencedAssemblies()
             .Where(static name => string.Equals(name.Name, "Microsoft.JSInterop", StringComparison.Ordinal))
             .ToList()
             .Should().HaveCount(0, "The Svg package must stay interop-free: no Microsoft.JSInterop reference allowed.");
-    }
 }

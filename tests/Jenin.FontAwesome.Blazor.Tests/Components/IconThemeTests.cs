@@ -12,8 +12,6 @@
 
 namespace Jenin.FontAwesome.Blazor.Tests.Components;
 
-
-
 [TestClass]
 
 public class IconThemeTests {
@@ -30,16 +28,12 @@ public class IconThemeTests {
 
             ("ChildContent", (RenderFragment)(builder => builder.AddContent(0, "x")))));
 
-
-
         markup.Should().Contain("class=\"jfa-duotone-theme\"");
         markup.Should().Contain("--duo-primary:#0d6efd;");
         markup.Should().Contain("--duo-secondary:#9ec5fe;");
         markup.Should().Contain("--duo-primary-dark:#8bb9fe;");
         markup.Should().Contain("--duo-secondary-dark:#084298;");
     }
-
-
 
     [TestMethod]
 
@@ -55,15 +49,11 @@ public class IconThemeTests {
 
             ("SecondaryColor", "#222222")));
 
-
-
         markup.Should().Contain("--duo-primary:#111111;");
         markup.Should().Contain("--duo-secondary:#222222;");
         markup.Should().Contain("--duo-primary-dark:#111111;");
         markup.Should().Contain("--duo-secondary-dark:#222222;");
     }
-
-
 
     [TestMethod]
 
@@ -77,13 +67,9 @@ public class IconThemeTests {
 
             ("LightSecondary", "#222222")));
 
-
-
         markup.Should().Contain("--duo-primary-dark:#111111;");
         markup.Should().Contain("--duo-secondary-dark:#222222;");
     }
-
-
 
     [TestMethod]
 
@@ -95,11 +81,8 @@ public class IconThemeTests {
 
             ("ChildContent", (RenderFragment)(builder => builder.AddContent(0, "x")))));
 
-
-
         markup.Should().Be("<span>x</span>");
 
     }
-
 }
 

@@ -12,15 +12,11 @@
 
 namespace Jenin.FontAwesome.Blazor.Svg.Tests;
 
-
-
 [TestClass]
 
 public sealed class GeneratedSvgIconTests {
 
     private const int EXPECTED_COMPONENT_COUNT = 2163;
-
-
 
     private static IEnumerable<Type> PresetTypes() =>
 
@@ -30,19 +26,13 @@ public sealed class GeneratedSvgIconTests {
 
             .Where(static type => type.IsSubclassOf(typeof(SvgIcon)));
 
-
-
     [TestMethod]
 
     public void AllGeneratedComponents_ArePublicSvgIconsWithParameterlessConstructors() {
 
         var presets = PresetTypes().ToList();
 
-
-
         presets.Should().HaveCount(EXPECTED_COMPONENT_COUNT);
-
-
 
         foreach(var type in presets) {
 
@@ -53,10 +43,7 @@ public sealed class GeneratedSvgIconTests {
             type.GetConstructor(Type.EmptyTypes).Should().NotBeNull($"{type.FullName} should expose a public parameterless constructor.");
 
         }
-
     }
-
-
 
     [TestMethod]
 
@@ -73,18 +60,13 @@ public sealed class GeneratedSvgIconTests {
                 .Should().BeTrue($"{type.FullName} should end with a style suffix.");
 
         }
-
     }
-
-
 
     [TestMethod]
 
     public async Task HouseSolidIcon_RendersStandaloneSvgAsync() {
 
         var markup = await TestHost.RenderMarkupAsync<HouseSolidIcon>();
-
-
 
         markup.Should().Contain("<svg");
 
@@ -102,8 +84,6 @@ public sealed class GeneratedSvgIconTests {
 
     }
 
-
-
     [TestMethod]
 
     public async Task NamedIcon_ExposesAnAccessibleNameAsync() {
@@ -111,8 +91,6 @@ public sealed class GeneratedSvgIconTests {
         var markup = await TestHost.RenderMarkupAsync<StarSolidIcon>(TestHost.Parameters(
 
             ("Title", "Favorite")));
-
-
 
         markup.Should().Contain("role=\"img\"");
 
@@ -124,8 +102,6 @@ public sealed class GeneratedSvgIconTests {
 
     }
 
-
-
     [TestMethod]
 
     public async Task CssClassAndUnmatchedAttributesFlowThroughAsync() {
@@ -136,13 +112,10 @@ public sealed class GeneratedSvgIconTests {
 
             ("width", "32")));
 
-
-
         markup.Should().Contain("class=\"custom\"");
 
         markup.Should().Contain("width=\"32\"");
 
     }
-
 }
 

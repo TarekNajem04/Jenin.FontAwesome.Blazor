@@ -29,7 +29,7 @@ public class RazorShapeTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UnknownIconNameId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.UNKNOWN_ICON_NAME_ID, DiagnosticSeverity.Warning)
             .WithSpan(7, 109, 7, 119)
             .WithArguments("fa-huose");
 
@@ -51,7 +51,7 @@ public class RazorShapeTests {
             }
             """;
 
-        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.RawClassStringId, DiagnosticSeverity.Warning)
+        var expected = new DiagnosticResult(JeninFontAwesomeAnalyzer.RAW_CLASS_STRING_ID, DiagnosticSeverity.Warning)
             .WithSpan(7, 113, 7, 133)
             .WithArguments("fa-solid fa-circle", "fa-circle");
 

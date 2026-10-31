@@ -29,14 +29,14 @@ namespace Jenin.FontAwesome.Blazor.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class JeninFontAwesomeAnalyzer : DiagnosticAnalyzer {
     /// <summary>Diagnostic ID for unknown icon names (warning).</summary>
-    public const string UnknownIconNameId = "JFA1001";
+    public const string UNKNOWN_ICON_NAME_ID = "JFA1001";
     /// <summary>Diagnostic ID for raw class strings in name positions (warning, with code fix).</summary>
-    public const string RawClassStringId = "JFA1002";
+    public const string RAW_CLASS_STRING_ID = "JFA1002";
     /// <summary>Diagnostic ID for Pro-only styles without licensed assets (warning).</summary>
-    public const string ProStyleId = "JFA1003";
+    public const string PRO_STYLE_ID = "JFA1003";
 
     private static readonly DiagnosticDescriptor _unknownIconName = new(
-        UnknownIconNameId,
+        UNKNOWN_ICON_NAME_ID,
         "Unknown Font Awesome icon name",
         "Icon name '{0}' is not a known Font Awesome 7 Free icon; it will render nothing. Use an IconNames constant or fix the spelling.",
         "Usage",
@@ -45,7 +45,7 @@ public sealed class JeninFontAwesomeAnalyzer : DiagnosticAnalyzer {
         description: "Typo'd, removed, or Pro-only icon names render nothing at runtime. Prefer the generated IconNames constants so renames become compile errors.");
 
     private static readonly DiagnosticDescriptor _rawClassString = new(
-        RawClassStringId,
+        RAW_CLASS_STRING_ID,
         "Raw Font Awesome classes in a name position",
         "Replace the raw class string '{0}' with the icon name '{1}'",
         "Usage",
@@ -54,7 +54,7 @@ public sealed class JeninFontAwesomeAnalyzer : DiagnosticAnalyzer {
         description: "IconName and MaskIconName take a bare icon name (for example fa-house), not a full class string. A code fix offers the typed IconNames equivalent when one exists.");
 
     private static readonly DiagnosticDescriptor _proStyle = new(
-        ProStyleId,
+        PRO_STYLE_ID,
         "Pro-only style without licensed assets",
         "'{0}' needs licensed Pro assets for full rendering",
         "Usage",

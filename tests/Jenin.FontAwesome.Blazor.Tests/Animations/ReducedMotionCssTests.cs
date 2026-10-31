@@ -17,7 +17,7 @@ namespace Jenin.FontAwesome.Blazor.Tests.Animations;
 public class ReducedMotionCssTests {
     private const string CSS_REPO_RELATIVE_PATH = "src/Jenin.FontAwesome.Blazor/wwwroot/css/animation-triggers.css";
 
-    private static string reducedMotionBlock = string.Empty;
+    private static string _reducedMotionBlock = string.Empty;
 
     [TestInitialize]
     public void LoadReducedMotionBlock() {
@@ -26,7 +26,7 @@ public class ReducedMotionCssTests {
 
         start.Should().NotBe(-1, "The reduced-motion media query is missing from animation-triggers.css.");
 
-        reducedMotionBlock = css.Substring(start);
+        _reducedMotionBlock = css[start..];
     }
 
     [TestMethod]
@@ -36,16 +36,14 @@ public class ReducedMotionCssTests {
     [DataRow(".jfa-anim-focus")]
     [DataRow(".jfa-anim-reveal-target")]
     [DataRow(".jfa-anim-transition-layer")]
-    public void ReducedMotionBlock_CoversLibraryOwnedMotion(string selector) {
-        reducedMotionBlock.Should().Contain(selector, $"The reduced-motion block must neutralize '{selector}'.");
-    }
+    public void ReducedMotionBlock_CoversLibraryOwnedMotion(string selector) => _reducedMotionBlock.Should().Contain(selector, $"The reduced-motion block must neutralize '{selector}'.");
 
     [TestMethod]
     [TestCategory("Contract")]
     public void ReducedMotionBlock_RemovesAnimationAndTransitions() {
-        reducedMotionBlock.Should().Contain("animation: none", "Trigger keyframes must be disabled, not just paused.");
-        reducedMotionBlock.Should().Contain("transition: none", "Icon transitions must complete instantly, not animate.");
-        reducedMotionBlock.Should().Contain("opacity: 1", "Scroll-reveal targets must stay visible instead of hidden.");
+        _reducedMotionBlock.Should().Contain("animation: none", "Trigger keyframes must be disabled, not just paused.");
+        _reducedMotionBlock.Should().Contain("transition: none", "Icon transitions must complete instantly, not animate.");
+        _reducedMotionBlock.Should().Contain("opacity: 1", "Scroll-reveal targets must stay visible instead of hidden.");
     }
 
     [TestMethod]
@@ -60,7 +58,7 @@ public class ReducedMotionCssTests {
             return;
         }
 
-        reducedMotionBlock.Should().Contain(
+        _reducedMotionBlock.Should().Contain(
             cssClass,
             $"AnimationTrigger.{trigger} renders '{cssClass}', which the reduced-motion block must neutralize.");
     }

@@ -121,7 +121,7 @@ public partial class Explorer : IAsyncDisposable {
     /// <param name="theme">The host theme, or <c>null</c> when the host cleared it.</param>
     /// <returns>A task that completes when the explorer has caught up with the host.</returns>
     [JSInvokable]
-    public async Task OnHostThemeChanged(string? theme) {
+    public async Task OnHostThemeChangedAsync(string? theme) {
         if(!_inheritsHostTheme) {
             return;
         }

@@ -26,7 +26,7 @@ public class FontAwesomeAssetEndpointTests {
         await app.StartAsync();
 
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
-        using var response = await client.GetAsync(ApplicationBuilderExtensions.DefaultConfigEndpointPath);
+        using var response = await client.GetAsync(ApplicationBuilderExtensions.DEFAULT_CONFIG_ENDPOINT_PATH);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         (response.Content.Headers.ContentType?.ToString()).Should().Be("application/javascript; charset=utf-8");
@@ -44,7 +44,7 @@ public class FontAwesomeAssetEndpointTests {
         await app.StartAsync();
 
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
-        var script = await client.GetStringAsync(ApplicationBuilderExtensions.DefaultConfigEndpointPath);
+        var script = await client.GetStringAsync(ApplicationBuilderExtensions.DEFAULT_CONFIG_ENDPOINT_PATH);
 
         script.Should().Contain("autoReplaceSvg: false");
         script.Should().NotContain("\"nest\"");
@@ -63,7 +63,7 @@ public class FontAwesomeAssetEndpointTests {
 
         var options = app.Services.GetRequiredService<FontAwesomeOptions>();
 
-        options.ConfigScriptUrl.Should().Be(ApplicationBuilderExtensions.DefaultConfigEndpointPath);
+        options.ConfigScriptUrl.Should().Be(ApplicationBuilderExtensions.DEFAULT_CONFIG_ENDPOINT_PATH);
         options.StyleSheetUrl.Should().Be("/fontawesome/css/all.css");
         options.JavaScriptUrl.Should().Be("/fontawesome/js/all.min.js");
     }
@@ -81,7 +81,7 @@ public class FontAwesomeAssetEndpointTests {
 
         // The mapped endpoint still serves; the head component simply points elsewhere.
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
-        using var response = await client.GetAsync(ApplicationBuilderExtensions.DefaultConfigEndpointPath);
+        using var response = await client.GetAsync(ApplicationBuilderExtensions.DEFAULT_CONFIG_ENDPOINT_PATH);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
@@ -93,7 +93,7 @@ public class FontAwesomeAssetEndpointTests {
         await app.StartAsync();
 
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
-        using var response = await client.PostAsync(ApplicationBuilderExtensions.DefaultConfigEndpointPath, new StringContent(string.Empty));
+        using var response = await client.PostAsync(ApplicationBuilderExtensions.DEFAULT_CONFIG_ENDPOINT_PATH, new StringContent(string.Empty));
 
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }

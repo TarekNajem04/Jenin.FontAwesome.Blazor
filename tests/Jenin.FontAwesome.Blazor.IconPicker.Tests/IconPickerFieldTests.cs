@@ -15,7 +15,7 @@ public sealed class IconPickerFieldTests {
     private static IDictionary<string, object?> BoundParameters(FormModel model) =>
         TestHost.Parameters(
             ("Value", model.Icon),
-            ("ValueChanged", EventCallback.Factory.Create<string?>(new object(), (string? value) => model.Icon = value)),
+            ("ValueChanged", EventCallback.Factory.Create<string?>(new object(), value => model.Icon = value)),
             ("ValueExpression", (Expression<Func<string?>>)(() => model.Icon)));
 
     [TestMethod]

@@ -14,7 +14,7 @@ public class ElementBase : ComponentBase {
     /// <summary>
     /// The well-known <c>style</c> attribute name.
     /// </summary>
-    private const string StyleAttribute = "style";
+    private const string STYLE_ATTRIBUTE = "style";
 
     #region Properties
     /// <summary>
@@ -242,7 +242,7 @@ public class ElementBase : ComponentBase {
             return;
         }
 
-        if(AdditionalAttributes.TryGetValue(StyleAttribute, out var style)) {
+        if(AdditionalAttributes.TryGetValue(STYLE_ATTRIBUTE, out var style)) {
             _userStyle = Convert.ToString(style, CultureInfo.InvariantCulture);
         }
 
@@ -322,10 +322,10 @@ public class ElementBase : ComponentBase {
         // Restore the author-supplied base values before recomputing, so computed values written on a
         // previous render never leak into the next one (BuildStyles reseeds from this dictionary).
         _ = AdditionalAttributes.SetOrRemoveIfEmpty("class", _userClass);
-        _ = AdditionalAttributes.SetOrRemoveIfEmpty(StyleAttribute, _userStyle);
+        _ = AdditionalAttributes.SetOrRemoveIfEmpty(STYLE_ATTRIBUTE, _userStyle);
 
         _ = AdditionalAttributes.SetOrRemoveIfEmpty("class", BuildClasses().Trim());
-        _ = AdditionalAttributes.SetOrRemoveIfEmpty(StyleAttribute, BuildStyles().Trim());
+        _ = AdditionalAttributes.SetOrRemoveIfEmpty(STYLE_ATTRIBUTE, BuildStyles().Trim());
 
         BuildAccessibilityAttributes();
     }
@@ -427,7 +427,7 @@ public class ElementBase : ComponentBase {
         var styles = new Dictionary<string, string>();
 
         // ===== Check exist Style =====
-        if(AdditionalAttributes?.TryGetValue(StyleAttribute, out var existStyles) == true) {
+        if(AdditionalAttributes?.TryGetValue(STYLE_ATTRIBUTE, out var existStyles) == true) {
             var existStylesString = Convert.ToString(existStyles, CultureInfo.InvariantCulture);
 
             if(!string.IsNullOrEmpty(existStylesString)) {

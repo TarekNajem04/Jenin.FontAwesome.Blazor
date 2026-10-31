@@ -17,7 +17,7 @@ public class StatCard : ComposedIconElement {
     /// <summary>
     /// The well-known <c>style</c> attribute name.
     /// </summary>
-    private const string StyleAttribute = "style";
+    private const string STYLE_ATTRIBUTE = "style";
 
     /// <summary>
     /// The icon shown in the disc. Defaults to a chart glyph.
@@ -147,23 +147,23 @@ public class StatCard : ComposedIconElement {
         AddRootAndMarker(builder, $"display:inline-flex;align-items:center;justify-content:center;width:2.75rem;height:2.75rem;border-radius:50%;font-size:1.25rem;background-color:{IconBackground ?? "color-mix(in srgb, currentColor 12%, transparent)"};", IconName, IconStyle, Typeface, IconColor, IconFragment);
 
         builder.OpenElement(16, "span");
-        builder.AddAttribute(17, StyleAttribute, "display:inline-flex;flex-direction:column;line-height:1.25;");
+        builder.AddAttribute(17, STYLE_ATTRIBUTE, "display:inline-flex;flex-direction:column;line-height:1.25;");
 
         builder.OpenElement(18, "span");
-        builder.AddAttribute(19, StyleAttribute, "font-size:1.5rem;font-weight:700;");
+        builder.AddAttribute(19, STYLE_ATTRIBUTE, "font-size:1.5rem;font-weight:700;");
         builder.AddContent(20, Value);
         builder.CloseElement();
 
         if(!string.IsNullOrEmpty(Label)) {
             builder.OpenElement(21, "span");
-            builder.AddAttribute(22, StyleAttribute, "font-size:0.85rem;opacity:0.75;");
+            builder.AddAttribute(22, STYLE_ATTRIBUTE, "font-size:0.85rem;opacity:0.75;");
             builder.AddContent(23, Label);
             builder.CloseElement();
         }
 
         if(Delta != StatDelta.None && (!string.IsNullOrEmpty(DeltaText) || !string.IsNullOrEmpty(DeltaGlyph))) {
             builder.OpenElement(24, "span");
-            builder.AddAttribute(25, StyleAttribute, $"display:inline-flex;align-items:center;gap:0.3em;font-size:0.8rem;font-weight:600;color:{DeltaColor ?? "inherit"};");
+            builder.AddAttribute(25, STYLE_ATTRIBUTE, $"display:inline-flex;align-items:center;gap:0.3em;font-size:0.8rem;font-weight:600;color:{DeltaColor ?? "inherit"};");
 
             if(!string.IsNullOrEmpty(DeltaGlyph)) {
                 builder.OpenComponent<Icon>(26);

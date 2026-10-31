@@ -104,7 +104,7 @@ public class FontAwesomeOptions {
     /// <summary>
     /// The Font Awesome kit runtime host. Kits are always served from this endpoint.
     /// </summary>
-    private const string KitScriptHost = "kit.fontawesome.com";
+    private const string KIT_SCRIPT_HOST = "kit.fontawesome.com";
 
     /// <summary>
     /// Points the one-line setup at a Font Awesome Kit: sets <see cref="JavaScriptUrl"/> to the
@@ -121,7 +121,7 @@ public class FontAwesomeOptions {
         }
 
         KitCode = kitCode.Trim();
-        JavaScriptUrl = new UriBuilder("https", KitScriptHost) { Path = KitCode + ".js" }.Uri.AbsoluteUri;
+        JavaScriptUrl = new UriBuilder("https", KIT_SCRIPT_HOST) { Path = KitCode + ".js" }.Uri.AbsoluteUri;
         StyleSheetUrl = null;
     }
 
@@ -130,7 +130,7 @@ public class FontAwesomeOptions {
     /// Defaults to <c>/_content/Jenin.FontAwesome.Blazor/js/fontawesome-config-auto.js</c>.
     /// </summary>
     public string ConfigEndpointPath {
-        get => _configEndpointPath ?? ApplicationBuilderExtensions.DefaultConfigEndpointPath;
+        get => _configEndpointPath ?? ApplicationBuilderExtensions.DEFAULT_CONFIG_ENDPOINT_PATH;
         set => _configEndpointPath = value;
     }
 

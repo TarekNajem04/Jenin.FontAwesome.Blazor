@@ -18,7 +18,7 @@ namespace Jenin.FontAwesome.Blazor.Analyzers;
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(RawClassStringCodeFixProvider)), Shared]
 public sealed class RawClassStringCodeFixProvider : CodeFixProvider {
     /// <inheritdoc/>
-    public override ImmutableArray<string> FixableDiagnosticIds => [JeninFontAwesomeAnalyzer.RawClassStringId];
+    public override ImmutableArray<string> FixableDiagnosticIds => [JeninFontAwesomeAnalyzer.RAW_CLASS_STRING_ID];
 
     /// <inheritdoc/>
     public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
@@ -61,7 +61,7 @@ public sealed class RawClassStringCodeFixProvider : CodeFixProvider {
             var insertion = SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(targetNamespace)).WithAdditionalAnnotations(Formatter.Annotation);
             var index = updated.Usings.Count;
             for(var i = 0; i < updated.Usings.Count; i++) {
-                if(string.Compare(updated.Usings[i].Name?.ToString(), targetNamespace, StringComparison.Ordinal) > 0) {
+                if(string.CompareOrdinal(updated.Usings[i].Name?.ToString(), targetNamespace) > 0) {
                     index = i;
                     break;
                 }

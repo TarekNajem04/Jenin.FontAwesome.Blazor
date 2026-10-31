@@ -12,8 +12,6 @@
 
 namespace Jenin.FontAwesome.Blazor.Tests.Components;
 
-
-
 [TestClass]
 
 public class IconTransitionTests {
@@ -30,8 +28,6 @@ public class IconTransitionTests {
 
             ("AlternateContent", (RenderFragment)(builder => builder.AddContent(0, "Second")))));
 
-
-
         markup.Should().Contain("class=\"jfa-anim-transition\"");
         CountOccurrences(markup, "jfa-anim-transition-layer").Should().Be(2);
 
@@ -40,8 +36,6 @@ public class IconTransitionTests {
         markup.Should().Contain(">First<");
         markup.Should().Contain(">Second<");
     }
-
-
 
     [TestMethod]
 
@@ -55,13 +49,9 @@ public class IconTransitionTests {
 
             TestHost.Parameters(("ShowAlternate", true)));
 
-
-
         markup.Should().Contain("class=\"jfa-anim-transition-layer\" style=\"opacity:0;transform:none;visibility:hidden;\">");
         markup.Should().Contain("class=\"jfa-anim-transition-layer\" style=\"opacity:1;transform:none;visibility:visible;\">");
     }
-
-
 
     [TestMethod]
 
@@ -81,13 +71,9 @@ public class IconTransitionTests {
 
             ("Transition", kind)));
 
-
-
         markup.Should().Contain($"transform:{transform};");
         markup.Should().Contain("visibility:hidden;");
     }
-
-
 
     [TestMethod]
 
@@ -99,12 +85,8 @@ public class IconTransitionTests {
 
             ("Duration", TimeSpan.FromMilliseconds(350))));
 
-
-
         markup.Should().Contain("--jfa-transition-duration:350ms;");
     }
-
-
 
     [TestMethod]
 
@@ -120,22 +102,16 @@ public class IconTransitionTests {
 
             ("ShowAlternate", true)));
 
-
-
         markup.Should().Contain("fa-play");
         markup.Should().Contain("fa-pause");
         markup.Should().Contain("jfa-anim-transition");
     }
-
-
 
     private static int CountOccurrences(string source, string token) {
 
         var count = 0;
 
         var index = 0;
-
-
 
         while((index = source.IndexOf(token, index, StringComparison.Ordinal)) >= 0) {
 
@@ -145,11 +121,8 @@ public class IconTransitionTests {
 
         }
 
-
-
         return count;
 
     }
-
 }
 

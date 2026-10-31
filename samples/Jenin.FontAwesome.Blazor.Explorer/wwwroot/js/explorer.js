@@ -143,7 +143,7 @@ export function observeHostTheme(dotNetRef) {
     }
 
     const observer = new MutationObserver(() => {
-        dotNetRef.invokeMethodAsync('OnHostThemeChanged', root.getAttribute('data-theme'));
+        dotNetRef.invokeMethodAsync('OnHostThemeChangedAsync', root.getAttribute('data-theme'));
     });
 
     observer.observe(root, { attributes: true, attributeFilter: ['data-theme'] });

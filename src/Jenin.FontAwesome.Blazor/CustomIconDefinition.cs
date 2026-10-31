@@ -17,14 +17,14 @@ public sealed class CustomIconDefinition {
     /// <summary>
     /// The default viewBox applied when no explicit viewBox is supplied.
     /// </summary>
-    public const string DefaultViewBox = "0 0 512 512";
+    public const string DEFAULT_VIEW_BOX = "0 0 512 512";
 
     /// <summary>
     /// Registers a custom glyph.
     /// </summary>
     /// <param name="name">The icon name in <c>IconName</c> form (<c>fa-acme-widget</c>).</param>
     /// <param name="pathData">The SVG path data (<c>d</c> attribute) for the glyph.</param>
-    /// <param name="viewBox">The SVG viewBox; defaults to <see cref="DefaultViewBox"/>.</param>
+    /// <param name="viewBox">The SVG viewBox; defaults to <see cref="DEFAULT_VIEW_BOX"/>.</param>
     /// <param name="label">The human-readable label used by search and the picker; defaults to the name.</param>
     /// <param name="searchTerms">Additional keywords used by search.</param>
     /// <exception cref="ArgumentException"><paramref name="name"/> or <paramref name="pathData"/> is missing or malformed.</exception>
@@ -39,7 +39,7 @@ public sealed class CustomIconDefinition {
 
         Name = name.Trim();
         PathData = pathData;
-        ViewBox = string.IsNullOrWhiteSpace(viewBox) ? DefaultViewBox : viewBox.Trim();
+        ViewBox = string.IsNullOrWhiteSpace(viewBox) ? DEFAULT_VIEW_BOX : viewBox.Trim();
         Label = string.IsNullOrWhiteSpace(label) ? Name : label.Trim();
         SearchTerms = searchTerms ?? [];
     }
