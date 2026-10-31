@@ -48,8 +48,20 @@ internal sealed class ReRenderHost<TComponent> : ComponentBase where TComponent 
         ArgumentNullException.ThrowIfNull(builder);
 
         builder.OpenComponent<TComponent>(0);
-        builder.AddMultipleAttributes(1, InnerParameters!);
+        builder.AddMultipleAttributes(1, GetInnerParameters());
         builder.AddComponentReferenceCapture(2, instance => _inner = (TComponent)instance);
         builder.CloseComponent();
+    }
+
+    private IEnumerable<KeyValuePair<string, object>>? GetInnerParameters() {
+        if(InnerParameters is null) {
+            yield break;
+        }
+
+        foreach(var kvp in InnerParameters) {
+            if(kvp.Value is { } value) {
+                yield return new KeyValuePair<string, object>(kvp.Key, value);
+            }
+        }
     }
 }
