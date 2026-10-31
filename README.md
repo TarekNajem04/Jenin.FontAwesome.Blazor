@@ -7,6 +7,8 @@
 
 ![API stability](badges/api-stability.svg) ![Public surface](badges/public-surface.svg) ![Target frameworks](badges/frameworks.svg) ![Obsolete members](badges/obsolete.svg)
 
+> 🚀 **Try it live:** explore the [documentation site](https://tareknajem04.github.io/Jenin.FontAwesome.Blazor/) — icon browser, copy-pasteable examples, component catalogue, and [API reference](https://tareknajem04.github.io/Jenin.FontAwesome.Blazor/api/api/). To run a sample locally: `dotnet new jenin-fa-blazor -n MyApp` then `dotnet run`.
+
 * Free Font Awesome components for ASP.NET Blazor
 * Targets .NET 8.0, .NET 9.0, and .NET 10.0; Blazor WebAssembly, Blazor Server, and Blazor Web App samples included (all four Blazor Web App render modes verified)
 * Browse the [documentation site](https://tareknajem04.github.io/Jenin.FontAwesome.Blazor/) for live, copy-pasteable examples, an icon browser, and the full component catalogue
