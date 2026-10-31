@@ -10,9 +10,9 @@ namespace Jenin.FontAwesome.Blazor.Tests.Transformations;
 public class RotatingTests {
     [TestMethod]
     [TestCategory("Model")]
-    public void Rotate_EmitsRotateToken() => Assert.AreEqual("rotate-90.00", Rotating.Rotate(90).GetTransformation());
+    public void Rotate_EmitsRotateToken() => Rotating.Rotate(90).GetTransformation().Should().Be("rotate-90.00");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void Rotate_NegativeValue_IsNotNormalized() => Assert.AreEqual("rotate--45.00", Rotating.Rotate(-45).GetTransformation());
+    public void Rotate_NegativeValue_IsNotNormalized() => Rotating.Rotate(-45).GetTransformation().Should().Be("rotate--45.00");
 }

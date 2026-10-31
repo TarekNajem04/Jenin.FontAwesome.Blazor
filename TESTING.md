@@ -7,8 +7,23 @@ tests will be run. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution p
 ## Policy
 
 - **Framework: MSTest.** Tests use `MSTest.TestFramework`, `MSTest.TestAdapter`, and
-  `Microsoft.NET.Test.Sdk`. Assertions use `Microsoft.VisualStudio.TestTools.UnitTesting.Assert`.
-- **No third-party test or assertion libraries.** xUnit, NUnit, Moq, FluentAssertions, bUnit, and
+  `Microsoft.NET.Test.Sdk`. Test discovery, attributes (`[TestClass]`, `[TestMethod]`,
+  `[DataRow]`, `[TestCategory]`), and outcomes stay on MSTest.
+- **Assertions: Jeninnet.Assertions.** All correctness assertions use the fluent `Should()`
+  API from the `Jeninnet.Assertions` NuGet package (pinned centrally in
+  `Directory.Packages.props`), called **directly** inside test methods — the same pattern the
+  library's own consumer suite uses. The `Jeninnet.Assertions.MSTest` adapter package is
+  deliberately *not* referenced: direct `Should()` keeps every assertion a single expression,
+  and MSTest already reports the thrown `AssertionFailedException` as a test failure.
+  `Assert.Inconclusive` is the sole remaining MSTest `Assert` member (test-outcome control,
+  not a correctness assertion). Adopted 2026-10-31 by maintainer decision; the 1.0.0 package
+  surface used here is `Be/NotBe`, `BeTrue/BeFalse`, `BeNull/NotBeNull`, `BeEmpty/NotBeEmpty`,
+  `BeSameAs`, `BeOfType` (exact type) vs `BeAssignableTo` (MSTest `IsInstanceOfType` semantics),
+  `Contain/NotContain`, `StartWith/EndWith`, `Equal` (order-sensitive) vs `BeEquivalentTo`,
+  `HaveCount`, `BeGreaterThanOrEqualTo`, `ThrowExactly` via `FluentActions.Invoking`, and
+  `because` messages. Reference-equality assertions use `ReferenceEquals(...).Should().BeTrue()`
+  (`BeSameAs` exists only for single objects, not collections).
+- **No other third-party test or assertion libraries.** xUnit, NUnit, Moq, FluentAssertions, bUnit, and
   similar packages are not used. Test doubles are hand-written when a seam needs one.
 - **Deferred test project (introduced).** The test project was intentionally introduced *after* the
   library architecture and implementation stabilised, so that tests validate the designed contract

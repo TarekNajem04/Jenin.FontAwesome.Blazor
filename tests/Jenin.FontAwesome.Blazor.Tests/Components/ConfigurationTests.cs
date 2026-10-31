@@ -17,7 +17,7 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house")),
             services => services.AddJeninFontAwesome(options => options.IconStyle = IconStyle.Regular));
 
-        Assert.AreEqual($"<span><i class=\"fa-regular fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-regular fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -27,7 +27,7 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house")),
             services => services.AddJeninFontAwesome(options => options.Typeface = Typeface.Sharp));
 
-        Assert.AreEqual($"<span><i class=\"fa-sharp fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-sharp fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -37,7 +37,7 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house")),
             services => services.AddJeninFontAwesome(options => options.IconSize = IconSize.X02));
 
-        Assert.AreEqual($"<span><i class=\"fa-2x fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-2x fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -47,9 +47,9 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house"), ("Title", "Home")),
             services => services.AddJeninFontAwesome(options => options.Decorative = true));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-house\" title=\"Home\" aria-hidden=\"true\" role=\"presentation\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-house\" title=\"Home\" aria-hidden=\"true\" role=\"presentation\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -59,9 +59,9 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house")),
             services => services.AddJeninFontAwesome(options => options.Decorative = false));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-house\" role=\"img\" aria-hidden=\"false\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-house\" role=\"img\" aria-hidden=\"false\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -71,7 +71,7 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house")),
             services => services.AddJeninFontAwesome());
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -81,7 +81,7 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house"), ("IconStyle", IconStyle.Solid)),
             services => services.AddJeninFontAwesome(options => options.IconStyle = IconStyle.Regular));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -91,7 +91,7 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house"), ("IconSize", IconSize.Large)),
             services => services.AddJeninFontAwesome(options => options.IconSize = IconSize.X02));
 
-        Assert.AreEqual($"<span><i class=\"fa-lg fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-lg fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -101,9 +101,9 @@ public class ConfigurationTests {
             TestHost.Parameters(("IconName", "fa-house"), ("Decorative", false)),
             services => services.AddJeninFontAwesome(options => options.Decorative = true));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-house\" role=\"img\" aria-hidden=\"false\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-house\" role=\"img\" aria-hidden=\"false\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -113,7 +113,7 @@ public class ConfigurationTests {
             ("IconStyle", IconStyle.Regular),
             ("ChildContent", IconFragment("fa-house"))));
 
-        Assert.AreEqual($"<span><i class=\"fa-regular fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-regular fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -125,7 +125,7 @@ public class ConfigurationTests {
                 ("ChildContent", IconFragment("fa-house"))),
             services => services.AddJeninFontAwesome(options => options.IconStyle = IconStyle.Regular));
 
-        Assert.AreEqual($"<span><i class=\"fa-brands fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-brands fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -137,7 +137,7 @@ public class ConfigurationTests {
             ("IconStyle", IconStyle.Regular),
             ("ChildContent", inner)));
 
-        Assert.AreEqual($"<span><i class=\"fa-brands fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-brands fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -149,7 +149,7 @@ public class ConfigurationTests {
             ("IconStyle", IconStyle.Regular),
             ("ChildContent", inner)));
 
-        Assert.AreEqual($"<span><i class=\"fa-3x fa-regular fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-3x fa-regular fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -166,7 +166,7 @@ public class ConfigurationTests {
                 }))),
             services => services.AddJeninFontAwesome(options => options.IconStyle = IconStyle.Regular));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -179,7 +179,7 @@ public class ConfigurationTests {
                 options.Decorative = true;
             }));
 
-        Assert.AreEqual("<div class=\"fa-lg\" aria-hidden=\"true\"></div>", markup);
+        markup.Should().Be("<div class=\"fa-lg\" aria-hidden=\"true\"></div>");
     }
 
     [TestMethod]
@@ -194,15 +194,15 @@ public class ConfigurationTests {
             options.Decorative = true;
         });
 
-        Assert.AreSame(services, returned);
+        ReferenceEquals(services, returned).Should().BeTrue();
 
         using var provider = services.BuildServiceProvider();
         var options = provider.GetRequiredService<FontAwesomeOptions>();
 
-        Assert.AreEqual(IconStyle.Regular, options.IconStyle);
-        Assert.AreEqual(Typeface.Sharp, options.Typeface);
-        Assert.AreEqual(IconSize.X04, options.IconSize);
-        Assert.IsTrue(options.Decorative);
+        options.IconStyle.Should().Be(IconStyle.Regular);
+        options.Typeface.Should().Be(Typeface.Sharp);
+        options.IconSize.Should().Be(IconSize.X04);
+        options.Decorative.Should().BeTrue();
     }
 
     [TestMethod]
@@ -215,10 +215,10 @@ public class ConfigurationTests {
         using var provider = services.BuildServiceProvider();
         var options = provider.GetRequiredService<FontAwesomeOptions>();
 
-        Assert.IsNull(options.IconStyle);
-        Assert.IsNull(options.Typeface);
-        Assert.IsNull(options.IconSize);
-        Assert.IsNull(options.Decorative);
+        options.IconStyle.Should().BeNull();
+        options.Typeface.Should().BeNull();
+        options.IconSize.Should().BeNull();
+        options.Decorative.Should().BeNull();
     }
 
     private static RenderFragment IconFragment(string iconName) => builder => {
@@ -234,9 +234,9 @@ public class ConfigurationTests {
 
         options.UseFontAwesomeKit("a1b2c3d4e5");
 
-        Assert.AreEqual("a1b2c3d4e5", options.KitCode);
-        Assert.AreEqual("https://kit.fontawesome.com/a1b2c3d4e5.js", options.JavaScriptUrl);
-        Assert.IsNull(options.StyleSheetUrl);
+        options.KitCode.Should().Be("a1b2c3d4e5");
+        options.JavaScriptUrl.Should().Be("https://kit.fontawesome.com/a1b2c3d4e5.js");
+        options.StyleSheetUrl.Should().BeNull();
     }
 
     [TestMethod]
@@ -249,7 +249,7 @@ public class ConfigurationTests {
     public void UseFontAwesomeKit_RejectsNonCodes(string? kitCode) {
         var options = new FontAwesomeOptions();
 
-        Assert.ThrowsExactly<ArgumentException>(() => options.UseFontAwesomeKit(kitCode!));
+        FluentActions.Invoking(() => options.UseFontAwesomeKit(kitCode!)).Should().ThrowExactly<ArgumentException>();
     }
 
     [TestMethod]
@@ -259,8 +259,8 @@ public class ConfigurationTests {
 
         options.UseFontAwesomeKit("a1b2c3d4e5");
 
-        Assert.AreEqual("/custom/config.js", options.ConfigScriptUrl);
-        Assert.AreEqual("https://kit.fontawesome.com/a1b2c3d4e5.js", options.JavaScriptUrl);
+        options.ConfigScriptUrl.Should().Be("/custom/config.js");
+        options.JavaScriptUrl.Should().Be("https://kit.fontawesome.com/a1b2c3d4e5.js");
     }
 
     private static RenderFragment DefaultsFragment(string parameterName, object? value, RenderFragment childContent) => builder => {

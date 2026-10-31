@@ -17,7 +17,7 @@ public class StaticAssetTests {
             directory = directory.Parent;
         }
 
-        Assert.IsNotNull(directory, "Could not locate the repository root.");
+        directory.Should().NotBeNull("Could not locate the repository root.");
 
         return directory!.FullName;
     }
@@ -35,7 +35,7 @@ public class StaticAssetTests {
 
         var path = Path.Combine(WwwRoot, relativePath.Replace('/', Path.DirectorySeparatorChar));
 
-        Assert.IsTrue(File.Exists(path), $"Missing static asset: {path}");
+        File.Exists(path).Should().BeTrue($"Missing static asset: {path}");
     }
 
     [TestMethod]
@@ -43,7 +43,7 @@ public class StaticAssetTests {
     public void NestConfig_SetsNestAutoReplaceSvg() {
         var content = File.ReadAllText(Path.Combine(WwwRoot, "js", "fontawesome-config-nest.js"));
 
-        Assert.Contains("autoReplaceSvg: \"nest\"", content);
+        content.Should().Contain("autoReplaceSvg: \"nest\"");
     }
 
     [TestMethod]
@@ -51,6 +51,6 @@ public class StaticAssetTests {
     public void WebfontConfig_DisablesAutoReplaceSvg() {
         var content = File.ReadAllText(Path.Combine(WwwRoot, "js", "fontawesome-config-webfont.js"));
 
-        Assert.Contains("autoReplaceSvg: false", content);
+        content.Should().Contain("autoReplaceSvg: false");
     }
 }

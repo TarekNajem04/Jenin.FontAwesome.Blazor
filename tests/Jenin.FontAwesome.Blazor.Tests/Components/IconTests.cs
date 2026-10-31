@@ -15,7 +15,7 @@ public class IconTests {
     public async Task RendersSpanWrappingEnhanceableIconElementAsync() {
         var markup = await TestHost.RenderMarkupAsync<Icon>(TestHost.Parameters(("IconName", "fa-house")));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -28,9 +28,8 @@ public class IconTests {
             ("FixedWidth", true),
             ("Transform", new Transform().Grow(2).Rotate(-30))));
 
-        Assert.AreEqual(
-            $"<span><i class=\"fa-fw fa-2x fa-solid fa-user\" style=\"color:red;\"{DECORATIVE} data-fa-transform=\"grow-2.00 rotate--30.00\"></i></span>",
-            markup);
+        markup.Should().Be(
+            $"<span><i class=\"fa-fw fa-2x fa-solid fa-user\" style=\"color:red;\"{DECORATIVE} data-fa-transform=\"grow-2.00 rotate--30.00\"></i></span>");
     }
 
     [TestMethod]
@@ -42,9 +41,8 @@ public class IconTests {
             ("BorderColor", "blue"),
             ("BorderStyle", BorderStyle.Solid)));
 
-        Assert.AreEqual(
-            $"<span><i class=\"fa-border fa-solid fa-user\" style=\"--fa-border-color:blue;--fa-border-style:solid;\"{DECORATIVE}></i></span>",
-            markup);
+        markup.Should().Be(
+            $"<span><i class=\"fa-border fa-solid fa-user\" style=\"--fa-border-color:blue;--fa-border-style:solid;\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -54,9 +52,8 @@ public class IconTests {
             ("IconName", "fa-spinner"),
             ("Animation", Animate.Spin().SetDelay(TimeSpan.FromMilliseconds(500)))));
 
-        Assert.AreEqual(
-            $"<span><i class=\"fa-solid fa-spinner fa-spin\" style=\"--fa-animation-delay:500ms;\"{DECORATIVE}></i></span>",
-            markup);
+        markup.Should().Be(
+            $"<span><i class=\"fa-solid fa-spinner fa-spin\" style=\"--fa-animation-delay:500ms;\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -67,7 +64,7 @@ public class IconTests {
             ("IconStyle", IconStyle.Brands),
             ("Typeface", Typeface.Sharp)));
 
-        Assert.AreEqual($"<span><i class=\"fa-sharp fa-brands fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-sharp fa-brands fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -77,7 +74,7 @@ public class IconTests {
             ("IconName", "fa-house"),
             ("Rotate", IconRotate.Deg090)));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house fa-rotate-90\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house fa-rotate-90\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -87,7 +84,7 @@ public class IconTests {
             TestHost.Parameters(("IconName", "fa-house"), ("Color", "red")),
             TestHost.Parameters(("IconName", "fa-house"), ("Color", null)));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -97,7 +94,7 @@ public class IconTests {
             TestHost.Parameters(("IconName", "fa-house"), ("Rotate", IconRotate.Deg090)),
             TestHost.Parameters(("IconName", "fa-house"), ("Rotate", IconRotate.NotSet)));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -107,7 +104,7 @@ public class IconTests {
             TestHost.Parameters(("IconName", "fa-house"), ("Transform", new Transform().Grow(2).Rotate(-30))),
             TestHost.Parameters(("IconName", "fa-house"), ("Transform", null)));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -117,7 +114,7 @@ public class IconTests {
             TestHost.Parameters(("IconName", "fa-house"), ("BackgroundColor", "#fff3cd")),
             TestHost.Parameters(("IconName", "fa-house"), ("BackgroundColor", null)));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -127,7 +124,7 @@ public class IconTests {
             TestHost.Parameters(("IconName", "fa-house"), ("Color", "red"), ("style", "width:10px")),
             TestHost.Parameters(("IconName", "fa-house"), ("Color", null), ("style", "width:10px")));
 
-        Assert.AreEqual($"<span><i style=\"width:10px;\" class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i style=\"width:10px;\" class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -138,9 +135,8 @@ public class IconTests {
             ("Rotate", IconRotate.RotateBy),
             ("RotateAngle", 45f)));
 
-        Assert.AreEqual(
-            $"<span><i class=\"fa-solid fa-house fa-rotate-by\" style=\"--fa-rotate-angle:45.00deg;\"{DECORATIVE}></i></span>",
-            markup);
+        markup.Should().Be(
+            $"<span><i class=\"fa-solid fa-house fa-rotate-by\" style=\"--fa-rotate-angle:45.00deg;\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -151,9 +147,8 @@ public class IconTests {
             ("PullPosition", PullPosition.Left),
             ("PullMargin", "1em")));
 
-        Assert.AreEqual(
-            $"<span><i class=\"fa-solid fa-house fa-pull-left\" style=\"--fa-pull-margin:1em;\"{DECORATIVE}></i></span>",
-            markup);
+        markup.Should().Be(
+            $"<span><i class=\"fa-solid fa-house fa-pull-left\" style=\"--fa-pull-margin:1em;\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -164,9 +159,8 @@ public class IconTests {
             ("StackSize", IconStackSize.Same),
             ("StackZIndex", 1)));
 
-        Assert.AreEqual(
-            $"<span><i class=\"fa-solid fa-circle fa-stack-1x\" style=\"--fa-stack-z-index:1;\"{DECORATIVE}></i></span>",
-            markup);
+        markup.Should().Be(
+            $"<span><i class=\"fa-solid fa-circle fa-stack-1x\" style=\"--fa-stack-z-index:1;\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -181,9 +175,8 @@ public class IconTests {
             ("SecondaryOpacity", 0.25f),
             ("SwapOpacity", true)));
 
-        Assert.AreEqual(
-            $"<span><i class=\"fa-duotone fa-solid fa-house fa-swap-opacity\" style=\"--fa-primary-color:red;--fa-primary-opacity:0.50;--fa-secondary-color:blue;--fa-secondary-opacity:0.25;\"{DECORATIVE}></i></span>",
-            markup);
+        markup.Should().Be(
+            $"<span><i class=\"fa-duotone fa-solid fa-house fa-swap-opacity\" style=\"--fa-primary-color:red;--fa-primary-opacity:0.50;--fa-secondary-color:blue;--fa-secondary-opacity:0.25;\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -202,9 +195,9 @@ public class IconTests {
             ("Typeface", Typeface.Sharp),
             ("IconStyle", IconStyle.Thin)));
 
-        Assert.Contains("class=\"fa-duotone fa-regular fa-user\"", duotoneRegular);
-        Assert.Contains("class=\"fa-sharp-duotone fa-solid fa-user\"", sharpDuotoneSolid);
-        Assert.Contains("class=\"fa-sharp fa-thin fa-user\"", sharpThin);
+        duotoneRegular.Should().Contain("class=\"fa-duotone fa-regular fa-user\"");
+        sharpDuotoneSolid.Should().Contain("class=\"fa-sharp-duotone fa-solid fa-user\"");
+        sharpThin.Should().Contain("class=\"fa-sharp fa-thin fa-user\"");
     }
 
     [TestMethod]
@@ -215,7 +208,7 @@ public class IconTests {
             ("IconStyle", IconStyle.Duotone),
             ("PrimaryOpacity", 5f)));
 
-        Assert.Contains("--fa-primary-opacity:1.00;", markup);
+        markup.Should().Contain("--fa-primary-opacity:1.00;");
     }
 
     [TestMethod]
@@ -226,7 +219,7 @@ public class IconTests {
             ("IconStyle", IconStyle.Duotone),
             ("SecondaryOpacity", -1f)));
 
-        Assert.Contains("--fa-secondary-opacity:0.00;", markup);
+        markup.Should().Contain("--fa-secondary-opacity:0.00;");
     }
 
     [TestMethod]
@@ -238,8 +231,8 @@ public class IconTests {
             ("MaskIconName", "fa-circle"),
             ("MaskId", "mask-1")));
 
-        Assert.Contains("data-fa-mask=\"fa-solid fa-circle\"", markup);
-        Assert.Contains("data-fa-mask-id=\"mask-1\"", markup);
+        markup.Should().Contain("data-fa-mask=\"fa-solid fa-circle\"");
+        markup.Should().Contain("data-fa-mask-id=\"mask-1\"");
     }
 
     [TestMethod]
@@ -249,7 +242,7 @@ public class IconTests {
             ("IconName", "fa-house"),
             ("AdditionalAttributes", new Dictionary<string, object> { ["data-x"] = "1", ["id"] = "i1" })));
 
-        Assert.AreEqual($"<span><i data-x=\"1\" id=\"i1\" class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i data-x=\"1\" id=\"i1\" class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -259,7 +252,7 @@ public class IconTests {
             ("IconName", "fa-house"),
             ("id", "zz")));
 
-        Assert.AreEqual($"<span><i id=\"zz\" class=\"fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i id=\"zz\" class=\"fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -269,7 +262,7 @@ public class IconTests {
             ("IconName", "fa-house"),
             ("CssClass", "my-icon")));
 
-        Assert.AreEqual($"<span><i class=\"my-icon fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"my-icon fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -284,8 +277,8 @@ public class IconTests {
         var first = await TestHost.RenderMarkupAsync<Icon>(parameters);
         var second = await TestHost.RenderMarkupAsync<Icon>(parameters);
 
-        Assert.AreEqual(first, second);
-        Assert.AreEqual("fa-solid fa-house", ExtractClass(first));
+        second.Should().Be(first);
+        ExtractClass(first).Should().Be("fa-solid fa-house");
     }
 
     private static string ExtractClass(string markup) {
@@ -301,7 +294,7 @@ public class IconTests {
     public async Task EmptyIconName_StillRendersEnhanceableElementAsync() {
         var markup = await TestHost.RenderMarkupAsync<Icon>();
 
-        Assert.AreEqual($"<span><i class=\"fa-solid\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-solid\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -311,7 +304,7 @@ public class IconTests {
             ("IconName", "fa-house"),
             ("WidthMode", IconWidth.Auto)));
 
-        Assert.AreEqual($"<span><i class=\"fa-width-auto fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-width-auto fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -321,7 +314,7 @@ public class IconTests {
             ("IconName", "fa-house"),
             ("WidthMode", IconWidth.Fixed)));
 
-        Assert.AreEqual($"<span><i class=\"fa-width-fixed fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-width-fixed fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -331,7 +324,7 @@ public class IconTests {
             ("IconName", "fa-house"),
             ("CanvasPadding", CanvasPadding.Roomy)));
 
-        Assert.AreEqual($"<span><i class=\"fa-canvas-roomy fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-canvas-roomy fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -343,7 +336,7 @@ public class IconTests {
             ("CanvasPadding", CanvasPadding.Square),
             ("IconSize", IconSize.X02)));
 
-        Assert.AreEqual($"<span><i class=\"fa-2x fa-width-fixed fa-canvas-square fa-solid fa-house\"{DECORATIVE}></i></span>", markup);
+        markup.Should().Be($"<span><i class=\"fa-2x fa-width-fixed fa-canvas-square fa-solid fa-house\"{DECORATIVE}></i></span>");
     }
 
     [TestMethod]
@@ -357,7 +350,7 @@ public class IconTests {
             ("IconName", "fa-house"),
             ("PullPosition", PullPosition.End)));
 
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house fa-pull-start\"{DECORATIVE}></i></span>", start);
-        Assert.AreEqual($"<span><i class=\"fa-solid fa-house fa-pull-end\"{DECORATIVE}></i></span>", end);
+        start.Should().Be($"<span><i class=\"fa-solid fa-house fa-pull-start\"{DECORATIVE}></i></span>");
+        end.Should().Be($"<span><i class=\"fa-solid fa-house fa-pull-end\"{DECORATIVE}></i></span>");
     }
 }

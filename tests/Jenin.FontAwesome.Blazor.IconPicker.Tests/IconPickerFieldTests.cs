@@ -22,25 +22,25 @@ public sealed class IconPickerFieldTests {
     public async Task RendersComboboxWithoutOpeningAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPickerField>(BoundParameters(new FormModel()));
 
-        Assert.Contains("role=\"combobox\"", markup);
-        Assert.Contains("Search icons...", markup);
-        Assert.IsFalse(markup.Contains("listbox", StringComparison.Ordinal));
+        markup.Should().Contain("role=\"combobox\"");
+        markup.Should().Contain("Search icons...");
+        markup.Contains("listbox", StringComparison.Ordinal).Should().BeFalse();
     }
 
     [TestMethod]
     public async Task RendersPreviewAndClearForInitialValueAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPickerField>(BoundParameters(new FormModel { Icon = "fa-house" }));
 
-        Assert.Contains("value=\"fa-house\"", markup);
-        Assert.Contains("fa-house", markup);
-        Assert.Contains("Clear selection", markup);
+        markup.Should().Contain("value=\"fa-house\"");
+        markup.Should().Contain("fa-house");
+        markup.Should().Contain("Clear selection");
     }
 
     [TestMethod]
     public async Task EmptyValue_RendersNoPreviewOrClearAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPickerField>(BoundParameters(new FormModel()));
 
-        Assert.IsFalse(markup.Contains("fa-icon-picker-field__preview", StringComparison.Ordinal));
-        Assert.IsFalse(markup.Contains("fa-icon-picker-field__clear", StringComparison.Ordinal));
+        markup.Contains("fa-icon-picker-field__preview", StringComparison.Ordinal).Should().BeFalse();
+        markup.Contains("fa-icon-picker-field__clear", StringComparison.Ordinal).Should().BeFalse();
     }
 }

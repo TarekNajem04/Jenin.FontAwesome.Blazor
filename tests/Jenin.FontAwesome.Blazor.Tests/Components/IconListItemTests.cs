@@ -21,9 +21,9 @@ public class IconListItemTests {
             ("ItemIcon", icon),
             ("ItemContent", (RenderFragment)(builder => builder.AddContent(0, "Content")))));
 
-        Assert.AreEqual(
-            "<li><span class=\"fa-li\"><span><i class=\"fa-solid fa-check\" aria-hidden=\"true\" role=\"presentation\"></i></span></span>Content</li>",
-            markup);
+        markup.Should().Be(
+            "<li><span class=\"fa-li\"><span><i class=\"fa-solid fa-check\" aria-hidden=\"true\" role=\"presentation\"></i></span></span>Content</li>"
+        );
     }
 
     [TestMethod]
@@ -33,8 +33,8 @@ public class IconListItemTests {
             ("ItemMargin", "1em"),
             ("ItemWidth", "1em")));
 
-        Assert.AreEqual(
-            "<li><span class=\"fa-li\" style=\"--fa-li-margin:1em;--fa-li-width:1em;\"></span></li>",
-            markup);
+        markup.Should().Be(
+            "<li><span class=\"fa-li\" style=\"--fa-li-margin:1em;--fa-li-width:1em;\"></span></li>"
+        );
     }
 }

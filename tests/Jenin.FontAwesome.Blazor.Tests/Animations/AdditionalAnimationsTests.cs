@@ -11,39 +11,39 @@ public class AdditionalAnimationsTests {
     [TestMethod]
     [TestCategory("Model")]
     public void NewAnimations_BuildExpectedFontAwesomeClasses() {
-        Assert.AreEqual("fa-buzz", new Buzz().BuildClasses());
-        Assert.AreEqual("fa-float", new Float().BuildClasses());
-        Assert.AreEqual("fa-jello", new Jello().BuildClasses());
-        Assert.AreEqual("fa-flip-360", new Flip360().BuildClasses());
-        Assert.AreEqual("fa-swing", new Swing().BuildClasses());
-        Assert.AreEqual("fa-wag", new Wag().BuildClasses());
-        Assert.AreEqual("fa-spin-snap", new SpinSnap().BuildClasses());
-        Assert.AreEqual("fa-spin-snap-4", new SpinSnap(new SpinSnapOptions { Size = SpinSnapSize.Four }).BuildClasses());
-        Assert.AreEqual("fa-spin-snap-8", new SpinSnap(new SpinSnapOptions { Size = SpinSnapSize.Eight }).BuildClasses());
+        new Buzz().BuildClasses().Should().Be("fa-buzz");
+        new Float().BuildClasses().Should().Be("fa-float");
+        new Jello().BuildClasses().Should().Be("fa-jello");
+        new Flip360().BuildClasses().Should().Be("fa-flip-360");
+        new Swing().BuildClasses().Should().Be("fa-swing");
+        new Wag().BuildClasses().Should().Be("fa-wag");
+        new SpinSnap().BuildClasses().Should().Be("fa-spin-snap");
+        new SpinSnap(new SpinSnapOptions { Size = SpinSnapSize.Four }).BuildClasses().Should().Be("fa-spin-snap-4");
+        new SpinSnap(new SpinSnapOptions { Size = SpinSnapSize.Eight }).BuildClasses().Should().Be("fa-spin-snap-8");
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void NewAnimations_ProduceNoStylesByDefault() {
-        Assert.IsEmpty(new Buzz().BuildStyles());
-        Assert.IsEmpty(new Float().BuildStyles());
-        Assert.IsEmpty(new Jello().BuildStyles());
-        Assert.IsEmpty(new Flip360().BuildStyles());
-        Assert.IsEmpty(new Swing().BuildStyles());
-        Assert.IsEmpty(new Wag().BuildStyles());
-        Assert.IsEmpty(new SpinSnap().BuildStyles());
+        new Buzz().BuildStyles().Should().BeEmpty();
+        new Float().BuildStyles().Should().BeEmpty();
+        new Jello().BuildStyles().Should().BeEmpty();
+        new Flip360().BuildStyles().Should().BeEmpty();
+        new Swing().BuildStyles().Should().BeEmpty();
+        new Wag().BuildStyles().Should().BeEmpty();
+        new SpinSnap().BuildStyles().Should().BeEmpty();
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void Factories_ReturnExpectedConcreteTypes() {
-        Assert.IsInstanceOfType<Buzz>(Animate.Buzz());
-        Assert.IsInstanceOfType<Float>(Animate.Float());
-        Assert.IsInstanceOfType<Jello>(Animate.Jello());
-        Assert.IsInstanceOfType<Flip360>(Animate.Flip360());
-        Assert.IsInstanceOfType<Swing>(Animate.Swing());
-        Assert.IsInstanceOfType<Wag>(Animate.Wag());
-        Assert.IsInstanceOfType<SpinSnap>(Animate.SpinSnap());
+        Animate.Buzz().Should().BeOfType<Buzz>();
+        Animate.Float().Should().BeOfType<Float>();
+        Animate.Jello().Should().BeOfType<Jello>();
+        Animate.Flip360().Should().BeOfType<Flip360>();
+        Animate.Swing().Should().BeOfType<Swing>();
+        Animate.Wag().Should().BeOfType<Wag>();
+        Animate.SpinSnap().Should().BeOfType<SpinSnap>();
     }
 
     [TestMethod]
@@ -51,8 +51,8 @@ public class AdditionalAnimationsTests {
     public void SpinSnapFactory_ForwardsSize() {
         var animation = Animate.SpinSnap(new SpinSnapOptions { Size = SpinSnapSize.Eight });
 
-        Assert.AreEqual(SpinSnapSize.Eight, animation.Options.Size);
-        Assert.AreEqual("fa-spin-snap-8", animation.BuildClasses());
+        animation.Options.Size.Should().Be(SpinSnapSize.Eight);
+        animation.BuildClasses().Should().Be("fa-spin-snap-8");
     }
 
     [TestMethod]
@@ -63,10 +63,10 @@ public class AdditionalAnimationsTests {
                           .SetDuration(TimeSpan.FromSeconds(2))
                           .SetIterationCount(3);
 
-        Assert.AreEqual(typeof(Buzz), buzz.GetType());
-        Assert.AreEqual(TimeSpan.FromSeconds(1), buzz.Options.Delay);
-        Assert.AreEqual(TimeSpan.FromSeconds(2), buzz.Options.Duration);
-        Assert.AreEqual(3f, buzz.Options.IterationCount!.Value);
+        buzz.GetType().Should().Be(typeof(Buzz));
+        buzz.Options.Delay.Should().Be(TimeSpan.FromSeconds(1));
+        buzz.Options.Duration.Should().Be(TimeSpan.FromSeconds(2));
+        buzz.Options.IterationCount!.Value.Should().Be(3f);
     }
 
     [TestMethod]
@@ -82,13 +82,13 @@ public class AdditionalAnimationsTests {
             Tilt = 1.5f
         }).BuildStyles();
 
-        Assert.AreEqual("2px", styles["--fa-float-drift"]);
-        Assert.AreEqual("8px", styles["--fa-float-height"]);
-        Assert.AreEqual("1.02", styles["--fa-float-squash-x"]);
-        Assert.AreEqual("0.98", styles["--fa-float-squash-y"]);
-        Assert.AreEqual("0.98", styles["--fa-float-stretch-x"]);
-        Assert.AreEqual("1.03", styles["--fa-float-stretch-y"]);
-        Assert.AreEqual("1.5deg", styles["--fa-float-tilt"]);
+        styles["--fa-float-drift"].Should().Be("2px");
+        styles["--fa-float-height"].Should().Be("8px");
+        styles["--fa-float-squash-x"].Should().Be("1.02");
+        styles["--fa-float-squash-y"].Should().Be("0.98");
+        styles["--fa-float-stretch-x"].Should().Be("0.98");
+        styles["--fa-float-stretch-y"].Should().Be("1.03");
+        styles["--fa-float-tilt"].Should().Be("1.5deg");
     }
 
     [TestMethod]
@@ -96,8 +96,8 @@ public class AdditionalAnimationsTests {
     public void BuzzOptions_EmitsDocumentedCustomProperty() {
         var styles = new Buzz(new BuzzOptions { Distance = "4px" }).BuildStyles();
 
-        Assert.AreEqual("4px", styles["--fa-buzz-distance"]);
-        Assert.HasCount(1, styles);
+        styles["--fa-buzz-distance"].Should().Be("4px");
+        styles.Should().HaveCount(1);
     }
 
     [TestMethod]
@@ -105,8 +105,8 @@ public class AdditionalAnimationsTests {
     public void JelloOptions_EmitDocumentedCustomProperties() {
         var styles = new Jello(new JelloOptions { ScaleX = 1.15f, ScaleY = 1.12f }).BuildStyles();
 
-        Assert.AreEqual("1.15", styles["--fa-jello-scale-x"]);
-        Assert.AreEqual("1.12", styles["--fa-jello-scale-y"]);
+        styles["--fa-jello-scale-x"].Should().Be("1.15");
+        styles["--fa-jello-scale-y"].Should().Be("1.12");
     }
 
     [TestMethod]
@@ -114,8 +114,8 @@ public class AdditionalAnimationsTests {
     public void SwingOptions_EmitsDocumentedCustomProperty() {
         var styles = new Swing(new SwingOptions { Angle = 22.5f }).BuildStyles();
 
-        Assert.AreEqual("22.5deg", styles["--fa-swing-angle"]);
-        Assert.HasCount(1, styles);
+        styles["--fa-swing-angle"].Should().Be("22.5deg");
+        styles.Should().HaveCount(1);
     }
 
     [TestMethod]
@@ -123,17 +123,17 @@ public class AdditionalAnimationsTests {
     public void WagOptions_EmitsDocumentedCustomProperty() {
         var styles = new Wag(new WagOptions { Angle = 12 }).BuildStyles();
 
-        Assert.AreEqual("12deg", styles["--fa-wag-angle"]);
-        Assert.HasCount(1, styles);
+        styles["--fa-wag-angle"].Should().Be("12deg");
+        styles.Should().HaveCount(1);
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void NewAnimationOptions_ProduceNoStylesWhenUnset() {
-        Assert.IsEmpty(new Float(new FloatOptions { Tilt = null }).BuildStyles());
-        Assert.IsEmpty(new Buzz(new BuzzOptions()).BuildStyles());
-        Assert.IsEmpty(new Jello(new JelloOptions()).BuildStyles());
-        Assert.IsEmpty(new Swing(new SwingOptions()).BuildStyles());
-        Assert.IsEmpty(new Wag(new WagOptions()).BuildStyles());
+        new Float(new FloatOptions { Tilt = null }).BuildStyles().Should().BeEmpty();
+        new Buzz(new BuzzOptions()).BuildStyles().Should().BeEmpty();
+        new Jello(new JelloOptions()).BuildStyles().Should().BeEmpty();
+        new Swing(new SwingOptions()).BuildStyles().Should().BeEmpty();
+        new Wag(new WagOptions()).BuildStyles().Should().BeEmpty();
     }
 }

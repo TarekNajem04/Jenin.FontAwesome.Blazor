@@ -14,7 +14,7 @@ public class BlazoriseIconMapperTests {
     [DataRow("phone", "fa-phone")]
     [DataRow("fa-acme-widget", "fa-acme-widget")]
     public void ToIconName_NormalizesToFaForm(string iconName, string expected) {
-        Assert.AreEqual(expected, BlazoriseIconMapper.ToIconName(iconName));
+        BlazoriseIconMapper.ToIconName(iconName).Should().Be(expected);
     }
 
     [TestMethod]
@@ -22,43 +22,43 @@ public class BlazoriseIconMapperTests {
     [DataRow(null)]
     [DataRow("")]
     public void ToIconName_RejectsEmpty(string? iconName) {
-        Assert.AreEqual(string.Empty, BlazoriseIconMapper.ToIconName(iconName));
+        BlazoriseIconMapper.ToIconName(iconName).Should().Be(string.Empty);
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void ToBlazoriseStyle_MapsSharedStyles() {
-        Assert.AreEqual(global::Blazorise.IconStyle.Solid, BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Solid));
-        Assert.AreEqual(global::Blazorise.IconStyle.Regular, BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Regular));
-        Assert.AreEqual(global::Blazorise.IconStyle.Light, BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Light));
-        Assert.AreEqual(global::Blazorise.IconStyle.DuoTone, BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Duotone));
+        BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Solid).Should().Be(global::Blazorise.IconStyle.Solid);
+        BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Regular).Should().Be(global::Blazorise.IconStyle.Regular);
+        BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Light).Should().Be(global::Blazorise.IconStyle.Light);
+        BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Duotone).Should().Be(global::Blazorise.IconStyle.DuoTone);
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void ToBlazoriseStyle_ReturnsNullWithoutCounterpart() {
-        Assert.IsNull(BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Thin));
-        Assert.IsNull(BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Brands));
-        Assert.IsNull(BlazoriseIconMapper.ToBlazoriseStyle(null));
+        BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Thin).Should().BeNull();
+        BlazoriseIconMapper.ToBlazoriseStyle(Jenin.FontAwesome.Blazor.IconStyle.Brands).Should().BeNull();
+        BlazoriseIconMapper.ToBlazoriseStyle(null).Should().BeNull();
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void ToBlazoriseSize_MapsSharedSteps() {
-        Assert.AreEqual(global::Blazorise.IconSize.ExtraSmall, BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.ExtraSmall));
-        Assert.AreEqual(global::Blazorise.IconSize.Small, BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.Small));
-        Assert.AreEqual(global::Blazorise.IconSize.Large, BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.Large));
-        Assert.AreEqual(global::Blazorise.IconSize.x2, BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.X02));
-        Assert.AreEqual(global::Blazorise.IconSize.x10, BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.X10));
+        BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.ExtraSmall).Should().Be(global::Blazorise.IconSize.ExtraSmall);
+        BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.Small).Should().Be(global::Blazorise.IconSize.Small);
+        BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.Large).Should().Be(global::Blazorise.IconSize.Large);
+        BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.X02).Should().Be(global::Blazorise.IconSize.x2);
+        BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.X10).Should().Be(global::Blazorise.IconSize.x10);
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void ToBlazoriseSize_ReturnsNullOutsideOverlap() {
-        Assert.IsNull(BlazoriseIconMapper.ToBlazoriseSize(null));
-        Assert.IsNull(BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.NotSet));
-        Assert.IsNull(BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.X01));
-        Assert.IsNull(BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.ExtraLarge));
+        BlazoriseIconMapper.ToBlazoriseSize(null).Should().BeNull();
+        BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.NotSet).Should().BeNull();
+        BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.X01).Should().BeNull();
+        BlazoriseIconMapper.ToBlazoriseSize(Jenin.FontAwesome.Blazor.IconSize.ExtraLarge).Should().BeNull();
     }
 
     [TestMethod]
@@ -78,8 +78,8 @@ public class BlazoriseIconMapperTests {
                 services.AddFontAwesomeIcons();
             });
 
-        Assert.Contains("fas", markup);
-        Assert.Contains("fa-phone", markup);
-        Assert.Contains("fa-lg", markup);
+        markup.Should().Contain("fas");
+        markup.Should().Contain("fa-phone");
+        markup.Should().Contain("fa-lg");
     }
 }

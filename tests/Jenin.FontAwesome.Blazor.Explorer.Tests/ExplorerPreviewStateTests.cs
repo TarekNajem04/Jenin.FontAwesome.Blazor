@@ -22,13 +22,13 @@ public sealed class ExplorerPreviewStateTests {
 
         state.ResetAnimationOptions();
 
-        Assert.AreEqual(PreviewAnimation.Beat, state.Animation, "The selected animation must be kept.");
-        Assert.IsFalse(state.UseAnimationDuration);
-        Assert.AreEqual(ExplorerPreviewState.DEFAULT_ANIMATION_DURATION, state.AnimationDuration);
-        Assert.IsFalse(state.UseAnimationIterationCount);
-        Assert.AreEqual(ExplorerPreviewState.DEFAULT_ANIMATION_ITERATION_COUNT, state.AnimationIterationCount);
-        Assert.AreEqual(AnimationDirection.None, state.AnimationDirection);
-        Assert.IsNull(state.AnimationTimingFunction);
+        state.Animation.Should().Be(PreviewAnimation.Beat, "The selected animation must be kept.");
+        state.UseAnimationDuration.Should().BeFalse();
+        state.AnimationDuration.Should().Be(ExplorerPreviewState.DEFAULT_ANIMATION_DURATION);
+        state.UseAnimationIterationCount.Should().BeFalse();
+        state.AnimationIterationCount.Should().Be(ExplorerPreviewState.DEFAULT_ANIMATION_ITERATION_COUNT);
+        state.AnimationDirection.Should().Be(AnimationDirection.None);
+        state.AnimationTimingFunction.Should().BeNull();
     }
 
     [TestMethod]
@@ -71,34 +71,34 @@ public sealed class ExplorerPreviewStateTests {
 
         state.Reset();
 
-        Assert.AreEqual(IconStyle.Brands, state.Style, "Style is intentionally kept.");
-        Assert.AreEqual(Typeface.Sharp, state.Typeface, "Typeface is intentionally kept.");
-        Assert.AreEqual(IconSize.NotSet, state.Size);
-        Assert.AreEqual(IconWidth.NotSet, state.WidthMode);
-        Assert.IsFalse(state.FixedWidth);
-        Assert.IsFalse(state.UseColor);
-        Assert.AreEqual(ExplorerPreviewState.DEFAULT_COLOR, state.Color);
-        Assert.IsFalse(state.UseBackgroundColor);
-        Assert.AreEqual(ExplorerPreviewState.DEFAULT_BACKGROUND_COLOR, state.BackgroundColor);
-        Assert.AreEqual(IconRotate.NotSet, state.Rotate);
-        Assert.AreEqual(PullPosition.None, state.PullPosition);
-        Assert.IsFalse(state.Bordered);
-        Assert.IsFalse(state.Inverse);
-        Assert.IsFalse(state.SwapOpacity);
-        Assert.IsFalse(state.UseDuotone);
-        Assert.IsFalse(state.UseDuotoneOpacity);
-        Assert.AreEqual(ExplorerPreviewState.DEFAULT_DUOTONE_PRIMARY_OPACITY, state.DuotonePrimaryOpacity);
-        Assert.AreEqual(ExplorerPreviewState.DEFAULT_DUOTONE_SECONDARY_OPACITY, state.DuotoneSecondaryOpacity);
-        Assert.AreEqual(PreviewAnimation.None, state.Animation);
-        Assert.IsFalse(state.UseAnimationDuration);
-        Assert.IsFalse(state.UseTransform);
-        Assert.AreEqual(ExplorerPreviewState.DEFAULT_TRANSFORM_SCALE, state.TransformScale);
-        Assert.IsTrue(state.TransformGrow);
-        Assert.AreEqual(ExplorerPreviewState.DEFAULT_TRANSFORM_ROTATE, state.TransformRotate);
-        Assert.AreEqual(0f, state.TransformX);
-        Assert.AreEqual(0f, state.TransformY);
-        Assert.IsFalse(state.TransformFlipHorizontal);
-        Assert.IsFalse(state.TransformFlipVertical);
-        Assert.IsFalse(state.UseMask);
+        state.Style.Should().Be(IconStyle.Brands, "Style is intentionally kept.");
+        state.Typeface.Should().Be(Typeface.Sharp, "Typeface is intentionally kept.");
+        state.Size.Should().Be(IconSize.NotSet);
+        state.WidthMode.Should().Be(IconWidth.NotSet);
+        state.FixedWidth.Should().BeFalse();
+        state.UseColor.Should().BeFalse();
+        state.Color.Should().Be(ExplorerPreviewState.DEFAULT_COLOR);
+        state.UseBackgroundColor.Should().BeFalse();
+        state.BackgroundColor.Should().Be(ExplorerPreviewState.DEFAULT_BACKGROUND_COLOR);
+        state.Rotate.Should().Be(IconRotate.NotSet);
+        state.PullPosition.Should().Be(PullPosition.None);
+        state.Bordered.Should().BeFalse();
+        state.Inverse.Should().BeFalse();
+        state.SwapOpacity.Should().BeFalse();
+        state.UseDuotone.Should().BeFalse();
+        state.UseDuotoneOpacity.Should().BeFalse();
+        state.DuotonePrimaryOpacity.Should().Be(ExplorerPreviewState.DEFAULT_DUOTONE_PRIMARY_OPACITY);
+        state.DuotoneSecondaryOpacity.Should().Be(ExplorerPreviewState.DEFAULT_DUOTONE_SECONDARY_OPACITY);
+        state.Animation.Should().Be(PreviewAnimation.None);
+        state.UseAnimationDuration.Should().BeFalse();
+        state.UseTransform.Should().BeFalse();
+        state.TransformScale.Should().Be(ExplorerPreviewState.DEFAULT_TRANSFORM_SCALE);
+        state.TransformGrow.Should().BeTrue();
+        state.TransformRotate.Should().Be(ExplorerPreviewState.DEFAULT_TRANSFORM_ROTATE);
+        state.TransformX.Should().Be(0f);
+        state.TransformY.Should().Be(0f);
+        state.TransformFlipHorizontal.Should().BeFalse();
+        state.TransformFlipVertical.Should().BeFalse();
+        state.UseMask.Should().BeFalse();
     }
 }

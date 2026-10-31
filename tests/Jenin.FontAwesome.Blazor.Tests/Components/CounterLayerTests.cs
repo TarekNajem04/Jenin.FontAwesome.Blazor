@@ -13,7 +13,7 @@ public class CounterLayerTests {
     public async Task RendersLayeredCounterSpanAsync() {
         var markup = await TestHost.RenderMarkupAsync<CounterLayer>(TestHost.Parameters(("Text", "42")));
 
-        Assert.AreEqual("<span class=\"fa-layers-counter\">42</span>", markup);
+        markup.Should().Be("<span class=\"fa-layers-counter\">42</span>");
     }
 
     [TestMethod]
@@ -21,7 +21,7 @@ public class CounterLayerTests {
     public async Task Text_IsTrimmedAsync() {
         var markup = await TestHost.RenderMarkupAsync<CounterLayer>(TestHost.Parameters(("Text", "  7  ")));
 
-        Assert.AreEqual("<span class=\"fa-layers-counter\">7</span>", markup);
+        markup.Should().Be("<span class=\"fa-layers-counter\">7</span>");
     }
 
     [TestMethod]
@@ -38,9 +38,9 @@ public class CounterLayerTests {
             ("Bottom", "0"),
             ("Left", "0")));
 
-        Assert.AreEqual(
-            "<span class=\"fa-layers-counter\" style=\"--fa-counter-line-height:1;--fa-counter-max-width:4em;--fa-counter-min-width:1em;--fa-counter-scale:2;--fa-top:0;--fa-right:0;--fa-bottom:0;--fa-left:0;\">1</span>",
-            markup);
+        markup.Should().Be(
+            "<span class=\"fa-layers-counter\" style=\"--fa-counter-line-height:1;--fa-counter-max-width:4em;--fa-counter-min-width:1em;--fa-counter-scale:2;--fa-top:0;--fa-right:0;--fa-bottom:0;--fa-left:0;\">1</span>"
+        );
     }
 
     [TestMethod]
@@ -52,9 +52,9 @@ public class CounterLayerTests {
             ("CounterBorderRadius", "0.25em"),
             ("CounterPadding", "0.2em")));
 
-        Assert.AreEqual(
-            "<span class=\"fa-layers-counter\" style=\"--fa-counter-background-color:Tomato;--fa-counter-border-radius:0.25em;--fa-counter-padding:0.2em;\">1</span>",
-            markup);
+        markup.Should().Be(
+            "<span class=\"fa-layers-counter\" style=\"--fa-counter-background-color:Tomato;--fa-counter-border-radius:0.25em;--fa-counter-padding:0.2em;\">1</span>"
+        );
     }
 
     [TestMethod]
@@ -62,6 +62,6 @@ public class CounterLayerTests {
     public async Task WithoutText_RendersEmptyCounterAsync() {
         var markup = await TestHost.RenderMarkupAsync<CounterLayer>();
 
-        Assert.AreEqual("<span class=\"fa-layers-counter\"></span>", markup);
+        markup.Should().Be("<span class=\"fa-layers-counter\"></span>");
     }
 }

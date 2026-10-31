@@ -120,7 +120,7 @@ public class PublicApiSurfaceTests {
             .OrderBy(static x => x, StringComparer.Ordinal)
             .ToArray();
 
-        Assert.AreSequenceEqual([.. _expectedExportedTypes.OrderBy(static x => x, StringComparer.Ordinal)], actual);
+        actual.Should().Equal([.. _expectedExportedTypes.OrderBy(static x => x, StringComparer.Ordinal)]);
     }
 
     [TestMethod]
@@ -133,7 +133,7 @@ public class PublicApiSurfaceTests {
             .Select(static t => t.FullName!)
             .ToArray();
 
-        Assert.IsEmpty(obsolete, "Obsolete members found: " + string.Join(", ", obsolete));
+        obsolete.Should().BeEmpty("Obsolete members found: " + string.Join(", ", obsolete));
     }
 
     [TestMethod]
@@ -141,8 +141,8 @@ public class PublicApiSurfaceTests {
     public void IconAnimationParameter_IsTypedAsAnimation() {
         var property = typeof(Icon).GetProperty(nameof(Icon.Animation));
 
-        Assert.IsNotNull(property);
-        Assert.AreEqual(typeof(Animation), property.PropertyType);
+        property.Should().NotBeNull();
+        property!.PropertyType.Should().Be(typeof(Animation));
     }
 
     [TestMethod]
@@ -150,8 +150,8 @@ public class PublicApiSurfaceTests {
     public void BoundaryVersion_IsNotPublic() {
         var property = typeof(ElementBase).GetProperty("BoundaryVersion", BindingFlags.Instance | BindingFlags.NonPublic);
 
-        Assert.IsNotNull(property);
-        Assert.IsFalse(property.GetMethod!.IsPublic);
+        property.Should().NotBeNull();
+        property!.GetMethod!.IsPublic.Should().BeFalse();
     }
 
     [TestMethod]
@@ -164,8 +164,8 @@ public class PublicApiSurfaceTests {
     public void ImplementationHelpers_AreInternal(string typeName) {
         var type = Library.GetType(typeName);
 
-        Assert.IsNotNull(type, $"Type '{typeName}' was not found.");
-        Assert.IsFalse(type.IsVisible, $"Type '{typeName}' must not be exported.");
+        type.Should().NotBeNull($"Type '{typeName}' was not found.");
+        type!.IsVisible.Should().BeFalse($"Type '{typeName}' must not be exported.");
     }
 
     [TestMethod]
@@ -174,7 +174,7 @@ public class PublicApiSurfaceTests {
         var hasJsInterop = Library.GetReferencedAssemblies()
             .Any(static a => string.Equals(a.Name, "Microsoft.JSInterop", StringComparison.Ordinal));
 
-        Assert.IsFalse(hasJsInterop, "The zero-interop contract requires no Microsoft.JSInterop reference.");
+        hasJsInterop.Should().BeFalse("The zero-interop contract requires no Microsoft.JSInterop reference.");
     }
 
     [TestMethod]
@@ -184,8 +184,8 @@ public class PublicApiSurfaceTests {
 
         var appended = transform.Shrink(2);
 
-        Assert.AreNotSame(transform, appended);
-        Assert.AreEqual("grow-2.00", transform.GetTransformation());
-        Assert.AreEqual("grow-2.00 shrink-2.00", appended.GetTransformation());
+        ReferenceEquals(transform, appended).Should().BeFalse();
+        transform.GetTransformation().Should().Be("grow-2.00");
+        appended.GetTransformation().Should().Be("grow-2.00 shrink-2.00");
     }
 }

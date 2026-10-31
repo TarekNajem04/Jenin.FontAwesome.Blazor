@@ -13,7 +13,7 @@ public class IconStackContainerTests {
     public async Task EmptyContainer_RendersSpanWithFa_stackClassAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconStackContainer>();
 
-        Assert.AreEqual("<span class=\"fa-stack\"></span>", markup);
+        markup.Should().Be("<span class=\"fa-stack\"></span>");
     }
 
     [TestMethod]
@@ -21,7 +21,7 @@ public class IconStackContainerTests {
     public async Task VerticalAlign_EmitsStyleAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconStackContainer>(TestHost.Parameters(("VerticalAlign", "middle")));
 
-        Assert.AreEqual("<span class=\"fa-stack\" style=\"vertical-align:middle;\"></span>", markup);
+        markup.Should().Be("<span class=\"fa-stack\" style=\"vertical-align:middle;\"></span>");
     }
 
     [TestMethod]
@@ -36,8 +36,8 @@ public class IconStackContainerTests {
 
         var markup = await TestHost.RenderMarkupAsync<IconStackContainer>(TestHost.Parameters(("Icons", icons)));
 
-        Assert.AreEqual(
-            "<span class=\"fa-stack\"><span><i class=\"fa-solid fa-circle fa-stack-2x\" aria-hidden=\"true\" role=\"presentation\"></i></span></span>",
-            markup);
+        markup.Should().Be(
+            "<span class=\"fa-stack\"><span><i class=\"fa-solid fa-circle fa-stack-2x\" aria-hidden=\"true\" role=\"presentation\"></i></span></span>"
+        );
     }
 }

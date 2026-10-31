@@ -13,9 +13,9 @@ public class AccessibilityTests {
     public async Task Icon_WithoutAccessibleName_IsDecorativeAsync() {
         var markup = await TestHost.RenderMarkupAsync<Icon>(TestHost.Parameters(("IconName", "fa-house")));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-house\" aria-hidden=\"true\" role=\"presentation\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-house\" aria-hidden=\"true\" role=\"presentation\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -25,9 +25,9 @@ public class AccessibilityTests {
             ("IconName", "fa-house"),
             ("Title", "Home")));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-house\" title=\"Home\" role=\"img\" aria-hidden=\"false\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-house\" title=\"Home\" role=\"img\" aria-hidden=\"false\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -37,9 +37,9 @@ public class AccessibilityTests {
             ("IconName", "fa-house"),
             ("AriaLabel", "Home")));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-house\" aria-label=\"Home\" role=\"img\" aria-hidden=\"false\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-house\" aria-label=\"Home\" role=\"img\" aria-hidden=\"false\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -50,10 +50,10 @@ public class AccessibilityTests {
             ("Title", "Home"),
             ("AriaLabel", "Home page")));
 
-        Assert.Contains("title=\"Home\"", markup);
-        Assert.Contains("aria-label=\"Home page\"", markup);
-        Assert.Contains("aria-hidden=\"false\"", markup);
-        Assert.Contains("role=\"img\"", markup);
+        markup.Should().Contain("title=\"Home\"");
+        markup.Should().Contain("aria-label=\"Home page\"");
+        markup.Should().Contain("aria-hidden=\"false\"");
+        markup.Should().Contain("role=\"img\"");
     }
 
     [TestMethod]
@@ -63,9 +63,9 @@ public class AccessibilityTests {
             ("IconName", "fa-house"),
             ("Decorative", false)));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-house\" role=\"img\" aria-hidden=\"false\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-house\" role=\"img\" aria-hidden=\"false\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -76,9 +76,9 @@ public class AccessibilityTests {
             ("Title", "Home"),
             ("Decorative", true)));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-house\" title=\"Home\" aria-hidden=\"true\" role=\"presentation\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-house\" title=\"Home\" aria-hidden=\"true\" role=\"presentation\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -89,8 +89,8 @@ public class AccessibilityTests {
             ("Title", "  Home  "),
             ("AriaLabel", "  Home page  ")));
 
-        Assert.Contains("title=\"Home\"", markup);
-        Assert.Contains("aria-label=\"Home page\"", markup);
+        markup.Should().Contain("title=\"Home\"");
+        markup.Should().Contain("aria-label=\"Home page\"");
     }
 
     [TestMethod]
@@ -98,7 +98,7 @@ public class AccessibilityTests {
     public async Task Container_WithoutAccessibleName_HasNoAccessibilityAttributesAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconContainer>();
 
-        Assert.AreEqual("<div></div>", markup);
+        markup.Should().Be("<div></div>");
     }
 
     [TestMethod]
@@ -106,7 +106,7 @@ public class AccessibilityTests {
     public async Task Container_WithAriaLabel_EmitsAccessibleNameAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconContainer>(TestHost.Parameters(("AriaLabel", "Icons")));
 
-        Assert.AreEqual("<div aria-label=\"Icons\"></div>", markup);
+        markup.Should().Be("<div aria-label=\"Icons\"></div>");
     }
 
     [TestMethod]
@@ -114,6 +114,6 @@ public class AccessibilityTests {
     public async Task Container_ExplicitDecorative_EmitsAriaHiddenAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconContainer>(TestHost.Parameters(("Decorative", true)));
 
-        Assert.AreEqual("<div aria-hidden=\"true\"></div>", markup);
+        markup.Should().Be("<div aria-hidden=\"true\"></div>");
     }
 }

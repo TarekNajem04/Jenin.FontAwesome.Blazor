@@ -10,23 +10,23 @@ namespace Jenin.FontAwesome.Blazor.Tests.Transformations;
 public class TransformTests {
     [TestMethod]
     [TestCategory("Model")]
-    public void GetTransformation_Default_IsEmpty() => Assert.AreEqual("", new Transform().GetTransformation());
+    public void GetTransformation_Default_IsEmpty() => new Transform().GetTransformation().Should().Be("");
 
     [TestMethod]
     [TestCategory("Model")]
     public void GetTransformation_PreservesInsertionOrder() {
         var value = new Transform().Shrink(8).Up(6).Rotate(-30).FlipV().GetTransformation();
 
-        Assert.AreEqual("shrink-8.00 up-6.00 rotate--30.00 flip-v", value);
+        value.Should().Be("shrink-8.00 up-6.00 rotate--30.00 flip-v");
     }
 
     [TestMethod]
     [TestCategory("Model")]
-    public void Grow_EmitsGrowToken() => Assert.AreEqual("grow-2.00", new Transform().Grow(2).GetTransformation());
+    public void Grow_EmitsGrowToken() => new Transform().Grow(2).GetTransformation().Should().Be("grow-2.00");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void Shrink_EmitsShrinkToken() => Assert.AreEqual("shrink-4.00", new Transform().Shrink(4).GetTransformation());
+    public void Shrink_EmitsShrinkToken() => new Transform().Shrink(4).GetTransformation().Should().Be("shrink-4.00");
 
     [TestMethod]
     [TestCategory("Model")]
@@ -42,34 +42,34 @@ public class TransformTests {
             _ => new Transform().Right(3)
         };
 
-        Assert.AreEqual(expected, value.GetTransformation());
+        value.GetTransformation().Should().Be(expected);
     }
 
     [TestMethod]
     [TestCategory("Model")]
     public void Rotate_AllowsNegativeAndUnboundedValues() {
-        Assert.AreEqual("rotate--90.00", new Transform().Rotate(-90).GetTransformation());
-        Assert.AreEqual("rotate-720.00", new Transform().Rotate(720).GetTransformation());
+        new Transform().Rotate(-90).GetTransformation().Should().Be("rotate--90.00");
+        new Transform().Rotate(720).GetTransformation().Should().Be("rotate-720.00");
     }
 
     [TestMethod]
     [TestCategory("Model")]
-    public void FlipV_EmitsFlipVerticalToken() => Assert.AreEqual("flip-v", new Transform().FlipV().GetTransformation());
+    public void FlipV_EmitsFlipVerticalToken() => new Transform().FlipV().GetTransformation().Should().Be("flip-v");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void FlipH_EmitsFlipHorizontalToken() => Assert.AreEqual("flip-h", new Transform().FlipH().GetTransformation());
+    public void FlipH_EmitsFlipHorizontalToken() => new Transform().FlipH().GetTransformation().Should().Be("flip-h");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void FlipBoth_EmitsVerticalThenHorizontal() => Assert.AreEqual("flip-v flip-h", new Transform().FlipBoth().GetTransformation());
+    public void FlipBoth_EmitsVerticalThenHorizontal() => new Transform().FlipBoth().GetTransformation().Should().Be("flip-v flip-h");
 
     [TestMethod]
     [TestCategory("Model")]
     public void Add_NullArguments_AreIgnored() {
         var value = new Transform().Grow(2).Add(null!).GetTransformation();
 
-        Assert.AreEqual("grow-2.00", value);
+        value.Should().Be("grow-2.00");
     }
 
     [TestMethod]
@@ -79,8 +79,8 @@ public class TransformTests {
 
         var grown = original.Grow(2);
 
-        Assert.AreEqual("", original.GetTransformation());
-        Assert.AreEqual("grow-2.00", grown.GetTransformation());
-        Assert.AreNotSame(original, grown);
+        original.GetTransformation().Should().Be("");
+        grown.GetTransformation().Should().Be("grow-2.00");
+        ReferenceEquals(original, grown).Should().BeFalse();
     }
 }

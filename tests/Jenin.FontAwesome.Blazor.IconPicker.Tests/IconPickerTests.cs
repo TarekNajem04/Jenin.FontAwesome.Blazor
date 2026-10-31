@@ -14,33 +14,33 @@ public sealed class IconPickerTests {
     public async Task RendersSearchControlsAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>();
 
-        Assert.Contains("fa-icon-picker__search", markup);
-        Assert.Contains("fa-icon-picker__filter", markup);
-        Assert.Contains("Search icons...", markup);
+        markup.Should().Contain("fa-icon-picker__search");
+        markup.Should().Contain("fa-icon-picker__filter");
+        markup.Should().Contain("Search icons...");
     }
 
     [TestMethod]
     public async Task RendersResultsForInitialSearchTextAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(TestHost.Parameters(("SearchText", "house")));
 
-        Assert.Contains("fa-house", markup);
-        Assert.Contains(ITEM_TOKEN, markup);
-        Assert.Contains("House", markup);
+        markup.Should().Contain("fa-house");
+        markup.Should().Contain(ITEM_TOKEN);
+        markup.Should().Contain("House");
     }
 
     [TestMethod]
     public async Task FiltersOutNonMatchingIconsAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(TestHost.Parameters(("SearchText", "house")));
 
-        Assert.IsFalse(markup.Contains("fa-github", StringComparison.Ordinal));
+        markup.Contains("fa-github", StringComparison.Ordinal).Should().BeFalse();
     }
 
     [TestMethod]
     public async Task NoResultsRendersEmptyMessageAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(TestHost.Parameters(("SearchText", "zzzznotarealicon")));
 
-        Assert.Contains("No icons found.", markup);
-        Assert.AreEqual(0, CountOccurrences(markup, ITEM_TOKEN));
+        markup.Should().Contain("No icons found.");
+        CountOccurrences(markup, ITEM_TOKEN).Should().Be(0);
     }
 
     [TestMethod]
@@ -48,7 +48,7 @@ public sealed class IconPickerTests {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(
             TestHost.Parameters(("SearchText", "zzzznotarealicon"), ("NoResultsText", "Nothing here")));
 
-        Assert.Contains("Nothing here", markup);
+        markup.Should().Contain("Nothing here");
     }
 
     [TestMethod]
@@ -56,8 +56,8 @@ public sealed class IconPickerTests {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(
             TestHost.Parameters(("SearchText", "house"), ("ShowLabels", false)));
 
-        Assert.Contains("fa-house", markup);
-        Assert.IsFalse(markup.Contains("fa-icon-picker__label", StringComparison.Ordinal));
+        markup.Should().Contain("fa-house");
+        markup.Contains("fa-icon-picker__label", StringComparison.Ordinal).Should().BeFalse();
     }
 
     [TestMethod]
@@ -65,19 +65,19 @@ public sealed class IconPickerTests {
         var brands = await TestHost.RenderMarkupAsync<IconPicker>(
             TestHost.Parameters(("SearchText", "github"), ("Style", IconStyle.Brands)));
 
-        Assert.Contains("fa-github", brands);
+        brands.Should().Contain("fa-github");
 
         var regular = await TestHost.RenderMarkupAsync<IconPicker>(
             TestHost.Parameters(("SearchText", "github"), ("Style", IconStyle.Regular)));
 
-        Assert.Contains("No icons found.", regular);
+        regular.Should().Contain("No icons found.");
     }
 
     [TestMethod]
     public async Task CssClassIsAppliedAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(TestHost.Parameters(("CssClass", "my-picker")));
 
-        Assert.Contains("my-picker", markup);
+        markup.Should().Contain("my-picker");
     }
 
     [TestMethod]
@@ -85,18 +85,18 @@ public sealed class IconPickerTests {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(
             TestHost.Parameters(("SearchText", string.Empty), ("MaxResults", 5)));
 
-        Assert.AreEqual(5, CountOccurrences(markup, ITEM_TOKEN));
+        CountOccurrences(markup, ITEM_TOKEN).Should().Be(5);
     }
 
     [TestMethod]
     public async Task RendersIconWithPrimaryStyleAsync() {
         var house = await TestHost.RenderMarkupAsync<IconPicker>(TestHost.Parameters(("SearchText", "house")));
-        Assert.Contains("fa-solid", house);
-        Assert.Contains("fa-house", house);
+        house.Should().Contain("fa-solid");
+        house.Should().Contain("fa-house");
 
         var github = await TestHost.RenderMarkupAsync<IconPicker>(TestHost.Parameters(("SearchText", "github")));
-        Assert.Contains("fa-brands", github);
-        Assert.Contains("fa-github", github);
+        github.Should().Contain("fa-brands");
+        github.Should().Contain("fa-github");
     }
 
     [TestMethod]
@@ -104,7 +104,7 @@ public sealed class IconPickerTests {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(
             TestHost.Parameters(("SearchText", "house"), ("Value", "fa-house")));
 
-        Assert.Contains("is-selected", markup);
+        markup.Should().Contain("is-selected");
     }
 
     [TestMethod]
@@ -113,14 +113,14 @@ public sealed class IconPickerTests {
             TestHost.Parameters(("SearchText", "house")),
             static services => services.AddJeninFontAwesomeIconPicker());
 
-        Assert.Contains("fa-house", markup);
+        markup.Should().Contain("fa-house");
     }
 
     [TestMethod]
     public async Task PlaceholderIsConfigurableAsync() {
         var markup = await TestHost.RenderMarkupAsync<IconPicker>(TestHost.Parameters(("Placeholder", "Find an icon")));
 
-        Assert.Contains("Find an icon", markup);
+        markup.Should().Contain("Find an icon");
     }
 
     private static int CountOccurrences(string value, string token) {

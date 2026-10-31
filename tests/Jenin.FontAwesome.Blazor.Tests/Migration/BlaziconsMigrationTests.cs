@@ -20,9 +20,9 @@ public class BlaziconsMigrationTests {
         // Before: <Blazicon Svg="FontAwesomeSolidIcon.Baseball" />
         var markup = await TestHost.RenderMarkupAsync<BaseballSolidIcon>();
 
-        Assert.Contains("<svg", markup);
-        Assert.Contains("viewBox=\"0 0 512 512\"", markup);
-        Assert.Contains("<path", markup);
+        markup.Should().Contain("<svg");
+        markup.Should().Contain("viewBox=\"0 0 512 512\"");
+        markup.Should().Contain("<path");
     }
 
     [TestMethod]
@@ -31,8 +31,8 @@ public class BlaziconsMigrationTests {
         // Before: <Blazicon Svg="FontAwesomeRegularIcon.Calendar" />
         var markup = await TestHost.RenderMarkupAsync<CalendarRegularIcon>();
 
-        Assert.Contains("<svg", markup);
-        Assert.Contains("<path", markup);
+        markup.Should().Contain("<svg");
+        markup.Should().Contain("<path");
     }
 
     [TestMethod]
@@ -42,7 +42,7 @@ public class BlaziconsMigrationTests {
         var markup = await TestHost.RenderMarkupAsync<HouseSolidIcon>(TestHost.Parameters(
             ("style", "color: #f00; font-size: 200%;")));
 
-        Assert.Contains("color: #f00; font-size: 200%;", markup);
+        markup.Should().Contain("color: #f00; font-size: 200%;");
     }
 
     [TestMethod]
@@ -54,9 +54,9 @@ public class BlaziconsMigrationTests {
             ("width", "64"),
             ("height", "64")));
 
-        Assert.Contains("height=\"1em\"", markup);
-        Assert.DoesNotContain("width=", markup);
-        Assert.Contains("width=\"64\"", sized);
-        Assert.Contains("height=\"64\"", sized);
+        markup.Should().Contain("height=\"1em\"");
+        markup.Should().NotContain("width=");
+        sized.Should().Contain("width=\"64\"");
+        sized.Should().Contain("height=\"64\"");
     }
 }

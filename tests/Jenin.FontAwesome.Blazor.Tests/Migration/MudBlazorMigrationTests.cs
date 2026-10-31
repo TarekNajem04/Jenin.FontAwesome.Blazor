@@ -22,7 +22,7 @@ public class MudBlazorMigrationTests {
             ("IconName", "fa-dragon"),
             ("IconStyle", IconStyle.Solid)));
 
-        Assert.Contains("class=\"fa-solid fa-dragon\"", markup);
+        markup.Should().Contain("class=\"fa-solid fa-dragon\"");
     }
 
     [TestMethod]
@@ -33,7 +33,7 @@ public class MudBlazorMigrationTests {
             ("IconName", "fa-github"),
             ("IconStyle", IconStyle.Brands)));
 
-        Assert.Contains("class=\"fa-brands fa-github\"", markup);
+        markup.Should().Contain("class=\"fa-brands fa-github\"");
     }
 
     [TestMethod]
@@ -44,7 +44,7 @@ public class MudBlazorMigrationTests {
             ("IconName", "fa-dragon"),
             ("IconSize", IconSize.Large)));
 
-        Assert.Contains("fa-lg", markup);
+        markup.Should().Contain("fa-lg");
     }
 
     [TestMethod]
@@ -55,7 +55,7 @@ public class MudBlazorMigrationTests {
             ("IconName", "fa-dragon"),
             ("Color", "var(--mud-palette-success)")));
 
-        Assert.Contains("color:var(--mud-palette-success)", markup.Replace(" ", string.Empty, StringComparison.Ordinal));
+        markup.Replace(" ", string.Empty, StringComparison.Ordinal).Should().Contain("color:var(--mud-palette-success)");
     }
 
     [TestMethod]
@@ -66,8 +66,8 @@ public class MudBlazorMigrationTests {
             ("IconName", "fa-dragon"),
             ("Title", "Dragon")));
 
-        Assert.Contains("title=\"Dragon\"", markup);
-        Assert.Contains("role=\"img\"", markup);
+        markup.Should().Contain("title=\"Dragon\"");
+        markup.Should().Contain("role=\"img\"");
     }
 
     [TestMethod]
@@ -80,8 +80,8 @@ public class MudBlazorMigrationTests {
             ("Color", "red"),
             ("AriaLabel", "Report a bug")));
 
-        Assert.Contains("class=\"fa-solid fa-bug\"", markup);
-        Assert.Contains("aria-label=\"Report a bug\"", markup);
+        markup.Should().Contain("class=\"fa-solid fa-bug\"");
+        markup.Should().Contain("aria-label=\"Report a bug\"");
     }
 
     [TestMethod]
@@ -90,6 +90,6 @@ public class MudBlazorMigrationTests {
         // The preset recommended by the guide keeps the brands style without parameters.
         var markup = await TestHost.RenderMarkupAsync<GithubIcon>();
 
-        Assert.Contains("class=\"fa-brands fa-github\"", markup);
+        markup.Should().Contain("class=\"fa-brands fa-github\"");
     }
 }

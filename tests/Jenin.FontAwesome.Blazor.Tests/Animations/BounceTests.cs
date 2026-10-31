@@ -10,11 +10,11 @@ namespace Jenin.FontAwesome.Blazor.Tests.Animations;
 public class BounceTests {
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildClasses_ReturnsFaBounce() => Assert.AreEqual("fa-bounce", new Bounce().BuildClasses());
+    public void BuildClasses_ReturnsFaBounce() => new Bounce().BuildClasses().Should().Be("fa-bounce");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void BuildStyles_WithoutValues_IsEmpty() => Assert.IsEmpty(new Bounce().BuildStyles());
+    public void BuildStyles_WithoutValues_IsEmpty() => new Bounce().BuildStyles().Should().BeEmpty();
 
     [TestMethod]
     [TestCategory("Model")]
@@ -30,14 +30,14 @@ public class BounceTests {
             LandScaleY = 8
         }).BuildStyles();
 
-        Assert.AreEqual("1.00", styles["--fa-bounce-rebound"]);
-        Assert.AreEqual("2.00", styles["--fa-bounce-height"]);
-        Assert.AreEqual("3.00", styles["--fa-bounce-start-scale-x"]);
-        Assert.AreEqual("4.00", styles["--fa-bounce-start-scale-y"]);
-        Assert.AreEqual("5.00", styles["--fa-bounce-jump-scale-x"]);
-        Assert.AreEqual("6.00", styles["--fa-bounce-jump-scale-y"]);
-        Assert.AreEqual("7.00", styles["--fa-bounce-land-scale-x"]);
-        Assert.AreEqual("8.00", styles["--fa-bounce-land-scale-y"]);
+        styles["--fa-bounce-rebound"].Should().Be("1.00");
+        styles["--fa-bounce-height"].Should().Be("2.00");
+        styles["--fa-bounce-start-scale-x"].Should().Be("3.00");
+        styles["--fa-bounce-start-scale-y"].Should().Be("4.00");
+        styles["--fa-bounce-jump-scale-x"].Should().Be("5.00");
+        styles["--fa-bounce-jump-scale-y"].Should().Be("6.00");
+        styles["--fa-bounce-land-scale-x"].Should().Be("7.00");
+        styles["--fa-bounce-land-scale-y"].Should().Be("8.00");
     }
 
     [TestMethod]
@@ -45,7 +45,7 @@ public class BounceTests {
     public void BuildStyles_WithAnticipation_EmitsDocumentedCustomProperty() {
         var styles = new Bounce(new BounceOptions { Anticipation = "3px" }).BuildStyles();
 
-        Assert.AreEqual("3px", styles["--fa-bounce-anticipation"]);
-        Assert.HasCount(1, styles);
+        styles["--fa-bounce-anticipation"].Should().Be("3px");
+        styles.Should().HaveCount(1);
     }
 }

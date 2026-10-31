@@ -18,11 +18,11 @@ public sealed class GeneratedIconPresetTests {
     public void AllPresetComponents_ArePublicIconSubclassesWithParameterlessConstructor() {
         var presetTypes = PresetTypes();
 
-        Assert.HasCount(EXPECTED_COMPONENT_COUNT, presetTypes);
+        presetTypes.Should().HaveCount(EXPECTED_COMPONENT_COUNT);
 
         foreach(var type in presetTypes) {
-            Assert.IsTrue(type.IsPublic, $"{type.FullName} should be public.");
-            Assert.IsNotNull(type.GetConstructor(Type.EmptyTypes), $"{type.FullName} should expose a public parameterless constructor.");
+            type.IsPublic.Should().BeTrue($"{type.FullName} should be public.");
+            type.GetConstructor(Type.EmptyTypes).Should().NotBeNull($"{type.FullName} should expose a public parameterless constructor.");
         }
     }
 
@@ -33,13 +33,13 @@ public sealed class GeneratedIconPresetTests {
         foreach(var type in PresetTypes()) {
             var icon = (Icon)Activator.CreateInstance(type)!;
 
-            Assert.IsNotNull(icon.IconName, $"{type.FullName} should bake an IconName.");
-            Assert.IsTrue(icon.IconName!.StartsWith("fa-", StringComparison.Ordinal), $"{type.FullName} IconName '{icon.IconName}' should start with 'fa-'.");
-            Assert.IsTrue(names.Add(icon.IconName!), $"Duplicate IconName '{icon.IconName}'.");
-            Assert.IsTrue(icon.IconStyle is IconStyle.Solid or IconStyle.Brands, $"{type.FullName} primary style '{icon.IconStyle}' should be a Free style.");
+            icon.IconName.Should().NotBeNull($"{type.FullName} should bake an IconName.");
+            icon.IconName!.StartsWith("fa-", StringComparison.Ordinal).Should().BeTrue($"{type.FullName} IconName '{icon.IconName}' should start with 'fa-'.");
+            names.Add(icon.IconName!).Should().BeTrue($"Duplicate IconName '{icon.IconName}'.");
+            (icon.IconStyle is IconStyle.Solid or IconStyle.Brands).Should().BeTrue($"{type.FullName} primary style '{icon.IconStyle}' should be a Free style.");
         }
 
-        Assert.HasCount(EXPECTED_COMPONENT_COUNT, names);
+        names.Should().HaveCount(EXPECTED_COMPONENT_COUNT);
     }
 
     [TestMethod]
@@ -57,10 +57,10 @@ public sealed class GeneratedIconPresetTests {
         var house = await TestHost.RenderMarkupAsync<HouseIcon>();
         var github = await TestHost.RenderMarkupAsync<GithubIcon>();
 
-        Assert.Contains("fa-solid", house);
-        Assert.Contains("fa-house", house);
-        Assert.Contains("fa-brands", github);
-        Assert.Contains("fa-github", github);
+        house.Should().Contain("fa-solid");
+        house.Should().Contain("fa-house");
+        github.Should().Contain("fa-brands");
+        github.Should().Contain("fa-github");
     }
 
     [TestMethod]
@@ -70,8 +70,8 @@ public sealed class GeneratedIconPresetTests {
             ("IconName", "fa-house"),
             ("IconStyle", IconStyle.Brands)));
 
-        Assert.AreEqual(generic, overridden);
-        Assert.Contains("fa-brands", overridden);
+        overridden.Should().Be(generic);
+        overridden.Should().Contain("fa-brands");
     }
 
     [TestMethod]
@@ -85,7 +85,7 @@ public sealed class GeneratedIconPresetTests {
             ("Color", "red"),
             ("Bordered", true)));
 
-        Assert.AreEqual(generic, preset);
+        preset.Should().Be(generic);
     }
 
     private static async Task AssertPresetMatchesGenericAsync<TComponent>(string iconName, IconStyle iconStyle)
@@ -95,7 +95,7 @@ public sealed class GeneratedIconPresetTests {
             ("IconName", iconName),
             ("IconStyle", iconStyle)));
 
-        Assert.AreEqual(generic, preset, $"Preset for '{iconName}' should render identically to the generic Icon.");
+        preset.Should().Be(generic, $"Preset for '{iconName}' should render identically to the generic Icon.");
     }
 
     private static Type[] PresetTypes() => [.. typeof(HouseIcon).Assembly

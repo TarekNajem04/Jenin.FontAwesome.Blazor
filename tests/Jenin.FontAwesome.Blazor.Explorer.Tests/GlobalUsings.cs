@@ -16,5 +16,6 @@ global using Jenin.FontAwesome.Blazor.Explorer.Routing;
 global using Jenin.FontAwesome.Blazor.Explorer.Snippets;
 global using Jenin.FontAwesome.Blazor.IconPicker;
 global using Jenin.FontAwesome.Blazor.Transformations;
+global using Jeninnet.Assertions;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;

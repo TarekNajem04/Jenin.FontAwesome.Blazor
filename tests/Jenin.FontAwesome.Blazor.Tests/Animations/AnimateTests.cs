@@ -13,8 +13,8 @@ public class AnimateTests {
     public void Beat_ReturnsBeat() {
         var animation = Animate.Beat();
 
-        Assert.IsInstanceOfType<Beat>(animation);
-        Assert.IsNull(animation.Options.Scale);
+        animation.Should().BeOfType<Beat>();
+        animation.Options.Scale.Should().BeNull();
     }
 
     [TestMethod]
@@ -22,7 +22,7 @@ public class AnimateTests {
     public void Beat_SetsScale() {
         var animation = Animate.Beat(new BeatOptions { Scale = 2 });
 
-        Assert.AreEqual(2f, animation.Options.Scale);
+        animation.Options.Scale.Should().Be(2f);
     }
 
     [TestMethod]
@@ -30,8 +30,8 @@ public class AnimateTests {
     public void Fade_SetsOpacity() {
         var animation = Animate.Fade(new FadeOptions { Opacity = 0.5f });
 
-        Assert.IsInstanceOfType<Fade>(animation);
-        Assert.AreEqual(0.5f, animation.Options.Opacity);
+        animation.Should().BeOfType<Fade>();
+        animation.Options.Opacity.Should().Be(0.5f);
     }
 
     [TestMethod]
@@ -39,8 +39,8 @@ public class AnimateTests {
     public void BeatFade_SetsOpacityAndScale() {
         var animation = Animate.BeatFade(new BeatFadeOptions { Opacity = 0.25f, Scale = 3 });
 
-        Assert.AreEqual(0.25f, animation.Options.Opacity);
-        Assert.AreEqual(3f, animation.Options.Scale);
+        animation.Options.Opacity.Should().Be(0.25f);
+        animation.Options.Scale.Should().Be(3f);
     }
 
     [TestMethod]
@@ -57,14 +57,14 @@ public class AnimateTests {
             LandScaleY = 8
         });
 
-        Assert.AreEqual(1f, animation.Options.Rebound);
-        Assert.AreEqual(2f, animation.Options.Height);
-        Assert.AreEqual(3f, animation.Options.StartScaleX);
-        Assert.AreEqual(4f, animation.Options.StartScaleY);
-        Assert.AreEqual(5f, animation.Options.JumpScaleX);
-        Assert.AreEqual(6f, animation.Options.JumpScaleY);
-        Assert.AreEqual(7f, animation.Options.LandScaleX);
-        Assert.AreEqual(8f, animation.Options.LandScaleY);
+        animation.Options.Rebound.Should().Be(1f);
+        animation.Options.Height.Should().Be(2f);
+        animation.Options.StartScaleX.Should().Be(3f);
+        animation.Options.StartScaleY.Should().Be(4f);
+        animation.Options.JumpScaleX.Should().Be(5f);
+        animation.Options.JumpScaleY.Should().Be(6f);
+        animation.Options.LandScaleX.Should().Be(7f);
+        animation.Options.LandScaleY.Should().Be(8f);
     }
 
     [TestMethod]
@@ -72,23 +72,23 @@ public class AnimateTests {
     public void Flip_SetsVectorAndAngle() {
         var animation = Animate.Flip(new FlipOptions { FlipX = 1, FlipY = 0, FlipZ = 1, FlipAngle = 90 });
 
-        Assert.AreEqual(1f, animation.Options.FlipX);
-        Assert.AreEqual(0f, animation.Options.FlipY);
-        Assert.AreEqual(1f, animation.Options.FlipZ);
-        Assert.AreEqual(90f, animation.Options.FlipAngle);
+        animation.Options.FlipX.Should().Be(1f);
+        animation.Options.FlipY.Should().Be(0f);
+        animation.Options.FlipZ.Should().Be(1f);
+        animation.Options.FlipAngle.Should().Be(90f);
     }
 
     [TestMethod]
     [TestCategory("Model")]
-    public void Shake_ReturnsShake() => Assert.IsInstanceOfType<Shake>(Animate.Shake());
+    public void Shake_ReturnsShake() => Animate.Shake().Should().BeOfType<Shake>();
 
     [TestMethod]
     [TestCategory("Model")]
     public void Spin_SetsPulseAndReverse() {
         var animation = Animate.Spin(new SpinOptions { Pulse = true, Reverse = true });
 
-        Assert.IsTrue(animation.Options.Pulse);
-        Assert.IsTrue(animation.Options.Reverse);
+        animation.Options.Pulse.Should().BeTrue();
+        animation.Options.Reverse.Should().BeTrue();
     }
 
     [TestMethod]
@@ -98,6 +98,6 @@ public class AnimateTests {
 
         var animation = Animate.Beat(options);
 
-        Assert.AreSame(options, animation.Options);
+        animation.Options.Should().BeSameAs(options);
     }
 }

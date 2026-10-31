@@ -13,11 +13,11 @@ public class AnimationOptionsTests {
     public void Constructor_DefaultsToEmptyOptions() {
         var options = new BeatOptions();
 
-        Assert.IsNull(options.Delay);
-        Assert.IsNull(options.Duration);
-        Assert.AreEqual(AnimationDirection.None, options.Direction);
-        Assert.IsNull(options.IterationCount);
-        Assert.IsNull(options.TimingFunction);
+        options.Delay.Should().BeNull();
+        options.Duration.Should().BeNull();
+        options.Direction.Should().Be(AnimationDirection.None);
+        options.IterationCount.Should().BeNull();
+        options.TimingFunction.Should().BeNull();
     }
 
     [TestMethod]
@@ -27,9 +27,9 @@ public class AnimationOptionsTests {
 
         var updated = options with { Duration = TimeSpan.FromSeconds(2) };
 
-        Assert.AreEqual(TimeSpan.FromSeconds(1), updated.Delay);
-        Assert.AreEqual(TimeSpan.FromSeconds(2), updated.Duration);
-        Assert.AreEqual("linear", updated.TimingFunction);
+        updated.Delay.Should().Be(TimeSpan.FromSeconds(1));
+        updated.Duration.Should().Be(TimeSpan.FromSeconds(2));
+        updated.TimingFunction.Should().Be("linear");
     }
 
     [TestMethod]
@@ -37,8 +37,8 @@ public class AnimationOptionsTests {
     public void DerivedOptions_InheritSharedSettingsAndAddTheirOwn() {
         var options = new BounceOptions { Delay = TimeSpan.FromSeconds(1), Rebound = 0.5f };
 
-        Assert.IsInstanceOfType<AnimationOptions>(options);
-        Assert.AreEqual(TimeSpan.FromSeconds(1), options.Delay);
-        Assert.AreEqual(0.5f, options.Rebound);
+        options.Should().BeAssignableTo<AnimationOptions>();
+        options.Delay.Should().Be(TimeSpan.FromSeconds(1));
+        options.Rebound.Should().Be(0.5f);
     }
 }

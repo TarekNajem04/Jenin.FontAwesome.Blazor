@@ -29,9 +29,9 @@ public class RawClassMigrationTests {
             ("IconName", "fa-github"),
             ("IconStyle", IconStyle.Brands)));
 
-        Assert.Contains("class=\"fa-solid fa-house\"", solid);
-        Assert.Contains("class=\"fa-regular fa-star\"", regular);
-        Assert.Contains("class=\"fa-brands fa-github\"", brands);
+        solid.Should().Contain("class=\"fa-solid fa-house\"");
+        regular.Should().Contain("class=\"fa-regular fa-star\"");
+        brands.Should().Contain("class=\"fa-brands fa-github\"");
     }
 
     [TestMethod]
@@ -48,9 +48,9 @@ public class RawClassMigrationTests {
             ("IconName", "fa-house"),
             ("IconSize", IconSize.Small)));
 
-        Assert.Contains("fa-2x", x2);
-        Assert.Contains("fa-lg", large);
-        Assert.Contains("fa-sm", small);
+        x2.Should().Contain("fa-2x");
+        large.Should().Contain("fa-lg");
+        small.Should().Contain("fa-sm");
     }
 
     [TestMethod]
@@ -61,8 +61,8 @@ public class RawClassMigrationTests {
             ("IconName", "fa-spinner"),
             ("Animation", Animate.Spin())));
 
-        Assert.Contains("fa-spin", markup);
-        Assert.Contains("fa-solid fa-spinner", markup);
+        markup.Should().Contain("fa-spin");
+        markup.Should().Contain("fa-solid fa-spinner");
     }
 
     [TestMethod]
@@ -75,9 +75,9 @@ public class RawClassMigrationTests {
             ("IconSize", IconSize.X02),
             ("Title", "Home")));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-2x fa-solid fa-house\" title=\"Home\" role=\"img\" aria-hidden=\"false\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-2x fa-solid fa-house\" title=\"Home\" role=\"img\" aria-hidden=\"false\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -88,7 +88,7 @@ public class RawClassMigrationTests {
         var constant = await TestHost.RenderMarkupAsync<Icon>(TestHost.Parameters(
             ("IconName", IconNames.Solid.House)));
 
-        Assert.Contains("class=\"fa-solid fa-house\"", preset);
-        Assert.Contains("class=\"fa-solid fa-house\"", constant);
+        preset.Should().Contain("class=\"fa-solid fa-house\"");
+        constant.Should().Contain("class=\"fa-solid fa-house\"");
     }
 }

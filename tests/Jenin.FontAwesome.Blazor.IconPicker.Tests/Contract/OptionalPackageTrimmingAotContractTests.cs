@@ -29,7 +29,7 @@ public class OptionalPackageTrimmingAotContractTests {
             directory = directory.Parent;
         }
 
-        Assert.IsNotNull(directory, "Could not locate the repository root.");
+        directory.Should().NotBeNull("Could not locate the repository root.");
 
         return directory!.FullName;
     }
@@ -51,13 +51,13 @@ public class OptionalPackageTrimmingAotContractTests {
     public void IconPickerPackage_ProjectDeclaresTrimmingAndAotCompatibility() {
         var csproj = File.ReadAllText(PackageCsproj);
 
-        Assert.Contains("<IsTrimmable>true</IsTrimmable>", csproj, "The IconPicker package must set <IsTrimmable>true</IsTrimmable> so hosts can trim it independently.");
-        Assert.Contains("<IsAotCompatible>true</IsAotCompatible>", csproj, "The IconPicker package must set <IsAotCompatible>true</IsAotCompatible> to keep its trim/AOT analyzers on.");
+        csproj.Should().Contain("<IsTrimmable>true</IsTrimmable>", "The IconPicker package must set <IsTrimmable>true</IsTrimmable> so hosts can trim it independently.");
+        csproj.Should().Contain("<IsAotCompatible>true</IsAotCompatible>", "The IconPicker package must set <IsAotCompatible>true</IsAotCompatible> to keep its trim/AOT analyzers on.");
     }
 
     [TestMethod]
     [TestCategory("Contract")]
-    public void IconPickerPackage_AssemblyIsMarkedTrimmable()
-        => Assert.AreEqual("True", MetadataValue("IsTrimmable"),
+    public void IconPickerPackage_AssemblyIsMarkedTrimmable() =>
+        MetadataValue("IsTrimmable").Should().Be("True",
             "The linker must see IsTrimmable=true in the IconPicker assembly metadata.");
 }

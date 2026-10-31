@@ -21,6 +21,7 @@ global using Jenin.FontAwesome.Blazor.Icons;
 global using Jenin.FontAwesome.Blazor.Svg;
 global using Jenin.FontAwesome.Blazor.Tests.TestSupport;
 global using Jenin.FontAwesome.Blazor.Transformations;
+global using Jeninnet.Assertions;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Rendering;

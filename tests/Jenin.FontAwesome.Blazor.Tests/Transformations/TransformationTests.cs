@@ -17,7 +17,7 @@ public class TransformationTests {
     public void GetFormattedValue_FormatsInvariantlyWithTwoDecimals() {
         var transformation = new CustomTransformation(2f);
 
-        Assert.AreEqual("custom-2.00", transformation.GetTransformation());
+        transformation.GetTransformation().Should().Be("custom-2.00");
     }
 
     [TestMethod]
@@ -25,6 +25,6 @@ public class TransformationTests {
     public void CustomSubclass_CanComposeIntoTransform() {
         var value = new Transform().Add(new CustomTransformation(1.5f)).GetTransformation();
 
-        Assert.AreEqual("custom-1.50", value);
+        value.Should().Be("custom-1.50");
     }
 }

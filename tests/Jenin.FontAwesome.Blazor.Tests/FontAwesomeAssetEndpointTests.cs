@@ -14,9 +14,9 @@ public class FontAwesomeAssetEndpointTests {
     public async Task MissingServiceRegistration_ThrowsHelpfulErrorAsync() {
         await using var app = WebApplication.Create();
 
-        var exception = Assert.ThrowsExactly<InvalidOperationException>(() => app.MapJeninFontAwesomeAssets());
+        var exception = FluentActions.Invoking(() => app.MapJeninFontAwesomeAssets()).Should().ThrowExactly<InvalidOperationException>().Which;
 
-        Assert.Contains("AddJeninFontAwesome", exception.Message);
+        exception.Message.Should().Contain("AddJeninFontAwesome");
     }
 
     [TestMethod]
@@ -28,13 +28,13 @@ public class FontAwesomeAssetEndpointTests {
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
         using var response = await client.GetAsync(ApplicationBuilderExtensions.DefaultConfigEndpointPath);
 
-        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-        Assert.AreEqual("application/javascript; charset=utf-8", response.Content.Headers.ContentType?.ToString());
-        Assert.AreEqual("public, max-age=86400", string.Join(",", response.Headers.GetValues("Cache-Control")));
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        (response.Content.Headers.ContentType?.ToString()).Should().Be("application/javascript; charset=utf-8");
+        string.Join(",", response.Headers.GetValues("Cache-Control")).Should().Be("public, max-age=86400");
 
         var script = await response.Content.ReadAsStringAsync();
-        Assert.Contains("autoReplaceSvg: \"nest\"", script);
-        Assert.DoesNotContain("autoReplaceSvg: false", script);
+        script.Should().Contain("autoReplaceSvg: \"nest\"");
+        script.Should().NotContain("autoReplaceSvg: false");
     }
 
     [TestMethod]
@@ -46,8 +46,8 @@ public class FontAwesomeAssetEndpointTests {
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
         var script = await client.GetStringAsync(ApplicationBuilderExtensions.DefaultConfigEndpointPath);
 
-        Assert.Contains("autoReplaceSvg: false", script);
-        Assert.DoesNotContain("\"nest\"", script);
+        script.Should().Contain("autoReplaceSvg: false");
+        script.Should().NotContain("\"nest\"");
     }
 
     [TestMethod]
@@ -63,9 +63,9 @@ public class FontAwesomeAssetEndpointTests {
 
         var options = app.Services.GetRequiredService<FontAwesomeOptions>();
 
-        Assert.AreEqual(ApplicationBuilderExtensions.DefaultConfigEndpointPath, options.ConfigScriptUrl);
-        Assert.AreEqual("/fontawesome/css/all.css", options.StyleSheetUrl);
-        Assert.AreEqual("/fontawesome/js/all.min.js", options.JavaScriptUrl);
+        options.ConfigScriptUrl.Should().Be(ApplicationBuilderExtensions.DefaultConfigEndpointPath);
+        options.StyleSheetUrl.Should().Be("/fontawesome/css/all.css");
+        options.JavaScriptUrl.Should().Be("/fontawesome/js/all.min.js");
     }
 
     [TestMethod]
@@ -77,13 +77,13 @@ public class FontAwesomeAssetEndpointTests {
 
         var options = app.Services.GetRequiredService<FontAwesomeOptions>();
 
-        Assert.AreEqual("/custom/config.js", options.ConfigScriptUrl);
+        options.ConfigScriptUrl.Should().Be("/custom/config.js");
 
         // The mapped endpoint still serves; the head component simply points elsewhere.
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
         using var response = await client.GetAsync(ApplicationBuilderExtensions.DefaultConfigEndpointPath);
 
-        Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 
     [TestMethod]
@@ -95,7 +95,7 @@ public class FontAwesomeAssetEndpointTests {
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
         using var response = await client.PostAsync(ApplicationBuilderExtensions.DefaultConfigEndpointPath, new StringContent(string.Empty));
 
-        Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
     [TestMethod]
@@ -107,7 +107,7 @@ public class FontAwesomeAssetEndpointTests {
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
         using var response = await client.GetAsync("/");
 
-        Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
     [TestMethod]
@@ -128,12 +128,12 @@ public class FontAwesomeAssetEndpointTests {
                 setup.ConfigScriptUrl = options.ConfigScriptUrl;
             }));
 
-        Assert.Contains($"src=\"{options.ConfigScriptUrl}\"", markup);
+        markup.Should().Contain($"src=\"{options.ConfigScriptUrl}\"");
 
         using var client = new HttpClient { BaseAddress = new Uri(app.Urls.First()) };
         var script = await client.GetStringAsync(options.ConfigScriptUrl);
 
-        Assert.Contains("autoReplaceSvg: false", script);
+        script.Should().Contain("autoReplaceSvg: false");
     }
 
     private static WebApplication CreateHost(Action<IServiceCollection> register, Action<FontAwesomeOptions>? configure = null) {

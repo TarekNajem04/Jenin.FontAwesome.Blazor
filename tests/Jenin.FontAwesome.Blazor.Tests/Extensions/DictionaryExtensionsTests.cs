@@ -15,7 +15,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.Combine("k", "a");
 
-        Assert.AreEqual("a", dictionary["k"]);
+        dictionary["k"].Should().Be("a");
     }
 
     [TestMethod]
@@ -25,16 +25,16 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.Combine("k", "b");
 
-        Assert.AreEqual("ba", dictionary["k"]);
+        dictionary["k"].Should().Be("ba");
     }
 
     [TestMethod]
     [TestCategory("Model")]
-    public void Concat_EmptyExistingValue_ReturnsValue() => Assert.AreEqual("a", DictionaryExtensions.Concat("a", ""));
+    public void Concat_EmptyExistingValue_ReturnsValue() => DictionaryExtensions.Concat("a", "").Should().Be("a");
 
     [TestMethod]
     [TestCategory("Model")]
-    public void Concat_NonNullValues_ConcatenatesNewBeforeExisting() => Assert.AreEqual("ab", DictionaryExtensions.Concat("a", "b"));
+    public void Concat_NonNullValues_ConcatenatesNewBeforeExisting() => DictionaryExtensions.Concat("a", "b").Should().Be("ab");
 
     [TestMethod]
     [TestCategory("Model")]
@@ -43,7 +43,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddIfNotNull("k", (string?)null);
 
-        Assert.IsFalse(dictionary.ContainsKey("k"));
+        dictionary.ContainsKey("k").Should().BeFalse();
     }
 
     [TestMethod]
@@ -53,7 +53,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddIfNotNull("k", "");
 
-        Assert.IsFalse(dictionary.ContainsKey("k"));
+        dictionary.ContainsKey("k").Should().BeFalse();
     }
 
     [TestMethod]
@@ -63,7 +63,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddIfNotNull("k", "v");
 
-        Assert.AreEqual("v", dictionary["k"]);
+        dictionary["k"].Should().Be("v");
     }
 
     [TestMethod]
@@ -73,7 +73,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddIfNotNull("k", (float?)2f);
 
-        Assert.AreEqual("2.00", dictionary["k"]);
+        dictionary["k"].Should().Be("2.00");
     }
 
     [TestMethod]
@@ -83,7 +83,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddIfNotNull("k", (int?)5);
 
-        Assert.AreEqual("5", dictionary["k"]);
+        dictionary["k"].Should().Be("5");
     }
 
     [TestMethod]
@@ -93,7 +93,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddOrUpdate("k", "new");
 
-        Assert.AreEqual("new", dictionary["k"]);
+        dictionary["k"].Should().Be("new");
     }
 
     [TestMethod]
@@ -103,7 +103,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddOrUpdateIfNotNull("k", (float?)null);
 
-        Assert.IsFalse(dictionary.ContainsKey("k"));
+        dictionary.ContainsKey("k").Should().BeFalse();
     }
 
     [TestMethod]
@@ -113,7 +113,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddOrUpdateIfNotNull("k", (float?)1.5f);
 
-        Assert.AreEqual("1.50", dictionary["k"]);
+        dictionary["k"].Should().Be("1.50");
     }
 
     [TestMethod]
@@ -123,7 +123,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddOrUpdateIf("k", IconSize.X02, static _ => true);
 
-        Assert.AreEqual("fa-2x", dictionary["k"]);
+        dictionary["k"].Should().Be("fa-2x");
     }
 
     [TestMethod]
@@ -133,7 +133,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.AddOrUpdateIf("k", IconSize.X02, static _ => false);
 
-        Assert.IsFalse(dictionary.ContainsKey("k"));
+        dictionary.ContainsKey("k").Should().BeFalse();
     }
 
     [TestMethod]
@@ -143,7 +143,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.UpdateOrRemoveIf("k", (string?)null);
 
-        Assert.IsFalse(dictionary.ContainsKey("k"));
+        dictionary.ContainsKey("k").Should().BeFalse();
     }
 
     [TestMethod]
@@ -153,7 +153,7 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.UpdateOrRemoveIf("k", "v", static _ => true);
 
-        Assert.IsFalse(dictionary.ContainsKey("k"));
+        dictionary.ContainsKey("k").Should().BeFalse();
     }
 
     [TestMethod]
@@ -163,19 +163,19 @@ public class DictionaryExtensionsTests {
 
         _ = dictionary.UpdateOrRemoveIf("k", "new", static _ => false);
 
-        Assert.AreEqual("new", dictionary["k"]);
+        dictionary["k"].Should().Be("new");
     }
 
     [TestMethod]
     [TestCategory("Model")]
-    public void JoinAsStyles_EmptyDictionary_ReturnsEmptyString() => Assert.AreEqual("", new Dictionary<string, string>().JoinAsStyles());
+    public void JoinAsStyles_EmptyDictionary_ReturnsEmptyString() => new Dictionary<string, string>().JoinAsStyles().Should().Be("");
 
     [TestMethod]
     [TestCategory("Model")]
     public void JoinAsStyles_EmitsEachEntryWithTrailingSemicolon() {
         var dictionary = new Dictionary<string, string> { ["a"] = "1", ["b"] = "2" };
 
-        Assert.AreEqual("a:1;b:2;", dictionary.JoinAsStyles());
+        dictionary.JoinAsStyles().Should().Be("a:1;b:2;");
     }
 
     [TestMethod]
@@ -183,6 +183,6 @@ public class DictionaryExtensionsTests {
     public void JoinAsStyles_SkipsEmptyValues() {
         var dictionary = new Dictionary<string, string> { ["a"] = "1", ["b"] = "" };
 
-        Assert.AreEqual("a:1;", dictionary.JoinAsStyles());
+        dictionary.JoinAsStyles().Should().Be("a:1;");
     }
 }

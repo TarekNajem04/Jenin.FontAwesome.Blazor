@@ -16,10 +16,10 @@ public class IconButtonTests {
             ("Label", "Home")));
 
         // The visible label already names the button, so no aria-label is emitted.
-        Assert.AreEqual(
+        markup.Should().Be(
             "<button type=\"button\">" +
-            "<span><i class=\"fa-solid fa-house\" aria-hidden=\"true\" role=\"presentation\"></i></span> Home</button>",
-            markup);
+            "<span><i class=\"fa-solid fa-house\" aria-hidden=\"true\" role=\"presentation\"></i></span> Home</button>"
+        );
     }
 
     [TestMethod]
@@ -29,10 +29,10 @@ public class IconButtonTests {
             ("IconName", "fa-bell"),
             ("Title", "Notifications")));
 
-        Assert.AreEqual(
+        markup.Should().Be(
             "<button type=\"button\" aria-label=\"Notifications\" title=\"Notifications\">" +
-            "<span><i class=\"fa-solid fa-bell\" aria-hidden=\"true\" role=\"presentation\"></i></span></button>",
-            markup);
+            "<span><i class=\"fa-solid fa-bell\" aria-hidden=\"true\" role=\"presentation\"></i></span></button>"
+        );
     }
 
     [TestMethod]
@@ -43,8 +43,8 @@ public class IconButtonTests {
             ("IconStyle", IconStyle.Brands),
             ("AriaLabel", "GitHub")));
 
-        Assert.Contains("class=\"fa-brands fa-github\"", markup);
-        Assert.Contains("aria-label=\"GitHub\"", markup);
+        markup.Should().Contain("class=\"fa-brands fa-github\"");
+        markup.Should().Contain("aria-label=\"GitHub\"");
     }
 
     [TestMethod]
@@ -55,10 +55,10 @@ public class IconButtonTests {
             ("Label", "Save"),
             ("Busy", true)));
 
-        Assert.AreEqual(
+        markup.Should().Be(
             "<button type=\"button\" disabled aria-busy=\"true\">" +
-            "<span><i class=\"fa-solid fa-spinner fa-spin\" aria-hidden=\"true\" role=\"presentation\"></i></span> Save</button>",
-            markup);
+            "<span><i class=\"fa-solid fa-spinner fa-spin\" aria-hidden=\"true\" role=\"presentation\"></i></span> Save</button>"
+        );
     }
 
     [TestMethod]
@@ -80,10 +80,10 @@ public class IconButtonTests {
                 ("PressedAnimation", null),
                 ("Pressed", true)));
 
-        Assert.AreEqual(
+        markup.Should().Be(
             "<button type=\"button\" aria-pressed=\"true\">" +
-            "<span><i class=\"fa-solid fa-heart\" aria-hidden=\"true\" role=\"presentation\" style=\"color:red;\"></i></span></button>",
-            markup);
+            "<span><i class=\"fa-solid fa-heart\" aria-hidden=\"true\" role=\"presentation\" style=\"color:red;\"></i></span></button>"
+        );
     }
 
     [TestMethod]
@@ -91,9 +91,9 @@ public class IconButtonTests {
     public async Task FavoriteButton_RendersBakedDefaultsAsync() {
         var markup = await TestHost.RenderMarkupAsync<FavoriteButton>();
 
-        Assert.AreEqual(
+        markup.Should().Be(
             "<button type=\"button\" aria-label=\"Add to favorites\" title=\"Add to favorites\" aria-pressed=\"false\">" +
-            "<span><i class=\"fa-regular fa-heart\" aria-hidden=\"true\" role=\"presentation\"></i></span></button>",
-            markup);
+            "<span><i class=\"fa-regular fa-heart\" aria-hidden=\"true\" role=\"presentation\"></i></span></button>"
+        );
     }
 }

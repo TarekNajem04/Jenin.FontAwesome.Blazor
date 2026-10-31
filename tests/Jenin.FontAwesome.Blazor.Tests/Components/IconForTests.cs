@@ -24,9 +24,9 @@ public class IconForTests {
         var markup = await TestHost.RenderMarkupAsync<IconFor<ShipmentStatus>>(TestHost.Parameters(
             ("Value", ShipmentStatus.Pending)));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-clock\" aria-hidden=\"true\" role=\"presentation\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-clock\" aria-hidden=\"true\" role=\"presentation\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -35,9 +35,9 @@ public class IconForTests {
         var markup = await TestHost.RenderMarkupAsync<IconFor<ShipmentStatus>>(TestHost.Parameters(
             ("Value", ShipmentStatus.Shipped)));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-regular fa-truck\" style=\"color:blue;\" aria-hidden=\"true\" role=\"presentation\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-regular fa-truck\" style=\"color:blue;\" aria-hidden=\"true\" role=\"presentation\"></i></span>"
+        );
     }
 
     [TestMethod]
@@ -46,8 +46,8 @@ public class IconForTests {
         var markup = await TestHost.RenderMarkupAsync<IconFor<ShipmentStatus>>(TestHost.Parameters(
             ("Value", ShipmentStatus.Cancelled)));
 
-        Assert.AreEqual(
-            "<span><i class=\"fa-solid fa-circle-question\" aria-hidden=\"true\" role=\"presentation\"></i></span>",
-            markup);
+        markup.Should().Be(
+            "<span><i class=\"fa-solid fa-circle-question\" aria-hidden=\"true\" role=\"presentation\"></i></span>"
+        );
     }
 }
