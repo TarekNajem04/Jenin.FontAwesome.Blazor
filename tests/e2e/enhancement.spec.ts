@@ -38,7 +38,7 @@ test('accessibility attributes survive the DOM replacement', async ({ page }) =>
 
     // Decorative icons are announced as presentational.
     await expect(page.locator('svg[aria-hidden="true"]').first()).toBeVisible();
-    expect(await page.locator('svg[aria-hidden="true"]').count()).toBeGreaterThanOrEqual(20);
+    await expect.poll(async () => page.locator('svg[aria-hidden="true"]').count()).toBeGreaterThanOrEqual(20);
 
     // A title becomes a real accessible image (`role="img"`), not a presentational icon.
     const named = page.locator('svg[role="img"][aria-hidden="false"]');
