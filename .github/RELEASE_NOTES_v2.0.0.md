@@ -77,6 +77,8 @@ Full API details: `CHANGELOG.md`. Everyday usage: `README.md`.
 
 ## Documentation
 
+- 🌐 Live documentation site (examples, icon browser, component catalogue, API reference):
+  https://tareknajem04.github.io/Jenin.FontAwesome.Blazor/
 - Upgrade guide: `MIGRATION.md` (1.x → 2.0, including §6 removed/renamed list and §7
   behavior changes).
 - Release details: `CHANGELOG.md` (§ Added / Changed / Removed / Fixed / Behavior changes).
