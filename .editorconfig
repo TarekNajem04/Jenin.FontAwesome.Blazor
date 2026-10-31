@@ -341,6 +341,10 @@ dotnet_naming_style.async_method.capitalization = pascal_case
 dotnet_naming_style.constant_all_upper.word_separator = _
 dotnet_naming_style.constant_all_upper.capitalization = all_upper
 
+# RCS1251: disabled — false positive on attribute types and marker interfaces, whose bodies
+# (empty or attribute-only) are required syntax and cannot be removed.
+dotnet_diagnostic.RCS1251.severity = none
+
 # Generated strongly-typed icon catalogue (see eng/generate-icon-catalogue.ps1). Analyzer, style, and
 # formatting rules are skipped for this machine-generated file; its contract is covered by IconCatalogueTests.
 [**/IconNames.cs]
@@ -353,9 +357,6 @@ generated_code = true
 
 # fluent vocabulary. Sync test methods keep the _Async suffix for grouping coverage areas.
 dotnet_diagnostic.RCS1047.severity = none
-# RCS1251: disabled — false positive on attribute types and marker interfaces, whose bodies
-# (empty or attribute-only) are required syntax and cannot be removed.
-dotnet_diagnostic.RCS1251.severity = none
 # S1215: forced collection is the measurement mechanism in Utilities/Allocation.cs (waived inline there too).
 dotnet_diagnostic.S1215.severity = suggestion
 # S4136: the assertion entry points are grouped by subject area, not by overload.
@@ -484,6 +485,11 @@ dotnet_diagnostic.RCS1213.severity = none
 # IDE1006: test methods are behavioral sentences per MSTest convention; the Async suffix
 # stays mandatory for production code (see the naming rule above, still suggestion there).
 [tests/**.cs]
+dotnet_naming_symbols.async_method.applicable_kinds = method, local_function
+dotnet_naming_symbols.async_method.applicable_accessibilities = *
+dotnet_naming_symbols.async_method.required_modifiers = async
+dotnet_naming_style.async_method.required_suffix = Async
+dotnet_naming_style.async_method.capitalization = pascal_case
 dotnet_naming_rule.async_method_should_be_async_method.severity = none
 dotnet_naming_rule.async_method_should_be_async_method.symbols = async_method
 dotnet_naming_rule.async_method_should_be_async_method.style = async_method
