@@ -45,14 +45,19 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Approve Pull Request
+        # Only patch updates are approved automatically. Minor and major bumps can carry
+        # coupled changes (for example a Roslyn bump that requires a newer SDK compiler
+        # than the one pinned in global.json) and need a human decision, so they are left
+        # for manual review.
+        if: github.event_name == 'workflow_dispatch' || steps.metadata.outputs.update-type == 'version-update:semver-patch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr review "${{ steps.pr.outputs.url }}" --approve
 
       - name: Enable Auto Merge (Squash)
-        # Major version bumps are approved but never auto-merged; they need a human decision.
-        if: github.event_name == 'workflow_dispatch' || steps.metadata.outputs.update-type != 'version-update:semver-major'
+        # Only patch updates are auto-merged. Minor and major bumps need a human decision.
+        if: github.event_name == 'workflow_dispatch' || steps.metadata.outputs.update-type == 'version-update:semver-patch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
