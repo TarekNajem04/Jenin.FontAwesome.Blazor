@@ -18,6 +18,15 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    # Roslyn minor/major bumps change the compiler assembly version the analyzer
+    # and code fix build against. A reference newer than the consumer compiler
+    # fails builds with CS9057, so Roslyn only moves together with global.json (human
+    # decision). Patch updates keep the same compiler assembly version and stay automatic.
+    ignore:
+      - dependency-name: "microsoft.codeanalysis.*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-major"
 
   - package-ecosystem: "github-actions"
     directory: "/"

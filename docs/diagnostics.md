@@ -31,3 +31,7 @@ Scope notes:
   (project-wide or `#pragma warning disable JFA1003` around an intentional demo).
 - In Razor files the diagnostic location comes from the generated code; the code fix
   applies in C# sources — in Razor, make the same edit by hand (the message shows it).
+- Compiler floor: the analyzer is built against Roslyn `4.14.0` and loads on any compiler
+  from that version up, including every .NET 10 SDK. Only a future Roslyn bump would raise
+  this floor; such a bump moves together with `global.json` by human decision, never via
+  automatic dependency updates.
