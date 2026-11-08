@@ -77,7 +77,7 @@ jobs:
         uses: actions/checkout@v7.0.1
 
       - name: Setup .NET SDK (global.json)
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: global.json
 
@@ -112,14 +112,14 @@ jobs:
           fetch-depth: 0
 
       - name: Setup .NET 8/9 runtimes (net8.0/net9.0 test hosts)
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: |
             8.0.x
             9.0.x
 
       - name: Setup .NET SDK (global.json)
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: global.json
 
@@ -187,7 +187,7 @@ jobs:
         uses: actions/checkout@v7.0.1
 
       - name: Setup .NET SDK (global.json)
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: global.json
 
@@ -246,7 +246,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup .NET SDK (global.json)
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: global.json
 
@@ -306,14 +306,14 @@ jobs:
           fetch-depth: 0
 
       - name: Setup .NET 8/9 runtimes (net8.0/net9.0 hosts and fixtures)
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: |
             8.0.x
             9.0.x
 
       - name: Setup .NET SDK (global.json)
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: global.json
 

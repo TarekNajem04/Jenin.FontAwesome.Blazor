@@ -66,14 +66,14 @@ jobs:
       # 2) Setup .NET
       # ---------------------------------------------------------
       - name: Setup .NET 8/9 runtimes (net8.0/net9.0 test hosts)
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           dotnet-version: |
             8.0.x
             9.0.x
 
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v6.0.0
+        uses: actions/setup-dotnet@v6.1.0
         with:
           global-json-file: global.json
 
