@@ -9,6 +9,7 @@
     </PropertyGroup>
 
   <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" />
     <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor\Jenin.FontAwesome.Blazor.csproj" />
     <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor.Icons\Jenin.FontAwesome.Blazor.Icons.csproj" />
     <ProjectReference Include="..\..\src\Jenin.FontAwesome.Blazor.IconPicker\Jenin.FontAwesome.Blazor.IconPicker.csproj" />
