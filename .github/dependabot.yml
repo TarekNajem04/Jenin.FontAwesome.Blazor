@@ -18,11 +18,18 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    # Roslyn minor/major bumps change the compiler assembly version the analyzer
-    # and code fix build against. A reference newer than the consumer compiler
-    # fails builds with CS9057, so Roslyn only moves together with global.json (human
-    # decision). Patch updates keep the same compiler assembly version and stay automatic.
+    # Scope Dependabot to patch/minor updates only. Major bumps move the required
+    # SDK/TFM or analyzer baseline and have repeatedly broken builds (MSBuild 18 host,
+    # JSON 11 on older TFMs, new analyzer rules). They are applied deliberately by a
+    # human together with global.json/target-framework changes, not via auto-merge.
     ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+      # Roslyn minor/major bumps change the compiler assembly version the analyzer
+      # and code fix build against. A reference newer than the consumer compiler
+      # fails builds with CS9057, so Roslyn only moves together with global.json (human
+      # decision). Patch updates keep the same compiler assembly version and stay automatic.
       - dependency-name: "microsoft.codeanalysis.*"
         update-types:
           - "version-update:semver-minor"
@@ -46,3 +53,9 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    # Keep action upgrades to patch/minor as well; major action versions can change
+    # inputs and permissions and are reviewed deliberately.
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
